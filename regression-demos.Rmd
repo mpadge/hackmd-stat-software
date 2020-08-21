@@ -1,0 +1,193 @@
+# Regression Demonstrations
+
+## lme4
+
+```{r}
+library (lme4)
+```
+
+
+The following generally note only those standards which the software does not
+appear to meet, although explicit notes are also made where aspects of the
+software meet or exceed the standards in particularly exemplary ways.
+
+
+## 1. Input data structures and validation
+
+- *RE1.1 Regression Software should document how formula interfaces are
+  converted to matrix representations of input data.*
+
+The main [package
+vignette](https://cran.r-project.org/web/packages/lme4/vignettes/lmer.pdf)
+provides a particularly exemplary demonstration (in Section 2.3) of the
+relationship between the package's formula interface and the underlying matrix
+representations.
+
+- *RE1.2 Regression Software should document expected format (types or classes)
+  for inputting predictor variables, including descriptions of types or classes
+  which are not accepted; for example, specification that software accepts only
+  numeric inputs in `vector` or `matrix` form, or that all inputs must be in
+  `data.frame` form with both column and row names.*
+
+Documentation of the primary function (`lmer`) states that the main `data`
+parameter is, "*an optional data frame containing the variables named in
+`formula`*". This function fails with equivalent `matrix` input with the
+uninformative error,
+```{r, eval = FALSE}
+s <- sleepstudy
+s$Subject <- as.integer (s$Subject)
+s <- as.matrix (s)
+m <- lmer(Reaction ~ Days + (Days | Subject), data = s)
+```
+
+    ## Error in list2env(data) : first argument must be a named list
+
+The function nevertheless accepts any generic rectangular input,
+including `tibble`, and `data.table` formats. Rectification to this standard
+would require only (i) updating the documentation to explicate that the
+function accepts any objects able to be coerced to `data.frame` representation;
+and (ii) ensuring that passing non-compliant `data` objects generates
+informative messages.
+
+
+## 2. Pre-processing and Variable Transformation
+
+- *RE2.0 Regression Software should document any transformations applied to
+  input data, for example conversion of label-values to `factor`, and should
+  provide ways to explicitly avoid any default transformations (with error or
+  warning conditions where appropriate).*
+
+`lme4` implicitly converts all columns of input data specified in a model
+formula as grouping factors (through being on the right-side of a vertical bar,
+`|`, in the formula) to `factor`, yet this is not explicitly stated in
+documentation. Avoiding such conversion would make no sense here.
+
+- *RE2.2 Regression Software should provide different options for processing
+  missing values in *predictor* and *response* data. For example, it should be
+  possible to fit a model with no missing predictor data in order to generate
+  values for all associated response points, even where submitted response
+  values may be missing.*
+
+`lme4` provides exemplary handling of this case, as illustrated by the following code:
+```{r}
+s <- sleepstudy
+s$Reaction [ceiling (runif (1, max = nrow (s)))] <- NA # random NA value in response variable
+m <- lmer(Reaction ~ Days + (Days | Subject), data = s)
+nobs (m)
+length (predict (m))
+length (predict (m, s))
+```
+
+- *RE2.4 Regression Software should implement pre-processing routines to
+  identify whether aspects of input data are perfectly collinear, notably
+  including:*
+    - *RE2.4a Perfect collinearity among predictor variables*
+    - *RE2.4b Perfect collinearity between independent and dependent variables*
+
+These conditions are neither pre-identified nor appropriately processed, with the
+first case returning an empty model, and the second initially issuing an
+appropriate message ("dropping 1 column / coefficient"), yet failing to
+subsequently fit an appropriate model. The following code demonstrates:
+
+```{r}
+s1 <- s2 <- sleepstudy
+s1$Reaction <- s1$Days
+lmer(Reaction ~ Days + (Days | Subject), data = s1)
+s2$Days2 <- 2 * s2$Days
+m <- lmer(Reaction ~ Days + Days2 + (Days | Subject) + (Days2 | Subject), data = s2)
+```
+
+
+## 3. Algorithms
+
+Control over algorithmic convergence in `lme4` is exemplarily handled through
+the `lmerControl()` function and associated extensive documentation.
+
+
+## 4. Return Results
+
+### 4.1 Accessor Methods
+
+All accessor methods for model data provided by the `stats` package, and all
+model parameters, are also implemented for `lmerMod` objects.
+
+### 4.2 Extrapolation and Forecasting
+
+- *RE4.14 Where Regression Software is intended to, or can, be used to
+  extrapolate or forecast values, values should also be provided for
+  extrapolation or forecast *errors*.*
+- *RE4.15 Sufficient documentation and/or testing should be provided to
+  demonstrate that forecast errors, confidence intervals, or equivalent values
+  increase with forecast horizons.*
+
+The `lme4` package does not explicitly implement forecasting or extrapolation
+algorithms, rather it is a generic model fitting package, the results of which
+can be used with methods such as `predict()` to generate forecast values beyond
+the ranges of input data. There are nevertheless no explicit methods to use
+a model to generate confidence intervals on forecasts in the ways offered by
+the `stats` package:
+
+```{r}
+x <- data.frame (x = 1:10,
+                 y = runif (10))
+m0 <- lm (y ~ x, data = x)
+predict (m0, newdata = data.frame (x = 11:16), se.fit = TRUE)
+predict (m0, newdata = data.frame (x = 11:16), interval = "confidence")
+predict (m0, newdata = data.frame (x = 11:16), interval = "prediction")
+```
+The three calls to `precict()` illustrate different ways of using the model to
+generate estimates of uncertainty involved in using that model to make
+forecasts. No such equivalent methods exist for objects of class `lmerMod`:
+
+
+```{r}
+m <- lmer(Reaction ~ Days + (Days | Subject), data = sleepstudy)
+predict (m, data.frame (Days = 0:12, Subject = 308))
+predict (m, data.frame (Days = 0:12, Subject = 308), se.fit = TRUE)
+predict (m, data.frame (Days = 0:12, Subject = 308), interval = "confidence")
+predict (m, data.frame (Days = 0:12, Subject = 308), interval = "prediction")
+```
+
+Similar comments apply to objects of class `glmerMod` returned by the `glmer` function:
+
+```{r}
+gm <- glmer(cbind(incidence, size - incidence) ~ period + (1 |herd),
+            data = cbpp,
+            family = binomial)
+p <- predict (gm, type = "response", se.fit = TRUE)
+p <- predict (gm, type = "response", interval = "confidence")
+p <- predict (gm, type = "response", interval = "prediction")
+p # numeric values only
+```
+
+
+## 5. Documentation
+
+
+- *RE5.0 Scaling relationships between sizes of input data (numbers of
+  observations, with potential extension to numbers of variables/columns) and
+  speed of algorithm.*
+
+`lme4` does not explicitly document scaling of model fitting algorithms 
+
+## 6. Visualization
+
+- *RE6.2 Where a model object is used to generate a forecast (for example,
+  through a `predict()` method), the default `plot` method should provide clear
+  visual distinction between modelled (interpolated) and forecast
+  (extrapolated) values.*
+
+It is not possible to use `lme4` to distinguish *extrapolated* from
+*interpolated* predicted values, and thus no visual distinction is possible.
+See preceding comments regarding prediction methods under 4.2.
+
+
+## 7. Testing
+
+- *RE7.0 Tests with noiseless, exact relationships between predictor
+  (independent) data.*
+- *RE7.1 Tests with noiseless, exact relationships between predictor
+  (independent) and response (dependent) data.*
+
+These tests do not appear to explicitly exist, although the test suite is quite
+large, and they could nevertheless be present somewhere.
