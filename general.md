@@ -206,44 +206,91 @@ of input classes.
 
 ## 4. Testing 
 
-All packages should follow rOpenSci standards on [testing](https://devguide.ropensci.org/building.html#testing) and [continuous integration](https://devguide.ropensci.org/ci.html), including aiming for high test coverage.  For testing _statistical algorithms_, tests should include tests of the following types:
+All packages should follow rOpenSci standards on
+[testing](https://devguide.ropensci.org/building.html#testing) and [continuous
+integration](https://devguide.ropensci.org/ci.html), including aiming for high
+test coverage.  
 
+- **G4.0** Where applicable or practicable, tests should use standard data sets
+  with known properties (for example, the [NIST Standard Reference
+  Datasets](https://www.itl.nist.gov/div898/strd/), or data sets provided by
+  other widely-used R packages).
+- **G4.1** Data sets created within, and used to test, a package should be
+  exported so that users can confirm tests and run examples.
 
-   -  **Correctness tests** to test that statistical algorithms produce expected output (predictions, fitted values) given test data sets.
-       -  For new methods, it can be difficult to separate out correctness of the the method from the correctness of the implementation, as there may not be reference for comparison.  In this case, options include testing against simple, trivial cases or testing multiple implementations (e.g., an initial R implementation then ported to C/C++.)
-        - For new implementations of existing methods, correctness tests should include tests against previous implementations.  Such testing may explicitly call those implementations in testing, preferably from fixed-versions of other software, or use stored outputs from those where it is not possible.
-            - Stored values may even be drawn from published paper outputs when applicable and code from the original implementation is not available
-            - Note binding frameworks such as [RStata](https://github.com/lbraglia/RStata) may help here.)
-        - Where applicable, using standard data sets with known properties, (e.g., [NIST Standard Reference Datasets](https://www.itl.nist.gov/div898/strd/) is encouraged.
-        - Correctness tests should be run with a fixed random seed
+For testing _statistical algorithms_, tests should include tests of the
+following types:
 
-   - **Parameter recovery tests** to test that the implementation produce expected results given data with known properties.  For instance, a linear regression algorithm should return expected coefficient values for a simulated data set generated from a linear model.  In general parameter recovery tests should be expected to succeed within a tolerance rather than exact values.
-       - Parameter recovery tests should be run with multiple random seeds when either data simulation or the algorithm contains a random component
-
-
-   - **Algorithm performance tests** test that implementation performs as expected as properties of data change.  For instance, a test may show that parameters approach correct estimates within tolerance and data size increases.
-
-   -  **Edge condition tests** to test that these conditions produce expected behavior such as clear warnings or errors when confronted with data with extreme properties 
-       -  Zero-length data, 
-       -  Data of unsupported types (e.g., character or complex numbers in for functions designed only for numeric data)
-       -  Data with all-NA fields or all identical fields
-       -  Data outside the scope of the algorithm (e.g., data with more fields (columns) than observations (rows) for some regression)
-
-   - Packages should test for expected stochastic behavior, e.g., 
-       - Adding trivial (e.g. `.Machine$double.eps`-scale) noise to data does not meaningfully change results
-       - Running under differennt random seeds / initital conditions does not meaningfully change results
-
-   - Data sets used in testing should be made available to the user in the package. 
-
-
-
-- Export data sets used for testing in the package for user confirmation and examples
-   -  
+-  **G4.2** **Correctness tests** to test that statistical algorithms produce
+   expected results to some fixed test data sets (potentially through
+   comparisons using binding frameworks such as
+   [RStata](https://github.com/lbraglia/RStata)).
+    -  **G4.2a** For new methods, it can be difficult to separate out
+       correctness of the the method from the correctness of the
+       implementation, as there may not be reference for comparison.  In this
+       case, testing may be implemented against simple, trivial cases or
+       against multiple implementations such as an initial R implementation
+       compared with results from a C/C++ impelementation.
+    - **G4.2b** For new implementations of existing methods, correctness tests
+      should include tests against previous implementations.  Such testing may
+      explicitly call those implementations in testing, preferably from
+      fixed-versions of other software, or use stored outputs from those where
+      that is not possible.
+    - **G4.2c** Where applicable, stored values may be drawn from published
+      paper outputs when applicable and where code from original
+      implementations is not available
+- **G4.3** Correctness tests should be run with a fixed random seed
+- **G4.4** **Parameter recovery tests** to test that the implementation produce
+  expected results given data with known properties.  For instance, a linear
+  regression algorithm should return expected coefficient values for a
+  simulated data set generated from a linear model.
+    - **G4.4a** Parameter recovery tests should generally be expected to
+      succeed within a defined tolerance rather than recovering exact values.
+    - **G4.4b** Parameter recovery tests should be run with multiple random
+      seeds when either data simulation or the algorithm contains a random
+      component
+- **G4.5** **Algorithm performance tests** to test that implementation performs
+  as expected as properties of data change.  For instance, a test may show that
+  parameters approach correct estimates within tolerance as data size
+  increases, or that convergence times decrease for higher convergence
+  thresholds.
+- **G4.6** **Edge condition tests** to test that these conditions produce
+  expected behaviour such as clear warnings or errors when confronted with data
+  with extreme properties including but not limited to:
+    - **G4.6a** Zero-length data, 
+    - **G4.6b** Data of unsupported types (e.g., character or complex numbers
+      in for functions designed only for numeric data)
+    - **G4.6c** Data with all-`NA` fields or columns or all identical fields or columns
+    - **G4.6d** Data outside the scope of the algorithm (for example, data with
+      more fields (columns) than observations (rows) for some regression
+      algorithms)
+- **G4.7** **Noise susceptibility tests** Packages should test for expected
+  stochastic behaviour, such as through the following conditions:
+    - **G4.7a** Adding trivial noise (for example, at the scale of
+      `.Machine$double.eps`) to data does not meaningfully change results
+    - **G4.7b** Running under different random seeds or initial conditions does
+      not meaningfully change results
 
 ### 4.1 Extended tests
 
-Tests on large data, tests with many permutations and other conditions are often ill-suited to workflows of unit tests run continuously with every code change.  In these cases authors may wish to provided extended tests.
+Thorough testing of statistical software may require tests on large data sets, 
+tests with many permutations, or other conditions leading to long-running
+tests. In such cases it may be neither possible nor advisable to execute tests
+continuously, or with every code change. Software should nevertheless test any
+and all conditions regardless of how long tests may take, and in doing so
+should adhere to the following standards:
 
-Extended tests should run under a common framework of with other tests but be switched on by flags such as as a `MYPKG_EXTENDED_TESTS=1` environment variable.  Where extended tests require large data sets or other assets, these should be provided for downloaded and fetched as part of the testing workflow.
+- **G4.8** Extended tests should included and run under a common framework with
+  other tests but be switched on by flags such as as a
+  `<MYPKG>_EXTENDED_TESTS=1` environment variable.
+- **G4.9** Where extended tests require large data sets or other assets, these
+  should be provided for downloading and fetched as part of the testing
+  workflow.
+    - **G4.9a** When any downloads of additional data necessary for extended
+      tests fail, the tests themselves should not fail, rather be skipped and
+      implicitly succeed with an appropriate diagnostic message.
+- **G4.10** Any conditions necessary to run extended tests such as platform
+  requirements, memory, expected runtime, and artefacts produced that may need
+  manual inspection, should be described in developer documentation such as a
+  `CONTRIBUTING.md` file. 
 
-Conditions for running extended tests such as platform requirements, memory, expected runtime, and artifacts produced that may need manual inspection, should be described in developer documentation such as a `CONTRIBUTING.md` file. 
