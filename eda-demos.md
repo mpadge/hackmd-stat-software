@@ -44,6 +44,13 @@ are:
   provided to remove them, even though such options could be useful here.
 - [ ] G3.1 File name specifications (in `ExpReport()` function) **not**
   appropriately parsed, rather simply assumed to be `*.html`.
+- [x] G4.0 Tests use data sets provided by other widely-used R packages.
+- [x] G4.1 No data sets created within package, so not applicable
+- [x] G4.2--4.5 Standards for testing statistical algorithms not applicable to
+  EDA software
+- [ ] G4.6 No edge condition tests implemented
+- [ ] G4.7 No tests of noise susceptibility implemented
+- [x] G4.8--4.10 No extended tests needed, so not applicable
 
 ### EDA Standards
 
@@ -100,6 +107,16 @@ are:
 - [x] G2.8--2.11 No functions accept data able to contain missing values, so
   not applicable
 - [x] G3.1 No functions use local files, so not appicable
+- [x] G4.0 Tests use data sets provided by other widely-used R packages.
+- [x] G4.1 No data sets created within package, so not applicable
+- [x] G4.2--4.5 Standards for testing statistical algorithms not applicable to
+  EDA software
+- [x] G4.6 Input to software is models not raw data, so edge conditions neither
+  relevant nor applicable.
+- [x] G4.7 Input to software is models not raw data, so noise tests neither
+  relevant nor applicable.
+- [x] G4.8--4.10 Extended tests neither relevant nor applicable.
+
 
 
 ### EDA Standards
@@ -159,7 +176,14 @@ are:
 - [ ] G2.11 No functions appropriately handle undefined values other than `NA`.
   `NaN` is treated exactly as `NA`, and `Inf` is simply ignored.
 - [ ] G3.1 There are no outputs written to local files, so not applicable
-
+- [x] G4.0 Tests use data sets provided by other widely-used R packages.
+- [x] G4.1 No data sets created within package, so not applicable
+  exported so that users can confirm tests and run examples.
+- [x] G4.2--4.5 Standards for testing statistical algorithms not applicable to
+  EDA software
+- [x] G4.6 Edge conditions tested appropriately
+- [x] G4.7 Test of noise susceptibility not applicable
+- [x] G4.8--4.10 Extended tests neither relevant nor applicable.
 
 ### EDA Standards
 
