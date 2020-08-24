@@ -216,7 +216,8 @@ test coverage.
   Datasets](https://www.itl.nist.gov/div898/strd/), or data sets provided by
   other widely-used R packages).
 - **G4.1** Data sets created within, and used to test, a package should be
-  exported so that users can confirm tests and run examples.
+  exported (or otherwise made generally available) so that users can confirm
+  tests and run examples.
 
 For testing _statistical algorithms_, tests should include tests of the
 following types:
