@@ -28,14 +28,14 @@ robots: noindex, nofollow
     - [x] G2.3c explicit conversion to character uses `as.character()`
     - [x] G2.3d--e No `factor` data used, so not applicable
 - [x] G2.4 No `factor` data used, so not applicable
-- [x] G2.5--2.7 Pre-processing of rectangular input expected to be explicitly
+- [x] G2.5--2.8 Pre-processing of rectangular input expected to be explicitly
   controlled through user specification of a log-likelihood function, so not
   applicable.
-- [ ] G2.8 There are no checks for missing data
-- [ ] G2.9 There are no options for users to specify how to handle missing
+- [ ] G2.9 There are no checks for missing data
+- [ ] G2.10 There are no options for users to specify how to handle missing
   (`NA`) data
-- [ ] G2.10 Functions assume non-missingness, without explicitly stating such
-- [ ] G2.11 There is no processing of other (non-`NA`) undefined values.
+- [ ] G2.11 Functions assume non-missingness, without explicitly stating such
+- [ ] G2.12 There is no processing of other (non-`NA`) undefined values.
 - [ ] G3.1 Nothing is written to local files, so not applicable
 
 
@@ -176,12 +176,13 @@ robots: noindex, nofollow
       `paste` or `paste0`)
     - [x] G2.3d--e There is no explicit `factor` input, so not applicable
 - [x] G2.4 There is no explicit `factor` input, so not applicable
-- [x] G2.5 Restrictions on multi-variate input very carefully documented
+- [x] G2.5 Restrictions on tabular input very carefully documented
 - [x] G2.6 There are conversion routines for multivariate input, for reasons
   explained in documentation.
 - [x] G2.7 There is no type conversion in which information is lost, so not
   applicable.
-- [x] G2.8--2.11 Missing data is explicitly prohibited, as extensively
+- [x] G2.8 Restrictions on tabular input very carefully documented.
+- [x] G2.9--2.12 Missing data is explicitly prohibited, as extensively
   documented, and all appropriate checks are also implemented.
 - [x] G3.1 Processing of names of local files explicitly documented
 

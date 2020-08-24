@@ -30,13 +30,13 @@ Where software supports a publication, all claims made in the publication with
 regard to software performance (for example, claims of algorithmic scaling or
 efficiency; or claims of accuracy), the following standard applies:
 
-- G1.0 Software should include all code necessary to reproduce results which
+- **G1.0** Software should include all code necessary to reproduce results which
   form the basis of performance claims made in associated publications.
 
 Where claims regarding aspects of software performance are made with respect to
 other extant R packages, the following standard applies:
 
-- G1.1 Software should include code necessary to compare performance claims
+- **G1.1** Software should include code necessary to compare performance claims
   with alternative implementations in other R packages.
 
 
@@ -60,84 +60,147 @@ It is important to note for univariate data that single values in R are vectors
 with a length of one, and that `1` is of exactly the same *data type* as `1:n`.
 Given this, inputs expected to be univariate should:
 
-- G2.0 Provide explicit secondary documentation of any expectations on lengths
+- **G2.0** Provide explicit secondary documentation of any expectations on lengths
   of inputs (generally implying identifying whether an input is expected to be
   single- or multi-valued)
-- G2.1 Provide explicit secondary documentation of expectations on *data types*
+- **G2.1** Provide explicit secondary documentation of expectations on *data types*
   of all vector inputs (see the above list).
-- G2.2 Appropriately prohibit or restrict submission of multivariate input to
+- **G2.2** Appropriately prohibit or restrict submission of multivariate input to
   parameters expected to be univariate.
-- G2.3 Provide appropriate mechanisms to convert between different *data
+- **G2.3** Provide appropriate mechanisms to convert between different *data
   types*, potentially including:
-    - G2.3a explicit conversion to `integer` via `as.integer()`
-    - G2.3b explicit conversion to continuous via `as.numeric()`
-    - G2.3c explicit conversion to character via `as.character()` (and not
+    - **G2.3a** explicit conversion to `integer` via `as.integer()`
+    - **G2.3b** explicit conversion to continuous via `as.numeric()`
+    - **G2.3c** explicit conversion to character via `as.character()` (and not
       `paste` or `paste0`)
-    - G2.3d explicit conversion to factor via `as.factor()`
-    - G2.3e explicit conversion from factor via `as...()` functions
-- G2.4 Where inputs are expected to be of `factor` type, secondary
+    - **G2.3d** explicit conversion to factor via `as.factor()`
+    - **G2.3e** explicit conversion from factor via `as...()` functions
+- **G2.4** Where inputs are expected to be of `factor` type, secondary
   documentation should explicitly state whether these should be `ordered` or
   not, and those inputs should provide appropriate error or other routines to
   ensure inputs follow these expectations.
 
 
-### 2.2 Multivariate Input
+### 2.2 Tabular Input
 
-This sub-section refers to "standard rectangular forms" for input data. The
-fundamental rectangular form in R is an `array`, which is just a vector with
-additional attributes specifying rectangular dimensions. A `matrix` was
-technically a special form of `array` which allowed additional attributes such
-as dimension (row and column) names, but since R4.0.0 the two have become
-largely equivalent such that an `array` constructor creates an object of class
-`c("matrix", "array")`, and `inherits(m, "array")` is true for a `matrix` `m`.
-Both terms may accordingly be considered entirely equivalent.
+This sub-section concerns input in "tabular data" forms, implying the two
+primary distinctions within R itself between `array` or `matrix`
+representations, and `data.frame` and associated representations. Among
+important differences between these two forms are that `array`/`matrix` classes
+are restricted to storing data of a single uniform type (for example, all
+`integer` or all `character` values), whereas `data.frame` as associated
+representations store each column as a list item, allowing different columns to
+hold values of different types. Further noting that
+a `matrix` may, [as of R version
+4.0](https://developer.r-project.org/Blog/public/2019/11/09/when-you-think-class.-think-again/index.html),
+be considered as a strictly two-dimensional array, tabular inputs for the
+purposes of these standards are considered to imply data represented in one or
+more of the following forms:
 
-Given this, multivariate inputs may be in one or or more of the following forms:
+Given this, tabular inputs may be in one or or more of the following forms:
 
-- `matrix`
+- `matrix` form when referring to specifically two-dimensional data of one
+  uniform type
+- `array` form as a more general expression, or when referring to data that are
+  not necessarily or strictly two-dimensional
 - `data.frame`
 - Extensions such as
     - [`tibble`](https://tibble.tidyverse.org)
     - [`data.table`](https://rdatatable.gitlab.io/data.table)
     - domain-specific classes such as
-      [`tsibble`](https://tsibble.tidyverts.org) for time series
+      [`tsibble`](https://tsibble.tidyverts.org) for time series, or
+      [`sf`](https://r-spatial.github.io/sf/) for spatial data.
+
+The term "`data.frame` and associated forms" is assumed to refer to data
+represented in either the `base::data.frame` format, and/or any of the classes
+listed in the final of the above points.
 
 General Standards applicable to software which is intended to accept any one or
-more of these rectangular inputs are then that:
+more of these tabular inputs are then that:
 
-- G2.5 Software should accept as input as many of the above standard forms as
-  possible, including extension to domain-specific forms
-- G2.6 Software should provide appropriate conversion routines as part of initial
+- **G2.5** Software should accept as input as many of the above standard tabular
+  forms as possible, including extension to domain-specific forms
+- **G2.6** Software should provide appropriate conversion routines as part of initial
   pre-processing to ensure that all other sub-functions of a package receive
-  inputs of a single defined type.
-- G2.7 Software should issue diagnostic messages for type conversion in which
+  inputs of a single defined class or type.
+- **G2.7** Software should issue diagnostic messages for type conversion in which
   information is lost (such as conversion of variables from factor to
-  character; or standardisation of variable names) or added (such as insertion
-  of variable or column names where none were provided).
+  character; standardisation of variable names; or removal of meta-data such as
+  those associated with [`sf`-format](https://r-spatial.github.io/sf/) data) or
+  added (such as insertion of variable or column names where none were
+  provided).
+
+The next standard concerns the following inconsistencies between three common
+tabular classes in regard the column extraction operator, `[`.
+
+``` r
+class (x) # x is any kind of `data.frame` object
+#> [1] "data.frame"
+class (x [, 1])
+#> [1] "integer"
+class (x [, 1, drop = TRUE]) # default
+#> [1] "integer"
+class (x [, 1, drop = FALSE])
+#> [1] "data.frame"
+
+x <- tibble::tibble (x)
+class (x [, 1])
+#> [1] "tbl_df"     "tbl"        "data.frame"
+class (x [, 1, drop = TRUE])
+#> [1] "integer"
+class (x [, 1, drop = FALSE]) # default
+#> [1] "tbl_df"     "tbl"        "data.frame"
+
+x <- data.table::data.table (x)
+class (x [, 1])
+#> [1] "data.table" "data.frame"
+class (x [, 1, drop = TRUE]) # no effect
+#> [1] "data.table" "data.frame"
+class (x [, 1, drop = FALSE]) # default
+#> [1] "data.table" "data.frame"
+```
+
+- Extracting a single column from a `data.frame` returns a `vector` by default,
+  and a `data.frame` if `drop = FALSE`.
+- Extracting a single column from a `tibble` returns a single-column `tibble`
+  by default, and a `vector` is `drop = TRUE`. 
+- Extracting a single column from a `data.table` always returns a `data.table`,
+  and the `drop` argument has no effect.
+
+Given such inconsistencies, 
+
+- **G2.8** Software should ensure that extraction or filtering of single columns
+  from tabular inputs should not presume any particular default behaviour, and
+  should ensure all column-extraction operations behave consistently regardless
+  of the class of tabular data used as input.
+
+Adherence to the above standard G2.6 will ensure that any implicitly or
+explicitly assumed default behaviour will yield consistent results regardless
+of input classes.
 
 ### 2.3 Missing or Undefined Values
 
-- G2.8 Statistical Software should implement appropriate checks for missing
+- **G2.9** Statistical Software should implement appropriate checks for missing
   data as part of initial pre-processing prior to passing data to analytic
   algorithms.
-- G2.9 Where possible, all functions should provide options for users to
+- **G2.10** Where possible, all functions should provide options for users to
   specify how to handle missing (`NA`) data, with options minimally including:
-  - G2.9a error on missing data
-  - G2.9b ignore missing data with default warnings or messages issued
-  - G2.9c replace missing data with appropriately imputed values
-- G2.10 Functions should never assume non-missingness, and should never pass
+  - **G2.10a** error on missing data
+  - **G2.10b** ignore missing data with default warnings or messages issued
+  - **G2.10c** replace missing data with appropriately imputed values
+- **G2.11** Functions should never assume non-missingness, and should never pass
   data with potential missing values to any base routines with default `na.rm =
   FALSE`-type parameters (such as
   [`mean()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html),
   [`sd()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/sd.html) or
   [`cor()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html)).
-- G2.11 All functions should also appropriately handle undefined values 
+- **G2.12** All functions should also appropriately handle undefined values 
   (e.g., `NaN`, `Inf` and `-Inf`), including potentially providing options for
   ignoring or removing such values.
 
 ## 3. Output Structures
 
-- G3.1 Statistical Software which enables outputs to be written to local files
+- **G3.1** Statistical Software which enables outputs to be written to local files
   should parse parameters specifying file names to ensure appropriate file
   suffices are automatically generated where not provided.
 

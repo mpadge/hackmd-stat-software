@@ -36,10 +36,11 @@ are:
 - [x] G2.5 All standard input forms accepted
 - [ ] G2.6 (Not yet checked)
 - [x] G2.7 Not applicable
-- [x] G2.8 Missing data appropriately handled
-- [x] G2.9 No user control over missing data needed here
-- [x] G2.10 All missing data appropriately pre-processed
-- [x] G2.11 Undefined values appropriately handled, although no options
+- [x] G2.8 Different classes of tabular input yield consistent results
+- [x] G2.9 Missing data appropriately handled
+- [x] G2.10 No user control over missing data needed here
+- [x] G2.11 All missing data appropriately pre-processed
+- [x] G2.12 Undefined values appropriately handled, although no options
   provided to remove them, even though such options could be useful here.
 - [ ] G3.1 File name specifications (in `ExpReport()` function) **not**
   appropriately parsed, rather simply assumed to be `*.html`.
