@@ -221,11 +221,11 @@ test coverage.
 For testing _statistical algorithms_, tests should include tests of the
 following types:
 
--  **G4.2** **Correctness tests** to test that statistical algorithms produce
+- **G4.2** **Correctness tests** to test that statistical algorithms produce
    expected results to some fixed test data sets (potentially through
    comparisons using binding frameworks such as
    [RStata](https://github.com/lbraglia/RStata)).
-    -  **G4.2a** For new methods, it can be difficult to separate out
+    - **G4.2a** For new methods, it can be difficult to separate out
        correctness of the the method from the correctness of the
        implementation, as there may not be reference for comparison.  In this
        case, testing may be implemented against simple, trivial cases or
