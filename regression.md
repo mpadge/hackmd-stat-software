@@ -69,7 +69,7 @@ standard prefixed with "RE".
     - **RE2.4a** Perfect collinearity among predictor variables
     - **RE2.4b** Perfect collinearity between independent and dependent variables
 
-  These pre-processing routines should also be tested as described below.
+These pre-processing routines should also be tested as described below.
 
 ## 3. Algorithms
 
@@ -186,7 +186,6 @@ documentation including graphical output:
 ## 7. Testing
 
 Tests for Regression Software should include the following conditions and cases:
-
 
 - **RE7.0** Tests with noiseless, exact relationships between predictor
   (independent) data.
