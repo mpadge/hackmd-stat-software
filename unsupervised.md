@@ -35,10 +35,49 @@ The latter fails, yet issues an informative error message that clearly
 indicates a failure to provide sufficient checks on the class of input
 data.
 
-  - **UL1.1** Unsupervised Learning Software should explicitly document
+  - **UL1.2** Unsupervised learning which uses row or column names to
+    label output objects should assert than input data has non-default
+    row or column names, and issue an informative message when these are
+    not provided.
+
+The following code provides simple examples of checks whether row and
+column names appear to have generic default values.
+
+``` r
+x <- data.frame (matrix (1:10, ncol = 2))
+x
+```
+
+    ##   X1 X2
+    ## 1  1  6
+    ## 2  2  7
+    ## 3  3  8
+    ## 4  4  9
+    ## 5  5 10
+
+``` r
+identical (rownames (x), as.character (seq (nrow (x))))
+```
+
+    ## [1] TRUE
+
+``` r
+identical (colnames (x), paste0 ("X", seq (ncol (x))))
+```
+
+    ## [1] TRUE
+
+Messages should be issued in both of these cases.
+
+  - **UL1.3** Unsupervised Learning Software should explicitly document
     any aspects of input data (such as row names) which are not used in
     model construction.
-  - **UL1.2** Unsupervised Learning Software should document any
+  - **UL1.4** Unsupervised Learning Software should explicitly document
+    whether input data may include missing values.
+  - **UL1.5** Functions in Unsupervised Learning Software which do not
+    admit input data with missing values should provide informative
+    error messages when data with missing values are submitted.
+  - **UL1.6** Unsupervised Learning Software should document any
     assumptions made with regard to input data; for example
     distributional assumptions, or assumptions that any aspects of input
     data have mean values of zero. Implications of violations of these
@@ -51,11 +90,11 @@ data.
     label-values to `factor`, and should provide ways to explicitly
     avoid any default transformations (with error or warning conditions
     where appropriate).
-  - **UL2.1** Unsupervised Learning Software should implement explicit
-    parameters controlling the processing of missing values, ideally
-    distinguishing `NA` or `NaN` values from `Inf` values (for example,
-    through use of `na.omit()` and related functions from the `stats`
-    package).
+  - **UL2.1** For Unsupervised Learning Software which accepts missing
+    values in input data, functions should implement explicit parameters
+    controlling the processing of missing values, ideally distinguishing
+    `NA` or `NaN` values from `Inf` values (for example, through use of
+    `na.omit()` and related functions from the `stats` package).
   - **UL2.2** Unsupervised Learning Software should implement
     pre-processing routines to identify whether aspects of input data
     are perfectly collinear, notably including:
@@ -82,7 +121,7 @@ data.
     should implement or appropriately extend a default `print` method
     which provides an on-screen summary of model (input) parameters and
     methods used to generate results. The `print` method may also
-    summarise results.
+    summarise statistical aspects of the output data or results.
   - **RE4.3** Unsupervised Learning Software should also implement
     `summary` methods for model objects which should summarise the
     primary statistics used in generating the model (such as numbers of
