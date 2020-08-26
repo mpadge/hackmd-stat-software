@@ -67,15 +67,21 @@ Given this, inputs expected to be univariate should:
   of all vector inputs (see the above list).
 - **G2.2** Appropriately prohibit or restrict submission of multivariate input to
   parameters expected to be univariate.
-- **G2.3** Provide appropriate mechanisms to convert between different *data
+- **G2.3** For univariate character input:
+    - **G2.3a** Use `match.arg()` or equivalent where applicable to only permit
+      expected values.
+    - **G2.3b** Either: use `tolower()` or equivalent to ensure input of
+      character parameters is not case dependent; or explicitly document that
+      parameters are strictly case-sensitive.
+- **G2.4** Provide appropriate mechanisms to convert between different *data
   types*, potentially including:
-    - **G2.3a** explicit conversion to `integer` via `as.integer()`
-    - **G2.3b** explicit conversion to continuous via `as.numeric()`
-    - **G2.3c** explicit conversion to character via `as.character()` (and not
+    - **G2.4a** explicit conversion to `integer` via `as.integer()`
+    - **G2.4b** explicit conversion to continuous via `as.numeric()`
+    - **G2.4c** explicit conversion to character via `as.character()` (and not
       `paste` or `paste0`)
-    - **G2.3d** explicit conversion to factor via `as.factor()`
-    - **G2.3e** explicit conversion from factor via `as...()` functions
-- **G2.4** Where inputs are expected to be of `factor` type, secondary
+    - **G2.4d** explicit conversion to factor via `as.factor()`
+    - **G2.4e** explicit conversion from factor via `as...()` functions
+- **G2.5** Where inputs are expected to be of `factor` type, secondary
   documentation should explicitly state whether these should be `ordered` or
   not, and those inputs should provide appropriate error or other routines to
   ensure inputs follow these expectations.
@@ -118,12 +124,12 @@ listed in the final of the above points.
 General Standards applicable to software which is intended to accept any one or
 more of these tabular inputs are then that:
 
-- **G2.5** Software should accept as input as many of the above standard tabular
+- **G2.6** Software should accept as input as many of the above standard tabular
   forms as possible, including extension to domain-specific forms
-- **G2.6** Software should provide appropriate conversion routines as part of initial
+- **G2.7** Software should provide appropriate conversion routines as part of initial
   pre-processing to ensure that all other sub-functions of a package receive
   inputs of a single defined class or type.
-- **G2.7** Software should issue diagnostic messages for type conversion in which
+- **G2.8** Software should issue diagnostic messages for type conversion in which
   information is lost (such as conversion of variables from factor to
   character; standardisation of variable names; or removal of meta-data such as
   those associated with [`sf`-format](https://r-spatial.github.io/sf/) data) or
@@ -169,7 +175,7 @@ class (x [, 1, drop = FALSE]) # default
 
 Given such inconsistencies, 
 
-- **G2.8** Software should ensure that extraction or filtering of single columns
+- **G2.9** Software should ensure that extraction or filtering of single columns
   from tabular inputs should not presume any particular default behaviour, and
   should ensure all column-extraction operations behave consistently regardless
   of the class of tabular data used as input.
@@ -180,21 +186,21 @@ of input classes.
 
 ### 2.3 Missing or Undefined Values
 
-- **G2.9** Statistical Software should implement appropriate checks for missing
+- **G2.10** Statistical Software should implement appropriate checks for missing
   data as part of initial pre-processing prior to passing data to analytic
   algorithms.
-- **G2.10** Where possible, all functions should provide options for users to
+- **G2.11** Where possible, all functions should provide options for users to
   specify how to handle missing (`NA`) data, with options minimally including:
-  - **G2.10a** error on missing data
-  - **G2.10b** ignore missing data with default warnings or messages issued
-  - **G2.10c** replace missing data with appropriately imputed values
-- **G2.11** Functions should never assume non-missingness, and should never pass
+  - **G2.11a** error on missing data
+  - **G2.11b** ignore missing data with default warnings or messages issued
+  - **G2.11c** replace missing data with appropriately imputed values
+- **G2.12** Functions should never assume non-missingness, and should never pass
   data with potential missing values to any base routines with default `na.rm =
   FALSE`-type parameters (such as
   [`mean()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html),
   [`sd()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/sd.html) or
   [`cor()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html)).
-- **G2.12** All functions should also appropriately handle undefined values 
+- **G2.13** All functions should also appropriately handle undefined values 
   (e.g., `NaN`, `Inf` and `-Inf`), including potentially providing options for
   ignoring or removing such values.
 

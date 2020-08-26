@@ -14,7 +14,7 @@ A general overview of the packages mentioned in that article is also provided
 in this  [github repository
 (work-in-progres)](https://github.com/m-clark/exploratory-data-analysis-tools).
 
-## [`smartEDA`](https://github.com/daya6489/SmartEDA)
+## [`SmartEDA`](https://github.com/daya6489/SmartEDA)
 
 This package conveniently offers a single "master function", `ExpReport`, which
 generates a stand-alone `html` report containing the output of most of the
@@ -31,16 +31,18 @@ are:
 - [ ] G2.0 No documentation on expected lengths of any input variables
 - [x] G2.1 Types of most inputs clearly documented
 - [ ] G2.2 (Not yet implemented in `autotest`, but will be confirmed there.)
-- [x] G2.3 Not applicable
-- [ ] G2.4 No mention of how factors are handled
-- [x] G2.5 All standard input forms accepted
-- [ ] G2.6 (Not yet checked)
-- [x] G2.7 Not applicable
-- [x] G2.8 Different classes of tabular input yield consistent results
-- [x] G2.9 Missing data appropriately handled
-- [x] G2.10 No user control over missing data needed here
-- [x] G2.11 All missing data appropriately pre-processed
-- [x] G2.12 Undefined values appropriately handled, although no options
+- [ ] G2.3 `match.arg()` not used for single-valued character inputs, nor is
+  `tolower()` or equivalent used to avoid sensitivity to case.
+- [x] G2.4 Not applicable
+- [ ] G2.5 No mention of how factors are handled
+- [x] G2.6 All standard input forms accepted
+- [ ] G2.7 (Not yet checked)
+- [x] G2.8 Not applicable
+- [x] G2.9 Different classes of tabular input yield consistent results
+- [x] G2.10 Missing data appropriately handled
+- [x] G2.11 No user control over missing data needed here
+- [x] G2.12 All missing data appropriately pre-processed
+- [x] G2.13 Undefined values appropriately handled, although no options
   provided to remove them, even though such options could be useful here.
 - [ ] G3.0 File name specifications (in `ExpReport()` function) **not**
   appropriately parsed, rather simply assumed to be `*.html`.
@@ -95,16 +97,19 @@ are:
   functions).
 - [ ] G2.2 There are no checks or restrictions on parameters expected to be
   univariate.
-- [ ] G2.3 Provide appropriate mechanisms to convert between different *data
+- [ ] G2.3 No checks implemented for assumed single-valued character input
+    - [ ] G2.3a `match.arg()` is not used
+    - [ ] G2.3b `tolower()` is not used to avoid sensitivity to case
+- [ ] G2.4 Provide appropriate mechanisms to convert between different *data
   types*, potentially including:
-    - [ ] G2.3a There is no explicit conversion to `integer` via `as.integer()`
-    - [x] G2.3b There is explicit conversion to continuous via `as.numeric()`
-    - [x] G2.3c explicit conversion to character uses `as.character()`
-    - [x] G2.3d explicit conversion to factor uses `as.factor()`
-    - [x] G2.3e explicit conversion from factor uses `as...()` functions
-- [x] G2.4 No inputs are expected to be of `factor` type, so not applicable
-- [x] G2.5--2.7 No functions accept rectangular input, so not applicable
-- [x] G2.8--2.11 No functions accept data able to contain missing values, so
+    - [ ] G2.4a There is no explicit conversion to `integer` via `as.integer()`
+    - [x] G2.4b There is explicit conversion to continuous via `as.numeric()`
+    - [x] G2.4c explicit conversion to character uses `as.character()`
+    - [x] G2.4d explicit conversion to factor uses `as.factor()`
+    - [x] G2.4e explicit conversion from factor uses `as...()` functions
+- [x] G2.5 No inputs are expected to be of `factor` type, so not applicable
+- [x] G2.6--2.8 No functions accept rectangular input, so not applicable
+- [x] G2.9--2.12 No functions accept data able to contain missing values, so
   not applicable
 - [x] G3.0 No functions use local files, so not appicable
 - [x] G4.0 Tests use data sets provided by other widely-used R packages.
@@ -156,24 +161,25 @@ are:
   lead to uninformative errors (for example, `missing` parameter of
   [`add_any_miss()`
   function](http://naniar.njtierney.com/reference/add_any_miss.html)).
-- [x] G2.3 Provide appropriate mechanisms to convert between different *data
+- [x] G2.3 No single-valued character parameters used, so not applicable.
+- [x] G2.4 Provide appropriate mechanisms to convert between different *data
   types*, potentially including:
-    - [x] G2.3a explicit conversion to `integer` uses `as.integer()`
-    - [x] G2.3b explicit conversion to continuous uses `as.numeric()`
-    - [x] G2.3c There is no explicit conversion to character, so not applicable
+    - [x] G2.4a explicit conversion to `integer` uses `as.integer()`
+    - [x] G2.4b explicit conversion to continuous uses `as.numeric()`
+    - [x] G2.4c There is no explicit conversion to character, so not applicable
       `paste` or `paste0`)
-    - [x] G2.3d There is no explicit conversion to factor, so not applicable
-    - [x] G2.3e There is no explicit conversion from factor, so not applicable
-- [x] G2.4 No inputs expected to be of `factor` type, so not applicable.
-- [ ] G2.5 `naniar` does not accept `matrix`/`array` input, even though it easily could.
-- [ ] G2.6 There is no initial pre-processing to ensure that all other
+    - [x] G2.4d There is no explicit conversion to factor, so not applicable
+    - [x] G2.4e There is no explicit conversion from factor, so not applicable
+- [x] G2.5 No inputs expected to be of `factor` type, so not applicable.
+- [ ] G2.6 `naniar` does not accept `matrix`/`array` input, even though it easily could.
+- [ ] G2.7 There is no initial pre-processing to ensure that all other
   sub-functions of a package receive inputs of a single defined type.
-- [ ] G2.7 There is no type conversion, so no diagnostic messages for type
+- [ ] G2.8 There is no type conversion, so no diagnostic messages for type
   conversion are issued.
-- [x] G2.8 Checks for missing data are a core part of every routine
-- [x] G2.9 Most functions provide multiple, custom options for handling missing
-- [x] G2.10 No functions assume non-missingness
-- [ ] G2.11 No functions appropriately handle undefined values other than `NA`.
+- [x] G2.9 Checks for missing data are a core part of every routine
+- [x] G2.10 Most functions provide multiple, custom options for handling missing
+- [x] G2.11 No functions assume non-missingness
+- [ ] G2.12 No functions appropriately handle undefined values other than `NA`.
   `NaN` is treated exactly as `NA`, and `Inf` is simply ignored.
 - [ ] G3.0 There are no outputs written to local files, so not applicable
 - [x] G4.0 Tests use data sets provided by other widely-used R packages.

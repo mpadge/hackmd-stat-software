@@ -21,21 +21,22 @@ robots: noindex, nofollow
   generally provided.
 - [ ] G2.2 Submission of multivariate input to parameters expected to be
   univariate is possible, and not caught in pre-processing
+- [x] G2.3 No functions have single-valued character inputs, so not applicable.
 - [ ] G2.3 Provide appropriate mechanisms to convert between different *data
   types*, potentially including:
     - [ ] G2.3a There is no explicit conversion to `integer` via `as.integer()`
     - [x] G2.3b explicit conversion to continuous uses `as.numeric()`
     - [x] G2.3c explicit conversion to character uses `as.character()`
     - [x] G2.3d--e No `factor` data used, so not applicable
-- [x] G2.4 No `factor` data used, so not applicable
-- [x] G2.5--2.8 Pre-processing of rectangular input expected to be explicitly
+- [x] G2.5 No `factor` data used, so not applicable
+- [x] G2.6--2.9 Pre-processing of rectangular input expected to be explicitly
   controlled through user specification of a log-likelihood function, so not
   applicable.
-- [ ] G2.9 There are no checks for missing data
-- [ ] G2.10 There are no options for users to specify how to handle missing
+- [ ] G2.10 There are no checks for missing data
+- [ ] G2.11 There are no options for users to specify how to handle missing
   (`NA`) data
-- [ ] G2.11 Functions assume non-missingness, without explicitly stating such
-- [ ] G2.12 There is no processing of other (non-`NA`) undefined values.
+- [ ] G2.12 Functions assume non-missingness, without explicitly stating such
+- [ ] G2.13 There is no processing of other (non-`NA`) undefined values.
 - [ ] G3.0 Nothing is written to local files, so not applicable
 - [ ] G4.0 No standard data sets used in tests (rather, all tests use random
   data simulated with fixed random seeds)
@@ -178,21 +179,25 @@ robots: noindex, nofollow
   vector inputs
 - [ ] G2.2 There is no explicit prohibition or restriction on submission of
   multivariate input to parameters expected to be univariate.
-- [x] G2.3 Provide appropriate mechanisms to convert between different *data
+- [ ] G2.3 Some control of single-valued character input provides
+    - [x] G2.3a `match.arg` is used
+    - [ ] `tolower` is not used, nor is their explicit mention of strict case
+      sensitivity
+- [x] G2.4 Provide appropriate mechanisms to convert between different *data
   types*, potentially including:
-    - [x] G2.3a explicit conversion to `integer` via `as.integer()`
-    - [x] G2.3b explicit conversion to continuous via `as.numeric()`
-    - [x] G2.3c explicit conversion to character via `as.character()` (and not
+    - [x] G2.4a explicit conversion to `integer` via `as.integer()`
+    - [x] G2.4b explicit conversion to continuous via `as.numeric()`
+    - [x] G2.4c explicit conversion to character via `as.character()` (and not
       `paste` or `paste0`)
-    - [x] G2.3d--e There is no explicit `factor` input, so not applicable
-- [x] G2.4 There is no explicit `factor` input, so not applicable
-- [x] G2.5 Restrictions on tabular input very carefully documented
-- [x] G2.6 There are conversion routines for multivariate input, for reasons
+    - [x] G2.4d--e There is no explicit `factor` input, so not applicable
+- [x] G2.5 There is no explicit `factor` input, so not applicable
+- [x] G2.6 Restrictions on tabular input very carefully documented
+- [x] G2.7 There are conversion routines for multivariate input, for reasons
   explained in documentation.
-- [x] G2.7 There is no type conversion in which information is lost, so not
+- [x] G2.8 There is no type conversion in which information is lost, so not
   applicable.
-- [x] G2.8 Restrictions on tabular input very carefully documented.
-- [x] G2.9--2.12 Missing data is explicitly prohibited, as extensively
+- [x] G2.9 Restrictions on tabular input very carefully documented.
+- [x] G2.10--2.13 Missing data is explicitly prohibited, as extensively
   documented, and all appropriate checks are also implemented.
 - [x] G3.1 Processing of names of local files explicitly documented
 - [x] G4.0 Tests use standard data sets
