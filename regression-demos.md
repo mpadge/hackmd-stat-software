@@ -188,42 +188,42 @@ predict (m0, newdata = data.frame (x = 11:16), se.fit = TRUE)
 ```
 
     ## $fit
-    ##          1          2          3          4          5          6 
-    ## 0.22797797 0.18826288 0.14854780 0.10883271 0.06911763 0.02940254 
+    ##         1         2         3         4         5         6 
+    ## 0.7312507 0.7363363 0.7414218 0.7465073 0.7515928 0.7566784 
     ## 
     ## $se.fit
     ##         1         2         3         4         5         6 
-    ## 0.2263723 0.2592618 0.2930034 0.3273338 0.3620854 0.3971477 
+    ## 0.1740457 0.1993327 0.2252748 0.2516696 0.2783883 0.3053458 
     ## 
     ## $df
     ## [1] 8
     ## 
     ## $residual.scale
-    ## [1] 0.3313751
+    ## [1] 0.2547767
 
 ``` r
 predict (m0, newdata = data.frame (x = 11:16), interval = "confidence")
 ```
 
-    ##          fit        lwr       upr
-    ## 1 0.22797797 -0.2940374 0.7499934
-    ## 2 0.18826288 -0.4095959 0.7861217
-    ## 3 0.14854780 -0.5271194 0.8242150
-    ## 4 0.10883271 -0.6460003 0.8636657
-    ## 5 0.06911763 -0.7658528 0.9040880
-    ## 6 0.02940254 -0.8864217 0.9452268
+    ##         fit        lwr      upr
+    ## 1 0.7312507 0.32990075 1.132601
+    ## 2 0.7363363 0.27667429 1.195998
+    ## 3 0.7414218 0.22193711 1.260906
+    ## 4 0.7465073 0.16615619 1.326858
+    ## 5 0.7515928 0.10962835 1.393557
+    ## 6 0.7566784 0.05254963 1.460807
 
 ``` r
 predict (m0, newdata = data.frame (x = 11:16), interval = "prediction")
 ```
 
-    ##          fit        lwr      upr
-    ## 1 0.22797797 -0.6974564 1.153412
-    ## 2 0.18826288 -0.7819762 1.158502
-    ## 3 0.14854780 -0.8714791 1.168575
-    ## 4 0.10883271 -0.9652723 1.182938
-    ## 5 0.06911763 -1.0627412 1.200976
-    ## 6 0.02940254 -1.1633517 1.222157
+    ##         fit          lwr      upr
+    ## 1 0.7312507  0.019733256 1.442768
+    ## 2 0.7363363 -0.009629183 1.482302
+    ## 3 0.7414218 -0.042822851 1.525666
+    ## 4 0.7465073 -0.079315154 1.572330
+    ## 5 0.7515928 -0.118633413 1.621819
+    ## 6 0.7566784 -0.160367217 1.673724
 
 The three calls to `precict()` illustrate different ways of using the
 model to generate estimates of uncertainty involved in using that model
@@ -334,7 +334,7 @@ p # numeric values only
 
 ## 6\. Visualization
 
-  - *RE6.2 Where a model object is used to generate a forecast (for
+  - *RE6.3 Where a model object is used to generate a forecast (for
     example, through a `predict()` method), the default `plot` method
     should provide clear visual distinction between modelled
     (interpolated) and forecast (extrapolated) values.*

@@ -172,7 +172,7 @@ p # numeric values only
 
 ## 6. Visualization
 
-- *RE6.2 Where a model object is used to generate a forecast (for example,
+- *RE6.3 Where a model object is used to generate a forecast (for example,
   through a `predict()` method), the default `plot` method should provide clear
   visual distinction between modelled (interpolated) and forecast
   (extrapolated) values.*

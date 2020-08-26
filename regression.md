@@ -174,10 +174,14 @@ documentation including graphical output:
   default `plot` methods, either through explicit implementation, extension of
   methods for existing model objects, or through ensuring default methods work
   appropriately.
-- **RE6.1** The default `plot` method should produce a plot of the `fitted` values
+- **RE6.1** Where the default `plot` method is **NOT** a generic `plot` method
+  dispatched on the class of return objects (that is, through
+  a `plot.<myclass>` function), that method dispatch should nevertheless exist
+  in order to explicitly direct users to the appropriate function.
+- **RE6.2** The default `plot` method should produce a plot of the `fitted` values
   of the model, with optional visualisation of confidence intervals or
   equivalent.
-- **RE6.2** Where a model object is used to generate a forecast (for example,
+- **RE6.3** Where a model object is used to generate a forecast (for example,
   through a `predict()` method), the default `plot` method should provide clear
   visual distinction between modelled (interpolated) and forecast
   (extrapolated) values.
