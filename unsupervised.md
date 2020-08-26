@@ -36,7 +36,7 @@ indicates a failure to provide sufficient checks on the class of input
 data.
 
   - **UL1.2** Unsupervised learning which uses row or column names to
-    label output objects should assert than input data has non-default
+    label output objects should assert than input data have non-default
     row or column names, and issue an informative message when these are
     not provided.
 
