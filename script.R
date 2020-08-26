@@ -1,3 +1,9 @@
+#!/usr/bin/env Rscript
+args = commandArgs(trailingOnly=TRUE)
+
+if (length (args) == 0) 
+      stop("At least one argument must be supplied", call.=FALSE)
+
 write_md <- function (file, title){
     file <- paste0 (tools::file_path_sans_ext (file), ".Rmd")
     rmarkdown::render (file,
@@ -16,4 +22,5 @@ write_md <- function (file, title){
     writeLines (x, con)
     close (con)
 }
-write_md ("regression-demos.Rmd", "regression-demos")
+#write_md ("time-series-demos.Rmd", "time-series-demos")
+write_md (paste0 (args [1], ".Rmd"), args [1])
