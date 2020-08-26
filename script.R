@@ -10,6 +10,9 @@ write_md <- function (file, title, demo){
     rmarkdown::render (file,
                        rmarkdown::md_document(variant='gfm'))
     file <- paste0 (tools::file_path_sans_ext (file), ".md")
+
+    if (title == "unsupervised")
+        title <- "Unsupervised Learning Software"
     
     if (tolower (demo) == "true")
         tags <- "tags: statistical-software-demos, statistical-software"
