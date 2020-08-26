@@ -1,18 +1,25 @@
 #!/usr/bin/env Rscript
 args = commandArgs(trailingOnly=TRUE)
 
-if (length (args) == 0) 
-      stop("At least one argument must be supplied", call.=FALSE)
+if (length (args) != 2) 
+      stop("Two arguments must be supplied", call.=FALSE)
 
-write_md <- function (file, title){
+write_md <- function (file, title, demo){
+
     file <- paste0 (tools::file_path_sans_ext (file), ".Rmd")
     rmarkdown::render (file,
                        rmarkdown::md_document(variant='gfm'))
     file <- paste0 (tools::file_path_sans_ext (file), ".md")
+    
+    if (tolower (demo) == "true")
+        tags <- "tags: statistical-software-demos, statistical-software"
+    else
+        tags <- "tags: statistical-software"
+
     x <- readLines (file)
     x <- c ("---",
             paste0 ("title: ", title),
-            "tags: statistical-software-demos, statistical-software",
+            tags,
             "robots: noindex, nofollow",
             "---",
             "",
@@ -23,4 +30,4 @@ write_md <- function (file, title){
     close (con)
 }
 #write_md ("time-series-demos.Rmd", "time-series-demos")
-write_md (paste0 (args [1], ".Rmd"), args [1])
+write_md (paste0 (args [1], ".Rmd"), args [1], args [2])

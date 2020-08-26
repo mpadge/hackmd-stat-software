@@ -1,6 +1,6 @@
 ---
 title: unsupervised
-tags: statistical-software-demos, statistical-software
+tags: statistical-software
 robots: noindex, nofollow
 ---
 
