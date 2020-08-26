@@ -39,10 +39,10 @@ documentation.
 The *Primary Documentation* (`README` and/or vignette(s)) of EDA software
 should:
 
-- EA1.0 Identify one or more target audiences for whom the software is intended
-- EA1.1 Identify the kinds of data the software is capable of analysing (see
+- **EA1.0** Identify one or more target audiences for whom the software is intended
+- **EA1.1** Identify the kinds of data the software is capable of analysing (see
   *Kinds of Data* below).
-- EA1.2 Identify the kinds of questions the software is intended to help
+- **EA1.2** Identify the kinds of questions the software is intended to help
   explore; for example, are these questions:
     - inferential?
     - predictive?
@@ -53,7 +53,7 @@ should:
 The *Secondary Documentation* (within individual functions) of EDA software
 should:
 
-- EA1.3 Identify the kinds of data each function is intended to accept as input
+- **EA1.3** Identify the kinds of data each function is intended to accept as input
 
 ## 2. Input Data
 
@@ -74,30 +74,30 @@ unique index index into any and all rows of that table. Index columns ensure
 the universal applicability of standard table join operations, such as those
 implemented via the [`dplyr` package](https://dplyr.tidyverse.org).
 
-- EA2.1 EDA Software which accepts standard rectangular data and implements or
+- **EA2.1** EDA Software which accepts standard rectangular data and implements or
   relies upon extensive table filter and join operations should utilise an
   *index column* system
-- EA2.2 All values in an index column must be unique, and this uniqueness
+- **EA2.2** All values in an index column must be unique, and this uniqueness
   should be affirmed as a pre-processing step for all input data.
-- EA2.3 Index columns should be explicitly identified, either:
-    - EA2.3a by using an appropriate class system, or
-    - EA2.3b through setting an `attribute` on a table, `x`, of `attr(x,
+- **EA2.3** Index columns should be explicitly identified, either:
+    - **EA2.3a** by using an appropriate class system, or
+    - **EA2.3b** through setting an `attribute` on a table, `x`, of `attr(x,
       "index") <- <index_col_name>`.
 
 For EDA software which either implements custom classes or explicitly sets
 attributes specifying index columns, these attributes should be used as the
 basis of all table join operations, and in particular:
 
-- EA2.4 Table join operations should *not* be based on any assumed variable or
+- **EA2.4** Table join operations should *not* be based on any assumed variable or
   column names
 
 ### 2.2 Multi-tabular input
 
 EDA software designed to accept multi-tabular input should:
 
-- EA2.5 Use and demand an explicit class system for such input (for example,
+- **EA2.5** Use and demand an explicit class system for such input (for example,
   via the [`DM` package](https://github.com/krlmlr/dm)).
-- EA2.6 Ensure all individual tables follow the above standards for *Index Columns*
+- **EA2.6** Ensure all individual tables follow the above standards for *Index Columns*
 
 ### 2.3 Classes and Sub-Classes
 
@@ -107,9 +107,9 @@ objects (for example, of columns of an input `data.frame`). EDA software which
 is intended to receive input in general vector formats (see *Uni-variate Input*
 section of *General Standards*) should ensure:
 
-- EA2.7 Routines appropriately process vector input of custom classes,
+- **EA2.7** Routines appropriately process vector input of custom classes,
   including those which do not inherit from the `vector` class
-- EA2.8 Routines should appropriately process vector data regardless of
+- **EA2.8** Routines should appropriately process vector data regardless of
   additional attributes
 
 The following code illustrates some ways by which "metadata" defining classes
@@ -152,11 +152,11 @@ Rectangular inputs in `data.frame` class may contain columns which are
 themselves defined by custom classes, and which possess additional attributes.
 EDA Software which accepts rectangular inputs should accordingly ensure:
 
-- EA2.9 EDA routines appropriately process rectangular input of custom classes,
+- **EA2.9** EDA routines appropriately process rectangular input of custom classes,
   ideally by means of a single pre-processing routine which converts
   rectangular input to some standard form subsequently passed to all analytic
   routines.
-- EA2.10 EDA routines accept and appropriately process rectangular input in
+- **EA2.10** EDA routines accept and appropriately process rectangular input in
   which individual columns may be of custom sub-classes including additional
   attributes.
 
@@ -167,13 +167,13 @@ EDA Software which accepts rectangular inputs should accordingly ensure:
 
 ## 4. Return Results / Output Data
 
-- EA4.1 EDA Software should ensure all return results have types which are
+- **EA4.1** EDA Software should ensure all return results have types which are
   consistent with input types. For example, `sum`, `min`, or `max` values
   applied to `integer`-type vectors should return `integer` values, while
   `mean` or `var` will generally return `numeric` types.
-- EA4.2 EDA Software should implement parameters to enable explicit control
+- **EA4.2** EDA Software should implement parameters to enable explicit control
   of numeric precision
-- EA4.3 The primary routines of EDA Software should return objects for which
+- **EA4.3** The primary routines of EDA Software should return objects for which
   default `print` and `plot` methods give sensible results. Default `summary`
   methods may also be implemented.
 
@@ -191,29 +191,29 @@ and dynamic visualization, where the latter includes interactive visualization.
 Prior to these individual sub-categories, we consider a few standards
 applicable to visualization in general, whether static or dynamic.
 
-- EA5.1 Graphical presentation in EDA software should be as accessible as
+- **EA5.1** Graphical presentation in EDA software should be as accessible as
   possible or practicable. In particular, EDA software should consider
   accessibility in terms of:
-    - EA5.1a Typeface sizes should default to sizes which explicitly enhance
+    - **EA5.1a** Typeface sizes should default to sizes which explicitly enhance
       accessibility
-    - EA5.1b Default colour schemes should be carefully constructed to ensure
+    - **EA5.1b** Default colour schemes should be carefully constructed to ensure
       accessibility.
-- EA5.2 Any explicit specifications of typefaces which override default values
+- **EA5.2** Any explicit specifications of typefaces which override default values
   should consider accessibility
 
 ### 5.1 Summary and Screen-based Output
 
-- EA5.3 Screen-based output should never rely on default print formatting of
+- **EA5.3** Screen-based output should never rely on default print formatting of
   `numeric` types, rather should also use some version of `round(., digits)`,
   `formatC`, `sprintf`, or similar functions for numeric formatting according
   the parameter described in EDA4.2.
-- EA5.4 Column-based summary statistics should always indicate the
+- **EA5.4** Column-based summary statistics should always indicate the
   `storage.mode`, `class`, or equivalent defining attribute of each column (as,
   for example, implemented in the default `print.tibble` method).
 
 ### 5.2 General Standards for Visualization (Static and Dynamic)
 
-- EA5.5 All visualisations should include units on all axes, with sensibly
+- **EA5.5** All visualisations should include units on all axes, with sensibly
   rounded values (for example, as produced by the `pretty()` function).
 
 ### 5.3 Dynamic Visualization
@@ -225,7 +225,7 @@ the code itself, rather only to decisions present as user-controlled parameters
 exposed within the R environment. That said, one standard may nevertheless be
 applied, with an aim to minimise 
 
-- EA5.6 Any packages which internally bundle libraries used for dynamic
+- **EA5.6** Any packages which internally bundle libraries used for dynamic
   visualization and which are also bundled in other, pre-existing R packages,
   should explain the necessity and advantage of re-bundling that library.
 
