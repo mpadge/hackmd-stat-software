@@ -42,7 +42,7 @@ are:
 - [x] G2.11 All missing data appropriately pre-processed
 - [x] G2.12 Undefined values appropriately handled, although no options
   provided to remove them, even though such options could be useful here.
-- [ ] G3.1 File name specifications (in `ExpReport()` function) **not**
+- [ ] G3.0 File name specifications (in `ExpReport()` function) **not**
   appropriately parsed, rather simply assumed to be `*.html`.
 - [x] G4.0 Tests use data sets provided by other widely-used R packages.
 - [x] G4.1 No data sets created within package, so not applicable
@@ -62,26 +62,26 @@ are:
 - [ ] EA1.1 No target kinds of data explicitly specified, and they should be.
 - [ ] EA1.2 No target questions explicitly identified, but purpose of package
   is clearly the exploration of *associative* relationships.
-- [x] EA2.1-2.4 No table filtering or joining performed, so not relevant
-- [x] EA2.5-2.6 No multi-tabular input possible, so not relevant
-- [x] EA2.7-2.10 Software performs to these standards, as indicated by output
+- [x] EA2.0-2.3 No table filtering or joining performed, so not relevant
+- [x] EA2.4-2.5 No multi-tabular input possible, so not relevant
+- [x] EA2.6-2.9 Software performs to these standards, as indicated by output
   of [`autotest`](https://github.com/mpadge/autotest).
-- [ ] EA4.1 `integer` input types not maintained, rather all values are
+- [ ] EA4.0 `integer` input types not maintained, rather all values are
   converted to `numeric`.
-- [x] EA4.2 Control of numeric precision is explicitly provided throughout,
+- [x] EA4.1 Control of numeric precision is explicitly provided throughout,
   with sensible default values.
-- [ ] EA4.3 Default `print` methods apply to all return objects, but default
+- [ ] EA4.2 Default `print` methods apply to all return objects, but default
   `plot` methods either fail (for `ExpData`), or are not accessible (for
   `ExpNumStat`, `ExpCTable`, and others, which rely on `plot.default`, and so
   simply plot a grid of *ncol*-by-*ncol* results, often with no labels to
   enable interpretation).
-- [x] EA5.1-5.2 Explicit graphical output, for example from `ExpNumViz` and
+- [x] EA5.0-5.1 Explicit graphical output, for example from `ExpNumViz` and
   `ExpCatViz` functions, provides accessible colour schemes, as well as
   allowing overrides of defaults through additional parameters.
-- [x] EA5.3 Screen-based output has sensibly printed numeric digits, defaulting
+- [x] EA5.2 Screen-based output has sensibly printed numeric digits, defaulting
   to 3.
-- [ ] EA5.4 Column-based summary statistics do not indicate the `storage.mode`
-- [ ] EA5.5 The default plotted output of `ExpNumViz` includes no scale
+- [ ] EA5.3 Column-based summary statistics do not indicate the `storage.mode`
+- [ ] EA5.4 The default plotted output of `ExpNumViz` includes no scale
 
 
 ## [`insight`](https://github.com/easystats/insight)
@@ -106,7 +106,7 @@ are:
 - [x] G2.5--2.7 No functions accept rectangular input, so not applicable
 - [x] G2.8--2.11 No functions accept data able to contain missing values, so
   not applicable
-- [x] G3.1 No functions use local files, so not appicable
+- [x] G3.0 No functions use local files, so not appicable
 - [x] G4.0 Tests use data sets provided by other widely-used R packages.
 - [x] G4.1 No data sets created within package, so not applicable
 - [x] G4.2--4.5 Standards for testing statistical algorithms not applicable to
@@ -127,22 +127,22 @@ are:
   clearly identified
 - [x] EA1.3 The kinds of data each function is intended to accept as input are
   clearly identified
-- [x] EA2.1--2.10 The software does not accept general inputs, so not applicable
-- [x] EA4.1 Generally not applicable, as almost all model parameters are
+- [x] EA2.0--2.9 The software does not accept general inputs, so not applicable
+- [x] EA4.0 Generally not applicable, as almost all model parameters are
   `numeric`, although `get_random()` does return `factor` for `factor` input,
   so standard met in that regard.
-- [x] EA4.2 Parameters to enable explicit control of numeric precision are not
+- [x] EA4.1 Parameters to enable explicit control of numeric precision are not
   directly implemented, rather the package offers a suite of `format_`
   functions to specify such.
-- [x] EA4.3 Primary routines return objects for which default `print` and
+- [x] EA4.2 Primary routines return objects for which default `print` and
   `plot` methods give sensible results, and also implement additional `print_`
   and `format_` methods.
-- [x] EA5.1--5.2 There are no `plot` or other graphical functions.
-- [ ] EA5.3 Screen-based output follows `getOption("digits")`, and so uses
+- [x] EA5.0--5.1 There are no `plot` or other graphical functions.
+- [ ] EA5.2 Screen-based output follows `getOption("digits")`, and so uses
   default print formatting for `numeric` types, with no user control possible.
-- [ ] EA5.4 Column-based summary statistics do not indicate the `storage.mode`,
+- [ ] EA5.3 Column-based summary statistics do not indicate the `storage.mode`,
   `class`, or equivalent defining attribute of each column.
-- [x] EA5.5--5.6 There are no visualisations, so not relevant
+- [x] EA5.4--5.5 There are no visualisations, so not relevant
 
 ## [`naniar`](https://github.com/njtierney/naniar)
 
@@ -175,7 +175,7 @@ are:
 - [x] G2.10 No functions assume non-missingness
 - [ ] G2.11 No functions appropriately handle undefined values other than `NA`.
   `NaN` is treated exactly as `NA`, and `Inf` is simply ignored.
-- [ ] G3.1 There are no outputs written to local files, so not applicable
+- [ ] G3.0 There are no outputs written to local files, so not applicable
 - [x] G4.0 Tests use data sets provided by other widely-used R packages.
 - [x] G4.1 No data sets created within package, so not applicable
   exported so that users can confirm tests and run examples.
@@ -197,32 +197,32 @@ are:
   intended to help explore
 - [ ] EA1.3 The software does not identify the kinds of data each function is
   intended to accept as input (see EA1.1, above).
-- [x] EA2.1--2.3 Software does not rely on index columns
-- [x] EA2.4 Table join operations are not based on any assumed variable or
+- [x] EA2.0--2.2 Software does not rely on index columns
+- [x] EA2.3 Table join operations are not based on any assumed variable or
   column names, rather are only performed on inputs generated internally within
   the package to have standard format.
-- [x] EA2.5 Package does not use or admit multi-tabular input
-- [x] EA2.7 Routines appropriately process vector input of custom classes
-- [x] EA2.8 Routines appropriately process vector data regardless of additional
+- [x] EA2.4 Package does not use or admit multi-tabular input
+- [x] EA2.6 Routines appropriately process vector input of custom classes
+- [x] EA2.7 Routines appropriately process vector data regardless of additional
   attributes
-- [x] EA2.9 Routines appropriately process rectangular input of custom classes
-- [x] EA2.10 Routines accept and appropriately process rectangular input with
+- [x] EA2.8 Routines appropriately process rectangular input of custom classes
+- [x] EA2.9 Routines accept and appropriately process rectangular input with
   columns of custom sub-classes including additional attributes.
-- [ ] EA4.1 Software does not ensure all return results have types which are
+- [ ] EA4.0 Software does not ensure all return results have types which are
   consistent with input types, rather returns all results as `tibble` objects
   regardless of class of input.
-- [x] EA4.2 Universal use of `tibble` classes ensures explicit control of
+- [x] EA4.1 Universal use of `tibble` classes ensures explicit control of
   numeric precision
-- [x] EA4.3 Universal use of `tibble` classes ensures default `print` and
+- [x] EA4.2 Universal use of `tibble` classes ensures default `print` and
   `plot` methods give sensible results.
-- [x] EA5.1 Graphical presentation is as accessible as possible or practicable.
-- [x] EA5.2 Typefaces appear to consider accessibility
-- [x] EA5.3 Screen-based output does not rely on default print formatting of
+- [x] EA5.0 Graphical presentation is as accessible as possible or practicable.
+- [x] EA5.1 Typefaces appear to consider accessibility
+- [x] EA5.2 Screen-based output does not rely on default print formatting of
   `numeric` types, rather relies on `print.tibble` throughout.
-- [x] EA5.4 Column-based summary statistics always indicates the `storage.mode`
+- [x] EA5.3 Column-based summary statistics always indicates the `storage.mode`
   via `tibble`.
-- [ ] EA5.5 Visualisations do not include units on all axes, but do use
+- [ ] EA5.4 Visualisations do not include units on all axes, but do use
   `ggplot2` to produce sensibly rounded values.
-- [x] EA5.6 There are no routines for dynamic visualization.
+- [x] EA5.5 There are no routines for dynamic visualization.
 
 

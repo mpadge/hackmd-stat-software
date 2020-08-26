@@ -200,7 +200,7 @@ of input classes.
 
 ## 3. Output Structures
 
-- **G3.1** Statistical Software which enables outputs to be written to local files
+- **G3.0** Statistical Software which enables outputs to be written to local files
   should parse parameters specifying file names to ensure appropriate file
   suffices are automatically generated where not provided.
 
