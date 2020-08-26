@@ -87,6 +87,9 @@ Messages should be issued in both of these cases.
 - **UL4.1** Unsupervised Learning Software may enable an ability to generate
   a model object without actually fitting values. This may be useful for
   controlling batch processing of computationally intensive fitting algorithms.
+- **UL4.2** The return object from Unsupervised Learning Software should
+  include, or otherwise enable immediate extraction of, all parameters used to
+  control the algorithm used.
 
 ### 4.1 Reporting Return Results
 
@@ -109,7 +112,11 @@ Messages should be issued in both of these cases.
   default `plot` methods, either through explicit implementation, extension of
   methods for existing model objects, or through ensuring default methods work
   appropriately.
-- **UL7.1** Where default plot methods include labelling components of return
+- **UL7.1** Where the default `plot` method is **NOT** a generic `plot` method
+  dispatched on the class of return objects (that is, through
+  a `plot.<myclass>` function), that method dispatch should nevertheless exist
+  in order to explicitly direct users to the appropriate function.
+- **UL7.2** Where default plot methods include labelling components of return
   objects (such as cluster labels), routines should ensure that labels are
   automatically placed to ensure readability, and/or that appropriate
   diagnostic messages are issued where readability is likely to be compromised
