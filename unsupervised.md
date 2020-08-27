@@ -78,29 +78,32 @@ Messages should be issued in both of these cases.
     admit input data with missing values should provide informative
     error messages when data with missing values are submitted.
   - **UL1.6** Unsupervised Learning Software should document any
-    assumptions made with regard to input data; for example
-    distributional assumptions, or assumptions that any aspects of input
-    data have mean values of zero. Implications of violations of these
+    assumptions made with regard to input data; for example assumptions
+    about distributional forms or locations (such as normal or
+    zero-mean, respectively). Implications of violations of these
     assumptions should be both documented and tested.
 
 ## 2\. Pre-processing and Variable Transformation
 
-  - **UL2.0** Unsupervised Learning Software should document any
+  - **UL2.0** Routines likely to give unreliable or irreproducible
+    results in response to violations of assumptions regarding input
+    data (see UL1.6) should implement pre-processing steps to diagnose
+    potential violations, and issue appropriately informative messages,
+    and/or include parameters to enable suitable transformations to be
+    applied.
+  - **UL2.1** Unsupervised Learning Software should document any
     transformations applied to input data, for example conversion of
     label-values to `factor`, and should provide ways to explicitly
     avoid any default transformations (with error or warning conditions
     where appropriate).
-  - **UL2.1** For Unsupervised Learning Software which accepts missing
+  - **UL2.2** For Unsupervised Learning Software which accepts missing
     values in input data, functions should implement explicit parameters
     controlling the processing of missing values, ideally distinguishing
     `NA` or `NaN` values from `Inf` values (for example, through use of
     `na.omit()` and related functions from the `stats` package).
-  - **UL2.2** Unsupervised Learning Software should implement
+  - **UL2.3** Unsupervised Learning Software should implement
     pre-processing routines to identify whether aspects of input data
-    are perfectly collinear, notably including:
-      - **RE2.2a** Perfect collinearity among predictor variables
-      - **RE2.2b** Perfect collinearity between independent and
-        dependent variables
+    are perfectly collinear.
 
 ## 3\. Algorithms
 
@@ -137,8 +140,11 @@ Messages should be issued in both of these cases.
 
   - **UL7.0** Objects returned by Unsupervised Learning Software should
     have default `plot` methods, either through explicit implementation,
-    extension of methods for existing model objects, or through ensuring
-    default methods work appropriately.
+    extension of methods for existing model objects, through ensuring
+    default methods work appropriately, or through explicit reference to
+    helper packages such as
+    [`factoextra`](https://github.com/kassambara/factoextra) and
+    associated functions.
   - **UL7.1** Where the default `plot` method is **NOT** a generic
     `plot` method dispatched on the class of return objects (that is,
     through a `plot.<myclass>` function), that method dispatch should
