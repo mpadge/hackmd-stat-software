@@ -97,9 +97,14 @@ Messages should be issued in both of these cases.
     error messages when data with missing values are submitted.
   - **UL1.6** Unsupervised Learning Software should document any
     assumptions made with regard to input data; for example assumptions
-    about distributional forms or locations (such as normal or
-    zero-mean, respectively). Implications of violations of these
-    assumptions should be both documented and tested.
+    about distributional forms or locations (such as that data are
+    centred or on approximately equivalent distributional scales).
+    Implications of violations of these assumptions should be both
+    documented and tested, in particular:
+      - **UL1.6a** Software which responds qualitatively differently to
+        input data which has components on markedly different scales
+        should explicitly document such differences, and implications of
+        submitting such data.
 
 ## 2\. Pre-processing and Variable Transformation
 
