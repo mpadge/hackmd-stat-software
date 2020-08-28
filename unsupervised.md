@@ -125,6 +125,51 @@ Messages should be issued in both of these cases.
 
 ## 3\. Algorithms
 
+### 3.1 Labelling
+
+  - **UL3.1** Algorithms which apply sequential labels to input data
+    (such as clustering or partitioning algorithms) should ensure that
+    the sequence follows decreasing group sizes (so labels of “1”, “a”,
+    or “A” describe the largest group, “2”, “b”, or “B” the second
+    largest, and so on.)
+
+Note that the `stats::cutree` function does not accord with this
+standard:
+
+``` r
+hc <- hclust (dist (USArrests))
+table (cutree (hc, k = 10))
+```
+
+    ## 
+    ##  1  2  3  4  5  6  7  8  9 10 
+    ##  3  3  3  6  5 10  2  5  5  8
+
+Arbitrary integer labels are applied to the groups, yet the order of
+labels is not related to the order of group sizes.
+
+  - **UL3.2** Dimensionality reduction or equivalent algorithms which
+    label dimensions should ensure that that sequences of labels follows
+    decreasing “importance” (for example, variance contribution).
+
+The
+[`stats::prcomp`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/prcomp.html)
+function accords with this standard:
+
+``` r
+z <- prcomp (eurodist, rank = 5) # return maximum of 5 components
+summary (z)
+```
+
+    ## Importance of first k=5 (out of 21) components:
+    ##                              PC1       PC2       PC3       PC4       PC5
+    ## Standard deviation     2529.6298 2157.3434 1459.4839 551.68183 369.10901
+    ## Proportion of Variance    0.4591    0.3339    0.1528   0.02184   0.00977
+    ## Cumulative Proportion     0.4591    0.7930    0.9458   0.96764   0.97741
+
+The proportion of variance explained by each component decreasing with
+increasing numeric labelling of the components.
+
 ## 4\. Return Results
 
   - **UL4.0** Unsupervised Learning Software should return some form of
