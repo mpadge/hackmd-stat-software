@@ -218,12 +218,12 @@ arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
-    ##                   PC1          PC2        PC3        PC4
-    ## Vermont    -123.73865 -26.41152491  5.4641047  1.5027595
-    ## New York     85.10260  16.12603890 -3.9359727 -1.1185617
-    ## Oklahoma    -18.65892   3.38757125 -0.3878771 -0.6323599
-    ## New Mexico  115.62145  -0.07004847  2.2795347  0.4616483
-    ## Arkansas     19.07657 -16.50539487  0.4016160  0.4583521
+    ##                      PC1        PC2         PC3        PC4
+    ## South Carolina 107.44369 -22.772998  -1.2968402 -1.5997021
+    ## Minnesota      -98.40691   6.094357   0.6775299  0.5253359
+    ## Maryland       129.59918  -4.733244  -1.6565397  1.1461079
+    ## Delaware        67.59103   2.080870 -11.1385683  3.0064400
+    ## Massachusetts  -20.73106  19.710106  -7.3413706  0.5533736
 
 ## 4\. Return Results
 
@@ -247,14 +247,19 @@ predict (res, newdata = arrests_new)
     methods used to generate results. The `print` method may also
     summarise statistical aspects of the output data or results.
       - **UL4.2a** The default `print` method should always ensure only
-        a restricted number of rows of any result matrices are printed
-        to the screen.
+        a restricted number of rows of any result matrices or equivalent
+        are printed to the screen.
 
 The [`prcomp`
 objects](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/prcomp.html)
 returned from the function of the same name include potential large
 matrices of component coordinates which are by default printed in their
-entirety to screen.
+entirety to the screen. This is because the default print behaviour for
+most tabular objects in R (`matrix`, `data.frame`, and objects from the
+`Matrix` package, for example) is to print objects in their entirety
+(limited only by such options as `getOption("max.print")`, which
+determines maximal numbers of printed objects, such as lines of
+`data.frame` objects).
 
   - **UL4.3** Unsupervised Learning Software should also implement
     `summary` methods for model objects which should summarise the

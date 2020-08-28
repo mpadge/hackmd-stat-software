@@ -197,13 +197,18 @@ predict (res, newdata = arrests_new)
   results. The `print` method may also summarise statistical aspects of the
   output data or results.
     - **UL4.2a** The default `print` method should always ensure only
-      a restricted number of rows of any result matrices are printed to the
-      screen.
+      a restricted number of rows of any result matrices or equivalent are
+      printed to the screen.
 
 The [`prcomp`
 objects](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/prcomp.html)
 returned from the function of the same name include potential large matrices of
-component coordinates which are by default printed in their entirety to screen.
+component coordinates which are by default printed in their entirety to the
+screen. This is because the default print behaviour for most tabular objects in
+R (`matrix`, `data.frame`, and objects from the `Matrix` package, for example)
+is to print objects in their entirety (limited only by such options as
+`getOption("max.print")`, which determines maximal numbers of printed objects,
+such as lines of `data.frame` objects).
 
 
 - **UL4.3** Unsupervised Learning Software should also implement `summary`
