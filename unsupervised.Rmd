@@ -148,14 +148,18 @@ applied to perform this task. The following demonstrates how the output of
 [`stats::hclust`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/hclust.html)
 can be used to predict membership of new data using the [`class:knn()`
 function](https://stat.ethz.ch/R-manual/R-devel/library/class/html/knn.html).
-(This is intended to illustrate one approach of many.)
+(This is intended to illustrate only one of many possible approaches.)
 
 ```{r}
 library (class)
 hc <- hclust (dist (iris [, -5]))
 groups <- cutree (hc, k = 3)
-# select random points from the `iris` data and add some randomness
-iris_new <- iris [sample (nrow (iris), size = 5), -5] + runif (length (iris [1:5, -5]))
+# function also used below to randomly select part of a data.frame and 
+# add some randomness
+sample_df <- function (x, n = 5) {
+    x [sample (nrow (x), size = n), ] + runif (length (x [seq (n), ]))
+}
+iris_new <- sample_df (iris [, -5], n = 5)
 # use knn to predict membership of those new points:
 knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
 knnClust
@@ -167,8 +171,7 @@ directly implements its own `predict()` method:
 
 ```{r}
 res<-prcomp (USArrests)
-arrests_new <- USArrests [sample (nrow (USArrests), size = 5), ] +
-    runif (length (USArrests [1:5, ]))
+arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
