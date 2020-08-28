@@ -10,7 +10,7 @@ This document details standards for Regression and Supervised Learning
 Software -- referred to from here on for simplicity as "Regression Software".
 Regression Software implements algorithms which aim to construct or analyse one
 or more mappings between two defined data sets (for example, a set of
-"independent" data, $X$, and a set of "dependent" data, "Y"). In contrast, the
+"independent" data, $X$, and a set of "dependent" data, $Y$). In contrast, the
 analogous category of Unsupervised Learning Software aims to construct or
 analyse one or more mappings between a defined set of input or independent
 data, and a second set of "output" data which are not necessarily known or
