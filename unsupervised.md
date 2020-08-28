@@ -7,6 +7,24 @@ robots: noindex, nofollow
 
 # Dimensionality Reduction, Clustering, and Unsupervised Learning
 
+This document details standards for Dimensionality Reduction,
+Clustering, and Unsupervised Learning Software – referred to from here
+on for simplicity as “Unsupervised Learning Software”. Software in this
+category is distinguished from Regression Software though the latter
+aiming to construct or analyse one or more mappings between two defined
+data sets (for example, a set of “independent” data, \(X\), and a set of
+“dependent” data, “Y”), whereas Unsupervised Learning Software aims to
+construct or analyse one or more mappings between a defined set of input
+or independent data, and a second set of “output” data which are not
+necessarily known or given prior to the analysis. A key distinction in
+Unsupervised Learning Software and Algorithms is between that for which
+output data represent (generally numerical) transformations of the input
+data set, and that for which output data are discrete labels applied to
+the input data. Examples of the former type include dimensionality
+reduction and ordination software and algorithms, and examples of the
+latter include clustering and discrete partitioning software and
+algorithms.
+
 ## 1 Input Data Structures and Validation
 
   - **UL1.0** Unsupervised Learning Software should explicitly document
