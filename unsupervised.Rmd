@@ -154,10 +154,9 @@ function](https://stat.ethz.ch/R-manual/R-devel/library/class/html/knn.html).
 library (class)
 hc <- hclust (dist (iris [, -5]))
 groups <- cutree (hc, k = 3)
-# function also used below to randomly select part of a data.frame and 
-# add some randomness
+# function to randomly select part of a data.frame and # add some randomness
 sample_df <- function (x, n = 5) {
-    x [sample (nrow (x), size = n), ] + runif (length (x [seq (n), ]))
+    x [sample (nrow (x), size = n), ] + runif (ncol (x) * n)
 }
 iris_new <- sample_df (iris [, -5], n = 5)
 # use knn to predict membership of those new points:

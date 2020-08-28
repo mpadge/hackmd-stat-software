@@ -195,10 +195,9 @@ function](https://stat.ethz.ch/R-manual/R-devel/library/class/html/knn.html).
 library (class)
 hc <- hclust (dist (iris [, -5]))
 groups <- cutree (hc, k = 3)
-# function also used below to randomly select part of a data.frame and 
-# add some randomness
+# function to randomly select part of a data.frame and # add some randomness
 sample_df <- function (x, n = 5) {
-    x [sample (nrow (x), size = n), ] + runif (length (x [seq (n), ]))
+    x [sample (nrow (x), size = n), ] + runif (ncol (x) * n)
 }
 iris_new <- sample_df (iris [, -5], n = 5)
 # use knn to predict membership of those new points:
@@ -206,7 +205,7 @@ knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
 knnClust
 ```
 
-    ## [1] 2 2 2 2 1
+    ## [1] 2 1 2 2 3
     ## Levels: 1 2 3
 
 The [`stats::prcomp()`
@@ -219,12 +218,12 @@ arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
-    ##                      PC1       PC2        PC3        PC4
-    ## Ohio          -49.961985 13.165252   1.583591 -2.9623954
-    ## Maryland      130.336598 -4.839078  -1.551921  1.9857701
-    ## Hawaii       -123.405024 25.122037   3.657980 -4.4552058
-    ## New York       85.252689 16.098245  -3.869720 -0.8394377
-    ## Rhode Island    3.188809 19.259898 -17.543759  1.3749799
+    ##                     PC1        PC2       PC3       PC4
+    ## Maine         -88.33634 -11.011670 -3.973716  1.442910
+    ## Arizona       125.03541   9.468784 -1.713422  3.562192
+    ## Hawaii       -122.80461  24.540695  3.844404 -4.029047
+    ## North Dakota -127.02315 -15.500848 -0.962151  1.540505
+    ## Florida       165.41003   6.600461 -2.008139 -2.152029
 
 ## 4\. Return Results
 
