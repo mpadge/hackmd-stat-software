@@ -205,7 +205,7 @@ knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
 knnClust
 ```
 
-    ## [1] 2 1 2 2 3
+    ## [1] 1 2 2 2 2
     ## Levels: 1 2 3
 
 The [`stats::prcomp()`
@@ -213,17 +213,17 @@ function](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/prcomp.html)
 directly implements its own `predict()` method:
 
 ``` r
-res<-prcomp (USArrests)
+res <- prcomp (USArrests)
 arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
-    ##                     PC1        PC2       PC3       PC4
-    ## Maine         -88.33634 -11.011670 -3.973716  1.442910
-    ## Arizona       125.03541   9.468784 -1.713422  3.562192
-    ## Hawaii       -122.80461  24.540695  3.844404 -4.029047
-    ## North Dakota -127.02315 -15.500848 -0.962151  1.540505
-    ## Florida       165.41003   6.600461 -2.008139 -2.152029
+    ##                   PC1          PC2        PC3        PC4
+    ## Vermont    -123.73865 -26.41152491  5.4641047  1.5027595
+    ## New York     85.10260  16.12603890 -3.9359727 -1.1185617
+    ## Oklahoma    -18.65892   3.38757125 -0.3878771 -0.6323599
+    ## New Mexico  115.62145  -0.07004847  2.2795347  0.4616483
+    ## Arkansas     19.07657 -16.50539487  0.4016160  0.4583521
 
 ## 4\. Return Results
 
@@ -241,12 +241,22 @@ predict (res, newdata = arrests_new)
 
 ### 4.1 Reporting Return Results
 
-  - **RE4.2** Model objects returned by Unsupervised Learning Software
+  - **UL4.2** Model objects returned by Unsupervised Learning Software
     should implement or appropriately extend a default `print` method
     which provides an on-screen summary of model (input) parameters and
     methods used to generate results. The `print` method may also
     summarise statistical aspects of the output data or results.
-  - **RE4.3** Unsupervised Learning Software should also implement
+      - **UL4.2a** The default `print` method should always ensure only
+        a restricted number of rows of any result matrices are printed
+        to the screen.
+
+The [`prcomp`
+objects](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/prcomp.html)
+returned from the function of the same name include potential large
+matrices of component coordinates which are by default printed in their
+entirety to screen.
+
+  - **UL4.3** Unsupervised Learning Software should also implement
     `summary` methods for model objects which should summarise the
     primary statistics used in generating the model (such as numbers of
     observations, parameters of methods applied). The `summary` method

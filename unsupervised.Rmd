@@ -169,7 +169,7 @@ function](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/prcomp.html)
 directly implements its own `predict()` method:
 
 ```{r}
-res<-prcomp (USArrests)
+res <- prcomp (USArrests)
 arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
@@ -191,12 +191,22 @@ predict (res, newdata = arrests_new)
 
 ### 4.1 Reporting Return Results
 
-- **RE4.2** Model objects returned by Unsupervised Learning Software should
+- **UL4.2** Model objects returned by Unsupervised Learning Software should
   implement or appropriately extend a default `print` method which provides an
   on-screen summary of model (input) parameters and methods used to generate
   results. The `print` method may also summarise statistical aspects of the
   output data or results.
-- **RE4.3** Unsupervised Learning Software should also implement `summary`
+    - **UL4.2a** The default `print` method should always ensure only
+      a restricted number of rows of any result matrices are printed to the
+      screen.
+
+The [`prcomp`
+objects](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/prcomp.html)
+returned from the function of the same name include potential large matrices of
+component coordinates which are by default printed in their entirety to screen.
+
+
+- **UL4.3** Unsupervised Learning Software should also implement `summary`
   methods for model objects which should summarise the primary statistics used
   in generating the model (such as numbers of observations, parameters of
   methods applied). The `summary` method may also provide summary statistics
