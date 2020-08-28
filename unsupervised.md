@@ -175,6 +175,54 @@ summary (z)
 The proportion of variance explained by each component decreasing with
 increasing numeric labelling of the components.
 
+### 3.2 Prediction
+
+  - **UL3.3** Where applicable, Unsupervised Learning Software should
+    implement routines to predict the properties (such as numerical
+    ordinates, or cluster memberships) of additional new data without
+    re-running the entire algorithm.
+
+While many algorithms such as Hierarchical clustering can not (readily)
+be used to predict memberships of new data, other algorithms can
+nevertheless be applied to perform this task. The following demonstrates
+how the output of
+[`stats::hclust`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/hclust.html)
+can be used to predict membership of new data using the [`class:knn()`
+function](https://stat.ethz.ch/R-manual/R-devel/library/class/html/knn.html).
+(This is intended to illustrate one approach of many.)
+
+``` r
+library (class)
+hc <- hclust (dist (iris [, -5]))
+groups <- cutree (hc, k = 3)
+# select random points from the `iris` data and add some randomness
+iris_new <- iris [sample (nrow (iris), size = 5), -5] + runif (length (iris [1:5, -5]))
+# use knn to predict membership of those new points:
+knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
+knnClust
+```
+
+    ## [1] 2 1 2 2 2
+    ## Levels: 1 2 3
+
+The [`stats::prcomp()`
+function](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/prcomp.html)
+directly implements its own `predict()` method:
+
+``` r
+res<-prcomp (USArrests)
+arrests_new <- USArrests [sample (nrow (USArrests), size = 5), ] +
+    runif (length (USArrests [1:5, ]))
+predict (res, newdata = arrests_new)
+```
+
+    ##                    PC1         PC2       PC3         PC4
+    ## Maryland    130.245679  -4.2551247 -1.656559  1.12207477
+    ## Mississippi  87.674731 -26.5162431 -4.314526 -4.62418340
+    ## Nebraska    -68.138594   0.7092897  1.062056  0.01412781
+    ## Maine       -88.280505 -10.6676272 -4.174651  1.32353723
+    ## Wyoming      -9.518996  -5.1725461 -3.103833 -0.28838205
+
 ## 4\. Return Results
 
   - **UL4.0** Unsupervised Learning Software should return some form of
