@@ -88,7 +88,10 @@ Messages should be issued in both of these cases.
   response to violations of assumptions regarding input data (see UL1.6) should
   implement pre-processing steps to diagnose potential violations, and issue
   appropriately informative messages, and/or include parameters to enable
-  suitable transformations to be applied.
+  suitable transformations to be applied (such as the `center` and `scale.`
+  parameters of the
+  [`stats::prcomp()`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/prcomp.html)
+  function).
 - **UL2.1** Unsupervised Learning Software should document any transformations
   applied to input data, for example conversion of label-values to `factor`,
   and should provide ways to explicitly avoid any default transformations (with
@@ -110,19 +113,23 @@ Messages should be issued in both of these cases.
   follows decreasing group sizes (so labels of "1", "a", or "A" describe the
   largest group, "2", "b", or "B" the second largest, and so on.)
 
-Note that the `stats::cutree` function does not accord with this standard:
+Note that the [`stats::cutree()`
+function](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cutree.html)
+does not accord with this standard:
 
 ```{r}
 hc <- hclust (dist (USArrests))
 table (cutree (hc, k = 10))
 ```
 
-Arbitrary integer labels are applied to the groups, yet the order of labels is
-not related to the order of group sizes.
+The [`cutree()`
+function](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cutree.html)
+applies arbitrary integer labels to the groups, yet the order of labels is not
+related to the order of group sizes.
 
 - **UL3.2** Dimensionality reduction or equivalent algorithms which label
   dimensions should ensure that that sequences of labels follows decreasing
-  "importance" (for example, variance contribution).
+  "importance" (for example, eigenvalues or variance contributions).
 
 The
 [`stats::prcomp`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/prcomp.html)
@@ -166,7 +173,7 @@ knnClust
 
 The [`stats::prcomp()`
 function](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/prcomp.html)
-directly implements its own `predict()` method:
+implements its own `predict()` method:
 
 ```{r}
 res <- prcomp (USArrests)
@@ -174,7 +181,11 @@ arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
+### 3.3 Group Distributions and Associated Statistics
 
+Many unsupervised learning algorithms serve to label, categorise, or partition
+data. Software which performs any of these tasks will commonly output some kind
+of labelling or grouping schemes.
 
 
 ## 4. Return Results
@@ -208,7 +219,9 @@ screen. This is because the default print behaviour for most tabular objects in
 R (`matrix`, `data.frame`, and objects from the `Matrix` package, for example)
 is to print objects in their entirety (limited only by such options as
 `getOption("max.print")`, which determines maximal numbers of printed objects,
-such as lines of `data.frame` objects).
+such as lines of `data.frame` objects). Such default behaviour ought be
+avoided, particularly in Unsupervised Learning Software which commonly returns
+objects containing large numbers of numeric entries.
 
 
 - **UL4.3** Unsupervised Learning Software should also implement `summary`

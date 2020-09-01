@@ -113,7 +113,9 @@ Messages should be issued in both of these cases.
     data (see UL1.6) should implement pre-processing steps to diagnose
     potential violations, and issue appropriately informative messages,
     and/or include parameters to enable suitable transformations to be
-    applied.
+    applied (such as the `center` and `scale.` parameters of the
+    [`stats::prcomp()`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/prcomp.html)
+    function).
   - **UL2.1** Unsupervised Learning Software should document any
     transformations applied to input data, for example conversion of
     label-values to `factor`, and should provide ways to explicitly
@@ -205,7 +207,7 @@ knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
 knnClust
 ```
 
-    ## [1] 1 2 2 2 2
+    ## [1] 2 1 1 3 1
     ## Levels: 1 2 3
 
 The [`stats::prcomp()`
@@ -218,12 +220,12 @@ arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
-    ##                      PC1        PC2         PC3        PC4
-    ## South Carolina 107.44369 -22.772998  -1.2968402 -1.5997021
-    ## Minnesota      -98.40691   6.094357   0.6775299  0.5253359
-    ## Maryland       129.59918  -4.733244  -1.6565397  1.1461079
-    ## Delaware        67.59103   2.080870 -11.1385683  3.0064400
-    ## Massachusetts  -20.73106  19.710106  -7.3413706  0.5533736
+    ##                 PC1         PC2       PC3        PC4
+    ## Wyoming   -9.610991  -5.3913038 -3.355638 -0.3502872
+    ## Utah     -49.141713  17.9360239  2.648796  1.4247151
+    ## Illinois  79.577000  13.5021560 -5.616375 -0.5854475
+    ## Maine    -88.620149 -11.2016863 -4.148504  1.3381642
+    ## Nebraska -68.260152   0.3036606  1.123689  0.2468008
 
 ## 4\. Return Results
 
@@ -259,7 +261,9 @@ most tabular objects in R (`matrix`, `data.frame`, and objects from the
 `Matrix` package, for example) is to print objects in their entirety
 (limited only by such options as `getOption("max.print")`, which
 determines maximal numbers of printed objects, such as lines of
-`data.frame` objects).
+`data.frame` objects). Such default behaviour ought be avoided,
+particularly in Unsupervised Learning Software which commonly returns
+objects containing large numbers of numeric entries.
 
   - **UL4.3** Unsupervised Learning Software should also implement
     `summary` methods for model objects which should summarise the
