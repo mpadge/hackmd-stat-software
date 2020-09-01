@@ -9,18 +9,87 @@ robots: noindex, nofollow
 
 ## lme4
 
-``` r
-library (lme4)
-```
-
-    ## Loading required package: Matrix
-
 The following generally note only those standards which the software
 does not appear to meet, although explicit notes are also made where
 aspects of the software meet or exceed the standards in particularly
 exemplary ways.
 
-## 1\. Input data structures and validation
+### General Standards
+
+  - **G2.3b** *Either: use `tolower()` or equivalent to ensure input of
+    character parameters is not case dependent; or explicitly document
+    that parameters are strictly case-sensitive.*
+
+Most character parameters for `lme4` are case-dependent.
+
+  - **G2.8** *Software should issue diagnostic messages for type
+    conversion in which information is lost (such as conversion of
+    variables from factor to character; standardisation of variable
+    names; or removal of meta-data) or added (such as insertion of
+    variable or column names where none were provided).*
+
+Main routines assume data to have a “grouping factor”, yet where or not
+the relevant column is a `factor` or not, or whether or not it is
+ordered, makes no difference. Thus submitting data in which the
+“grouping factor” is, for example, a simple integer, lead to that
+being interpreted as a `factor`, which is equivalent to the addition of
+information describing the factor levels. Conversely, submitting as an
+ordered factor makes no difference, thereby effectively removing the
+information that the `factor` variable is ordered.
+
+  - **G2.13** *All functions should also appropriately handle undefined
+    values (e.g., `NaN`, `Inf` and `-Inf`), including potentially
+    providing options for ignoring or removing such values.*
+
+No options are provided for handling undefined values, rather routines
+simply error with informative messages.
+
+  - **G4.4a** *Parameter recovery tests should generally be expected to
+    succeed within a defined tolerance rather than recovering exact
+    values.*
+
+Many – but not all – parameter recovery tests expect exact value
+matching without specifying tolerance.
+
+  - **G4.4b** *Parameter recovery tests should be run with multiple
+    random seeds when either data simulation or the algorithm contains a
+    random component*
+
+Parameter recovery tests are generally run once with only a single
+random seed.
+
+  - **G4.5** **Algorithm performance tests** *to test that
+    implementation performs as expected as properties of data change.
+    For instance, a test may show that parameters approach correct
+    estimates within tolerance as data size increases, or that
+    convergence times decrease for higher convergence thresholds.*
+
+There appear to be no algorithm performance tests.
+
+  - **G4.7** **Noise susceptibility tests** *Packages should test for
+    expected stochastic behaviour, such as through the following
+    conditions:*
+      - **G4.7a** *Adding trivial noise (for example, at the scale of
+        `.Machine$double.eps`) to data does not meaningfully change
+        results*
+      - **G4.7b** *Running under different random seeds or initial
+        conditions does not meaningfully change results*
+
+There appear to be no noise susceptibility tests, neither tests of the
+effect of adding trivial noise, nor tests running under different random
+seeds (see G4.4b, above).
+
+  - **G4.8** *Extended tests should included and run under a common
+    framework with other tests but be switched on by flags such as as a
+    `<MYPKG>_EXTENDED_TESTS=1` environment variable.*
+
+The `lme4` package provides exemplary use of exactly such an
+environmental variable, carefully documented in a `tests/README.md`
+file.
+
+### Standards for Regression Software
+
+#### 1\. Input data structures and validation
 
   - *RE1.1 Regression Software should document how formula interfaces
     are converted to matrix representations of input data.*
@@ -59,7 +128,7 @@ that the function accepts any objects able to be coerced to `data.frame`
 representation; and (ii) ensuring that passing non-compliant `data`
 objects generates informative messages.
 
-## 2\. Pre-processing and Variable Transformation
+#### 2\. Pre-processing and Variable Transformation
 
   - *RE2.0 Regression Software should document any transformations
     applied to input data, for example conversion of label-values to
@@ -151,20 +220,20 @@ m <- lmer(Reaction ~ Days + Days2 + (Days | Subject) + (Days2 | Subject), data =
     ## Warning in checkConv(attr(opt, "derivs"), opt$par, ctrl = control$checkConv, :
     ## Model failed to converge: degenerate Hessian with 2 negative eigenvalues
 
-## 3\. Algorithms
+#### 3\. Algorithms
 
 Control over algorithmic convergence in `lme4` is exemplarily handled
 through the `lmerControl()` function and associated extensive
 documentation.
 
-## 4\. Return Results
+#### 4\. Return Results
 
-### 4.1 Accessor Methods
+**4.1 Accessor Methods**
 
 All accessor methods for model data provided by the `stats` package, and
 all model parameters, are also implemented for `lmerMod` objects.
 
-### 4.2 Extrapolation and Forecasting
+**4.2 Extrapolation and Forecasting**
 
   - *RE4.14 Where Regression Software is intended to, or can, be used to
     extrapolate or forecast values, values should also be provided for
@@ -189,41 +258,41 @@ predict (m0, newdata = data.frame (x = 11:16), se.fit = TRUE)
 
     ## $fit
     ##         1         2         3         4         5         6 
-    ## 0.7312507 0.7363363 0.7414218 0.7465073 0.7515928 0.7566784 
+    ## 0.7579713 0.7767377 0.7955040 0.8142704 0.8330367 0.8518030 
     ## 
     ## $se.fit
     ##         1         2         3         4         5         6 
-    ## 0.1740457 0.1993327 0.2252748 0.2516696 0.2783883 0.3053458 
+    ## 0.1233244 0.1412422 0.1596242 0.1783268 0.1972590 0.2163605 
     ## 
     ## $df
     ## [1] 8
     ## 
     ## $residual.scale
-    ## [1] 0.2547767
+    ## [1] 0.1805285
 
 ``` r
 predict (m0, newdata = data.frame (x = 11:16), interval = "confidence")
 ```
 
-    ##         fit        lwr      upr
-    ## 1 0.7312507 0.32990075 1.132601
-    ## 2 0.7363363 0.27667429 1.195998
-    ## 3 0.7414218 0.22193711 1.260906
-    ## 4 0.7465073 0.16615619 1.326858
-    ## 5 0.7515928 0.10962835 1.393557
-    ## 6 0.7566784 0.05254963 1.460807
+    ##         fit       lwr      upr
+    ## 1 0.7579713 0.4735847 1.042358
+    ## 2 0.7767377 0.4510326 1.102443
+    ## 3 0.7955040 0.4274101 1.163598
+    ## 4 0.8142704 0.4030480 1.225493
+    ## 5 0.8330367 0.3781566 1.287917
+    ## 6 0.8518030 0.3528749 1.350731
 
 ``` r
 predict (m0, newdata = data.frame (x = 11:16), interval = "prediction")
 ```
 
-    ##         fit          lwr      upr
-    ## 1 0.7312507  0.019733256 1.442768
-    ## 2 0.7363363 -0.009629183 1.482302
-    ## 3 0.7414218 -0.042822851 1.525666
-    ## 4 0.7465073 -0.079315154 1.572330
-    ## 5 0.7515928 -0.118633413 1.621819
-    ## 6 0.7566784 -0.160367217 1.673724
+    ##         fit       lwr      upr
+    ## 1 0.7579713 0.2538077 1.262135
+    ## 2 0.7767377 0.2481651 1.305310
+    ## 3 0.7955040 0.2398077 1.351200
+    ## 4 0.8142704 0.2291131 1.399428
+    ## 5 0.8330367 0.2164160 1.449657
+    ## 6 0.8518030 0.2020073 1.501599
 
 The three calls to `precict()` illustrate different ways of using the
 model to generate estimates of uncertainty involved in using that model
@@ -324,7 +393,7 @@ p # numeric values only
     ##         50         51         52         53         54         55         56 
     ## 0.19467475 0.17419155 0.11839303 0.12686730 0.05113143 0.04490927 0.02906595
 
-## 5\. Documentation
+#### 5\. Documentation
 
   - *RE5.0 Scaling relationships between sizes of input data (numbers of
     observations, with potential extension to numbers of
@@ -332,7 +401,7 @@ p # numeric values only
 
 `lme4` does not explicitly document scaling of model fitting algorithms
 
-## 6\. Visualization
+#### 6\. Visualization
 
   - *RE6.3 Where a model object is used to generate a forecast (for
     example, through a `predict()` method), the default `plot` method
@@ -343,7 +412,7 @@ It is not possible to use `lme4` to distinguish *extrapolated* from
 *interpolated* predicted values, and thus no visual distinction is
 possible. See preceding comments regarding prediction methods under 4.2.
 
-## 7\. Testing
+#### 7\. Testing
 
   - *RE7.0 Tests with noiseless, exact relationships between predictor
     (independent) data.*
