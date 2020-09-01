@@ -275,19 +275,19 @@ objects containing large numbers of numeric entries.
 
 ## 6\. Visualization
 
-  - **UL7.0** Objects returned by Unsupervised Learning Software should
+  - **UL6.0** Objects returned by Unsupervised Learning Software should
     have default `plot` methods, either through explicit implementation,
     extension of methods for existing model objects, through ensuring
     default methods work appropriately, or through explicit reference to
     helper packages such as
     [`factoextra`](https://github.com/kassambara/factoextra) and
     associated functions.
-  - **UL7.1** Where the default `plot` method is **NOT** a generic
+  - **UL6.1** Where the default `plot` method is **NOT** a generic
     `plot` method dispatched on the class of return objects (that is,
     through a `plot.<myclass>` function), that method dispatch should
     nevertheless exist in order to explicitly direct users to the
     appropriate function.
-  - **UL7.2** Where default plot methods include labelling components of
+  - **UL6.2** Where default plot methods include labelling components of
     return objects (such as cluster labels), routines should ensure that
     labels are automatically placed to ensure readability, and/or that
     appropriate diagnostic messages are issued where readability is

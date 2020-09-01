@@ -1,6 +1,7 @@
 SFILE = script
-RFILE = unsupervised
-DEMO = FALSE
+#RFILE = unsupervised
+RFILE = regression-demos
+DEMO = TRUE
 
 all: runscript
 
