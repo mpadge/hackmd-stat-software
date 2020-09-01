@@ -299,5 +299,5 @@ should adhere to the following standards:
 - **G4.10** Any conditions necessary to run extended tests such as platform
   requirements, memory, expected runtime, and artefacts produced that may need
   manual inspection, should be described in developer documentation such as a
-  `CONTRIBUTING.md` file. 
+  `CONTRIBUTING.md` or `tests/README.md` file. 
 
