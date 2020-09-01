@@ -215,7 +215,11 @@ of input classes.
 All packages should follow rOpenSci standards on
 [testing](https://devguide.ropensci.org/building.html#testing) and [continuous
 integration](https://devguide.ropensci.org/ci.html), including aiming for high
-test coverage.  
+test coverage. Extant R packages which may be useful for testing include
+[`testthat`](https://testthat.r-lib.org),
+[`tinytest`](https://github.com/markvanderloo/tinytest),
+[`roxytest`](https://github.com/mikldk/roxytest), and
+[`xpectr`](https://github.com/LudvigOlsen/xpectr).
 
 - **G4.0** Where applicable or practicable, tests should use standard data sets
   with known properties (for example, the [NIST Standard Reference
@@ -233,11 +237,11 @@ following types:
    comparisons using binding frameworks such as
    [RStata](https://github.com/lbraglia/RStata)).
     - **G4.2a** For new methods, it can be difficult to separate out
-       correctness of the the method from the correctness of the
+       correctness of the method from the correctness of the
        implementation, as there may not be reference for comparison.  In this
        case, testing may be implemented against simple, trivial cases or
        against multiple implementations such as an initial R implementation
-       compared with results from a C/C++ impelementation.
+       compared with results from a C/C++ implementation.
     - **G4.2b** For new implementations of existing methods, correctness tests
       should include tests against previous implementations.  Such testing may
       explicitly call those implementations in testing, preferably from

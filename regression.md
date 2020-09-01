@@ -83,7 +83,8 @@ These pre-processing routines should also be tested as described below.
 
 The following standards apply to the model fitting algorithms of Regression
 Software which implements or relies on iterative algorithms which are expected
-to converge to generate model statistics. Regression Software which implements or relies on iterative convergence algorithms should:
+to converge to generate model statistics. Regression Software which implements
+or relies on iterative convergence algorithms should:
 
 - **RE3.0** Issue appropriate warnings or other diagnostic messages for models
   which fail to converge.
@@ -193,7 +194,6 @@ documentation including graphical output:
   through a `predict()` method), the default `plot` method should provide clear
   visual distinction between modelled (interpolated) and forecast
   (extrapolated) values.
-
 
 ## 7. Testing
 
