@@ -49,9 +49,12 @@ each standard prefixed with “RE”.
     example, specification that software accepts only numeric inputs in
     `vector` or `matrix` form, or that all inputs must be in
     `data.frame` form with both column and row names.
-  - **RE1.3** Regression Software should explicitly document any aspects
-    of input data (such as row names) which are not used in model
-    construction.
+  - **RE1.3** Regression Software should transfer all relevant aspects
+    of input data, notably including row and column names, and
+    potentially information from other `attributes()`, to corresponding
+    aspects of return objects (see RE4, below).
+      - **RE1.3a** Where otherwise relevant information is *not*
+        transferred, this should be explicitly documented.
   - **RE1.4** Regression Software should document any assumptions made
     with regard to input data; for example distributional assumptions,
     or assumptions that predictor data have mean values of zero.
