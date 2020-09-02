@@ -260,7 +260,7 @@ knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
 knnClust
 ```
 
-    ## [1] 2 2 2 2 2
+    ## [1] 1 2 2 2 2
     ## Levels: 1 2 3
 
 The [`stats::prcomp()`
@@ -273,12 +273,12 @@ arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
-    ##                    PC1       PC2        PC3        PC4
-    ## Illinois      79.24901  13.25967 -5.2887993 -0.5848655
-    ## Mississippi   87.77157 -26.61735 -4.6874278 -4.5443132
-    ## South Dakota -85.94758 -15.94554  1.8811637  0.9731323
-    ## Colorado      36.03166  14.42957 12.9648236  0.8945323
-    ## Kansas       -54.96463   4.19988  0.8289948 -1.0973785
+    ##                     PC1        PC2        PC3        PC4
+    ## Utah          -49.49603  18.681981  2.4772340  1.7443672
+    ## Arkansas       18.46343 -16.581662  0.7151997  0.0799065
+    ## North Dakota -126.65714 -15.822891 -1.3061525  2.1464048
+    ## Oregon        -10.48534   4.094969  8.7208948  2.4001357
+    ## Kansas        -55.63701   3.641544  0.3481376 -0.7912735
 
 ### 3.3 Group Distributions and Associated Statistics
 
@@ -323,17 +323,17 @@ Such output accords with the following standard:
 
 The above example of principal components is one where there are no
 inter-group relationships, and so that standard is fulfilled by
-providing information on intra-group variances. Discrete clustering
-algorithms, in contrast, yield results for which inter-group
-relationships are meaningful, and can be meaningfully provided. The
-[`hclust()`
+providing information on intra-group variances alone. Discrete
+clustering algorithms, in contrast, yield results for which inter-group
+relationships are meaningful, and such relationships can generally be
+meaningfully provided. The [`hclust()`
 routine](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/hclust.html),
 like many clustering routines, simply returns a *scheme* for devising an
 arbitrary number of clusters, and so can not meaningfully provide
 variances or relationships between such. The [`cutree()`
 function](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cutree.html),
 however, does yield defined numbers of clusters, yet devoid of any
-quantitative information.
+quantitative information on variances or equivalent.
 
 ``` r
 res <- hclust (dist (USArrests))
@@ -345,7 +345,9 @@ str (cutree (res, k = 5))
 
 Compare that with the output of a largely equivalent routine, the
 [`clara()`
-function](https://stat.ethz.ch/R-manual/R-devel/library/cluster/html/clara.html).
+function](https://stat.ethz.ch/R-manual/R-devel/library/cluster/html/clara.html)
+from the [`cluster`
+package](https://cran.r-project.org/package=cluster).
 
 ``` r
 library (cluster)

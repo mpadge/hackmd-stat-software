@@ -238,9 +238,9 @@ Such output accords with the following standard:
 
 The above example of principal components is one where there are no inter-group
 relationships, and so that standard is fulfilled by providing information on
-intra-group variances. Discrete clustering algorithms, in contrast, yield
-results for which inter-group relationships are meaningful, and can be
-meaningfully provided. The [`hclust()`
+intra-group variances alone. Discrete clustering algorithms, in contrast, yield
+results for which inter-group relationships are meaningful, and such
+relationships can generally be meaningfully provided. The [`hclust()`
 routine](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/hclust.html),
 like many clustering routines, simply returns a *scheme* for devising an
 arbitrary number of clusters, and so
@@ -248,7 +248,7 @@ can not meaningfully provide variances or relationships between such. The
 [`cutree()`
 function](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cutree.html),
 however, does yield defined numbers of clusters, yet devoid of any quantitative
-information.
+information on variances or equivalent.
 
 ```{r}
 res <- hclust (dist (USArrests))
@@ -256,7 +256,8 @@ str (cutree (res, k = 5))
 ```
 
 Compare that with the output of a largely equivalent routine, the [`clara()`
-function](https://stat.ethz.ch/R-manual/R-devel/library/cluster/html/clara.html).
+function](https://stat.ethz.ch/R-manual/R-devel/library/cluster/html/clara.html)
+from the [`cluster` package](https://cran.r-project.org/package=cluster).
 
 ```{r}
 library (cluster)
