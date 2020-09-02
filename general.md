@@ -200,9 +200,9 @@ of input classes.
   [`mean()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html),
   [`sd()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/sd.html) or
   [`cor()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html)).
-- **G2.13** All functions should also appropriately handle undefined values 
-  (e.g., `NaN`, `Inf` and `-Inf`), including potentially providing options for
-  ignoring or removing such values.
+- **G2.13** All functions should also provide options to handle undefined values 
+  (e.g., `NaN`, `Inf` and `-Inf`), including potentially ignoring or removing
+  such values.
 
 ## 3. Output Structures
 
@@ -259,7 +259,8 @@ following types:
       succeed within a defined tolerance rather than recovering exact values.
     - **G4.4b** Parameter recovery tests should be run with multiple random
       seeds when either data simulation or the algorithm contains a random
-      component
+      component. (When long-running, such tests may be part of an extended,
+      rather than regular, test suite; see G4.8-4.10, below).
 - **G4.5** **Algorithm performance tests** to test that implementation performs
   as expected as properties of data change.  For instance, a test may show that
   parameters approach correct estimates within tolerance as data size

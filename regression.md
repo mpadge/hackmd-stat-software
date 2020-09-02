@@ -39,11 +39,11 @@ standard prefixed with "RE".
   blog
   post](https://rviews.rstudio.com/2017/02/01/the-r-formula-method-the-good-parts/)
   for examples.
-- **RE1.2** Regression Software should document expected format (types or classes)
-  for inputting predictor variables, including descriptions of types or classes
-  which are not accepted; for example, specification that software accepts only
-  numeric inputs in `vector` or `matrix` form, or that all inputs must be in
-  `data.frame` form with both column and row names.
+- **RE1.2** Regression Software should *document* expected format (types or
+  classes) for inputting predictor variables, including descriptions of types
+  or classes which are not accepted; for example, specification that software
+  accepts only numeric inputs in `vector` or `matrix` form, or that all inputs
+  must be in `data.frame` form with both column and row names.
 - **RE1.3** Regression Software should explicitly document any aspects of input
   data (such as row names) which are not used in model construction.
 - **RE1.4** Regression Software should document any assumptions made with regard to
@@ -147,21 +147,38 @@ otherwise access the following:
 
 - **RE4.13** Predictor variables, and associated "metadata" where applicable.
 
-### 4.2 Extrapolation and Forecasting
+### 4.2 Prediction, Extrapolation, and Forecasting
 
-- **RE4.14** Where Regression Software is intended to, or can, be used to
-  extrapolate or forecast values, values should also be provided for
-  extrapolation or forecast *errors*.
+Not all regression software is intended to, or can, provide distinct abilities
+to extrapolate or forecast. Moreover, identifying cases in which a regression
+model is used to extrapolate or forecast may often be a non-trivial exercise.
+It may nevertheless be possible, for example when input data used to construct
+a model are unidimensional, and data on which a prediction is to be based
+extend beyond the range used to construct the model. Where reasonably
+unambiguous identification of extrapolation or forecasting using a model is
+possible, the following standards apply:
+
+- **RE4.14** Where possible, values should also be provided for extrapolation
+  or forecast *errors*.
 - **RE4.15** Sufficient documentation and/or testing should be provided to
   demonstrate that forecast errors, confidence intervals, or equivalent values
   increase with forecast horizons.
 
+Distinct from extrapolation or forecasting abilities, the following standard
+applies to regression software which relies on, or otherwise provides abilities
+to process, categorical grouping variables:
+
+- **RE4.16** Regression Software which models distinct responses for different
+  categorical groups should include the ability to submit new groups to
+  `predict()` methods.
+
+
 ### 4.3 Reporting Return Results
 
-- **RE4.16** Model objects returned by Regression Software should implement or
+- **RE4.17** Model objects returned by Regression Software should implement or
   appropriately extend a default `print` method which provides an on-screen
   summary of model (input) parameters and (output) coefficients.
-- **RE4.17** Regression Software may also implement `summary` methods for model
+- **RE4.18** Regression Software may also implement `summary` methods for model
   objects, and in particular *should* implement distinct `summary` methods for
   any cases in which calculation of summary statistics is computationally
   non-trivial (for example, for bootstrapped estimates of confidence
@@ -171,7 +188,7 @@ otherwise access the following:
 
 Beyond the general standards for documentation, Regression Software should
 explicitly describe the following aspects, and ideally provide extended
-documentation including graphical output: 
+documentation including summary graphical reports of: 
 
 - **RE5.0** Scaling relationships between sizes of input data (numbers of
   observations, with potential extension to numbers of variables/columns) and
@@ -190,6 +207,10 @@ documentation including graphical output:
 - **RE6.2** The default `plot` method should produce a plot of the `fitted` values
   of the model, with optional visualisation of confidence intervals or
   equivalent.
+
+The following standard applies only to software fulfilling RE4.14-4.15, and the
+conditions described prior to those standards.
+
 - **RE6.3** Where a model object is used to generate a forecast (for example,
   through a `predict()` method), the default `plot` method should provide clear
   visual distinction between modelled (interpolated) and forecast
