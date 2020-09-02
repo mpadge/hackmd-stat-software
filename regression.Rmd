@@ -179,7 +179,6 @@ to process, categorical grouping variables:
   categorical groups should include the ability to submit new groups to
   `predict()` methods.
 
-
 ### 4.3 Reporting Return Results
 
 - **RE4.17** Model objects returned by Regression Software should implement or

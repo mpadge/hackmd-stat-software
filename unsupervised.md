@@ -260,7 +260,7 @@ knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
 knnClust
 ```
 
-    ## [1] 1 2 2 2 2
+    ## [1] 1 1 1 2 1
     ## Levels: 1 2 3
 
 The [`stats::prcomp()`
@@ -273,12 +273,12 @@ arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
-    ##                     PC1        PC2        PC3        PC4
-    ## Utah          -49.49603  18.681981  2.4772340  1.7443672
-    ## Arkansas       18.46343 -16.581662  0.7151997  0.0799065
-    ## North Dakota -126.65714 -15.822891 -1.3061525  2.1464048
-    ## Oregon        -10.48534   4.094969  8.7208948  2.4001357
-    ## Kansas        -55.63701   3.641544  0.3481376 -0.7912735
+    ##                      PC1        PC2       PC3        PC4
+    ## California     107.80654  22.642602  7.158801  2.5898464
+    ## Illinois        79.92808  13.393070 -5.951697 -0.5640631
+    ## Georgia         40.79716  -6.697265  4.383001 -8.2432706
+    ## South Carolina 107.79262 -23.129541 -1.950701 -1.3144588
+    ## Washington     -24.80850  10.849924  5.616725  1.8019841
 
 ### 3.3 Group Distributions and Associated Statistics
 
@@ -422,19 +422,19 @@ objects containing large numbers of numeric entries.
 
 ## 6\. Visualization
 
-  - **UL7.0** Objects returned by Unsupervised Learning Software should
+  - **UL6.0** Objects returned by Unsupervised Learning Software should
     have default `plot` methods, either through explicit implementation,
     extension of methods for existing model objects, through ensuring
     default methods work appropriately, or through explicit reference to
     helper packages such as
     [`factoextra`](https://github.com/kassambara/factoextra) and
     associated functions.
-  - **UL7.1** Where the default `plot` method is **NOT** a generic
+  - **UL6.1** Where the default `plot` method is **NOT** a generic
     `plot` method dispatched on the class of return objects (that is,
     through a `plot.<myclass>` function), that method dispatch should
     nevertheless exist in order to explicitly direct users to the
     appropriate function.
-  - **UL7.2** Where default plot methods include labelling components of
+  - **UL6.2** Where default plot methods include labelling components of
     return objects (such as cluster labels), routines should ensure that
     labels are automatically placed to ensure readability, and/or that
     appropriate diagnostic messages are issued where readability is

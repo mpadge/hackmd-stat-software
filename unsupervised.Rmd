@@ -17,7 +17,6 @@ dimensionality reduction and ordination software and algorithms, and examples
 of the latter include clustering and discrete partitioning software and
 algorithms.
 
-
 ## 1 Input Data Structures and Validation
 
 - **UL1.0** Unsupervised Learning Software should explicitly document expected
@@ -95,7 +94,6 @@ to enable them to be transferred within
 (The labels are transferred to the object returned by `agnes`, just not in
 a way that enables `cutree` to inherit them.)
 
-
 - **UL1.4** Unsupervised Learning Software should explicitly document whether
   input data may include missing values. 
 - **UL1.5** Functions in Unsupervised Learning Software which do not admit
@@ -113,7 +111,6 @@ a way that enables `cutree` to inherit them.)
       equivalent transformations without explaining *why* scale is applied,
       and explicitly illustrating and contrasting the consequences of not
       applying such transformations.
-
 
 ## 2. Pre-processing and Variable Transformation
 
@@ -272,8 +269,6 @@ available as the
 ["silhouette"](https://stat.ethz.ch/R-manual/R-devel/library/cluster/html/silhouette.html)
 of the clustering scheme.
 
-
-
 ## 4. Return Results
 
 - **UL4.0** Unsupervised Learning Software should return some form of "model"
@@ -309,7 +304,6 @@ such as lines of `data.frame` objects). Such default behaviour ought be
 avoided, particularly in Unsupervised Learning Software which commonly returns
 objects containing large numbers of numeric entries.
 
-
 - **UL4.3** Unsupervised Learning Software should also implement `summary`
   methods for model objects which should summarise the primary statistics used
   in generating the model (such as numbers of observations, parameters of
@@ -320,17 +314,17 @@ objects containing large numbers of numeric entries.
 
 ## 6. Visualization
 
-- **UL7.0** Objects returned by Unsupervised Learning Software should have
+- **UL6.0** Objects returned by Unsupervised Learning Software should have
   default `plot` methods, either through explicit implementation, extension of
   methods for existing model objects, through ensuring default methods work
   appropriately, or through explicit reference to helper packages such as
   [`factoextra`](https://github.com/kassambara/factoextra) and associated
   functions.
-- **UL7.1** Where the default `plot` method is **NOT** a generic `plot` method
+- **UL6.1** Where the default `plot` method is **NOT** a generic `plot` method
   dispatched on the class of return objects (that is, through
   a `plot.<myclass>` function), that method dispatch should nevertheless exist
   in order to explicitly direct users to the appropriate function.
-- **UL7.2** Where default plot methods include labelling components of return
+- **UL6.2** Where default plot methods include labelling components of return
   objects (such as cluster labels), routines should ensure that labels are
   automatically placed to ensure readability, and/or that appropriate
   diagnostic messages are issued where readability is likely to be compromised
