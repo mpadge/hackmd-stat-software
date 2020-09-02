@@ -71,6 +71,31 @@ hc <- hclust (dist (u))
   objects.
     - **UL1.3a** Where otherwise relevant information is *not* transferred,
       this should be explicitly documented.
+
+An example of a function according with UL1.3 is
+[`stats::cutree()`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cutree.html)
+
+```{r}
+hc <- hclust (dist (USArrests))
+head (cutree (hc, 10))
+```
+The rownames of `USArrests` are transferred to the output object. In contrast,
+some routines from the [`cluster`
+package](https://cran.r-project.org/package=cluster) do not comply with this standard:
+
+```{r}
+library (cluster)
+ac <- agnes (USArrests) # agglomerative nesting
+head (cutree (ac, 10))
+```
+The case labels are not appropriately carried through to the object returned by
+[`agnes()`](https://stat.ethz.ch/R-manual/R-devel/library/cluster/html/agnes.html)
+to enable them to be transferred within 
+[`cutree()`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cutree.html).
+(The labels are transferred to the object returned by `agnes`, just not in
+a way that enables `cutree` to inherit them.)
+
+
 - **UL1.4** Unsupervised Learning Software should explicitly document whether
   input data may include missing values. 
 - **UL1.5** Functions in Unsupervised Learning Software which do not admit
@@ -193,7 +218,59 @@ predict (res, newdata = arrests_new)
 
 Many unsupervised learning algorithms serve to label, categorise, or partition
 data. Software which performs any of these tasks will commonly output some kind
-of labelling or grouping schemes.
+of labelling or grouping schemes. The above example of principal components
+illustrates that the return object records the standard deviations associated
+with each component:
+
+```{r prcomp-return}
+res <- prcomp (USArrests)
+print(res)
+summary (res)
+```
+
+Such output accords with the following standard:
+
+- **UL3.4** Objects returned from Unsupervised Learning Software which labels,
+  categorise, or partitions data into discrete groups should include, or
+  provide immediate access to, quantitative information on intra-group
+  variances or equivalent, as well as on inter-group relationships where
+  applicable. 
+
+The above example of principal components is one where there are no inter-group
+relationships, and so that standard is fulfilled by providing information on
+intra-group variances. Discrete clustering algorithms, in contrast, yield
+results for which inter-group relationships are meaningful, and can be
+meaningfully provided. The [`hclust()`
+routine](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/hclust.html),
+like many clustering routines, simply returns a *scheme* for devising an
+arbitrary number of clusters, and so
+can not meaningfully provide variances or relationships between such. The
+[`cutree()`
+function](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cutree.html),
+however, does yield defined numbers of clusters, yet devoid of any quantitative
+information.
+
+```{r}
+res <- hclust (dist (USArrests))
+str (cutree (res, k = 5))
+```
+
+Compare that with the output of a largely equivalent routine, the [`clara()`
+function](https://stat.ethz.ch/R-manual/R-devel/library/cluster/html/clara.html).
+
+```{r}
+library (cluster)
+cl <- clara (USArrests, k = 10) # direct clustering into specified number of clusters
+cl$clusinfo
+```
+
+That object contains information on dissimilarities between each observation
+and cluster medoids, which in the context of UL3.4 is "information on
+intra-group variances or equivalent". Moreover, inter-group information is also
+available as the
+["silhouette"](https://stat.ethz.ch/R-manual/R-devel/library/cluster/html/silhouette.html)
+of the clustering scheme.
+
 
 
 ## 4. Return Results

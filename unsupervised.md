@@ -102,6 +102,39 @@ hc <- hclust (dist (u))
     corresponding aspects of return objects.
       - **UL1.3a** Where otherwise relevant information is *not*
         transferred, this should be explicitly documented.
+
+An example of a function according with UL1.3 is
+[`stats::cutree()`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cutree.html)
+
+``` r
+hc <- hclust (dist (USArrests))
+head (cutree (hc, 10))
+```
+
+    ##    Alabama     Alaska    Arizona   Arkansas California   Colorado 
+    ##          1          2          3          4          5          4
+
+The rownames of `USArrests` are transferred to the output object. In
+contrast, some routines from the [`cluster`
+package](https://cran.r-project.org/package=cluster) do not comply with
+this standard:
+
+``` r
+library (cluster)
+ac <- agnes (USArrests) # agglomerative nesting
+head (cutree (ac, 10))
+```
+
+    ## [1] 1 2 3 4 3 4
+
+The case labels are not appropriately carried through to the object
+returned by
+[`agnes()`](https://stat.ethz.ch/R-manual/R-devel/library/cluster/html/agnes.html)
+to enable them to be transferred within
+[`cutree()`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cutree.html).
+(The labels are transferred to the object returned by `agnes`, just not
+in a way that enables `cutree` to inherit them.)
+
   - **UL1.4** Unsupervised Learning Software should explicitly document
     whether input data may include missing values.
   - **UL1.5** Functions in Unsupervised Learning Software which do not
@@ -227,7 +260,7 @@ knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
 knnClust
 ```
 
-    ## [1] 2 1 1 2 2
+    ## [1] 2 2 2 2 2
     ## Levels: 1 2 3
 
 The [`stats::prcomp()`
@@ -240,18 +273,104 @@ arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
-    ##                   PC1       PC2        PC3        PC4
-    ## Washington  -24.98662 10.191101  5.0673368  1.7800185
-    ## Georgia      40.79679 -6.480958  3.7736177 -7.5522215
-    ## Iowa       -114.63802 -3.137131 -0.3020688  0.2649213
-    ## Nevada       84.38123 15.591050 16.1572390 -1.0354023
-    ## Michigan     86.16655  6.170905  6.8108074 -0.5095444
+    ##                    PC1       PC2        PC3        PC4
+    ## Illinois      79.24901  13.25967 -5.2887993 -0.5848655
+    ## Mississippi   87.77157 -26.61735 -4.6874278 -4.5443132
+    ## South Dakota -85.94758 -15.94554  1.8811637  0.9731323
+    ## Colorado      36.03166  14.42957 12.9648236  0.8945323
+    ## Kansas       -54.96463   4.19988  0.8289948 -1.0973785
 
 ### 3.3 Group Distributions and Associated Statistics
 
 Many unsupervised learning algorithms serve to label, categorise, or
 partition data. Software which performs any of these tasks will commonly
-output some kind of labelling or grouping schemes.
+output some kind of labelling or grouping schemes. The above example of
+principal components illustrates that the return object records the
+standard deviations associated with each component:
+
+``` r
+res <- prcomp (USArrests)
+print(res)
+```
+
+    ## Standard deviations (1, .., p=4):
+    ## [1] 83.732400 14.212402  6.489426  2.482790
+    ## 
+    ## Rotation (n x k) = (4 x 4):
+    ##                 PC1         PC2         PC3         PC4
+    ## Murder   0.04170432 -0.04482166  0.07989066 -0.99492173
+    ## Assault  0.99522128 -0.05876003 -0.06756974  0.03893830
+    ## UrbanPop 0.04633575  0.97685748 -0.20054629 -0.05816914
+    ## Rape     0.07515550  0.20071807  0.97408059  0.07232502
+
+``` r
+summary (res)
+```
+
+    ## Importance of components:
+    ##                            PC1      PC2    PC3     PC4
+    ## Standard deviation     83.7324 14.21240 6.4894 2.48279
+    ## Proportion of Variance  0.9655  0.02782 0.0058 0.00085
+    ## Cumulative Proportion   0.9655  0.99335 0.9991 1.00000
+
+Such output accords with the following standard:
+
+  - **UL3.4** Objects returned from Unsupervised Learning Software which
+    labels, categorise, or partitions data into discrete groups should
+    include, or provide immediate access to, quantitative information on
+    intra-group variances or equivalent, as well as on inter-group
+    relationships where applicable.
+
+The above example of principal components is one where there are no
+inter-group relationships, and so that standard is fulfilled by
+providing information on intra-group variances. Discrete clustering
+algorithms, in contrast, yield results for which inter-group
+relationships are meaningful, and can be meaningfully provided. The
+[`hclust()`
+routine](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/hclust.html),
+like many clustering routines, simply returns a *scheme* for devising an
+arbitrary number of clusters, and so can not meaningfully provide
+variances or relationships between such. The [`cutree()`
+function](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cutree.html),
+however, does yield defined numbers of clusters, yet devoid of any
+quantitative information.
+
+``` r
+res <- hclust (dist (USArrests))
+str (cutree (res, k = 5))
+```
+
+    ##  Named int [1:50] 1 1 1 2 1 2 3 1 4 2 ...
+    ##  - attr(*, "names")= chr [1:50] "Alabama" "Alaska" "Arizona" "Arkansas" ...
+
+Compare that with the output of a largely equivalent routine, the
+[`clara()`
+function](https://stat.ethz.ch/R-manual/R-devel/library/cluster/html/clara.html).
+
+``` r
+library (cluster)
+cl <- clara (USArrests, k = 10) # direct clustering into specified number of clusters
+cl$clusinfo
+```
+
+    ##       size  max_diss   av_diss isolation
+    ##  [1,]    4 24.708298 14.284874 1.4837745
+    ##  [2,]    6 28.857755 16.759943 1.7329563
+    ##  [3,]    6 44.640565 23.718040 0.9677229
+    ##  [4,]    6 28.005892 17.382196 0.8442061
+    ##  [5,]    6 15.901258  9.363471 1.1037219
+    ##  [6,]    7 29.407822 14.817031 0.9080598
+    ##  [7,]    4 11.764353  6.781659 0.8165753
+    ##  [8,]    3  8.766984  5.768183 0.3547323
+    ##  [9,]    3 18.848077 10.101505 0.7176276
+    ## [10,]    5 16.477257  8.468541 0.6273603
+
+That object contains information on dissimilarities between each
+observation and cluster medoids, which in the context of UL3.4 is
+“information on intra-group variances or equivalent”. Moreover,
+inter-group information is also available as the
+[“silhouette”](https://stat.ethz.ch/R-manual/R-devel/library/cluster/html/silhouette.html)
+of the clustering scheme.
 
 ## 4\. Return Results
 
