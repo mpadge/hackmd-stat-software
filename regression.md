@@ -115,8 +115,10 @@ ideally rely on class-specific methods which extend, or implement otherwise
 equivalent versions of, the methods from the `stats` package which are named in
 parentheses in each of the following standards.
 
-The model objects should include, or otherwise enable effectively immediate
-access to, 
+Model objects should include, or otherwise enable effectively immediate access
+to the following descriptors. It is acknowledged that not all regression models
+can sensibly provide access to these descriptors, yet should include access
+provisions to all those that are applicable.
 
 - **RE4.2** Model coefficients (via `coeff()` / `coefficients()`)
 - **RE4.3** Confidence intervals on those coefficients (via `confint()`)
@@ -125,7 +127,6 @@ access to,
 - **RE4.5** Numbers of observations submitted to model (via `nobs()`)
 - **RE4.6** The variance-covariance matrix of the model parameters (via `vcov()`)
 - **RE4.7** Where appropriate, convergence statistics
-
 
 Regression Software *should* provide simple and direct methods to return or
 otherwise access the following form of data and metadata, where the latter
