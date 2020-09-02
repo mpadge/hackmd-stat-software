@@ -117,7 +117,7 @@ Note that the [`stats::cutree()`
 function](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cutree.html)
 does not accord with this standard:
 
-```{r}
+```{r cutree}
 hc <- hclust (dist (USArrests))
 table (cutree (hc, k = 10))
 ```
@@ -135,7 +135,7 @@ The
 [`stats::prcomp`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/prcomp.html)
 function accords with this standard:
 
-```{r}
+```{r prcomp}
 z <- prcomp (eurodist, rank = 5) # return maximum of 5 components
 summary (z)
 ```
@@ -157,7 +157,7 @@ can be used to predict membership of new data using the [`class:knn()`
 function](https://stat.ethz.ch/R-manual/R-devel/library/class/html/knn.html).
 (This is intended to illustrate only one of many possible approaches.)
 
-```{r}
+```{r knn}
 library (class)
 hc <- hclust (dist (iris [, -5]))
 groups <- cutree (hc, k = 3)
@@ -175,7 +175,7 @@ The [`stats::prcomp()`
 function](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/prcomp.html)
 implements its own `predict()` method:
 
-```{r}
+```{r predict-prcomp}
 res <- prcomp (USArrests)
 arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)

@@ -140,8 +140,9 @@ Messages should be issued in both of these cases.
     or “A” describe the largest group, “2”, “b”, or “B” the second
     largest, and so on.)
 
-Note that the `stats::cutree` function does not accord with this
-standard:
+Note that the [`stats::cutree()`
+function](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cutree.html)
+does not accord with this standard:
 
 ``` r
 hc <- hclust (dist (USArrests))
@@ -152,12 +153,15 @@ table (cutree (hc, k = 10))
     ##  1  2  3  4  5  6  7  8  9 10 
     ##  3  3  3  6  5 10  2  5  5  8
 
-Arbitrary integer labels are applied to the groups, yet the order of
-labels is not related to the order of group sizes.
+The [`cutree()`
+function](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cutree.html)
+applies arbitrary integer labels to the groups, yet the order of labels
+is not related to the order of group sizes.
 
   - **UL3.2** Dimensionality reduction or equivalent algorithms which
     label dimensions should ensure that that sequences of labels follows
-    decreasing “importance” (for example, variance contribution).
+    decreasing “importance” (for example, eigenvalues or variance
+    contributions).
 
 The
 [`stats::prcomp`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/prcomp.html)
@@ -207,12 +211,12 @@ knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
 knnClust
 ```
 
-    ## [1] 2 1 1 3 1
+    ## [1] 1 1 1 1 2
     ## Levels: 1 2 3
 
 The [`stats::prcomp()`
 function](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/prcomp.html)
-directly implements its own `predict()` method:
+implements its own `predict()` method:
 
 ``` r
 res <- prcomp (USArrests)
@@ -220,12 +224,18 @@ arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
-    ##                 PC1         PC2       PC3        PC4
-    ## Wyoming   -9.610991  -5.3913038 -3.355638 -0.3502872
-    ## Utah     -49.141713  17.9360239  2.648796  1.4247151
-    ## Illinois  79.577000  13.5021560 -5.616375 -0.5854475
-    ## Maine    -88.620149 -11.2016863 -4.148504  1.3381642
-    ## Nebraska -68.260152   0.3036606  1.123689  0.2468008
+    ##                       PC1        PC2         PC3        PC4
+    ## North Carolina  165.20158 -30.413068 -11.6259478  1.7434841
+    ## Wisconsin      -117.54114   5.753598  -2.3906073 -0.9673528
+    ## Arkansas         19.30416 -16.064286   0.3561254  0.2495519
+    ## Oregon          -10.23512   4.272541   8.9777704  2.7892510
+    ## Mississippi      87.75752 -26.676792  -4.9750697 -4.1037262
+
+### 3.3 Group Distributions and Associated Statistics
+
+Many unsupervised learning algorithms serve to label, categorise, or
+partition data. Software which performs any of these tasks will commonly
+output some kind of labelling or grouping schemes.
 
 ## 4\. Return Results
 
@@ -275,19 +285,19 @@ objects containing large numbers of numeric entries.
 
 ## 6\. Visualization
 
-  - **UL6.0** Objects returned by Unsupervised Learning Software should
+  - **UL7.0** Objects returned by Unsupervised Learning Software should
     have default `plot` methods, either through explicit implementation,
     extension of methods for existing model objects, through ensuring
     default methods work appropriately, or through explicit reference to
     helper packages such as
     [`factoextra`](https://github.com/kassambara/factoextra) and
     associated functions.
-  - **UL6.1** Where the default `plot` method is **NOT** a generic
+  - **UL7.1** Where the default `plot` method is **NOT** a generic
     `plot` method dispatched on the class of return objects (that is,
     through a `plot.<myclass>` function), that method dispatch should
     nevertheless exist in order to explicitly direct users to the
     appropriate function.
-  - **UL6.2** Where default plot methods include labelling components of
+  - **UL7.2** Where default plot methods include labelling components of
     return objects (such as cluster labels), routines should ensure that
     labels are automatically placed to ensure readability, and/or that
     appropriate diagnostic messages are issued where readability is
