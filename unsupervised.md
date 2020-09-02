@@ -85,11 +85,23 @@ identical (colnames (x), paste0 ("X", seq (ncol (x))))
 
     ## [1] TRUE
 
-Messages should be issued in both of these cases.
+Messages should be issued in both of these cases. The following code
+illustrates that the `hclust` function does not implement any such
+checks or assertions, rather it silently returns an object with default
+labels.
 
-  - **UL1.3** Unsupervised Learning Software should explicitly document
-    any aspects of input data (such as row names) which are not used in
-    model construction.
+``` r
+u <- USArrests
+rownames (u) <- seq (nrow (u))
+hc <- hclust (dist (u))
+```
+
+  - **UL1.3** Unsupervised Learning Software should transfer all
+    relevant aspects of input data, notably including row and column
+    names, and potentially information from other `attributes()`, to
+    corresponding aspects of return objects.
+      - **UL1.3a** Where otherwise relevant information is *not*
+        transferred, this should be explicitly documented.
   - **UL1.4** Unsupervised Learning Software should explicitly document
     whether input data may include missing values.
   - **UL1.5** Functions in Unsupervised Learning Software which do not
@@ -105,6 +117,10 @@ Messages should be issued in both of these cases.
         input data which has components on markedly different scales
         should explicitly document such differences, and implications of
         submitting such data.
+      - **UL1.6b** Examples or other documentation should not use
+        `scale()` or equivalent transformations without explaining *why*
+        scale is applied, and explicitly illustrating and contrasting
+        the consequences of not applying such transformations.
 
 ## 2\. Pre-processing and Variable Transformation
 
@@ -211,12 +227,12 @@ knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
 knnClust
 ```
 
-    ## [1] 2 2 2 2 2
+    ## [1] 2 1 1 2 2
     ## Levels: 1 2 3
 
 The [`stats::prcomp()`
 function](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/prcomp.html)
-implements its own `predict()` method:
+implements its own `predict()` method which conforms to this standard:
 
 ``` r
 res <- prcomp (USArrests)
@@ -224,12 +240,12 @@ arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
-    ##                     PC1         PC2       PC3        PC4
-    ## New Mexico    115.47522  -0.1257654  2.369994  0.5529028
-    ## Nevada         84.30188  15.4740658 15.980485 -1.2178676
-    ## Alabama        65.31846 -10.7928436 -2.125699 -3.1059849
-    ## Massachusetts -21.12612  19.8589452 -6.950282  1.0501728
-    ## Kansas        -54.83616   3.2740935  1.188045 -0.7408433
+    ##                   PC1       PC2        PC3        PC4
+    ## Washington  -24.98662 10.191101  5.0673368  1.7800185
+    ## Georgia      40.79679 -6.480958  3.7736177 -7.5522215
+    ## Iowa       -114.63802 -3.137131 -0.3020688  0.2649213
+    ## Nevada       84.38123 15.591050 16.1572390 -1.0354023
+    ## Michigan     86.16655  6.170905  6.8108074 -0.5095444
 
 ### 3.3 Group Distributions and Associated Statistics
 
