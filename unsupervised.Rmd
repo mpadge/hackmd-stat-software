@@ -32,19 +32,13 @@ algorithms.
 The following code demonstrates an example of a routine which fails to meet
 this standard.
 
-```{r hclust-fail, eval = FALSE}
+```{r hclust-fail, eval = TRUE, error = TRUE}
 d <- dist (USArrests) # example from help file for 'hclust' function
 hc <- hclust (d) # okay
 hc <- hclust (as.matrix (d))
 ```
-```{r hclust-fail-fakey, eval = TRUE, echo = FALSE}
-d <- dist (USArrests) # example from help file for 'hclust' function
-hc <- hclust (d) # okay
-hc <- tryCatch (hclust (as.matrix (d)), error = function (e) e)
-print (hc)
-```
 
-The latter fails, yet issues an informative error message that clearly
+The latter fails, yet issues an uninformative error message that clearly
 indicates a failure to provide sufficient checks on the class of input data.
 
 - **UL1.2** Unsupervised learning which uses row or column names to label

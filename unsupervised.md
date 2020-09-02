@@ -47,9 +47,9 @@ hc <- hclust (d) # okay
 hc <- hclust (as.matrix (d))
 ```
 
-    ## <simpleError in if (is.na(n) || n > 65536L) stop("size cannot be NA nor exceed 65536"): missing value where TRUE/FALSE needed>
+    ## Error in if (is.na(n) || n > 65536L) stop("size cannot be NA nor exceed 65536"): missing value where TRUE/FALSE needed
 
-The latter fails, yet issues an informative error message that clearly
+The latter fails, yet issues an uninformative error message that clearly
 indicates a failure to provide sufficient checks on the class of input
 data.
 
@@ -211,7 +211,7 @@ knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
 knnClust
 ```
 
-    ## [1] 1 1 1 1 2
+    ## [1] 2 2 2 2 2
     ## Levels: 1 2 3
 
 The [`stats::prcomp()`
@@ -224,12 +224,12 @@ arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
-    ##                       PC1        PC2         PC3        PC4
-    ## North Carolina  165.20158 -30.413068 -11.6259478  1.7434841
-    ## Wisconsin      -117.54114   5.753598  -2.3906073 -0.9673528
-    ## Arkansas         19.30416 -16.064286   0.3561254  0.2495519
-    ## Oregon          -10.23512   4.272541   8.9777704  2.7892510
-    ## Mississippi      87.75752 -26.676792  -4.9750697 -4.1037262
+    ##                     PC1         PC2       PC3        PC4
+    ## New Mexico    115.47522  -0.1257654  2.369994  0.5529028
+    ## Nevada         84.30188  15.4740658 15.980485 -1.2178676
+    ## Alabama        65.31846 -10.7928436 -2.125699 -3.1059849
+    ## Massachusetts -21.12612  19.8589452 -6.950282  1.0501728
+    ## Kansas        -54.83616   3.2740935  1.188045 -0.7408433
 
 ### 3.3 Group Distributions and Associated Statistics
 
