@@ -328,4 +328,4 @@ standards:
     platform requirements, memory, expected runtime, and artefacts
     produced that may need manual inspection, should be described in
     developer documentation such as a `CONTRIBUTING.md` or
-    `tests/README.md` file. *
+    `tests/README.md` file.*
