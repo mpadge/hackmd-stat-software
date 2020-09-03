@@ -7,7 +7,7 @@ robots: noindex, nofollow
 
 <!-- Edit the .Rmd not the .md file -->
 
-# Bayesian and Monte Carlo Software
+## Bayesian and Monte Carlo Software
 
 Bayesian and Monte Carlo Software (hereafter referred to for simplicity
 as “Bayesian Software”) is presumed to perform one or more of the
@@ -36,7 +36,7 @@ following steps:
 This document details standards for each of these steps, each prefixed
 with “BS”.
 
-## 1\. Documentation of Inputs
+### Documentation of Inputs
 
 Prior to actual standards for documentation of inputs, we note one
 terminological standard for Bayesian software:
@@ -84,13 +84,13 @@ specify inputs:
     enables multiple convergence checkers, differences between these
     should be explicitly tested.*
 
-## 2\. Input Data Structures and Validation
+### Input Data Structures and Validation
 
 This section contains standards primarily intended to ensure that input
 data, including model specifications, are validated prior to passing
 through to the main computational algorithms.
 
-### 2.1 Input Data
+#### Input Data
 
 Bayesian Software is commonly designed to accept generic one- or
 two-dimensional forms such as vector, matrix, or `data.frame` objects.
@@ -129,7 +129,7 @@ input *data*:
     example by ensuring commensurate lengths of vectors or numbers of
     rows of rectangular inputs.*
 
-### 2.2 Prior Distributions, Model Specifications, and Hyperparameters
+#### Prior Distributions, Model Specifications, and Hyperparameters
 
 The second set of standards in this section concern specification of
 prior distributions, model structures, or other equivalent ways of
@@ -280,7 +280,7 @@ refers to a non-existent or undefined hyperparameter. Such controls
 should be part of a single pre-processing stage, and so should only
 generate a single error.
 
-### 2.3 Computational Parameters
+#### Computational Parameters
 
 Computational parameters are considered here as those passed to Bayesian
 functions other than hyperparameters determining the forms of prior
@@ -309,7 +309,7 @@ standards for such sanity checks include that Bayesian Software should:
 The following two sub-sections consider particular cases of
 computational parameters.
 
-### 2.4 Seed Parameters
+#### Seed Parameters
 
 Bayesian software should:
 
@@ -334,7 +334,7 @@ random seeds and starting values, we recommended a single “starting
 values” rather than “seeds” argument, with appropriate translation of
 these parameters into seeds where necessary.
 
-### 2.5 Output Verbosity
+#### Output Verbosity
 
 All Bayesian Software should implement computational parameters to
 control output verbosity. Bayesian computations are often
@@ -355,9 +355,9 @@ standards should be adhered to in regard to output verbosity:
     warnings, or otherwise captured in return values. This should be
     tested.*
 
-## 3\. Pre-processing and Data Transformation
+### Pre-processing and Data Transformation
 
-### 3.1 Missing Values
+#### Missing Values
 
 Bayesian Software should:
 
@@ -369,7 +369,7 @@ Bayesian Software should:
     values prior to passing data through to main computational
     algorithms.*
 
-### 3.2 Perfect Collinearity
+#### Perfect Collinearity
 
 Where appropriate, Bayesian Software should:
 
@@ -386,7 +386,7 @@ Alternatively, a test could ensure that perfectly collinear data passed
 to a function with a stopping criteria generated no results, while
 specifying a fixed number of iterations may generate results.
 
-## 4\. Analytic Algorithms
+### Analytic Algorithms
 
 As mentioned, analytic algorithms for Bayesian Software are commonly
 algorithms to simulate posterior distributions, and to draw samples from
@@ -432,7 +432,7 @@ Where possible or applicable, Bayesian Software should:
     parameters, for example, lower values should result in longer
     sequence lengths.*
 
-## 5\. Return Values
+### Return Values
 
 Unlike software in many other categories, Bayesian Software should
 generally return several kinds of distinct data, both the raw data
@@ -470,7 +470,7 @@ Software should:
   - **BS5.5** *Appropriate diagnostic statistics to indicate absence of
     convergence are either returned or immediately able to be accessed.*
 
-## 6\. Additional Functionality
+### Additional Functionality
 
 Bayesian Software should:
 
@@ -488,7 +488,7 @@ Bayesian Software may:
   - **BS6.5** *Provide abilities to plot both sequences of posterior
     samples and distributional estimates together in single graphic*
 
-## Testing
+### 
 
   - Parameter recoveery tests:
       - Recover the prior woth no data or data with no information,

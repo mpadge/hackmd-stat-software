@@ -1,6 +1,6 @@
 <!-- Edit the .Rmd not the .md file -->
 
-# Dimensionality Reduction, Clustering, and Unsupervised Learning
+## Dimensionality Reduction, Clustering, and Unsupervised Learning
 
 This document details standards for Dimensionality Reduction, Clustering, and
 Unsupervised Learning Software -- referred to from here on for simplicity as
@@ -19,7 +19,7 @@ dimensionality reduction and ordination software and algorithms, and examples
 of the latter include clustering and discrete partitioning software and
 algorithms.
 
-## 1 Input Data Structures and Validation
+### Input Data Structures and Validation
 
 - **UL1.0** *Unsupervised Learning Software should explicitly document expected
   format (types or classes) for input data, including descriptions of types or
@@ -132,7 +132,7 @@ a way that enables `cutree` to inherit them.)
       and explicitly illustrating and contrasting the consequences of not
       applying such transformations.*
 
-## 2. Pre-processing and Variable Transformation
+### Pre-processing and Variable Transformation
 
 - **UL2.0** *Routines likely to give unreliable or irreproducible results in
   response to violations of assumptions regarding input data (see UL1.6) should
@@ -154,9 +154,9 @@ a way that enables `cutree` to inherit them.)
 - **UL2.3** *Unsupervised Learning Software should implement pre-processing
   routines to identify whether aspects of input data are perfectly collinear.*
 
-## 3. Algorithms
+### Algorithms
 
-### 3.1 Labelling
+#### Labelling
 
 - **UL3.1** *Algorithms which apply sequential labels to input data (such as
   clustering or partitioning algorithms) should ensure that the sequence
@@ -193,7 +193,7 @@ summary (z)
 The proportion of variance explained by each component decreasing with
 increasing numeric labelling of the components.
 
-### 3.2 Prediction
+#### Prediction
 
 - **UL3.3** *Where applicable, Unsupervised Learning Software should implement
   routines to predict the properties (such as numerical ordinates, or cluster
@@ -231,7 +231,7 @@ arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
-### 3.3 Group Distributions and Associated Statistics
+#### Group Distributions and Associated Statistics
 
 Many unsupervised learning algorithms serve to label, categorise, or partition
 data. Software which performs any of these tasks will commonly output some kind
@@ -289,7 +289,7 @@ available as the
 ["silhouette"](https://stat.ethz.ch/R-manual/R-devel/library/cluster/html/silhouette.html)
 of the clustering scheme.
 
-## 4. Return Results
+### Return Results
 
 - **UL4.0** *Unsupervised Learning Software should return some form of "model"
   object, generally through using or modifying existing class structures for
@@ -301,7 +301,7 @@ of the clustering scheme.
   include, or otherwise enable immediate extraction of, all parameters used to
   control the algorithm used.*
 
-### 4.1 Reporting Return Results
+#### Reporting Return Results
 
 - **UL4.2** *Model objects returned by Unsupervised Learning Software should
   implement or appropriately extend a default `print` method which provides an
@@ -330,9 +330,9 @@ objects containing large numbers of numeric entries.
   methods applied). The `summary` method may also provide summary statistics
   from the resultant model.*
 
-## 5. Documentation
+### Documentation
 
-## 6. Visualization
+### Visualization
 
 - **UL6.0** *Objects returned by Unsupervised Learning Software should have
   default `plot` methods, either through explicit implementation, extension of
@@ -350,5 +350,5 @@ objects containing large numbers of numeric entries.
   diagnostic messages are issued where readability is likely to be compromised
   (for example, through attempting to place too many labels).*
 
-## 7. Testing
+### Testing
 

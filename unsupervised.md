@@ -7,7 +7,7 @@ robots: noindex, nofollow
 
 <!-- Edit the .Rmd not the .md file -->
 
-# Dimensionality Reduction, Clustering, and Unsupervised Learning
+## Dimensionality Reduction, Clustering, and Unsupervised Learning
 
 This document details standards for Dimensionality Reduction,
 Clustering, and Unsupervised Learning Software – referred to from here
@@ -27,7 +27,7 @@ reduction and ordination software and algorithms, and examples of the
 latter include clustering and discrete partitioning software and
 algorithms.
 
-## 1 Input Data Structures and Validation
+### Input Data Structures and Validation
 
   - **UL1.0** *Unsupervised Learning Software should explicitly document
     expected format (types or classes) for input data, including
@@ -171,7 +171,7 @@ in a way that enables `cutree` to inherit them.)
         scale is applied, and explicitly illustrating and contrasting
         the consequences of not applying such transformations.*
 
-## 2\. Pre-processing and Variable Transformation
+### Pre-processing and Variable Transformation
 
   - **UL2.0** *Routines likely to give unreliable or irreproducible
     results in response to violations of assumptions regarding input
@@ -195,9 +195,9 @@ in a way that enables `cutree` to inherit them.)
     pre-processing routines to identify whether aspects of input data
     are perfectly collinear.*
 
-## 3\. Algorithms
+### Algorithms
 
-### 3.1 Labelling
+#### Labelling
 
   - **UL3.1** *Algorithms which apply sequential labels to input data
     (such as clustering or partitioning algorithms) should ensure that
@@ -246,7 +246,7 @@ summary (z)
 The proportion of variance explained by each component decreasing with
 increasing numeric labelling of the components.
 
-### 3.2 Prediction
+#### Prediction
 
   - **UL3.3** *Where applicable, Unsupervised Learning Software should
     implement routines to predict the properties (such as numerical
@@ -276,7 +276,7 @@ knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
 knnClust
 ```
 
-    ## [1] 3 3 2 1 1
+    ## [1] 2 1 1 2 2
     ## Levels: 1 2 3
 
 The [`stats::prcomp()`
@@ -289,14 +289,14 @@ arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
-    ##               PC1        PC2        PC3        PC4
-    ## Alabama  65.66409 -10.659597 -2.4540925 -2.8987602
-    ## Idaho   -50.81743  -9.354970 -0.9277566  2.6688143
-    ## Georgia  41.41471  -7.082887  3.6151006 -7.9433493
-    ## Florida 166.29871   6.611965 -2.4114176 -1.2641054
-    ## Wyoming -10.01245  -5.740295 -3.2629208  0.3862871
+    ##                       PC1       PC2       PC3        PC4
+    ## Alabama          65.61238 -11.09684 -2.552682 -2.4833589
+    ## Connecticut     -59.86714  13.36920 -7.992836  0.6825674
+    ## Hawaii         -122.81896  25.10561  3.786881 -4.1891074
+    ## South Carolina  107.46756 -22.60271 -2.182703 -1.3081308
+    ## New Jersey      -10.51142  23.52836 -5.394656 -2.1566940
 
-### 3.3 Group Distributions and Associated Statistics
+#### Group Distributions and Associated Statistics
 
 Many unsupervised learning algorithms serve to label, categorise, or
 partition data. Software which performs any of these tasks will commonly
@@ -390,7 +390,7 @@ inter-group information is also available as the
 [“silhouette”](https://stat.ethz.ch/R-manual/R-devel/library/cluster/html/silhouette.html)
 of the clustering scheme.
 
-## 4\. Return Results
+### Return Results
 
   - **UL4.0** *Unsupervised Learning Software should return some form of
     “model” object, generally through using or modifying existing class
@@ -404,7 +404,7 @@ of the clustering scheme.
     should include, or otherwise enable immediate extraction of, all
     parameters used to control the algorithm used.*
 
-### 4.1 Reporting Return Results
+#### Reporting Return Results
 
   - **UL4.2** *Model objects returned by Unsupervised Learning Software
     should implement or appropriately extend a default `print` method
@@ -434,9 +434,9 @@ objects containing large numbers of numeric entries.
     observations, parameters of methods applied). The `summary` method
     may also provide summary statistics from the resultant model.*
 
-## 5\. Documentation
+### Documentation
 
-## 6\. Visualization
+### Visualization
 
   - **UL6.0** *Objects returned by Unsupervised Learning Software should
     have default `plot` methods, either through explicit implementation,
@@ -457,4 +457,4 @@ objects containing large numbers of numeric entries.
     likely to be compromised (for example, through attempting to place
     too many labels).*
 
-## 7\. Testing
+### Testing

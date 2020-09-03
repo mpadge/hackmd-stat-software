@@ -7,7 +7,7 @@ robots: noindex, nofollow
 
 <!-- Edit the .Rmd not the .md file -->
 
-# General standards arising from specific categories
+## General standards arising from specific categories
 
 These standards refer to **Data Types** as the fundamental types defined
 by the R language itself between the following:
@@ -19,7 +19,7 @@ by the R language itself between the following:
   - Factor
   - Ordered Factor
 
-## 1\. Documentation
+### Documentation
 
 The following standards describe several forms of what might be
 considered “Supplementary Material”. While there are many places within
@@ -44,7 +44,7 @@ respect to other extant R packages, the following standard applies:
     performance claims with alternative implementations in other R
     packages.*
 
-## 2\. Input Structures
+### Input Structures
 
 This section considers general standards for *Input Structures*. These
 standards may often effectively be addressed through implementing class
@@ -57,7 +57,7 @@ to input data. Systems like those demonstrated in that vignette provide
 a very effective way to ensure that software remains robust to diverse
 and unexpected classes and types of input data.
 
-### 2.1 Uni-variate (Vector) Input
+#### Uni-variate (Vector) Input
 
 It is important to note for univariate data that single values in R are
 vectors with a length of one, and that `1` is of exactly the same *data
@@ -90,7 +90,7 @@ type* as `1:n`. Given this, inputs expected to be univariate should:
     be `ordered` or not, and those inputs should provide appropriate
     error or other routines to ensure inputs follow these expectations.*
 
-### 2.2 Tabular Input
+#### Tabular Input
 
 This sub-section concerns input in “tabular data” forms, implying the
 two primary distinctions within R itself between `array` or `matrix`
@@ -191,7 +191,7 @@ Adherence to the above standard G2.6 will ensure that any implicitly or
 explicitly assumed default behaviour will yield consistent results
 regardless of input classes.
 
-### 2.3 Missing or Undefined Values
+#### Missing or Undefined Values
 
   - **G2.10** *Statistical Software should implement appropriate checks
     for missing data as part of initial pre-processing prior to passing
@@ -215,14 +215,14 @@ regardless of input classes.
     undefined values (e.g., `NaN`, `Inf` and `-Inf`), including
     potentially ignoring or removing such values.*
 
-## 3\. Output Structures
+### Output Structures
 
   - **G3.0** *Statistical Software which enables outputs to be written
     to local files should parse parameters specifying file names to
     ensure appropriate file suffices are automatically generated where
     not provided.*
 
-## 4\. Testing
+### Testing
 
 All packages should follow rOpenSci standards on
 [testing](https://devguide.ropensci.org/building.html#testing) and
@@ -304,7 +304,7 @@ following types:
       - **G4.7b** *Running under different random seeds or initial
         conditions does not meaningfully change results*
 
-### 4.1 Extended tests
+#### Extended tests
 
 Thorough testing of statistical software may require tests on large data
 sets, tests with many permutations, or other conditions leading to

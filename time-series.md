@@ -7,7 +7,7 @@ robots: noindex, nofollow
 
 <!-- Edit the .Rmd not the .md file -->
 
-# Time Series Software
+## Time Series Software
 
 Time series software is presumed to perform one or more of the following
 steps:
@@ -22,7 +22,7 @@ steps:
 This document details standards for each of these steps, each prefixed
 with “TS”.
 
-## 1\. Input data structures and validation
+### Input data structures and validation
 
 Input validation is an important software task, and an important part of
 our standards. While there are many ways to approach validation, the
@@ -68,7 +68,7 @@ be adhered to:
   - **TS1.6** *Any violations of ordering should be caught in the
     pre-processing stages of all functions.*
 
-### 1.1 Time Intervals and Relative Time
+#### Time Intervals and Relative Time
 
 While most common packages and classes for time series data assume
 *absolute* temporal scales such as those represented in [`POSIX`
@@ -89,9 +89,9 @@ can or should accept times series inputs in relative form should:
     regarding whether a calendar system is used, or whether a year is
     presumed to have 365 days, 365.2422 days, or some other value.*
 
-## 2\. Pre-processing and Variable Transformation
+### Pre-processing and Variable Transformation
 
-### 2.1 Missing Data
+#### Missing Data
 
 One critical pre-processing step for Time Series Software is the
 appropriate handling of missing data. It is convenient to distinguish
@@ -240,7 +240,7 @@ With this in mind, the following standards apply:
     or
     [`var()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html)).*
 
-### 2.2 Stationarity
+#### Stationarity
 
 Time Series Software should explicitly document assumptions or
 requirements made with respect to the stationarity or otherwise of all
@@ -265,7 +265,7 @@ appropriate routines, generally triggered by some function parameter, or
 users to additional functions able to implement appropriate
 transformations.
 
-### 2.3 Covariance Matrices
+#### Covariance Matrices
 
 Where covariance matrices are constructed or otherwise used within or as
 input to functions, they should:
@@ -277,13 +277,13 @@ input to functions, they should:
   - **TS2.8** *Where applicable, covariance matrices should also include
     specification of appropriate units.*
 
-## 3\. Analytic Algorithms
+### Analytic Algorithms
 
 Analytic algorithms are considered here to reflect the core analytic
 components of Time Series Software. These may be many and varied, and we
 explicitly consider only a small subset here.
 
-### 3.1 Forecasting
+#### Forecasting
 
 Statistical software which implements forecasting routines should:
 
@@ -303,7 +303,7 @@ Statistical software which implements forecasting routines should:
         post-processing function, or via an input parameter to a primary
         analytic function.*
 
-## 4\. Return Results
+### Return Results
 
 For (functions within) Time Series Software which return time series
 data:
@@ -324,7 +324,7 @@ direct series:
   - **TS4.3** *Return values should explicitly include all appropriate
     units and/or time scales*
 
-### 4.1 Data Transformation
+#### Data Transformation
 
 Time Series Software which internally implements routines for
 transforming data to achieve stationarity and which returns forecast
@@ -341,7 +341,7 @@ values should:
         form commensurate with original, non-stationary input data.*
       - **TS4.5c** *Document associated limitations on forecast values*
 
-### 4.2 Forecasting
+#### Forecasting
 
 Where Time Series Software implements or otherwise enables forecasting
 abilities, it should return one of the following three kinds of
@@ -377,7 +377,7 @@ Software which implements or otherwise enables forecasting should:
         return object with an appropriate additional column clearly
         distinguishing the two kinds of data.*
 
-## 5\. Visualization
+### Visualization
 
 Time Series Software should:
 
