@@ -38,8 +38,8 @@ algorithms.
     and issue informative error messages when incompatible data are
     submitted.
 
-The following code demonstrates an example of a routine which fails to
-meet this standard.
+The following code demonstrates an example of a routine from the base
+`stats` package which fails to meet this standard.
 
 ``` r
 d <- dist (USArrests) # example from help file for 'hclust' function
@@ -54,9 +54,10 @@ indicates a failure to provide sufficient checks on the class of input
 data.
 
   - **UL1.2** Unsupervised learning which uses row or column names to
-    label output objects should assert than input data have non-default
+    label output objects should assert that input data have non-default
     row or column names, and issue an informative message when these are
-    not provided.
+    not provided. (Such messages need not necessarily be provided by
+    default, but should at least be optionally available.)
 
 The following code provides simple examples of checks whether row and
 column names appear to have generic default values.
@@ -73,14 +74,24 @@ x
     ## 4  4  9
     ## 5  5 10
 
+Generic rownames are almost always simple integer sequences, which the
+following condition confirms.
+
 ``` r
 identical (rownames (x), as.character (seq (nrow (x))))
 ```
 
     ## [1] TRUE
 
+Generic column names may come in a variety of formats. The following
+code uses a `grep` expression to match any number of characters plus an
+optional leading zero followed by a generic sequence of column numbers,
+appropriate for matching column names produced by generic construction
+of `data.frame` objects.
+
 ``` r
-identical (colnames (x), paste0 ("X", seq (ncol (x))))
+all (vapply (seq (ncol (x)), function (i)
+             grepl (paste0 ("[[:alpha:]]0?", i), colnames (x) [i]), logical (1)))
 ```
 
     ## [1] TRUE
@@ -94,7 +105,10 @@ labels.
 u <- USArrests
 rownames (u) <- seq (nrow (u))
 hc <- hclust (dist (u))
+head (hc$labels)
 ```
+
+    ## [1] "1" "2" "3" "4" "5" "6"
 
   - **UL1.3** Unsupervised Learning Software should transfer all
     relevant aspects of input data, notably including row and column
@@ -260,7 +274,7 @@ knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
 knnClust
 ```
 
-    ## [1] 1 1 1 2 1
+    ## [1] 1 2 1 3 1
     ## Levels: 1 2 3
 
 The [`stats::prcomp()`
@@ -273,12 +287,12 @@ arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
-    ##                      PC1        PC2       PC3        PC4
-    ## California     107.80654  22.642602  7.158801  2.5898464
-    ## Illinois        79.92808  13.393070 -5.951697 -0.5640631
-    ## Georgia         40.79716  -6.697265  4.383001 -8.2432706
-    ## South Carolina 107.79262 -23.129541 -1.950701 -1.3144588
-    ## Washington     -24.80850  10.849924  5.616725  1.8019841
+    ##                    PC1        PC2       PC3        PC4
+    ## Tennessee     17.99835  -5.670322 6.8433834 -4.5988797
+    ## Kansas       -54.79176   3.299285 0.7988818 -0.7378231
+    ## South Dakota -85.62168 -15.473814 2.0744530  0.8152098
+    ## Utah         -49.14479  18.301540 2.2011082  1.6030816
+    ## Washington   -24.35943  10.226463 5.4252466  2.7313423
 
 ### 3.3 Group Distributions and Associated Statistics
 

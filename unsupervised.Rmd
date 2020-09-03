@@ -28,8 +28,8 @@ algorithms.
   sub-routines to assert that all input data is of the expected form, and issue
   informative error messages when incompatible data are submitted.
 
-The following code demonstrates an example of a routine which fails to meet
-this standard.
+The following code demonstrates an example of a routine from the base `stats`
+package which fails to meet this standard.
 
 ```{r hclust-fail, eval = TRUE, error = TRUE}
 d <- dist (USArrests) # example from help file for 'hclust' function
@@ -41,8 +41,10 @@ The latter fails, yet issues an uninformative error message that clearly
 indicates a failure to provide sufficient checks on the class of input data.
 
 - **UL1.2** Unsupervised learning which uses row or column names to label
-  output objects should assert than input data have non-default row or column
-  names, and issue an informative message when these are not provided.
+  output objects should assert that input data have non-default row or column
+  names, and issue an informative message when these are not provided. (Such
+  messages need not necessarily be provided by default, but should at least be
+  optionally available.)
 
 The following code provides simple examples of checks whether row and column
 names appear to have generic default values.
@@ -50,8 +52,23 @@ names appear to have generic default values.
 ```{r row-col-names}
 x <- data.frame (matrix (1:10, ncol = 2))
 x
+```
+
+Generic rownames are almost always simple integer sequences, which the
+following condition confirms.
+
+```{r rowname-check}
 identical (rownames (x), as.character (seq (nrow (x))))
-identical (colnames (x), paste0 ("X", seq (ncol (x))))
+```
+
+Generic column names may come in a variety of formats. The following code uses
+a `grep` expression to match any number of characters plus an optional leading
+zero followed by a generic sequence of column numbers, appropriate for matching
+column names produced by generic construction of `data.frame` objects.
+
+```{r colname-check}
+all (vapply (seq (ncol (x)), function (i)
+             grepl (paste0 ("[[:alpha:]]0?", i), colnames (x) [i]), logical (1)))
 ```
 
 Messages should be issued in both of these cases. The following code
@@ -62,6 +79,7 @@ assertions, rather it silently returns an object with default labels.
 u <- USArrests
 rownames (u) <- seq (nrow (u))
 hc <- hclust (dist (u))
+head (hc$labels)
 ```
 
 - **UL1.3** Unsupervised Learning Software should transfer all relevant aspects
