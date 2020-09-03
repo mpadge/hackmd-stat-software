@@ -27,16 +27,16 @@ algorithms.
 
 ## 1 Input Data Structures and Validation
 
-  - **UL1.0** Unsupervised Learning Software should explicitly document
+  - **UL1.0** *Unsupervised Learning Software should explicitly document
     expected format (types or classes) for input data, including
     descriptions of types or classes which are not accepted; for
     example, specification that software accepts only numeric inputs in
     `vector` or `matrix` form, or that all inputs must be in
-    `data.frame` form with both column and row names.
-  - **UL1.1**\* Unsupervised Learning Software should provide distinct
+    `data.frame` form with both column and row names.*
+  - **UL1.1**\* *Unsupervised Learning Software should provide distinct
     sub-routines to assert that all input data is of the expected form,
     and issue informative error messages when incompatible data are
-    submitted.
+    submitted.*
 
 The following code demonstrates an example of a routine from the base
 `stats` package which fails to meet this standard.
@@ -53,11 +53,11 @@ The latter fails, yet issues an uninformative error message that clearly
 indicates a failure to provide sufficient checks on the class of input
 data.
 
-  - **UL1.2** Unsupervised learning which uses row or column names to
+  - **UL1.2** *Unsupervised learning which uses row or column names to
     label output objects should assert that input data have non-default
     row or column names, and issue an informative message when these are
     not provided. (Such messages need not necessarily be provided by
-    default, but should at least be optionally available.)
+    default, but should at least be optionally available.)*
 
 The following code provides simple examples of checks whether row and
 column names appear to have generic default values.
@@ -110,12 +110,12 @@ head (hc$labels)
 
     ## [1] "1" "2" "3" "4" "5" "6"
 
-  - **UL1.3** Unsupervised Learning Software should transfer all
+  - **UL1.3** *Unsupervised Learning Software should transfer all
     relevant aspects of input data, notably including row and column
     names, and potentially information from other `attributes()`, to
-    corresponding aspects of return objects.
-      - **UL1.3a** Where otherwise relevant information is *not*
-        transferred, this should be explicitly documented.
+    corresponding aspects of return objects.*
+      - **UL1.3a** *Where otherwise relevant information is *not\*
+        transferred, this should be explicitly documented.\*
 
 An example of a function according with UL1.3 is
 [`stats::cutree()`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cutree.html)
@@ -149,59 +149,60 @@ to enable them to be transferred within
 (The labels are transferred to the object returned by `agnes`, just not
 in a way that enables `cutree` to inherit them.)
 
-  - **UL1.4** Unsupervised Learning Software should explicitly document
-    whether input data may include missing values.
-  - **UL1.5** Functions in Unsupervised Learning Software which do not
+  - **UL1.4** *Unsupervised Learning Software should explicitly document
+    whether input data may include missing values.*
+  - **UL1.5** *Functions in Unsupervised Learning Software which do not
     admit input data with missing values should provide informative
-    error messages when data with missing values are submitted.
-  - **UL1.6** Unsupervised Learning Software should document any
+    error messages when data with missing values are submitted.*
+  - **UL1.6** *Unsupervised Learning Software should document any
     assumptions made with regard to input data; for example assumptions
     about distributional forms or locations (such as that data are
     centred or on approximately equivalent distributional scales).
     Implications of violations of these assumptions should be both
-    documented and tested, in particular:
-      - **UL1.6a** Software which responds qualitatively differently to
+    documented and tested, in particular:*
+      - **UL1.6a** *Software which responds qualitatively differently to
         input data which has components on markedly different scales
         should explicitly document such differences, and implications of
-        submitting such data.
-      - **UL1.6b** Examples or other documentation should not use
-        `scale()` or equivalent transformations without explaining *why*
-        scale is applied, and explicitly illustrating and contrasting
-        the consequences of not applying such transformations.
+        submitting such data.*
+      - **UL1.6b** *Examples or other documentation should not use
+        `scale()` or equivalent transformations without explaining
+        *why\* scale is applied, and explicitly illustrating and
+        contrasting the consequences of not applying such
+        transformations.\*
 
 ## 2\. Pre-processing and Variable Transformation
 
-  - **UL2.0** Routines likely to give unreliable or irreproducible
+  - **UL2.0** *Routines likely to give unreliable or irreproducible
     results in response to violations of assumptions regarding input
     data (see UL1.6) should implement pre-processing steps to diagnose
     potential violations, and issue appropriately informative messages,
     and/or include parameters to enable suitable transformations to be
     applied (such as the `center` and `scale.` parameters of the
     [`stats::prcomp()`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/prcomp.html)
-    function).
-  - **UL2.1** Unsupervised Learning Software should document any
+    function).*
+  - **UL2.1** *Unsupervised Learning Software should document any
     transformations applied to input data, for example conversion of
     label-values to `factor`, and should provide ways to explicitly
     avoid any default transformations (with error or warning conditions
-    where appropriate).
-  - **UL2.2** For Unsupervised Learning Software which accepts missing
+    where appropriate).*
+  - **UL2.2** *For Unsupervised Learning Software which accepts missing
     values in input data, functions should implement explicit parameters
     controlling the processing of missing values, ideally distinguishing
     `NA` or `NaN` values from `Inf` values (for example, through use of
-    `na.omit()` and related functions from the `stats` package).
-  - **UL2.3** Unsupervised Learning Software should implement
+    `na.omit()` and related functions from the `stats` package).*
+  - **UL2.3** *Unsupervised Learning Software should implement
     pre-processing routines to identify whether aspects of input data
-    are perfectly collinear.
+    are perfectly collinear.*
 
 ## 3\. Algorithms
 
 ### 3.1 Labelling
 
-  - **UL3.1** Algorithms which apply sequential labels to input data
+  - **UL3.1** *Algorithms which apply sequential labels to input data
     (such as clustering or partitioning algorithms) should ensure that
     the sequence follows decreasing group sizes (so labels of “1”, “a”,
     or “A” describe the largest group, “2”, “b”, or “B” the second
-    largest, and so on.)
+    largest, and so on.)*
 
 Note that the [`stats::cutree()`
 function](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cutree.html)
@@ -221,10 +222,10 @@ function](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cutree.html
 applies arbitrary integer labels to the groups, yet the order of labels
 is not related to the order of group sizes.
 
-  - **UL3.2** Dimensionality reduction or equivalent algorithms which
+  - **UL3.2** *Dimensionality reduction or equivalent algorithms which
     label dimensions should ensure that that sequences of labels follows
     decreasing “importance” (for example, eigenvalues or variance
-    contributions).
+    contributions).*
 
 The
 [`stats::prcomp`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/prcomp.html)
@@ -246,10 +247,10 @@ increasing numeric labelling of the components.
 
 ### 3.2 Prediction
 
-  - **UL3.3** Where applicable, Unsupervised Learning Software should
+  - **UL3.3** *Where applicable, Unsupervised Learning Software should
     implement routines to predict the properties (such as numerical
     ordinates, or cluster memberships) of additional new data without
-    re-running the entire algorithm.
+    re-running the entire algorithm.*
 
 While many algorithms such as Hierarchical clustering can not (readily)
 be used to predict memberships of new data, other algorithms can
@@ -274,7 +275,7 @@ knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
 knnClust
 ```
 
-    ## [1] 1 2 1 3 1
+    ## [1] 2 2 1 2 1
     ## Levels: 1 2 3
 
 The [`stats::prcomp()`
@@ -287,12 +288,12 @@ arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
-    ##                    PC1        PC2       PC3        PC4
-    ## Tennessee     17.99835  -5.670322 6.8433834 -4.5988797
-    ## Kansas       -54.79176   3.299285 0.7988818 -0.7378231
-    ## South Dakota -85.62168 -15.473814 2.0744530  0.8152098
-    ## Utah         -49.14479  18.301540 2.2011082  1.6030816
-    ## Washington   -24.35943  10.226463 5.4252466  2.7313423
+    ##                  PC1       PC2         PC3        PC4
+    ## Arizona   124.525807  9.046674 -0.74242347  3.5858076
+    ## Missouri    8.886518  5.613935  5.94993604 -0.9402650
+    ## Virginia  -13.789784 -1.035571  1.77177249 -1.2956632
+    ## Iowa     -114.832556 -3.146223  0.08136794  0.6303158
+    ## Nevada     84.263055 15.631991 16.41439069 -1.0814205
 
 ### 3.3 Group Distributions and Associated Statistics
 
@@ -329,11 +330,11 @@ summary (res)
 
 Such output accords with the following standard:
 
-  - **UL3.4** Objects returned from Unsupervised Learning Software which
-    labels, categorise, or partitions data into discrete groups should
-    include, or provide immediate access to, quantitative information on
-    intra-group variances or equivalent, as well as on inter-group
-    relationships where applicable.
+  - **UL3.4** *Objects returned from Unsupervised Learning Software
+    which labels, categorise, or partitions data into discrete groups
+    should include, or provide immediate access to, quantitative
+    information on intra-group variances or equivalent, as well as on
+    inter-group relationships where applicable. *
 
 The above example of principal components is one where there are no
 inter-group relationships, and so that standard is fulfilled by
@@ -390,28 +391,28 @@ of the clustering scheme.
 
 ## 4\. Return Results
 
-  - **UL4.0** Unsupervised Learning Software should return some form of
-    “model” object, generally through using or modifying existing
-    class structures for model objects, or creating a new class of model
-    objects.
-  - **UL4.1** Unsupervised Learning Software may enable an ability to
+  - **UL4.0** *Unsupervised Learning Software should return some form of
+    “model” object, generally through using or modifying existing class
+    structures for model objects, or creating a new class of model
+    objects.*
+  - **UL4.1** *Unsupervised Learning Software may enable an ability to
     generate a model object without actually fitting values. This may be
     useful for controlling batch processing of computationally intensive
-    fitting algorithms.
-  - **UL4.2** The return object from Unsupervised Learning Software
+    fitting algorithms.*
+  - **UL4.2** *The return object from Unsupervised Learning Software
     should include, or otherwise enable immediate extraction of, all
-    parameters used to control the algorithm used.
+    parameters used to control the algorithm used.*
 
 ### 4.1 Reporting Return Results
 
-  - **UL4.2** Model objects returned by Unsupervised Learning Software
+  - **UL4.2** *Model objects returned by Unsupervised Learning Software
     should implement or appropriately extend a default `print` method
     which provides an on-screen summary of model (input) parameters and
     methods used to generate results. The `print` method may also
-    summarise statistical aspects of the output data or results.
-      - **UL4.2a** The default `print` method should always ensure only
+    summarise statistical aspects of the output data or results.*
+      - **UL4.2a** *The default `print` method should always ensure only
         a restricted number of rows of any result matrices or equivalent
-        are printed to the screen.
+        are printed to the screen.*
 
 The [`prcomp`
 objects](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/prcomp.html)
@@ -426,33 +427,33 @@ determines maximal numbers of printed objects, such as lines of
 particularly in Unsupervised Learning Software which commonly returns
 objects containing large numbers of numeric entries.
 
-  - **UL4.3** Unsupervised Learning Software should also implement
+  - **UL4.3** *Unsupervised Learning Software should also implement
     `summary` methods for model objects which should summarise the
     primary statistics used in generating the model (such as numbers of
     observations, parameters of methods applied). The `summary` method
-    may also provide summary statistics from the resultant model.
+    may also provide summary statistics from the resultant model.*
 
 ## 5\. Documentation
 
 ## 6\. Visualization
 
-  - **UL6.0** Objects returned by Unsupervised Learning Software should
+  - **UL6.0** *Objects returned by Unsupervised Learning Software should
     have default `plot` methods, either through explicit implementation,
     extension of methods for existing model objects, through ensuring
     default methods work appropriately, or through explicit reference to
     helper packages such as
     [`factoextra`](https://github.com/kassambara/factoextra) and
-    associated functions.
-  - **UL6.1** Where the default `plot` method is **NOT** a generic
+    associated functions.*
+  - **UL6.1** *Where the default `plot` method is **NOT** a generic
     `plot` method dispatched on the class of return objects (that is,
     through a `plot.<myclass>` function), that method dispatch should
     nevertheless exist in order to explicitly direct users to the
-    appropriate function.
-  - **UL6.2** Where default plot methods include labelling components of
-    return objects (such as cluster labels), routines should ensure that
-    labels are automatically placed to ensure readability, and/or that
-    appropriate diagnostic messages are issued where readability is
+    appropriate function.*
+  - **UL6.2** *Where default plot methods include labelling components
+    of return objects (such as cluster labels), routines should ensure
+    that labels are automatically placed to ensure readability, and/or
+    that appropriate diagnostic messages are issued where readability is
     likely to be compromised (for example, through attempting to place
-    too many labels).
+    too many labels).*
 
 ## 7\. Testing

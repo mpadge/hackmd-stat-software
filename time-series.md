@@ -34,28 +34,28 @@ variety of class systems for representing time series data, new time series
 package should accept as many different classes of input as possible by
 according with the following standards:
 
-- **TS1.0** Time Series Software should explicitly document the types and classes
-  of input data able to be passed to each function.
-- **TS1.1** Time Series Software should accept input data in as many time series
-  specific classes as possible.
-- **TS1.2** Time Series Software should implement validation routines to confirm
+- **TS1.0** *Time Series Software should explicitly document the types and classes
+  of input data able to be passed to each function.*
+- **TS1.1** *Time Series Software should accept input data in as many time series
+  specific classes as possible.*
+- **TS1.2** *Time Series Software should implement validation routines to confirm
   that inputs are of acceptable classes (or represented in otherwise
-  appropriate ways for software which does not use class systems).
-- **TS1.3** Time Series Software should implement a single pre-processing routine
+  appropriate ways for software which does not use class systems).*
+- **TS1.3** *Time Series Software should implement a single pre-processing routine
   to validate input data, and to appropriately transform it to a single uniform
   type to be passed to all subsequent data-processing functions (the [`tsbox`
-  package](https://www.tsbox.help/) provides one convenient approach for this).
-- **TS1.4** The pre-processing function described above should maintain all time-
-  or date-based components or attributes of input data.
+  package](https://www.tsbox.help/) provides one convenient approach for this).*
+- **TS1.4** *The pre-processing function described above should maintain all time-
+  or date-based components or attributes of input data.*
 
 For Time Series Software which relies on or implements custom classes or types
 for representing time-series data, the following standards should be adhered
 to:
 
-- **TS1.5** The software should ensure strict ordering of the time, frequency, or
-  equivalent ordering index variable.
-- **TS1.6** Any violations of ordering should be caught in the pre-processing stages
-  of all functions.
+- **TS1.5** *The software should ensure strict ordering of the time, frequency, or
+  equivalent ordering index variable.*
+- **TS1.6** *Any violations of ordering should be caught in the pre-processing stages
+  of all functions.*
 
 ### 1.1 Time Intervals and Relative Time
 
@@ -70,13 +70,13 @@ form, and thus many packages should accept time series inputs both in absolute
 and relative forms. Software which can or should accept times series inputs in
 relative form should:
 
-- **TS1.7** Accept inputs defined via the [`units`
+- **TS1.7** *Accept inputs defined via the [`units`
   package](https://github.com/r-quantities/units/) for attributing SI units to
-  R vectors.
-- **TS1.8** Where time intervals or periods may be days or months, be explicit
+  R vectors.*
+- **TS1.8** *Where time intervals or periods may be days or months, be explicit
   about the system used to represent such, particularly regarding whether a
   calendar system is used, or whether a year is presumed to have 365 days,
-  365.2422 days, or some other value.
+  365.2422 days, or some other value.*
 
 ## 2. Pre-processing and Variable Transformation
 
@@ -124,27 +124,24 @@ The value for 08:46 is *implicitly missing*, while the value for 08:44 is
 things, and may require different forms of pre-processing. With this in mind,
 the following standards apply:
 
-- **TS2.0** Appropriate checks for missing data, and associated transformation
+- **TS2.0** *Appropriate checks for missing data, and associated transformation
   routines, should be performed as part of initial pre-processing prior to
-  passing data to analytic algorithms.
-- **TS2.1** Time Series Software which presumes or requires regular data should
+  passing data to analytic algorithms.*
+- **TS2.1** *Time Series Software which presumes or requires regular data should
   only allow *explicit* missing values, and should issue appropriate diagnostic
   messages, potentially including errors, in response to any *implicit* missing
-  values.
-- **TS2.2** Where possible, all functions should provide options for users to
-  specify how to handle missing data, with options minimally including:
-  - **TS2.2a** error on missing data.
-  - **TS2.2b** warn or ignore missing data, and proceed to analyse *irregular*
-    data, ensuring that results from function calls with regular yet missing
-    data return identical values to submitting equivalent irregular data with
-    no missing values.
-  - **TS2.2c** replace missing data with appropriately imputed values.
-- **TS2.3** Functions should never assume non-missingness, and should never pass
+  values.*
+- **TS2.2** *Where possible, all functions should provide options for users to
+  specify how to handle missing data, with options minimally including:*
+  - **TS2.2a** *error on missing data.*
+  - **TS2.2b** *warn or ignore missing data, and proceed to analyse irregular data, ensuring that results from function calls with regular yet missing data return identical values to submitting equivalent irregular data with no missing values.*
+  - **TS2.2c** *replace missing data with appropriately imputed values.*
+- **TS2.3** *Functions should never assume non-missingness, and should never pass
   data with potential missing values to any base routines with default `na.rm =
   FALSE`-type parameters (such as
   [`mean()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html),
   [`sd()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/sd.html) or
-  [`var()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html)).
+  [`var()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html)).*
 
 ### 2.2 Stationarity
 
@@ -152,15 +149,14 @@ Time Series Software should explicitly document assumptions or requirements
 made with respect to the stationarity or otherwise of all input data. In
 particular, any (sub-)functions which assume or rely on stationarity should:
 
-- **TS2.4** Consider stationarity of all relevant moments - typically first (mean)
+- **TS2.4** *Consider stationarity of all relevant moments - typically first (mean)
   and second (variance) order, or otherwise document why such
-  consideration may be restricted to lower orders only.
-- **TS2.5** Explicitly document all assumptions and/or requirements of stationarity
-- **TS2.6** Implement appropriate checks for all relevant forms of stationarity,
-  and either:
-    - **TS2.6a** issue diagnostic messages or warnings; or
-    - **TS2.6b** enable or advise on appropriate transformations to ensure
-      stationarity.
+  consideration may be restricted to lower orders only.*
+- **TS2.5** *Explicitly document all assumptions and/or requirements of stationarity*
+- **TS2.6** *Implement appropriate checks for all relevant forms of stationarity,
+  and either:*
+    - **TS2.6a** *issue diagnostic messages or warnings; or*
+    - **TS2.6b** *enable or advise on appropriate transformations to ensure stationarity.*
 
 The two options in the last point (TS2.6b) respectively translate to *enabling*
 transformations to ensure stationarity by providing appropriate routines,
@@ -174,12 +170,12 @@ implement appropriate transformations.
 Where covariance matrices are constructed or otherwise used within or as input
 to functions, they should:
 
-- **TS2.7** Incorporate a system to ensure that both row and column orders follow
+- **TS2.7** *Incorporate a system to ensure that both row and column orders follow
   the same ordering as the underlying time series data. This may, for example,
   be done by including the `index` attribute of the time series data as an
-  attribute of the covariance matrix.
-- **TS2.8** Where applicable, covariance matrices should also include specification
-  of appropriate units.
+  attribute of the covariance matrix.*
+- **TS2.8** *Where applicable, covariance matrices should also include specification
+  of appropriate units.*
 
 ## 3. Analytic Algorithms
 
@@ -191,51 +187,44 @@ consider only a small subset here.
 
 Statistical software which implements forecasting routines should:
 
-- **TS3.0** Provide tests to demonstrate at least one case in which errors widen
-  appropriately with forecast horizon.
-- **TS3.1** If possible, provide at least one test which violates TS3.0
-- **TS3.2** Document the general drivers of forecast errors or horizons, as
-  demonstrated via the particular cases of TS3.0 and TS3.1
-- **TS3.3** Either:
-    - **TS3.3a** Document, preferable via an example, how to trim forecast values
-      based on a specified error margin or equivalent; or
-    - **TS3.3b** Provide an explicit mechanism to trim forecast values to a
-      specified error margin, either via an explicit post-processing function,
-      or via an input parameter to a primary analytic function.
+- **TS3.0** *Provide tests to demonstrate at least one case in which errors widen
+  appropriately with forecast horizon.*
+- **TS3.1** *If possible, provide at least one test which violates TS3.0*
+- **TS3.2** *Document the general drivers of forecast errors or horizons, as
+  demonstrated via the particular cases of TS3.0 and TS3.1*
+- **TS3.3** *Either:*
+    - **TS3.3a** *Document, preferable via an example, how to trim forecast values based on a specified error margin or equivalent; or*
+    - **TS3.3b** *Provide an explicit mechanism to trim forecast values to a specified error margin, either via an explicit post-processing function, or via an input parameter to a primary analytic function.*
 
       
 ## 4. Return Results
 
 For (functions within) Time Series Software which return time series data:
 
-- **TS4.0** Return values should either:
-    - **TS4.0a** Be in same class as input data, for example by using the 
-        [`tsbox` package](https://www.tsbox.help/) to re-convert from standard
-        internal format (see 1.4, above); or
-    - **TS4.0b** Be in a unique, preferably class-defined, format.
-- **TS4.1** Any units included as attributes of input data should also be included
-  within return values.
-- **TS4.2** The type and class of all return values should be explicitly documented.
+- **TS4.0** *Return values should either:*
+    - **TS4.0a** *Be in same class as input data, for example by using the [`tsbox` package](https://www.tsbox.help/) to re-convert from standard internal format (see 1.4, above); or*
+    - **TS4.0b** *Be in a unique, preferably class-defined, format.*
+- **TS4.1** *Any units included as attributes of input data should also be included
+  within return values.*
+- **TS4.2** *The type and class of all return values should be explicitly documented.*
 
 For (functions within) Time Series Software which return data other than direct
 series:
 
-- **TS4.3** Return values should explicitly include all appropriate units and/or
-  time scales
+- **TS4.3** *Return values should explicitly include all appropriate units and/or
+  time scales*
 
 ### 4.1 Data Transformation
 
 Time Series Software which internally implements routines for transforming data
 to achieve stationarity and which returns forecast values should:
 
-- **TS4.4** Document the effect of any such transformations on forecast data,
-  including potential effects on both first- and second-order estimates.
-- **TS4.5** In decreasing order of preference, either:
-    - **TS4.5a** Provide explicit routines or options to back-transform data
-      commensurate with original, non-stationary input data
-    - **TS4.5b** Demonstrate how data may be back-transformed to a form
-      commensurate with original, non-stationary input data.
-    - **TS4.5c** Document associated limitations on forecast values
+- **TS4.4** *Document the effect of any such transformations on forecast data,
+  including potential effects on both first- and second-order estimates.*
+- **TS4.5** *In decreasing order of preference, either:*
+    - **TS4.5a** *Provide explicit routines or options to back-transform data commensurate with original, non-stationary input data*
+    - **TS4.5b** *Demonstrate how data may be back-transformed to a form commensurate with original, non-stationary input data.*
+    - **TS4.5c** *Document associated limitations on forecast values*
 
 
 ### 4.2 Forecasting
@@ -246,56 +235,45 @@ These are presented in decreasing order of preference, such that software
 should strive to return the first kind of object, failing that the second, and
 only the third as a last resort.
 
-- **TS4.6** Time Series Software which implements or otherwise enables forecasting
-  should return either:
-    - **TS4.6a** A distribution object, for example via one of the many packages
-      described in the CRAN Task View on [*Probability
-      Distributions*](https://cran.r-project.org/web/views/Distributions.html)
-      (or the new [`distributional`
-      package](https://pkg.mitchelloharawild.com/distributional/) as used in
-      the [`fable` package](https://fable.tidyverts.org) for time-series
-      forecasting).
-    - **TS4.6b** For each variable to be forecast, predicted values equivalent to
-      first- and second-order moments (for example, mean and standard error
-      values).
-    - **TS4.6c** Some more general indication of error involved with forecast
-      estimates.
+- **TS4.6** *Time Series Software which implements or otherwise enables forecasting
+  should return either:*
+    - **TS4.6a** *A distribution object, for example via one of the many packages described in the CRAN Task View on [*Probability Distributions*](https://cran.r-project.org/web/views/Distributions.html) (or the new [`distributional` package](https://pkg.mitchelloharawild.com/distributional/) as used in the [`fable` package](https://fable.tidyverts.org) for time-series forecasting).*
+    - **TS4.6b** *For each variable to be forecast, predicted values equivalent to first- and second-order moments (for example, mean and standard error values).*
+    - **TS4.6c** *Some more general indication of error involved with forecast estimates.*
       
 Beyond these particular standards for return objects, Time Series Software
 which implements or otherwise enables forecasting should:
 
-- **TS4.7** Ensure that forecast (modelled) values are clearly distinguished from
+- **TS4.7** *Ensure that forecast (modelled) values are clearly distinguished from
   observed (model or input) values, either (in this case in no order of
-  preference) by
-    - **TS4.7a** Returning forecast values alone
-    - **TS4.7b** Returning distinct list items for model and forecast values
-    - **TS4.7c** Combining model and forecast values into a single return object
-      with an appropriate additional column clearly distinguishing the two
-      kinds of data.
+  preference) by*
+    - **TS4.7a** *Returning forecast values alone*
+    - **TS4.7b** *Returning distinct list items for model and forecast values*
+    - **TS4.7c** *Combining model and forecast values into a single return object with an appropriate additional column clearly distinguishing the two kinds of data.*
 
 ## 5. Visualization
 
 Time Series Software should:
 
-- **TS5.0** Implement default `plot` methods for any implemented class system.
-- **TS5.1** When representing results in temporal domain(s), ensure that one axis
-  is clearly labelled "time" (or equivalent), with continuous units.
-- **TS5.2** Default to placing the "time" (or equivalent) variable on the
-  horizontal axis.
-- **TS5.3** Ensure that units of the time, frequency, or index variable are printed
-  by default on the axis.
-- **TS5.4** For frequency visualization, abscissa spanning $[-\pi, \pi]$ should be
+- **TS5.0** *Implement default `plot` methods for any implemented class system.*
+- **TS5.1** *When representing results in temporal domain(s), ensure that one axis
+  is clearly labelled "time" (or equivalent), with continuous units.*
+- **TS5.2** *Default to placing the "time" (or equivalent) variable on the
+  horizontal axis.*
+- **TS5.3** *Ensure that units of the time, frequency, or index variable are printed
+  by default on the axis.*
+- **TS5.4** *For frequency visualization, abscissa spanning $[-\pi, \pi]$ should be
   avoided in favour positive units of $[0, 2\pi]$ or $[0, 0.5]$, in all cases
-  with appropriate additional explanation of units.
-- **TS5.5** Provide options to determine whether plots of data with missing values
-  should generate continuous or broken lines.
+  with appropriate additional explanation of units.*
+- **TS5.5** *Provide options to determine whether plots of data with missing values
+  should generate continuous or broken lines.*
 
 For the results of forecast operations, Time Series Software should
 
-- **TS5.6** By default indicate distributional limits of forecast on plot
-- **TS5.7** By default include model (input) values in plot, as well as forecast
-  (output) values
-- **TS5.8** By default provide clear visual distinction between model (input)
-  values and forecast (output) values.
+- **TS5.6** *By default indicate distributional limits of forecast on plot*
+- **TS5.7** *By default include model (input) values in plot, as well as forecast
+  (output) values*
+- **TS5.8** *By default provide clear visual distinction between model (input)
+  values and forecast (output) values.*
 
 
