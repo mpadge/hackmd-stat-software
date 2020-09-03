@@ -1,3 +1,5 @@
+<!-- Edit the .Rmd not the .md file -->
+
 # Dimensionality Reduction, Clustering, and Unsupervised Learning
 
 This document details standards for Dimensionality Reduction, Clustering, and

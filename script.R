@@ -11,10 +11,18 @@ write_md <- function (file, title, demo){
                        rmarkdown::md_document(variant='gfm'))
     file <- paste0 (tools::file_path_sans_ext (file), ".md")
 
-    if (title == "unsupervised")
-        title <- "Unsupervised Learning Software"
+    if (title == "bayesian")
+        title <- "Bayesian Software"
+    else if (title == "eda")
+        title <- "Exploratory Data Analysis Software"
+    else if (title == "general")
+        title <- "General Standards"
     else if (title == "regression")
         title <- "Regression Software"
+    else if (title == "time-series")
+        title <- "Time Series Software"
+    else if (title == "unsupervised")
+        title <- "Unsupervised Learning Software"
     
     if (tolower (demo) == "true")
         tags <- "tags: statistical-software-demos, statistical-software"

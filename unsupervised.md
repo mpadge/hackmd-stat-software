@@ -5,6 +5,8 @@ robots: noindex, nofollow
 ---
 
 
+<!-- Edit the .Rmd not the .md file -->
+
 # Dimensionality Reduction, Clustering, and Unsupervised Learning
 
 This document details standards for Dimensionality Reduction,
@@ -275,7 +277,7 @@ knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
 knnClust
 ```
 
-    ## [1] 2 2 1 2 1
+    ## [1] 3 1 2 2 2
     ## Levels: 1 2 3
 
 The [`stats::prcomp()`
@@ -288,12 +290,12 @@ arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
-    ##                  PC1       PC2         PC3        PC4
-    ## Arizona   124.525807  9.046674 -0.74242347  3.5858076
-    ## Missouri    8.886518  5.613935  5.94993604 -0.9402650
-    ## Virginia  -13.789784 -1.035571  1.77177249 -1.2956632
-    ## Iowa     -114.832556 -3.146223  0.08136794  0.6303158
-    ## Nevada     84.263055 15.631991 16.41439069 -1.0814205
+    ##                     PC1        PC2        PC3        PC4
+    ## Nevada        83.853105  15.398994  16.496761 -0.4472127
+    ## Alabama       65.303692 -10.876562  -2.637798 -2.4650180
+    ## Virginia     -13.776030  -1.006101   1.771870 -1.8297352
+    ## Arizona      124.248442   9.753300  -1.341064  3.5562790
+    ## Rhode Island   3.191201  19.040981 -17.416105  2.0796432
 
 ### 3.3 Group Distributions and Associated Statistics
 

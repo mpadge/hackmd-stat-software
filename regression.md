@@ -5,7 +5,7 @@ robots: noindex, nofollow
 ---
 
 
-<!-- Make edits to the .Rmd and NOT the .md version -->
+<!-- Edit the .Rmd not the .md file -->
 
 # Regression and Supervised Learning
 
