@@ -76,7 +76,7 @@ x
     ## 4  4  9
     ## 5  5 10
 
-Generic rownames are almost always simple integer sequences, which the
+Generic row names are almost always simple integer sequences, which the
 following condition confirms.
 
 ``` r
@@ -130,7 +130,7 @@ head (cutree (hc, 10))
     ##    Alabama     Alaska    Arizona   Arkansas California   Colorado 
     ##          1          2          3          4          5          4
 
-The rownames of `USArrests` are transferred to the output object. In
+The row names of `USArrests` are transferred to the output object. In
 contrast, some routines from the [`cluster`
 package](https://cran.r-project.org/package=cluster) do not comply with
 this standard:
@@ -276,7 +276,7 @@ knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
 knnClust
 ```
 
-    ## [1] 2 2 1 2 1
+    ## [1] 1 1 2 2 1
     ## Levels: 1 2 3
 
 The [`stats::prcomp()`
@@ -289,12 +289,12 @@ arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
-    ##                     PC1         PC2       PC3        PC4
-    ## Vermont      -123.72986 -27.0575286  4.791091  1.8844050
-    ## Nebraska      -68.76393   0.4043342  1.071498  0.5307976
-    ## Montana       -61.93778  -8.8662186  2.349867 -0.6013109
-    ## New York       84.99179  16.6844081 -4.075017 -1.3784432
-    ## South Dakota  -85.30937 -15.7639457  1.875120  0.3107290
+    ##                 PC1        PC2         PC3        PC4
+    ## Iowa     -115.23018  -2.951523 -0.06489389  0.5484048
+    ## Vermont  -123.74334 -27.145178  5.12793532  1.6970270
+    ## Alabama    65.19182 -10.736481 -2.50911183 -2.5923850
+    ## Arizona   124.57524   9.693852 -1.83405776  4.1698861
+    ## Kentucky  -62.24524 -10.430289  3.03796387 -4.4093424
 
 #### 3.3 Group Distributions and Associated Statistics
 

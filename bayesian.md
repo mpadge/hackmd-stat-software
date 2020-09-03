@@ -488,12 +488,12 @@ Bayesian Software may:
   - **BS6.5** *Provide abilities to plot both sequences of posterior
     samples and distributional estimates together in single graphic*
 
-### 7 
+### 7 Tests
 
-  - Parameter recoveery tests:
-      - Recover the prior woth no data or data with no information,
+  - Parameter recovery tests:
+      - Recover the prior with no data or data with no information,
         especially where priors are implicit.  
-      - Even in empirical bayes, recover the estimated prior
+      - Even in empirical Bayes, recover the estimated prior
       - Recover posterior given expected data *and* prior
   - Algorithmic scaling tests with data - is it linear, log, etc
   - Test for prediction/fitted values on same scale as input values
