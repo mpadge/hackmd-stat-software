@@ -7,7 +7,7 @@ robots: noindex, nofollow
 
 <!-- Edit the .Rmd not the .md file -->
 
-## General standards arising from specific categories
+## General Standards for Statistical Software
 
 These standards refer to **Data Types** as the fundamental types defined
 by the R language itself between the following:
@@ -20,6 +20,22 @@ by the R language itself between the following:
   - Ordered Factor
 
 ### Documentation
+
+Standards will include requirements for form and completeness of
+documentation. As with interface, several sources already provide
+starting points for reasonable documentation. Some documentation
+requirements will be specific to the statistical context. For instance,
+it is likely we will have requirements for referencing appropriate
+literature or references for theoretical support of implementations.
+Another area of importance is correctness and clarity of definitions of
+statistical quantities produced by the software, e.g., the definition of
+null hypotheses or confidence intervals. Data included in software –
+that used in examples or tests – will also have documentation
+requirements. It is worth noting that the
+[`roxygen`](https://roxygen2.r-lib.org/) system for documenting R
+packages is readily extensible, as exemplified through the [`roxytest`
+package](https://github.com/mikldk/roxytest) for specifying tests
+*in-line*.
 
 The following standards describe several forms of what might be
 considered “Supplementary Material”. While there are many places within
