@@ -26,7 +26,7 @@ algorithms.
   classes which are not accepted; for example, specification that software
   accepts only numeric inputs in `vector` or `matrix` form, or that all inputs
   must be in `data.frame` form with both column and row names.*
-- **UL1.1*** *Unsupervised Learning Software should provide distinct
+- **UL1.1** *Unsupervised Learning Software should provide distinct
   sub-routines to assert that all input data is of the expected form, and issue
   informative error messages when incompatible data are submitted.*
 
@@ -88,7 +88,7 @@ head (hc$labels)
   of input data, notably including row and column names, and potentially
   information from other `attributes()`, to corresponding aspects of return
   objects.*
-    - **UL1.3a** *Where otherwise relevant information is *not* transferred,
+    - **UL1.3a** *Where otherwise relevant information is not transferred,
       this should be explicitly documented.*
 
 An example of a function according with UL1.3 is
@@ -128,7 +128,7 @@ a way that enables `cutree` to inherit them.)
       data which has components on markedly different scales should explicitly
       document such differences, and implications of submitting such data.*
     - **UL1.6b** *Examples or other documentation should not use `scale()` or
-      equivalent transformations without explaining *why* scale is applied,
+      equivalent transformations without explaining why scale is applied,
       and explicitly illustrating and contrasting the consequences of not
       applying such transformations.*
 
@@ -251,7 +251,7 @@ Such output accords with the following standard:
   categorise, or partitions data into discrete groups should include, or
   provide immediate access to, quantitative information on intra-group
   variances or equivalent, as well as on inter-group relationships where
-  applicable. *
+  applicable.*
 
 The above example of principal components is one where there are no inter-group
 relationships, and so that standard is fulfilled by providing information on

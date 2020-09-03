@@ -26,7 +26,7 @@ reg: $(SFILE).R
 ts: $(SFILE).R
 	Rscript $(SFILE).R $(TFILE) $(DEMO)
 
-un: $(SFILE).R
+ul: $(SFILE).R
 	Rscript $(SFILE).R $(UFILE) $(DEMO)
 
 clean:

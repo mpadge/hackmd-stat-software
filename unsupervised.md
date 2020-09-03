@@ -35,7 +35,7 @@ algorithms.
     example, specification that software accepts only numeric inputs in
     `vector` or `matrix` form, or that all inputs must be in
     `data.frame` form with both column and row names.*
-  - **UL1.1**\* *Unsupervised Learning Software should provide distinct
+  - **UL1.1** *Unsupervised Learning Software should provide distinct
     sub-routines to assert that all input data is of the expected form,
     and issue informative error messages when incompatible data are
     submitted.*
@@ -116,8 +116,8 @@ head (hc$labels)
     relevant aspects of input data, notably including row and column
     names, and potentially information from other `attributes()`, to
     corresponding aspects of return objects.*
-      - **UL1.3a** *Where otherwise relevant information is *not\*
-        transferred, this should be explicitly documented.\*
+      - **UL1.3a** *Where otherwise relevant information is not
+        transferred, this should be explicitly documented.*
 
 An example of a function according with UL1.3 is
 [`stats::cutree()`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cutree.html)
@@ -167,10 +167,9 @@ in a way that enables `cutree` to inherit them.)
         should explicitly document such differences, and implications of
         submitting such data.*
       - **UL1.6b** *Examples or other documentation should not use
-        `scale()` or equivalent transformations without explaining
-        *why\* scale is applied, and explicitly illustrating and
-        contrasting the consequences of not applying such
-        transformations.\*
+        `scale()` or equivalent transformations without explaining why
+        scale is applied, and explicitly illustrating and contrasting
+        the consequences of not applying such transformations.*
 
 ## 2\. Pre-processing and Variable Transformation
 
@@ -277,7 +276,7 @@ knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
 knnClust
 ```
 
-    ## [1] 3 1 2 2 2
+    ## [1] 3 3 2 1 1
     ## Levels: 1 2 3
 
 The [`stats::prcomp()`
@@ -290,12 +289,12 @@ arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
-    ##                     PC1        PC2        PC3        PC4
-    ## Nevada        83.853105  15.398994  16.496761 -0.4472127
-    ## Alabama       65.303692 -10.876562  -2.637798 -2.4650180
-    ## Virginia     -13.776030  -1.006101   1.771870 -1.8297352
-    ## Arizona      124.248442   9.753300  -1.341064  3.5562790
-    ## Rhode Island   3.191201  19.040981 -17.416105  2.0796432
+    ##               PC1        PC2        PC3        PC4
+    ## Alabama  65.66409 -10.659597 -2.4540925 -2.8987602
+    ## Idaho   -50.81743  -9.354970 -0.9277566  2.6688143
+    ## Georgia  41.41471  -7.082887  3.6151006 -7.9433493
+    ## Florida 166.29871   6.611965 -2.4114176 -1.2641054
+    ## Wyoming -10.01245  -5.740295 -3.2629208  0.3862871
 
 ### 3.3 Group Distributions and Associated Statistics
 
@@ -336,7 +335,7 @@ Such output accords with the following standard:
     which labels, categorise, or partitions data into discrete groups
     should include, or provide immediate access to, quantitative
     information on intra-group variances or equivalent, as well as on
-    inter-group relationships where applicable. *
+    inter-group relationships where applicable.*
 
 The above example of principal components is one where there are no
 inter-group relationships, and so that standard is fulfilled by
