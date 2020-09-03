@@ -36,8 +36,8 @@ each standard prefixed with “RE”.
 ## 1\. Input data structures and validation
 
   - **RE1.0** *Regression Software should enable models to be specified
-    via a formula interface, unless reasons for *not\* doing so are
-    explicitly documented.\*
+    via a formula interface, unless reasons for not doing so are
+    explicitly documented.*
   - **RE1.1** *Regression Software should document how formula
     interfaces are converted to matrix representations of input data.
     See Max Kuhn’s [RStudio blog
