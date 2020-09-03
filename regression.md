@@ -33,7 +33,7 @@ to these subcategories may apply.
 The following standards are divided among several sub-categories, with
 each standard prefixed with “RE”.
 
-### Input data structures and validation
+### 1 Input data structures and validation
 
   - **RE1.0** *Regression Software should enable models to be specified
     via a formula interface, unless reasons for not doing so are
@@ -61,7 +61,7 @@ each standard prefixed with “RE”.
     Implications of violations of these assumptions should be both
     documented and tested.*
 
-### Pre-processing and Variable Transformation
+### 2 Pre-processing and Variable Transformation
 
   - **RE2.0** *Regression Software should document any transformations
     applied to input data, for example conversion of label-values to
@@ -92,7 +92,7 @@ each standard prefixed with “RE”.
 
 These pre-processing routines should also be tested as described below.
 
-### Algorithms
+### 3 Algorithms
 
 The following standards apply to the model fitting algorithms of
 Regression Software which implements or relies on iterative algorithms
@@ -110,7 +110,7 @@ should:
   - **RE3.3** *Allow explicit setting of convergence thresholds, unless
     reasons against doing so are explicitly documented.*
 
-### Return Results
+### 4 Return Results
 
   - **RE4.0** *Regression Software should return some form of “model”
     object, generally through using or modifying existing class
@@ -121,7 +121,7 @@ should:
     controlling batch processing of computationally intensive fitting
     algorithms.*
 
-#### Accessor Methods
+#### 4.1 Accessor Methods
 
 Regression Software should provide functions to access or extract as
 much of the following kinds of model data as possible or practicable.
@@ -168,7 +168,7 @@ otherwise access the following:
   - **RE4.13** *Predictor variables, and associated “metadata” where
     applicable.*
 
-#### Prediction, Extrapolation, and Forecasting
+#### 4.2 Prediction, Extrapolation, and Forecasting
 
 Not all regression software is intended to, or can, provide distinct
 abilities to extrapolate or forecast. Moreover, identifying cases in
@@ -194,7 +194,7 @@ provides abilities to process, categorical grouping variables:
     different categorical groups should include the ability to submit
     new groups to `predict()` methods.*
 
-#### Reporting Return Results
+#### 4.3 Reporting Return Results
 
   - **RE4.17** *Model objects returned by Regression Software should
     implement or appropriately extend a default `print` method which
@@ -206,7 +206,7 @@ provides abilities to process, categorical grouping variables:
     statistics is computationally non-trivial (for example, for
     bootstrapped estimates of confidence intervals).*
 
-### Documentation
+### 5 Documentation
 
 Beyond the general standards for documentation, Regression Software
 should explicitly describe the following aspects, and ideally provide
@@ -216,7 +216,7 @@ extended documentation including summary graphical reports of:
     (numbers of observations, with potential extension to numbers of
     variables/columns) and speed of algorithm.*
 
-### Visualization
+### 6 Visualization
 
   - **RE6.0** *Model objects returned by Regression Software (see RE3.0)
     should have default `plot` methods, either through explicit
@@ -239,7 +239,7 @@ and the conditions described prior to those standards.
     should provide clear visual distinction between modelled
     (interpolated) and forecast (extrapolated) values.*
 
-### Testing
+### 7 Testing
 
 Tests for Regression Software should include the following conditions
 and cases:

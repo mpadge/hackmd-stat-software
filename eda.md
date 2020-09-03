@@ -36,7 +36,7 @@ categories, clear and instructive documentation is of paramount
 importance for EDA Software, and so warrants its own sub-section within
 this document.
 
-### Documentation Standards
+### 1 Documentation Standards
 
 The following refer to *Primary Documentation*, implying in main package
 `README` or vignette(s), and *Secondary Documentation*, implying
@@ -63,7 +63,7 @@ software should:
   - **EA1.3** *Identify the kinds of data each function is intended to
     accept as input*
 
-### Input Data
+### 2 Input Data
 
 A further primary difference of EDA software from that of our other
 categories is that input data for statistical software may be generally
@@ -75,7 +75,7 @@ in terms of the two cases of input data in uni- and multi-variate form.
 All of the general standards for kinds of input (G2.0 - G2.7) apply to
 input data for EDA Software.
 
-#### Index Columns
+#### 2.1 Index Columns
 
 The following standards refer to an *index column*, which is understood
 to imply an explicitly named or identified column which can be used to
@@ -102,7 +102,7 @@ used as the basis of all table join operations, and in particular:
   - **EA2.3** *Table join operations should not be based on any assumed
     variable or column names*
 
-#### Multi-tabular input
+#### 2.2 Multi-tabular input
 
 EDA software designed to accept multi-tabular input should:
 
@@ -112,7 +112,7 @@ EDA software designed to accept multi-tabular input should:
   - **EA2.5** *Ensure all individual tables follow the above standards
     for Index Columns*
 
-#### Classes and Sub-Classes
+#### 2.3 Classes and Sub-Classes
 
 *Classes* are understood here to be the classes define single input
 objects, while *Sub-Classes* refer to the class definitions of
@@ -176,12 +176,12 @@ accordingly ensure:
     input in which individual columns may be of custom sub-classes
     including additional attributes.*
 
-### Analytic Algorithms
+### 3 Analytic Algorithms
 
 (There are no specific standards for analytic algorithms in EDA
 Software.)
 
-### Return Results / Output Data
+### 4 Return Results / Output Data
 
   - **EA4.0** *EDA Software should ensure all return results have types
     which are consistent with input types. For example, `sum`, `min`, or
@@ -194,7 +194,7 @@ Software.)
     objects for which default `print` and `plot` methods give sensible
     results. Default `summary` methods may also be implemented.*
 
-### Visualization and Summary Output
+### 5 Visualization and Summary Output
 
 Visualization commonly represents one of the primary functions of EDA
 Software, and thus visualization output is given greater consideration
@@ -219,7 +219,7 @@ applicable to visualization in general, whether static or dynamic.
   - **EA5.1** *Any explicit specifications of typefaces which override
     default values should consider accessibility*
 
-#### Summary and Screen-based Output
+#### 5.1 Summary and Screen-based Output
 
   - **EA5.2** *Screen-based output should never rely on default print
     formatting of `numeric` types, rather should also use some version
@@ -230,13 +230,13 @@ applicable to visualization in general, whether static or dynamic.
     each column (as, for example, implemented in the default
     `print.tibble` method).*
 
-#### General Standards for Visualization (Static and Dynamic)
+#### 5.2 General Standards for Visualization (Static and Dynamic)
 
   - **EA5.4** *All visualisations should include units on all axes, with
     sensibly rounded values (for example, as produced by the `pretty()`
     function).*
 
-#### Dynamic Visualization
+#### 5.3 Dynamic Visualization
 
 Dynamic visualization routines are commonly implemented as interfaces to
 `javascript` routines. Unless routines have been explicitly developed as
