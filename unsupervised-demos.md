@@ -160,3 +160,26 @@ robots: noindex, nofollow
 | --------- | ------------ | ---- | -------------- | ---- |
 | General   | 28           | 5    | 7              | 16   |
 | UL        | 24           | 2    | 6              | 16   |
+
+### 4 [`autotest`](https://github.com/mpadge/autotest) output
+
+Current `autotest` only produces output where issues arises. This is a
+relatively very clean response, none of which ought be considered
+particularly important, except perhaps for the notes about missing
+documentation on permitted parameter ranges.
+
+  - Parameter `clusters` responds to integer values in \[1, 110\]
+  - Warning: ✖ Parameter range for clusters is NOT documented
+  - Parameter `batch_size` responds to integer values in \[1, 110\]
+  - Warning: ✖ Parameter range for batch\_size is NOT documented
+  - Parameter `max_iters` permits unrestricted integer inputs
+  - Parameter `initializer` of function `mini_batch` is assumed to a
+    single character, but is case dependent
+  - Parameter `compute_labels` of function `mini_batch` is assumed to be
+    logical, but responds to general integer values.
+  - Parameter `calc_wcss` of function `mini_batch` is assumed to be
+    logical, but responds to general integer values.
+  - Parameter `early_stop_iter` responds to integer values in \[1, 28\]
+  - Warning: ✖ Parameter range for `early_stop_iter` is NOT documented
+  - Parameter verbose of function `mini_batch` is assumed to be logical,
+    but responds to general integer values.
