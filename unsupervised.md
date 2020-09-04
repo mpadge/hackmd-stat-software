@@ -246,9 +246,14 @@ summary (z)
 The proportion of variance explained by each component decreasing with
 increasing numeric labelling of the components.
 
+  - **UL3.3** *Unsupervised Learning Software for which input data does
+    not generally include labels (such as `array`-like data with no row
+    names) should provide an additional parameter to enable cases to be
+    labelled.*
+
 #### 3.2 Prediction
 
-  - **UL3.3** *Where applicable, Unsupervised Learning Software should
+  - **UL3.4** *Where applicable, Unsupervised Learning Software should
     implement routines to predict the properties (such as numerical
     ordinates, or cluster memberships) of additional new data without
     re-running the entire algorithm.*
@@ -276,7 +281,7 @@ knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
 knnClust
 ```
 
-    ## [1] 1 1 2 2 1
+    ## [1] 2 2 2 2 2
     ## Levels: 1 2 3
 
 The [`stats::prcomp()`
@@ -289,12 +294,12 @@ arrests_new <- sample_df (USArrests, n = 5)
 predict (res, newdata = arrests_new)
 ```
 
-    ##                 PC1        PC2         PC3        PC4
-    ## Iowa     -115.23018  -2.951523 -0.06489389  0.5484048
-    ## Vermont  -123.74334 -27.145178  5.12793532  1.6970270
-    ## Alabama    65.19182 -10.736481 -2.50911183 -2.5923850
-    ## Arizona   124.57524   9.693852 -1.83405776  4.1698861
-    ## Kentucky  -62.24524 -10.430289  3.03796387 -4.4093424
+    ##                 PC1       PC2        PC3        PC4
+    ## Nevada     84.23372 15.601819 16.1403270 -0.4681077
+    ## Arizona   124.20460  9.697429 -1.5872750  3.4882920
+    ## Louisiana  78.68715 -3.471980 -3.2899089 -4.5111757
+    ## Illinois   79.69376 12.913759 -5.6902886 -1.1103125
+    ## Idaho     -51.11201 -9.121897 -0.6572273  2.5509398
 
 #### 3.3 Group Distributions and Associated Statistics
 
@@ -331,7 +336,7 @@ summary (res)
 
 Such output accords with the following standard:
 
-  - **UL3.4** *Objects returned from Unsupervised Learning Software
+  - **UL3.5** *Objects returned from Unsupervised Learning Software
     which labels, categorise, or partitions data into discrete groups
     should include, or provide immediate access to, quantitative
     information on intra-group variances or equivalent, as well as on
