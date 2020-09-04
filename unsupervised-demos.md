@@ -128,11 +128,7 @@ robots: noindex, nofollow
     applicable.
   - [ ] UL2.3 There are no pre-processing routines to identify whether
     aspects of input data are perfectly collinear.
-  - [x] UL3.1 Algorithms which apply sequential labels to input data
-    (such as clustering or partitioning algorithms) should ensure that
-    the sequence follows decreasing group sizes (so labels of “1”, “a”,
-    or “A” describe the largest group, “2”, “b”, or “B” the second
-    largest, and so on.)
+  - [x] UL3.1 No labels applied to input data, so not applicable.
   - [x] UL3.2 There is no labelling of dimensions or groups, so not
     applicable.
   - [ ] UL3.3 Input data does not generally include labels, yet there is
@@ -157,3 +153,10 @@ robots: noindex, nofollow
     arguably sufficient here (although a non-default method would enable
     more informative `summary` data to be generated).
   - [ ] UL6.0–6.2 There are no default `plot` methods.
+
+### 3 Summary
+
+| Standards | Total Number | Pass | Not Applicable | Fail |
+| --------- | ------------ | ---- | -------------- | ---- |
+| General   | 28           | 5    | 7              | 16   |
+| UL        | 24           | 2    | 6              | 16   |
