@@ -25,9 +25,9 @@ robots: noindex, nofollow
         sensible errors
       - [ ] G2.3b `tolower()` or equivalent is not used, and would yield
         more sensible errors
-  - **G2.4** Provide appropriate mechanisms to convert between different
+  - [ ] G2.4 Provide appropriate mechanisms to convert between different
     data types, potentially including:
-      - G2.4a \[ \] There is no explicit conversion to `integer` via
+      - [ ] G2.4a There is no explicit conversion to `integer` via
         `as.integer()`, and should be (for example for `clusters`, which
         is ultimately *implicitly* converted by being passed as an
         assumed [C++
@@ -128,7 +128,7 @@ robots: noindex, nofollow
     applicable.
   - [ ] UL2.3 There are no pre-processing routines to identify whether
     aspects of input data are perfectly collinear.
-  - [x] **UL3.1** Algorithms which apply sequential labels to input data
+  - [x] UL3.1 Algorithms which apply sequential labels to input data
     (such as clustering or partitioning algorithms) should ensure that
     the sequence follows decreasing group sizes (so labels of “1”, “a”,
     or “A” describe the largest group, “2”, “b”, or “B” the second
