@@ -5,11 +5,12 @@ EFILE = eda
 GFILE = general
 RFILE = regression
 TFILE = time-series
-UFILE = unsupervised
+UFILE = unsupervised-demos
+MFILE = ml
 
-DEMO = FALSE
+DEMO = TRUE
 
-all: bayes eda gen reg ts ul
+all: bayes eda gen reg ts ul ml
 
 bayes: rbayes cpb
 eda: reda cpe
@@ -17,8 +18,9 @@ gen: rgen cpg
 reg: rreg cpr
 ts: rts cpt
 ul: rul cpu
+ml: rml cpm
 
-render: rbayes reda rgen rreg rts rul
+render: rbayes reda rgen rreg rts rul rml
 
 rbayes: $(SFILE).R
 	Rscript $(SFILE).R $(BFILE) $(DEMO)
@@ -37,6 +39,10 @@ rts: $(SFILE).R
 
 rul: $(SFILE).R
 	Rscript $(SFILE).R $(UFILE) $(DEMO)
+
+rml: $(SFILE).R
+	Rscript $(SFILE).R $(MFILE) $(DEMO)
+
 
 copy: cpb cpe cpg cpr cpt cpu
 
@@ -57,6 +63,9 @@ cpt: $(TFILE).Rmd
 
 cpu: $(UFILE).Rmd
 	cp $(UFILE).Rmd ../../ropensci-stats/statistical-software-review/standards/.
+
+cpm: $(MFILE).Rmd
+	cp $(MFILE).Rmd ../../ropensci-stats/statistical-software-review/standards/.
 
 clean:
 	rm -rf *.html *.png README_cache 

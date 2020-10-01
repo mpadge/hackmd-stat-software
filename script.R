@@ -65,6 +65,8 @@ write_md <- function (file, title, demo){
         title <- "Time Series Software"
     else if (title == "unsupervised")
         title <- "Unsupervised Learning Software"
+    else if (title == "ml")
+        title <- "Machine Learning Software"
     
     if (tolower (demo) == "true")
         tags <- "tags: statistical-software-demos, statistical-software"
