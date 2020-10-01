@@ -1,6 +1,6 @@
 ---
 title: Machine Learning Software
-tags: statistical-software-demos, statistical-software
+tags: statistical-software
 robots: noindex, nofollow
 ---
 

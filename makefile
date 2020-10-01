@@ -8,7 +8,7 @@ TFILE = time-series
 UFILE = unsupervised-demos
 MFILE = ml
 
-DEMO = TRUE
+DEMO = FALSE
 
 all: bayes eda gen reg ts ul ml
 
