@@ -7,8 +7,8 @@ robots: noindex, nofollow
 
 <!-- Edit the .Rmd not the .md file -->
 
-Machine Learning
-----------------
+Machine Learning Software
+-------------------------
 
 For an overview of Machine Learning (ML) Software in R, see the [CRAN
 Task View](https://cran.r-project.org/web/views/MachineLearning.html).
