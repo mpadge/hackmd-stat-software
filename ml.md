@@ -78,10 +78,11 @@ appropriate values, is given in [this blog
 post](https://sgugger.github.io/how-do-you-find-a-good-learning-rate.html).
 
 Before proceeding with the standards, the following sub-section
-describes a typical ML workflow as envisions by these standards. This
+describes a typical ML workflow as envisioned by these standards. This
 workflow provides a useful context for the standards which follow,
 particularly because typical ML workflows are often quite distinct from
-workflows for statistical software in other categories.
+workflows for statistical software in other categories. The standards
+which follow then address each stage of the following workflow.
 
 **Workflows for Machine Learning Software**
 
@@ -90,9 +91,11 @@ workflow for inherently diverse ML software. This workflow pertains to
 large sets of input data, only a portion of which will typically be able
 to be stored in local memory. Adaptation of this kind of workflow to
 situations in which all training data can be loaded into memory will
-often mean one or more of the following stages do not apply. This thus
-ought to be considered an “extensive” workflow, with shorter versions
-possible dependent upon envisioned areas of application.
+often mean one or more of the following stages, and therefore
+corresponding standards, do not apply. This thus ought to be considered
+an “extensive” workflow, with shorter versions, and correspondingly more
+restricted sets of standards, possible dependent upon envisioned areas
+of application.
 
 Just as typical workflows are potentially very diverse, so are outputs
 of ML software, which depend on areas of application and intended
@@ -103,8 +106,8 @@ of distance between sets of training and validation data. Such “desired
 outputs” are presumed to be quantified in terms of a “loss” or “cost”
 function (hereafter, simply “loss function”) quantifying a distance
 between a model estimate (resulting from applying the model to one or
-more components of a training data set) and a pre-defined “valid”
-output.
+more components of a training data set) and a pre-defined “valid” output
+(during training), or a test data set (following training).
 
 1.  Obtain local copy of input data, often in a series of
     sub-directories labelled something like `./train`, `./test`, and
@@ -117,12 +120,13 @@ output.
 3.  Define what kind of model will be applied to map the input data on
     to the specified output (commonly either categorical labels, or a
     set of validation data). ML software often allows the use of
-    pre-trained models, in which this this step includes downloading or
-    otherwise obtaining a pre-trained model, along with specification of
-    which aspects of those models are to be modified through application
-    to the training and validation data.
-4.  Define parameters controlling how algorithm will progress towards
-    optimal solution, commonly including but not limited to:
+    pre-trained models, in which case this this step includes
+    downloading or otherwise obtaining a pre-trained model, along with
+    specification of which aspects of those models are to be modified
+    through application to a particular set of training and validation
+    data.
+4.  Define parameters controlling how the algorithm will progress
+    towards an optimal solution, commonly including but not limited to:
     1.  The type of algorithm used to explore the search space (for
         example some kind of gradient descent algorithm).
     2.  The kind of loss function will be used to quantify distance
@@ -177,13 +181,13 @@ accessible via remote connection.
         “Testing” and “Training” will be unambiguously identified.
 -   **ML1.2** ML software should implement a single function which
     summarises contents of test and training (and other) data sets,
-    minimally including counts of numbers of files, and potentially
-    extending to tables or summaries of file types, sizes, and other
-    information.
+    minimally including counts of numbers of cases, records, or files,
+    and potentially extending to tables or summaries of file or data
+    types, sizes, and other information.
 
 #### 1.1 Missing Values
 
-Missing data are handled different by different ML software, and it is
+Missing data are handled differently by different ML routines, and it is
 also difficult to suggest generally applicable standards for
 pre-processing missing values in ML software. The following standards
 attempt to cover a practical range of typical approaches and
@@ -202,7 +206,7 @@ applications.
 -   **ML1.4** ML software which admits missing values should clearly
     document how such values are processed.
     -   **ML1.4a** Where missing values are imputed, software should
-        offer multiple user-defined ways to input missing data.
+        offer multiple user-defined ways to impute missing data.
     -   **ML1.4b** Where missing values are imputed, the precise
         imputation steps should also be explicitly documented, either in
         tests (see **ML7.1** below), function documentation, or
@@ -240,8 +244,9 @@ standards apply to the pre-processing stages of ML software.
     variances) should allow explicit specification of target values,
     rather than rely on default generic values (such as transformations
     to z-scores).
-    -   **ML2.2a** Those values should be recorded in the object return
-        by the function described in the preceding standard.
+    -   **ML2.2a** Those values should be recorded in the object
+        returned by the function described in the preceding standard
+        (**ML2.18**).
     -   **ML2.2b** Where the parameters have default values, reasons for
         those particular defaults should be explicitly described.
     -   **ML2.2c** Any extended documentation (such as vignettes) which
@@ -266,7 +271,8 @@ training the model, and is described in the following sub-section.
         directly trained as described in the following sub-section.
     -   **ML3.0** That return object should have a defined class
         minimally intended to implement a default `print` method which
-        summarises the model specification.
+        summarises the model specification, including values of all
+        relevant parameters.
 -   **ML3.1** ML software should allow the use of both untrained models,
     specified through model parameters only, as well as pre-trained
     models.
@@ -276,16 +282,16 @@ training the model, and is described in the following sub-section.
     preceding steps.
 -   **ML3.3** Where ML software implements its own distinct classes of
     model objects (in the sense intended here), the properties and
-    behaviours of those specific objects should be explicitly compared
-    with objects produced by other ML software. In particular, where
-    possible,
+    behaviours of those specific classes of objects should be explicitly
+    compared with objects produced by other ML software. In particular,
+    where possible,
     -   **ML3.3** ML software should provide extended documentation (as
         vignettes or equivalent) comparing model objects with those from
         other ML software, noting both unique abilities and restrictions
         of any implemented classes.
 -   **ML3.4** Where training rates are used, ML software should provide
     explicit documentation both in all functions which use training
-    rates, and in extended form such as vignettes, of the important of
+    rates, and in extended form such as vignettes, of the importance of,
     and/or sensitivity to, different values of training rates. In
     particular,
     -   **ML3.4a** Unless explicitly justified otherwise, ML software
@@ -411,7 +417,7 @@ implemented by effectively shuffling data between training and test
 sub-directories.
 
 -   **ML5.7.X** ML software should provide an ability to combine results
-    from multiple re-sampling iterations sets) using a single parameter
+    from multiple re-sampling iterations using a single parameter
     specifying numbers of iterations.
 -   **ML5.8** Absent any additional specification, re-sampling
     algorithms should by default partition data according to proportions
@@ -451,21 +457,24 @@ sub-directories.
 -   **ML7.3** ML software should explicit document the effects of
     different training rates, and in particular should demonstrate
     divergence from optima with inappropriate training rates.
--   **ML7.4** ML software which implement independent training “epochs”
+-   **ML7.4** ML software which implements routines to determine optimal
+    training rates (see **ML3.4**, above) should implement tests to
+    confirm the optimality of resultant values.
+-   **ML7.5** ML software which implement independent training “epochs”
     should demonstrate in tests the effects of lesser versus greater
     numbers of epochs.
--   **ML7.5** ML software should explicitly test different optimization
+-   **ML7.6** ML software should explicitly test different optimization
     algorithms, even where software is intended to implement one
     specific algorithm.
--   **ML7.6** ML software should explicitly test different loss
+-   **ML7.7** ML software should explicitly test different loss
     functions, even where software is intended to implement one specific
     measure of loss.
--   **ML7.7** Tests should explicitly compare all possible combinations
+-   **ML7.8** Tests should explicitly compare all possible combinations
     in categorical differences in model architecture, such as different
     model architectures with same optimization algorithms, same model
     architectures with different optimization algorithms, and
     differences in both.
-    -   **ML7.7a** Such combinations will generally be formed from
+    -   **ML7.8a** Such combinations will generally be formed from
         multiple categorical factors, for which explicit use of
         functions such as
         [`expand.grid()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/expand.grid.html)
@@ -501,7 +510,7 @@ The following example illustrates:
 All possible combinations of these categorical parameters could then be
 tested by iterating over the rows of that output.
 
--   **ML7.8** The successful extraction of information on paths taken by
+-   **ML7.9** The successful extraction of information on paths taken by
     optimizers (see **ML5.1**, above), should be tested, including
     testing the general properties, but not necessarily actual values
     of, such data.
