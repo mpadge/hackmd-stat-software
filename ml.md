@@ -14,10 +14,10 @@ R has an extensive and diverse ecosystem of Machine Learning (ML)
 software which is very well described in the corresponding [CRAN Task
 View](https://cran.r-project.org/web/views/MachineLearning.html). Unlike
 most other categories of statistical software considered here, the
-primary distinguishing feature of ML software is not algorithmic, rather
-pertains to a *workflow* typical of machine learning tasks. In
-particular, we consider ML software to be software which approaches data
-analysis via the two primary steps of:
+primary distinguishing feature of ML software is not (necessarily or
+directly) algorithmic, rather pertains to a *workflow* typical of
+machine learning tasks. In particular, we consider ML software to
+approach data analysis via the two primary steps of:
 
 1.  Passing a set of *training* data to an algorithm in order to
     generate a candidate mapping between that data and some form of
@@ -67,69 +67,71 @@ set (following training).
 Given the foregoing considerations, we consider a typical ML workflow to
 progress through (at least some of) the following steps:
 
-1.  Obtain a local copy of input data, often as multiple *objects*
-    (either on-disk or in memory) in some suitably structured form such
-    as in a series of sub-directories or accompanied by additional data
-    defining the structural properties of input objects. Regardless of
-    form, multiple objects are commonly given generic labels which
-    distinguish between `training` and `test` data, along with optional
-    additional categories and labels such as `validation` data used, for
-    example, to determine accuracy of models applied to training data
-    yet prior to testing.
-2.  Define transformations of input data, including but not restricted
-    to, broadcasting dimensions (as defined below) and standardising
-    data ranges (typically to defined values of mean and standard
-    deviation).
-3.  Define what kind of model will be applied to map the input data on
-    to the desired output. ML software often allows the use of
-    pre-trained models, in which case this this step includes
-    downloading or otherwise obtaining a pre-trained model, along with
-    specification of which aspects of those models are to be modified
-    through application to a particular set of training and validation
-    data.
-4.  Define parameters controlling how the algorithm will progress
-    towards an optimal solution, commonly including but not limited to:
-    1.  The type of algorithm used to explore the search space (for
-        example some kind of gradient descent algorithm).
-    2.  The kind of loss function will be used to quantify distance
-        between model estimates and desired output.
-5.  Apply the specified model to the training data to generate a series
-    of estimates from the specified loss function. This stage may also
-    include specifying parameters such as stopping or exit criteria, and
-    parameters controlling batch processing of input data. Moreover,
-    this stage may involve retaining some of the following additional
-    data:
+1.  ***Input Data Specification*** Obtain a local copy of input data,
+    often as multiple *objects* (either on-disk or in memory) in some
+    suitably structured form such as in a series of sub-directories or
+    accompanied by additional data defining the structural properties of
+    input objects. Regardless of form, multiple objects are commonly
+    given generic labels which distinguish between `training` and `test`
+    data, along with optional additional categories and labels such as
+    `validation` data used, for example, to determine accuracy of models
+    applied to training data yet prior to testing.
+2.  ***Pre-Processing*** Define transformations of input data, including
+    but not restricted to, broadcasting dimensions (as defined below)
+    and standardising data ranges (typically to defined values of mean
+    and standard deviation).
+3.  ***Model and Algorithm Specification*** Specify the model and
+    associated processes which will be applied to map the input data on
+    to the desired output. This step minimally includes the following
+    distinct stages (generally in no particular order):
+    1.  Specify the kind of model which will be applied to the training
+        data. ML software often allows the use of pre-trained models, in
+        which case this this step includes downloading or otherwise
+        obtaining a pre-trained model, along with specification of which
+        aspects of those models are to be modified through application
+        to a particular set of training and validation data.
+    2.  Specify the kind of algorithm which will be used to explore the
+        search space (for example some kind of gradient descent
+        algorithm), along with parameters controlling how that algorithm
+        will be applied (for example a learning rate, as defined above).
+    3.  Specify the kind of loss function will be used to quantify
+        distance between model estimates and desired output.
+4.  ***Model Training*** Apply the specified model to the training data
+    to generate a series of estimates from the specified loss function.
+    This stage may also include specifying parameters such as stopping
+    or exit criteria, and parameters controlling batch processing of
+    input data. Moreover, this stage may involve retaining some of the
+    following additional data:
     1.  Potential “pre-processing” stages such as initial estimates of
         optimal learning rates (see above).
     2.  Details of summaries of actual paths taken through the search
         space towards convergence on local or global minimum.
-6.  Measure the performance of the trained model when applied to the
-    test data set, generally requiring the specification of a metric of
-    model performance or accuracy.
+5.  ***Model Output and Performance*** Measure the performance of the
+    trained model when applied to the test data set, generally requiring
+    the specification of a metric of model performance or accuracy.
 
 Importantly, ML workflows may be partly iterative. This may in turn
 potentially confound distinctions between training and test data, and
 accordingly confound expectations commonly placed upon statistical
-analyses of statistical independence of response variables (such as, for
-example, with linear regression). ML routines such as cross-validation
-repeatedly partition data between training and test sets. Resultant
-models can then not be considered to have been developed through
-application to any single set of truly “independent” data. In the
-context of the standards that follow, these considerations admit a
-potential lack of absolute clarity in any notional categorical
-distinction between training and test data.
+analyses of statistical independence of response variables. ML routines
+such as cross-validation repeatedly (re-)partition data between training
+and test sets. Resultant models can then not be considered to have been
+developed through application to any single set of truly “independent”
+data. In the context of the standards that follow, these considerations
+admit a potential lack of clarity in any notional categorical
+distinction between training and test data, and between model
+specification and training.
 
 The preceding workflow mentioned a couple of concepts the definitions of
 which may be seen by clicking on the corresponding items below.
-Following that, we proceed to the definition of standards for ML
-software, enumerated and developed with reference to the steps of the
-workflow. As described above, these steps may not be applicable to all
-ML software, and so all of the following standards should be considered
-to be conditioned on “where applicable.” In order that the following
-standards initially adhere to the enumeration of workflow steps given
-above, more general standards pertaining to aspects such as
-documentation and testing are given following the initial six “workflow”
-standards.
+Following that, we proceed to standards for ML software, enumerated and
+developed with reference to the preceding workflow steps. As described
+above, these steps may not be applicable to all ML software, and so all
+of the following standards should be considered to be conditioned on
+“where applicable.” In order that the following standards initially
+adhere to the enumeration of workflow steps given above, more general
+standards pertaining to aspects such as documentation and testing are
+given following the initial five “workflow” standards.
 
 <details>
 <summary>
@@ -199,7 +201,7 @@ post](https://sgugger.github.io/how-do-you-find-a-good-learning-rate.html).
 </p>
 </details>
 
-### 1 Input Data Structures and Validation
+### 1 Input Data Specification
 
 Many of the following standards refer to the labelling of input data as
 “testing” or “training” data, along with potentially additional labels
@@ -221,7 +223,7 @@ two standards apply,
         accordance with **ML7.0**, below).
     -   **ML1.1b** Matches to expected labels should be case-insensitive
         and based on partial matching such that, for example, “Test”,
-        “test”, or “testing” would all suffice.
+        “test”, or “testing” should all suffice.
 
 The following three standards (**ML1.2**–**ML1.4**) represent three
 possible design intentions for ML software. Only one of these three will
@@ -233,7 +235,7 @@ intended to process, or capable of processing, input data as a single
 
 -   **ML1.2** Training and test data sets for ML software should be able
     to be input as a single, generally tabular, data object, with the
-    two kinds of data distinguished either by
+    training and test data distinguished either by
     -   A specified variable containing, for example, `TRUE`/`FALSE` or
         `0`/`1` values, or which uses some other system such as missing
         (`NA`) values to denote test data); and/or
@@ -271,7 +273,8 @@ applicability or otherwise of the preceding three standards.
     summarises the contents of test and training (and other) data sets,
     minimally including counts of numbers of cases, records, or files,
     and potentially extending to tables or summaries of file or data
-    types, sizes, and other information.
+    types, sizes, and other information (such as unique hashes for each
+    component).
 
 #### 1.1 Missing Values
 
@@ -303,7 +306,27 @@ applications.
     values for both training and test data, with optional user ability
     to control application to either one or both.
 
-### 2 Transformation and Pre-processing of Input Data
+### 2 Pre-processing
+
+As reflected in the workflow envisioned at the outset, ML software
+operates somewhat differently to statistical software in many other
+categories. In particular, ML software often requires explicit
+specification of a workflow, including specification of input data (as
+per the standards of the preceding sub-section), and of both
+transformations and statistical models to be applied to those data. This
+section of standards refers exclusively to the transformation of input
+data as a pre-processing step prior to any specification of, or
+submission to, actual models.
+
+-   **ML2.0** A dedicated function should enable pre-processing steps to
+    be defined and parametrized.
+    -   **ML2.0a** That function should return an object which can be
+        directly submitted to a specified model (see section 3, below).
+    -   **ML2.0b** Absent explicit justification otherwise, that return
+        object should have a defined class minimally intended to
+        implement a default `print` method which summarizes the input
+        data set (as per **ML1.5** above) and associated transformations
+        (see the following standard).
 
 Standards for most other categories of statistical software suggest that
 pre-processing routines should ensure that input data sets are
@@ -313,7 +336,7 @@ which can not be guaranteed to be dimensionally commensurate, such as
 software intended to process rectangular image files which may be of
 different sizes.
 
--   **ML2.0** ML software which uses broadcasting to reconcile
+-   **ML2.1** ML software which uses broadcasting to reconcile
     dimensionally incommensurate input data should offer an ability to
     at least optionally record transformations applied to each input
     file.
@@ -321,31 +344,41 @@ different sizes.
 Beyond broadcasting and dimensional transformations, the following
 standards apply to the pre-processing stages of ML software.
 
--   **ML2.1** A dedicated function should enable pre-processing steps to
-    be defined and parametrized.
-    -   **ML2.1a** That function should return an object which can be
-        directly submitted to a specified model (see section 3, below).
-    -   **ML2.1b** Absent explicit justification otherwise, that return
-        object should have a defined class minimally intended to
-        implement a default `print` method which summarizes the input
-        data set (as per **ML1.2** above) and associated transformations
-        (see the following standard).
 -   **ML2.2** ML software which requires or relies upon numeric
     transformations of input data (such as change in mean values or
-    variances) should allow explicit specification of target values,
-    rather than rely on default generic values (such as transformations
-    to z-scores).
-    -   **ML2.2a** Those values should be recorded in the object
-        returned by the function described in the preceding standard
-        (**ML2.18**).
-    -   **ML2.2b** Where the parameters have default values, reasons for
+    variances) should allow optimal explicit specification of target
+    values, rather than restricting transformations to default generic
+    values only (such as transformations to z-scores).
+    -   **ML2.2a** Where the parameters have default values, reasons for
         those particular defaults should be explicitly described.
-    -   **ML2.2c** Any extended documentation (such as vignettes) which
+    -   **ML2.2b** Any extended documentation (such as vignettes) which
         demonstrates the use of explicit values for numeric
         transformations should explicitly describe why particular values
         are used.
 
-### 3 Model Specification
+For all transformations applied to input data, whether of dimension
+(**ML2.1**) or scale (**ML2.2**),
+
+-   **ML2.3** The values associated with all transformations should be
+    recorded in the object returned by the function described in the
+    preceding standard (**ML2.0**).
+-   **ML2.4** Default values of all transformations should be explicitly
+    documented, both in documentation of parameters where appropriate
+    (such as for numeric transformations), and in extended documentation
+    such as vignettes.
+-   **ML2.5** ML software should provide options to bypass or otherwise
+    switch off all default transformations.
+-   **ML2.6** Where transformations are implemented via distinct
+    functions, these should be exported to a package’s namespace so they
+    can be applied in other contexts.
+-   **ML2.7** Where possible, documentation should be provided for how
+    transformations may be reversed. For example, documentation may
+    demonstrate how the values retained via **ML2.3**, above, can be
+    used along with transformations either exported via **ML2.6** or
+    otherwise exemplified in demonstration code to independently
+    transform data, and then to reverse those transformations.
+
+### 3 Model and Algorithm Specification
 
 A “model” in the context of ML software is understood to be a means of
 specifying a mapping between input and output data, generally applied to
@@ -355,7 +388,9 @@ of *what* the values of such a model actually are occurs through
 training the model, and is described in the following sub-section.
 
 -   **ML3.0** Model specification should be implemented as a distinct
-    stage prior to actual model fitting or training. In particular,
+    stage subsequent to specification of pre-processing routines (see
+    Section 2, above) and prior to actual model fitting or training (see
+    Section 4, below). In particular,
     -   **ML3.0a** A dedicated function should enable models to be
         specified without actually fitting or training them.
     -   **ML3.0b** That function should return an object which can be
