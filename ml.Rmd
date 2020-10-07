@@ -350,31 +350,60 @@ specifying a mapping between input and output data, generally applied to
 training and validation data. Model specification is the step of specifying
 *how* such a mapping is to be constructed. The specification of *what* the
 values of such a model actually are occurs through training the model, and is
-described in the following sub-section.
+described in the following sub-section. These standards also refer to *control
+parameters* which specify how models are trained. These parameters commonly
+include values specifying numbers of iterations, training rates, and parameters
+controlling algorithmic processes such as re-sampling or cross-validation.
 
 - **ML3.0** Model specification should be implemented as a distinct stage
   subsequent to specification of pre-processing routines (see Section 2, above)
   and prior to actual model fitting or training (see Section 4, below). In
   particular,
     - **ML3.0a** A dedicated function should enable models to be specified
-      without actually fitting or training them.
-    - **ML3.0b** That function should return an object which can be directly
-      trained as described in the following sub-section.
-    - **ML3.0** That return object should have a defined class minimally
+      without actually fitting or training them, *or* if this (**ML3**) and the
+      following (**ML4**) stages are controlled by a single function, that
+      function should have a parameter enabling models to be specified yet not
+      fitted (for example, `nofit = FALSE`).
+    - **ML3.0b** That function should accept as input the objects produced by
+      the previous *Input Data Specification* stage, and defined according to
+      **ML2.0**, above.
+    - **ML3.0c** The function described above (**ML3.0a**) should return an
+      object which can be directly trained as described in the following
+      sub-section (**ML4**).
+    - **ML3.0d** That return object should have a defined class minimally
       intended to implement a default `print` method which summarises the model
       specification, including values of all relevant parameters.
 - **ML3.1** ML software should allow the use of both untrained models,
-  specified through model parameters only, as well as pre-trained models.
+  specified through model parameters only, as well as pre-trained models. Use
+  of the latter commonly entails an ability to submit a previously-trained
+  model object to the function defined according to **ML3.0a**, above.
 - **ML3.2** ML software should enable different models to be applied to the
   object specifying data inputs and transformations (see sub-sections 1--2,
   above) without needing to re-define those preceding steps.
+
+A function fulfilling **ML3.0--3.2** might, for example, permit the following
+arguments:
+
+1. `data`: Input data specification constructed according to **ML1**
+2. `model`: An optional previously-trained model
+3. `control`: A list of parameters controlling how the model algorithm is to be
+  applied during the subsequent training phase (**ML4**).
+
+A function with the arguments defined above would fulfil the preceding three
+standards, because the `data` stage would represent the output of **ML1**,
+while the `model` stage would allow for different pre-trained models to be
+submitted using the same data and associated specifications (**ML3.1**). The
+provision of a separate `.data` argument would fulfil **ML3.2** by allowing one
+or both `model` or `control` parameters to be re-defined while submitting the
+same `data` object.
+
 - **ML3.3** Where ML software implements its own distinct classes of model
-  objects (in the sense intended here), the properties and behaviours of those
-  specific classes of objects should be explicitly compared with objects
-  produced by other ML software. In particular, where possible,
-    - **ML3.3** ML software should provide extended documentation (as vignettes
-      or equivalent) comparing model objects with those from other ML software,
-      noting both unique abilities and restrictions of any implemented classes.
+  objects, the properties and behaviours of those specific classes of objects
+  should be explicitly compared with objects produced by other ML software. In
+  particular, where possible, ML software should provide extended documentation
+  (as vignettes or equivalent) comparing model objects with those from other ML
+  software, noting both unique abilities and restrictions of any implemented
+  classes.
 - **ML3.4** Where training rates are used, ML software should provide explicit
   documentation both in all functions which use training rates, and in extended
   form such as vignettes, of the importance of, and/or sensitivity to, different
@@ -383,35 +412,31 @@ described in the following sub-section.
       offer abilities to automatically determine appropriate or optimal
       training rates, either as distinct pre-processing stages, or as implicit
       stages of model training.
-    - **ML3.4b** ML software which provide default values for training rates
+    - **ML3.4b** ML software which provides default values for training rates
       should clearly document anticipated restrictions of validity of those
       default values; for example through clear suggestions that
       user-determined and -specified values may generally be necessary or
       preferable.
 
-### Algorithms
+#### Control Parameters
 
-- **ML4.0** Parameters controlling optimization algorithms should minimally include:
-    - **ML4.0a** Specification of the type of algorithm used to explore the search space.
-    - **ML4.0b** The kind of loss function used to assess distance between
+Control parameters are considered here to specify how a model is to be applied
+to a set of training data. These are generally distinct from parameters
+specifying the actual model (such as model architecture). While we recommend
+that control parameters be submitted as items of a single named list, this is
+neither a firm expectation nor an explicit part of the current standards.
+
+- **ML3.5** Parameters controlling optimization algorithms should minimally include:
+    - **ML3.5a** Specification of the type of algorithm used to explore the
+      search space (commonly, for example, some kind of gradient descent
+      algorithm)
+    - **ML3.5b** The kind of loss function used to assess distance between
       model estimates and desired output.
-- **ML4.1** Unless explicitly justified otherwise (for example because ML
+- **ML3.6** Unless explicitly justified otherwise (for example because ML
   software under consideration is an implementation of one specific algorithm),
   ML software should:
-    - **ML4.1a** Implement or otherwise permit usage of multiple ways of exploring search space
-    - **ML4.1b** Implement or otherwise permit usage of multiple loss functions.
-
-The specification of optimization algorithms may be implemented as a part of
-model specification (in the prior section), or as a distinct step in its own
-right. Either way, the following standard applies:
-
-- **ML4.2** ML software should permit specification of optimization algorithms
-  in the sense covered by the preceding two standards prior to, and definitely
-  not as part of, specification of model training as considered in the
-  subsequent sub-section.
-
-That is, the object passed to a model training exercise should contain full
-specification of the optimization algorithm.
+    - **ML3.6a** Implement or otherwise permit usage of multiple ways of exploring search space
+    - **ML3.6b** Implement or otherwise permit usage of multiple loss functions.
 
 #### CPU and GPU processing
 
@@ -421,7 +446,7 @@ central processing units (CPUs). ML software thus commonly offers options to
 train models using either CPUs or GPUs. While these standards do not currently
 suggest any particular design choice in this regard, we do note the following:
 
-- **ML4.3** For ML software in which algorithms are coded in C++,
+- **ML3.7** For ML software in which algorithms are coded in C++,
   user-controlled use of either CPUs or GPUs (on NVIDIA processors at least)
   should be implemented through direct use of
   [`libcudacxx`](https://github.com/NVIDIA/libcudacxx).
@@ -431,22 +456,27 @@ to switch from CPU to GPU.
 
 ### Model Training
 
-- **ML5.0** ML software should generally implement a unified single-function
+Model training is the stage of the ML workflow envisioned here in which the
+actual computation is performed by applying a model specified according to
+**ML3** to data specified according to **ML1** and **ML2**.
+
+- **ML4.0** ML software should generally implement a unified single-function
   interface to model training, able to receive as input a model specified
   according to all preceding standards. In particular, models with
   categorically different specifications, such as different model architectures
   or optimization algorithms, should be able to be submitted to the same model
   training function.
-- **ML5.1** ML software should retain explicit information on paths taken as an
-  optimizer advances towards minimal loss. Such information should minimally
-  include:
-    - **ML5.1a** Specification of all model-internal parameters, or equivalent
+- **ML4.1** ML software should at least optionally retain explicit information
+  on paths taken as an optimizer advances towards minimal loss. Such
+  information should minimally include:
+    - **ML4.1a** Specification of all model-internal parameters, or equivalent
       hashed representation.
-    - **ML5.1b** The value of the loss function at each point
-    - **ML5.1c** Information used to advance to next point, for example
+    - **ML4.1b** The value of the loss function at each point
+    - **ML4.1c** Information used to advance to next point, for example
       quantification of local gradient.
-- **ML5.2** The subsequent extraction of information retained according to the
-  preceding standard should be explicitly documented.
+- **ML4.2** The subsequent extraction of information retained according to the
+  preceding standard should be explicitly documented, including through example
+  code.
 
 #### Batch Processing
 
@@ -454,39 +484,40 @@ The following standards apply to ML software which implements batch processing,
 commonly to train models on data sets too large to be loaded in their entirety
 into memory.
 
-- **ML5.3** All parameters controlling batch processing and associated
+- **ML4.3** All parameters controlling batch processing and associated
   terminology should be explicitly documented, and it should not, for example,
   be presumed that users will understand the definition of "epoch" as
   implemented in any particular ML software.
 
 According to that standard, it would for example be inappropriate to have
-a parameter, `nepochs`, described as `"Number of epochs used in model
-training"`. Rather, the definition and particular implementation of "epoch"
-must be explicitly defined.
+a parameter, `nepochs`, described as "Number of epochs used in model training".
+Rather, the definition and particular implementation of "epoch" must be
+explicitly defined.
 
-- **ML5.4** Explicit guidance should be provided on selection of appropriate
+- **ML4.4** Explicit guidance should be provided on selection of appropriate
   values for parameter controlling batch processing, for example, on trade-offs
-  between batch sizes and numbers of epochs (with both terms explicitly defined
-  in accordance with the preceding standard).
-- **ML5.5** ML software may optionally include a function to estimate likely
+  between batch sizes and numbers of epochs (with both terms provided as
+  *Control Parameters* in accordance with the preceding standard, **ML3**).
+- **ML4.5** ML software may optionally include a function to estimate likely
   time to train a specified model, through estimating initial timings from
   a small sample of the full batch.
-- **ML5.6** ML software should by default provide explicit information on the
+- **ML4.6** ML software should by default provide explicit information on the
   progress of batch jobs (even where those jobs may be implemented in parallel
   on GPUs). That information may be optionally suppressed through additional
   parameters.
 
 #### Re-sampling
 
-ML software does not always rely on pre-specified and categorical distinctions
-between training and test data. For example, models may be fit to what is
-effectively one single data set in which specified cases or rows are used as
-training data, and the remainder as test data. Re-sampling generally refers to
-the practice of re-defining categorical distinctions between training and test
-data. One training run accordingly connotes training a model on one particular
-set of training data and then applying that model to the specified set of test
-data. Re-sampling starts that process anew, through constructing an alternative
-categorical partition between test and training data.
+As described at the outset, ML software does not always rely on pre-specified
+and categorical distinctions between training and test data. For example,
+models may be fit to what is effectively one single data set in which specified
+cases or rows are used as training data, and the remainder as test data.
+Re-sampling generally refers to the practice of re-defining categorical
+distinctions between training and test data. One training run accordingly
+connotes training a model on one particular set of training data and then
+applying that model to the specified set of test data. Re-sampling starts that
+process anew, through constructing an alternative categorical partition between
+test and training data.
 
 Even where test and training data are distinguished by more than a simple
 data-internal category (such as a labelling column), for example,
@@ -494,21 +525,48 @@ by being stored in distinctly-named sub-directories, re-sampling may be
 implemented by effectively shuffling data between training and test
 sub-directories.
 
-- **ML5.7.X** ML software should provide an ability to combine results from
+- **ML4.7.X** ML software should provide an ability to combine results from
   multiple re-sampling iterations using a single parameter specifying numbers
   of iterations.
-- **ML5.8** Absent any additional specification, re-sampling algorithms should
+- **ML4.8** Absent any additional specification, re-sampling algorithms should
   by default partition data according to proportions of original test and
   training data.
-    - **ML5.8a** Re-sampling routines of ML software should nevertheless offer
+    - **ML4.8a** Re-sampling routines of ML software should nevertheless offer
       an ability to explicitly control or override such default proportions of
       test and training data.
 
 ### Model Output and Performance
 
-- **ML6.0** For ML software able to perform classification tasks, the return
+- **ML5.0** The result of applying the training processes described above
+  should be contained within a single model object returned by the function
+  defined according to **ML4.0**, above.
+    - **ML5.0a** That object should either have its own class, or extend some
+      previously-defined class.
+    - **ML5.0b** That class should have a defined `print` method which
+      summarises important aspects of the model object, including but not
+      limited to summaries of input data and algorithmic control parameters.
+- **ML5.1** As for the untrained model objects produced according to the above
+  standards, and in particular as a direct extension of **ML3.3**, the
+  properties and behaviours of trained models produced by ML software should be
+  explicitly compared with equivalent objects produced by other ML software.
+- **ML5.2** Documentation should include examples of how to save and re-load
+  trained model objects for their re-use in accordance with **ML3.1**, above.
+    - **ML5.2a** Where general functions for saving or serializing objects,
+      such as
+      [`saveRDS`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/readRDS.html)
+      are not appropriate for storing local copies of trained models, an
+      explicit function should be provided for that purpose, and demonstrated
+      with example code.
+
+Model performance refers to the quantitative assessment of a trained model when
+applied to a set of test data. Such application to test data is commonly performe
+
+- **ML5.3** A function should be provided to apply a trained model to a set of
+  test data
+
+- **ML5.0** For ML software able to perform classification tasks, the return
   object should provide direct access to a classification ("confusion") matrix.
-- **ML6.1** For ML software able to perform classification tasks, the return
+- **ML5.1** For ML software able to perform classification tasks, the return
   object should provide direct access to classification probabilities.
 
 ### Documentation
