@@ -712,7 +712,7 @@ standards **ML3** and **ML4**.
     -   **ML7.3a** These tests should explicitly identify restrictions
         on the functionality of model objects in comparison with those
         of other packages.
-    -   **ML7.3b** These tests should explicity identify functional
+    -   **ML7.3b** These tests should explicitly identify functional
         advantages and unique abilities of the model objects in
         comparison with those of other packages.
 
