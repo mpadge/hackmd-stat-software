@@ -161,17 +161,14 @@ CRAN).
     b <- array(c(3, 4), dim = c(1, 2))
     # rbind (a, b) # error!
     rray_bind (a, b, .axis = 1)
-
-    ##      [,1] [,2]
-    ## [1,]    1    1
-    ## [2,]    2    2
-    ## [3,]    3    4
-
+    #>      [,1] [,2]
+    #> [1,]    1    1
+    #> [2,]    2    2
+    #> [3,]    3    4
     rray_bind (a, b, .axis = 2)
-
-    ##      [,1] [,2] [,3]
-    ## [1,]    1    3    4
-    ## [2,]    2    3    4
+    #>      [,1] [,2] [,3]
+    #> [1,]    1    3    4
+    #> [2,]    2    3    4
 
 Broadcasting is commonly employed in ML software because it enables ML
 operations to be implemented on objects with incommensurate dimensions.
