@@ -600,7 +600,7 @@ Performance is then considered as a separate stage.
     the function defined according to **ML4.0**, above. Even where the
     output reflects application to a test data set, the resultant object
     need not include any information on model performance (see
-    **ML5.X**, below).
+    **ML5.3**–**ML5.4**, below).
     -   **ML5.0a** That object should either have its own class, or
         extend some previously-defined class.
     -   **ML5.0b** That class should have a defined `print` method which
@@ -613,7 +613,7 @@ Performance is then considered as a separate stage.
     by ML software should be explicitly compared with equivalent objects
     produced by other ML software. (Such comparison will generally be
     done in terms of comparing model performance, as described in the
-    following standard **ML5.X**).
+    following standard **ML5.3**–**ML5.4**).
 -   **ML5.2** The structure and functionality of objects representing
     trained ML models should be thoroughly documented. In particular,
     -   **ML5.2a** Either all functionality extending from the class of
