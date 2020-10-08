@@ -573,7 +573,7 @@ by being stored in distinctly-named sub-directories, re-sampling may be
 implemented by effectively shuffling data between training and test
 sub-directories.
 
--   **ML4.7.X** ML software should provide an ability to combine results
+-   **ML4.7** ML software should provide an ability to combine results
     from multiple re-sampling iterations using a single parameter
     specifying numbers of iterations.
 -   **ML4.8** Absent any additional specification, re-sampling
@@ -585,9 +585,22 @@ sub-directories.
 
 ### 5 Model Output and Performance
 
+Model output is considered here as a stage distinct from model
+performance. Model output refers to the end result of model training
+(**ML4**), while model performance involves the assessment of a trained
+model against a test data set. The present section first describes
+standards for model output, which are standards guiding the form of a
+model trained according to the preceding standards (**ML4**). Model
+Performance is then considered as a separate stage.
+
+#### 5.1 Model Output
+
 -   **ML5.0** The result of applying the training processes described
     above should be contained within a single model object returned by
-    the function defined according to **ML4.0**, above.
+    the function defined according to **ML4.0**, above. Even where the
+    output reflects application to a test data set, the resultant object
+    need not include any information on model performance (see
+    **ML5.X**, below).
     -   **ML5.0a** That object should either have its own class, or
         extend some previously-defined class.
     -   **ML5.0b** That class should have a defined `print` method which
@@ -598,35 +611,61 @@ sub-directories.
     the above standards, and in particular as a direct extension of
     **ML3.3**, the properties and behaviours of trained models produced
     by ML software should be explicitly compared with equivalent objects
-    produced by other ML software.
--   **ML5.2** Documentation should include examples of how to save and
-    re-load trained model objects for their re-use in accordance with
-    **ML3.1**, above.
-    -   **ML5.2a** Where general functions for saving or serializing
+    produced by other ML software. (Such comparison will generally be
+    done in terms of comparing model performance, as described in the
+    following standard **ML5.X**).
+-   **ML5.2** The structure and functionality of objects representing
+    trained ML models should be thoroughly documented. In particular,
+    -   **ML5.2a** Either all functionality extending from the class of
+        model object should be explicitly documented, or a method for
+        listing or otherwise accessing all associated functionality
+        explicitly documented and demonstrated in example code.
+    -   **ML5.2b** Documentation should include examples of how to save
+        and re-load trained model objects for their re-use in accordance
+        with **ML3.1**, above.
+    -   **ML5.2c** Where general functions for saving or serializing
         objects, such as
         [`saveRDS`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/readRDS.html)
         are not appropriate for storing local copies of trained models,
         an explicit function should be provided for that purpose, and
-        demonstrated with example code.
+        should be demonstrated with example code.
+
+The [`R6` system](https://r6.r-lib.org) for representing classes in R is
+an example of a system with explicit functionality, all components of
+which are accessible by a simple
+[`ls()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/ls.html)
+call. Adherence to **ML5.2a** would nevertheless require explicit
+description of the ability of
+[`ls()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/ls.html)
+to supply a list of all functions associated with an object. The [`mlr`
+package](https://github.com/mlr-org/mlr3), for example, uses [`R6`
+classes](https://r6.r-lib.org), yet neither explicitly describes the use
+of
+[`ls()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/ls.html)
+to list all associated functions, nor explicitly lists those functions.
+
+#### 5.2 Model Performance
 
 Model performance refers to the quantitative assessment of a trained
-model when applied to a set of test data. Such application to test data
-is commonly performe
+model when applied to a set of test data.
 
--   **ML5.3** A function should be provided to apply a trained model to
-    a set of test data
+-   **ML5.3** Assessment of model performance should be implemented as
+    one or more functions distinct from model training.
+-   **ML5.4** Model performance should be able to be assessed according
+    to a variety of metrics.
+    -   **ML5.4a** All model performance metrics represented by
+        functions internal to a package must be clearly and distinctly
+        documented.
+    -   **ML5.4b** It should be possible to submit custom metrics to a
+        model assessment function, and the ability to do so should be
+        clearly documented including through example code.
 
--   **ML5.0** For ML software able to perform classification tasks, the
-    return object should provide direct access to a classification
-    (“confusion”) matrix.
-
--   **ML5.1** For ML software able to perform classification tasks, the
-    return object should provide direct access to classification
-    probabilities.
+The remaining sub-sections specify general standards beyond the
+preceding workflow-specific ones.
 
 ### 6 Documentation
 
--   **ML1.0** Descriptions of ML software should make explicit reference
+-   **ML6.0** Descriptions of ML software should make explicit reference
     to a workflow which separates training and testing stages, and which
     clearly indicates a need for distinct training and test data sets.
 
@@ -637,12 +676,17 @@ intended to aid one particular aspect of the general workflow envisioned
 here, such as implementations of ML optimization functions, or specific
 loss measures.
 
--   **MLX.X** ML software intentionally designed to address only a
+-   **ML6.1** ML software intentionally designed to address only a
     restricted subset of the workflow described here should clearly
     document how it can be embedded within a typical *full* ML workflow
     in the sense considered here.
+    -   **ML6.1** Such demonstrations should include and contrast
+        embedding within a full workflow using at least two other
+        packages to implement that workflow.
 
 ### 7 Testing
+
+#### 7.1 Input Data
 
 -   **ML7.0** Test should explicitly confirm partial and
     case-insensitive matching of “test”, “train”, and, where applicable,
@@ -654,6 +698,13 @@ loss measures.
     implements imputation steps (even where such imputation is a
     single-step implemented via some external package). These tests
     serve as an explicit reference for how imputation is performed.
+
+#### 7.2 Model Classes
+
+The following standard applies to models in both untrained and trained
+forms, considered to be the respective outputs of the preceding
+standards **ML3** and **ML4**.
+
 -   **ML7.3** Where model objects are implemented as distinct classes,
     tests should explicitly compare the functionality of these classes
     with functionality of equivalent classes for ML model objects from
@@ -664,6 +715,9 @@ loss measures.
     -   **ML7.3b** These tests should explicity identify functional
         advantages and unique abilities of the model objects in
         comparison with those of other packages.
+
+#### 7.3 Model Training
+
 -   **ML7.4** ML software should explicit document the effects of
     different training rates, and in particular should demonstrate
     divergence from optima with inappropriate training rates.
@@ -724,3 +778,12 @@ tested by iterating over the rows of that output.
     by optimizers (see **ML5.1**, above), should be tested, including
     testing the general properties, but not necessarily actual values
     of, such data.
+
+#### 7.4 Model Performance
+
+-   **ML7.11** All performance metrics available for a given class of
+    trained model should be thoroughly tested and compared.
+    -   **ML7.11a** Tests which compare metrics should do so over a
+        range of inputs (generally implying differently trained models)
+        to demonstrate relative advantages and disadvantages of
+        different metrics.
