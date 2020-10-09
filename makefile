@@ -1,16 +1,19 @@
 SFILE = script
 
-BFILE = bayesian
-EFILE = eda
-GFILE = general
-RFILE = regression
-TFILE = time-series
-UFILE = unsupervised-demos
-MFILE = ml
+BFILE = standards/bayesian
+EFILE = standards/eda
+GFILE = standards/general
+RFILE = standards/regression
+TFILE = standards/time-series
+UFILE = standards/unsupervised-demos
+MFILE = standards/ml
+
+COPYDEST = ../../ropensci-stats/statistical-software-review-book/standards/.
 
 DEMO = FALSE
 
-all: bayes eda gen reg ts ul ml
+#all: bayes eda gen reg ts ul ml
+all: ml
 
 bayes: rbayes cpb
 eda: reda cpe
@@ -47,25 +50,25 @@ rml: $(SFILE).R
 copy: cpb cpe cpg cpr cpt cpu
 
 cpb: $(BFILE).Rmd
-	cp $(BFILE).Rmd ../../ropensci-stats/statistical-software-review/standards/.
+	cp $(BFILE).Rmd $(COPYDEST)
 
 cpe: $(EFILE).Rmd
-	cp $(EFILE).Rmd ../../ropensci-stats/statistical-software-review/standards/.
+	cp $(EFILE).Rmd $(COPYDEST)
 
 cpg: $(GFILE).Rmd
-	cp $(GFILE).Rmd ../../ropensci-stats/statistical-software-review/standards/.
+	cp $(GFILE).Rmd $(COPYDEST)
 
 cpr: $(RFILE).Rmd
-	cp $(RFILE).Rmd ../../ropensci-stats/statistical-software-review/standards/.
+	cp $(RFILE).Rmd $(COPYDEST)
 
 cpt: $(TFILE).Rmd
-	cp $(TFILE).Rmd ../../ropensci-stats/statistical-software-review/standards/.
+	cp $(TFILE).Rmd $(COPYDEST)
 
 cpu: $(UFILE).Rmd
-	cp $(UFILE).Rmd ../../ropensci-stats/statistical-software-review/standards/.
+	cp $(UFILE).Rmd $(COPYDEST)
 
 cpm: $(MFILE).Rmd
-	cp $(MFILE).Rmd ../../ropensci-stats/statistical-software-review/standards/.
+	cp $(MFILE).Rmd $(COPYDEST)
 
 clean:
 	rm -rf *.html *.png README_cache 

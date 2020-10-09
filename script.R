@@ -53,19 +53,19 @@ write_md <- function (file, title, demo){
                        rmarkdown::md_document(variant='gfm'))
     file <- paste0 (tools::file_path_sans_ext (file), ".md")
 
-    if (title == "bayesian")
+    if (title == "standards/bayesian")
         title <- "Bayesian Software"
-    else if (title == "eda")
+    else if (title == "standards/eda")
         title <- "Exploratory Data Analysis Software"
-    else if (title == "general")
+    else if (title == "standards/general")
         title <- "General Standards"
-    else if (title == "regression")
+    else if (title == "standards/regression")
         title <- "Regression Software"
-    else if (title == "time-series")
+    else if (title == "standards/time-series")
         title <- "Time Series Software"
-    else if (title == "unsupervised")
+    else if (title == "standards/unsupervised")
         title <- "Unsupervised Learning Software"
-    else if (title == "ml")
+    else if (title == "standards/ml")
         title <- "Machine Learning Software"
     
     if (tolower (demo) == "true")
@@ -90,5 +90,5 @@ write_md <- function (file, title, demo){
     writeLines (x, con)
     close (con)
 }
-#write_md ("time-series-demos.Rmd", "time-series-demos")
+
 write_md (paste0 (args [1], ".Rmd"), args [1], args [2])
