@@ -7,17 +7,31 @@ robots: noindex, nofollow
 
 <!-- Edit the .Rmd not the .md file -->
 
-## General Standards for Statistical Software
+General Standards for Statistical Software
+------------------------------------------
 
 These standards refer to **Data Types** as the fundamental types defined
 by the R language itself between the following:
 
-  - Continuous (numeric)
-  - Integer
-  - String / character
-  - Date/Time
-  - Factor
-  - Ordered Factor
+-   Continuous (`class = "numeric"`, `typeof = "double"`)
+-   Integer
+-   String / character
+-   Date/Time
+-   Factor
+-   Ordered Factor
+
+The continuous type has a `typeof` of “double” because that represents
+the storage mode in the C representation of such objects, while the
+`class` as defined within R is referred to as “numeric”. While `typeof`
+is not the same as `class`, with reference to continuous variables,
+“numeric” may be considered identical to “double” throughout.
+
+The term “character” is interpreted here to refer to a vector each
+element of which is an individual “character” object. The term “string”
+does not relate to any official R nomenclature, but is used here to
+refer for convenience to a character vector of length one; in other
+words, a “string” is the sole element of a single-length “character”
+vector.
 
 ### 1 Documentation
 
@@ -37,6 +51,12 @@ packages is readily extensible, as exemplified through the [`roxytest`
 package](https://github.com/mikldk/roxytest) for specifying tests
 *in-line*.
 
+-   **G1.0** *Software should use
+    [`roxygen`](https://roxygen2.r-lib.org/) for all documentation.*
+    -   **G1.0a** *All internal (non-exported) functions should also be
+        documented in standard [`roxygen`](https://roxygen2.r-lib.org/)
+        format.*
+
 The following standards describe several forms of what might be
 considered “Supplementary Material”. While there are many places within
 an R package where such material may be included, common locations
@@ -49,14 +69,14 @@ publication with regard to software performance (for example, claims of
 algorithmic scaling or efficiency; or claims of accuracy), the following
 standard applies:
 
-  - **G1.0** *Software should include all code necessary to reproduce
+-   **G1.1** *Software should include all code necessary to reproduce
     results which form the basis of performance claims made in
     associated publications.*
 
 Where claims regarding aspects of software performance are made with
 respect to other extant R packages, the following standard applies:
 
-  - **G1.1** *Software should include code necessary to compare
+-   **G1.2** *Software should include code necessary to compare
     performance claims with alternative implementations in other R
     packages.*
 
@@ -79,29 +99,29 @@ It is important to note for univariate data that single values in R are
 vectors with a length of one, and that `1` is of exactly the same *data
 type* as `1:n`. Given this, inputs expected to be univariate should:
 
-  - **G2.0** *Provide explicit secondary documentation of any
+-   **G2.0** *Provide explicit secondary documentation of any
     expectations on lengths of inputs (generally implying identifying
     whether an input is expected to be single- or multi-valued)*
-  - **G2.1** *Provide explicit secondary documentation of expectations
+-   **G2.1** *Provide explicit secondary documentation of expectations
     on data types of all vector inputs (see the above list).*
-  - **G2.2** *Appropriately prohibit or restrict submission of
+-   **G2.2** *Appropriately prohibit or restrict submission of
     multivariate input to parameters expected to be univariate.*
-  - **G2.3** *For univariate character input:*
-      - **G2.3a** *Use `match.arg()` or equivalent where applicable to
+-   **G2.3** *For univariate character input:*
+    -   **G2.3a** *Use `match.arg()` or equivalent where applicable to
         only permit expected values.*
-      - **G2.3b** *Either: use `tolower()` or equivalent to ensure input
+    -   **G2.3b** *Either: use `tolower()` or equivalent to ensure input
         of character parameters is not case dependent; or explicitly
         document that parameters are strictly case-sensitive.*
-  - **G2.4** *Provide appropriate mechanisms to convert between
+-   **G2.4** *Provide appropriate mechanisms to convert between
     different data types, potentially including:*
-      - **G2.4a** *explicit conversion to `integer` via `as.integer()`*
-      - **G2.4b** *explicit conversion to continuous via `as.numeric()`*
-      - **G2.4c** *explicit conversion to character via `as.character()`
+    -   **G2.4a** *explicit conversion to `integer` via `as.integer()`*
+    -   **G2.4b** *explicit conversion to continuous via `as.numeric()`*
+    -   **G2.4c** *explicit conversion to character via `as.character()`
         (and not `paste` or `paste0`)*
-      - **G2.4d** *explicit conversion to factor via `as.factor()`*
-      - **G2.4e** *explicit conversion from factor via `as...()`
+    -   **G2.4d** *explicit conversion to factor via `as.factor()`*
+    -   **G2.4e** *explicit conversion from factor via `as...()`
         functions*
-  - **G2.5** *Where inputs are expected to be of `factor` type,
+-   **G2.5** *Where inputs are expected to be of `factor` type,
     secondary documentation should explicitly state whether these should
     be `ordered` or not, and those inputs should provide appropriate
     error or other routines to ensure inputs follow these expectations.*
@@ -125,15 +145,15 @@ in one or more of the following forms:
 Given this, tabular inputs may be in one or or more of the following
 forms:
 
-  - `matrix` form when referring to specifically two-dimensional data of
+-   `matrix` form when referring to specifically two-dimensional data of
     one uniform type
-  - `array` form as a more general expression, or when referring to data
+-   `array` form as a more general expression, or when referring to data
     that are not necessarily or strictly two-dimensional
-  - `data.frame`
-  - Extensions such as
-      - [`tibble`](https://tibble.tidyverse.org)
-      - [`data.table`](https://rdatatable.gitlab.io/data.table)
-      - domain-specific classes such as
+-   `data.frame`
+-   Extensions such as
+    -   [`tibble`](https://tibble.tidyverse.org)
+    -   [`data.table`](https://rdatatable.gitlab.io/data.table)
+    -   domain-specific classes such as
         [`tsibble`](https://tsibble.tidyverts.org) for time series, or
         [`sf`](https://r-spatial.github.io/sf/) for spatial data.
 
@@ -144,14 +164,14 @@ classes listed in the final of the above points.
 General Standards applicable to software which is intended to accept any
 one or more of these tabular inputs are then that:
 
-  - **G2.6** *Software should accept as input as many of the above
+-   **G2.6** *Software should accept as input as many of the above
     standard tabular forms as possible, including extension to
     domain-specific forms.*
-  - **G2.7** *Software should provide appropriate conversion routines as
+-   **G2.7** *Software should provide appropriate conversion routines as
     part of initial pre-processing to ensure that all other
     sub-functions of a package receive inputs of a single defined class
     or type.*
-  - **G2.8** *Software should issue diagnostic messages for type
+-   **G2.8** *Software should issue diagnostic messages for type
     conversion in which information is lost (such as conversion of
     variables from factor to character; standardisation of variable
     names; or removal of meta-data such as those associated with
@@ -161,43 +181,41 @@ one or more of these tabular inputs are then that:
 The next standard concerns the following inconsistencies between three
 common tabular classes in regard the column extraction operator, `[`.
 
-``` r
-class (x) # x is any kind of `data.frame` object
-#> [1] "data.frame"
-class (x [, 1])
-#> [1] "integer"
-class (x [, 1, drop = TRUE]) # default
-#> [1] "integer"
-class (x [, 1, drop = FALSE])
-#> [1] "data.frame"
+    class (x) # x is any kind of `data.frame` object
+    #> [1] "data.frame"
+    class (x [, 1])
+    #> [1] "integer"
+    class (x [, 1, drop = TRUE]) # default
+    #> [1] "integer"
+    class (x [, 1, drop = FALSE])
+    #> [1] "data.frame"
 
-x <- tibble::tibble (x)
-class (x [, 1])
-#> [1] "tbl_df"     "tbl"        "data.frame"
-class (x [, 1, drop = TRUE])
-#> [1] "integer"
-class (x [, 1, drop = FALSE]) # default
-#> [1] "tbl_df"     "tbl"        "data.frame"
+    x <- tibble::tibble (x)
+    class (x [, 1])
+    #> [1] "tbl_df"     "tbl"        "data.frame"
+    class (x [, 1, drop = TRUE])
+    #> [1] "integer"
+    class (x [, 1, drop = FALSE]) # default
+    #> [1] "tbl_df"     "tbl"        "data.frame"
 
-x <- data.table::data.table (x)
-class (x [, 1])
-#> [1] "data.table" "data.frame"
-class (x [, 1, drop = TRUE]) # no effect
-#> [1] "data.table" "data.frame"
-class (x [, 1, drop = FALSE]) # default
-#> [1] "data.table" "data.frame"
-```
+    x <- data.table::data.table (x)
+    class (x [, 1])
+    #> [1] "data.table" "data.frame"
+    class (x [, 1, drop = TRUE]) # no effect
+    #> [1] "data.table" "data.frame"
+    class (x [, 1, drop = FALSE]) # default
+    #> [1] "data.table" "data.frame"
 
-  - Extracting a single column from a `data.frame` returns a `vector` by
+-   Extracting a single column from a `data.frame` returns a `vector` by
     default, and a `data.frame` if `drop = FALSE`.
-  - Extracting a single column from a `tibble` returns a single-column
+-   Extracting a single column from a `tibble` returns a single-column
     `tibble` by default, and a `vector` is `drop = TRUE`.
-  - Extracting a single column from a `data.table` always returns a
+-   Extracting a single column from a `data.table` always returns a
     `data.table`, and the `drop` argument has no effect.
 
 Given such inconsistencies,
 
-  - **G2.9** *Software should ensure that extraction or filtering of
+-   **G2.9** *Software should ensure that extraction or filtering of
     single columns from tabular inputs should not presume any particular
     default behaviour, and should ensure all column-extraction
     operations behave consistently regardless of the class of tabular
@@ -209,31 +227,31 @@ regardless of input classes.
 
 #### 2.3 Missing or Undefined Values
 
-  - **G2.10** *Statistical Software should implement appropriate checks
+-   **G2.10** *Statistical Software should implement appropriate checks
     for missing data as part of initial pre-processing prior to passing
     data to analytic algorithms.*
-  - **G2.11** *Where possible, all functions should provide options for
+-   **G2.11** *Where possible, all functions should provide options for
     users to specify how to handle missing (`NA`) data, with options
     minimally including:*
-      - **G2.11a** *error on missing data*
-      - **G2.11b** *ignore missing data with default warnings or
+    -   **G2.11a** *error on missing data*
+    -   **G2.11b** *ignore missing data with default warnings or
         messages issued*
-      - **G2.11c** *replace missing data with appropriately imputed
+    -   **G2.11c** *replace missing data with appropriately imputed
         values*
-  - **G2.12** *Functions should never assume non-missingness, and should
+-   **G2.12** *Functions should never assume non-missingness, and should
     never pass data with potential missing values to any base routines
-    with default `na.rm = FALSE`-type parameters (such as
+    with default `na.rm =   FALSE`-type parameters (such as
     [`mean()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html),
     [`sd()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/sd.html)
     or
     [`cor()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html)).*
-  - **G2.13** *All functions should also provide options to handle
+-   **G2.13** *All functions should also provide options to handle
     undefined values (e.g., `NaN`, `Inf` and `-Inf`), including
     potentially ignoring or removing such values.*
 
 ### 3 Output Structures
 
-  - **G3.0** *Statistical Software which enables outputs to be written
+-   **G3.0** *Statistical Software which enables outputs to be written
     to local files should parse parameters specifying file names to
     ensure appropriate file suffices are automatically generated where
     not provided.*
@@ -249,75 +267,75 @@ useful for testing include [`testthat`](https://testthat.r-lib.org),
 [`roxytest`](https://github.com/mikldk/roxytest), and
 [`xpectr`](https://github.com/LudvigOlsen/xpectr).
 
-  - **G4.0** *Where applicable or practicable, tests should use standard
+-   **G4.0** *Where applicable or practicable, tests should use standard
     data sets with known properties (for example, the [NIST Standard
     Reference Datasets](https://www.itl.nist.gov/div898/strd/), or data
     sets provided by other widely-used R packages).*
-  - **G4.1** *Data sets created within, and used to test, a package
+-   **G4.1** *Data sets created within, and used to test, a package
     should be exported (or otherwise made generally available) so that
     users can confirm tests and run examples.*
 
 For testing *statistical algorithms*, tests should include tests of the
 following types:
 
-  - **G4.2** **Correctness tests** *to test that statistical algorithms
+-   **G4.2** **Correctness tests** *to test that statistical algorithms
     produce expected results to some fixed test data sets (potentially
     through comparisons using binding frameworks such as
     [RStata](https://github.com/lbraglia/RStata)).*
-      - **G4.2a** *For new methods, it can be difficult to separate out
+    -   **G4.2a** *For new methods, it can be difficult to separate out
         correctness of the method from the correctness of the
         implementation, as there may not be reference for comparison. In
         this case, testing may be implemented against simple, trivial
         cases or against multiple implementations such as an initial R
         implementation compared with results from a C/C++
         implementation.*
-      - **G4.2b** *For new implementations of existing methods,
+    -   **G4.2b** *For new implementations of existing methods,
         correctness tests should include tests against previous
         implementations. Such testing may explicitly call those
         implementations in testing, preferably from fixed-versions of
         other software, or use stored outputs from those where that is
         not possible.*
-      - **G4.2c** *Where applicable, stored values may be drawn from
+    -   **G4.2c** *Where applicable, stored values may be drawn from
         published paper outputs when applicable and where code from
         original implementations is not available*
-  - **G4.3** *Correctness tests should be run with a fixed random seed*
-  - **G4.4** **Parameter recovery tests** *to test that the
+-   **G4.3** *Correctness tests should be run with a fixed random seed*
+-   **G4.4** **Parameter recovery tests** *to test that the
     implementation produce expected results given data with known
     properties. For instance, a linear regression algorithm should
     return expected coefficient values for a simulated data set
     generated from a linear model.*
-      - **G4.4a** *Parameter recovery tests should generally be expected
+    -   **G4.4a** *Parameter recovery tests should generally be expected
         to succeed within a defined tolerance rather than recovering
         exact values.*
-      - **G4.4b** *Parameter recovery tests should be run with multiple
+    -   **G4.4b** *Parameter recovery tests should be run with multiple
         random seeds when either data simulation or the algorithm
         contains a random component. (When long-running, such tests may
         be part of an extended, rather than regular, test suite; see
         G4.8-4.10, below).*
-  - **G4.5** **Algorithm performance tests** *to test that
+-   **G4.5** **Algorithm performance tests** *to test that
     implementation performs as expected as properties of data change.
     For instance, a test may show that parameters approach correct
     estimates within tolerance as data size increases, or that
     convergence times decrease for higher convergence thresholds.*
-  - **G4.6** **Edge condition tests** *to test that these conditions
+-   **G4.6** **Edge condition tests** *to test that these conditions
     produce expected behaviour such as clear warnings or errors when
     confronted with data with extreme properties including but not
     limited to:*
-      - **G4.6a** *Zero-length data*
-      - **G4.6b** *Data of unsupported types (e.g., character or complex
+    -   **G4.6a** *Zero-length data*
+    -   **G4.6b** *Data of unsupported types (e.g., character or complex
         numbers in for functions designed only for numeric data)*
-      - **G4.6c** *Data with all-`NA` fields or columns or all identical
+    -   **G4.6c** *Data with all-`NA` fields or columns or all identical
         fields or columns*
-      - **G4.6d** *Data outside the scope of the algorithm (for example,
+    -   **G4.6d** *Data outside the scope of the algorithm (for example,
         data with more fields (columns) than observations (rows) for
         some regression algorithms)*
-  - **G4.7** **Noise susceptibility tests** *Packages should test for
+-   **G4.7** **Noise susceptibility tests** *Packages should test for
     expected stochastic behaviour, such as through the following
     conditions:*
-      - **G4.7a** *Adding trivial noise (for example, at the scale of
+    -   **G4.7a** *Adding trivial noise (for example, at the scale of
         `.Machine$double.eps`) to data does not meaningfully change
         results*
-      - **G4.7b** *Running under different random seeds or initial
+    -   **G4.7b** *Running under different random seeds or initial
         conditions does not meaningfully change results*
 
 #### 4.1 Extended tests
@@ -330,17 +348,17 @@ Software should nevertheless test any and all conditions regardless of
 how long tests may take, and in doing so should adhere to the following
 standards:
 
-  - **G4.8** *Extended tests should included and run under a common
+-   **G4.8** *Extended tests should included and run under a common
     framework with other tests but be switched on by flags such as as a
     `<MYPKG>_EXTENDED_TESTS=1` environment variable.*
-  - **G4.9** *Where extended tests require large data sets or other
+-   **G4.9** *Where extended tests require large data sets or other
     assets, these should be provided for downloading and fetched as part
     of the testing workflow.*
-      - **G4.9a** *When any downloads of additional data necessary for
+    -   **G4.9a** *When any downloads of additional data necessary for
         extended tests fail, the tests themselves should not fail,
         rather be skipped and implicitly succeed with an appropriate
         diagnostic message.*
-  - **G4.10** *Any conditions necessary to run extended tests such as
+-   **G4.10** *Any conditions necessary to run extended tests such as
     platform requirements, memory, expected runtime, and artefacts
     produced that may need manual inspection, should be described in
     developer documentation such as a `CONTRIBUTING.md` or
