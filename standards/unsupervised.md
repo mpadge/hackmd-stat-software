@@ -251,6 +251,7 @@ function](https://stat.ethz.ch/R-manual/R-devel/library/class/html/knn.html).
 (This is intended to illustrate only one of many possible approaches.)
 
     library (class)
+    set.seed (1)
     hc <- hclust (dist (iris [, -5]))
     groups <- cutree (hc, k = 3)
     # function to randomly select part of a data.frame and # add some randomness
@@ -262,7 +263,7 @@ function](https://stat.ethz.ch/R-manual/R-devel/library/class/html/knn.html).
     knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
     knnClust
 
-    ## [1] 2 2 2 2 2
+    ## [1] 2 2 1 1 2
     ## Levels: 1 2 3
 
 The [`stats::prcomp()`
@@ -273,12 +274,12 @@ implements its own `predict()` method which conforms to this standard:
     arrests_new <- sample_df (USArrests, n = 5)
     predict (res, newdata = arrests_new)
 
-    ##                      PC1        PC2        PC3        PC4
-    ## New Jersey     -10.58953  23.517236 -6.3221074 -2.1350470
-    ## Arkansas        18.99369 -15.945005  0.2065052 -0.3248443
-    ## Illinois        79.82822  13.249068 -5.4766072 -1.2075792
-    ## South Carolina 108.36539 -22.512371 -1.3364468 -1.6450465
-    ## Florida        165.46923   6.717845 -2.5958039 -2.1722202
+    ##                      PC1        PC2        PC3       PC4
+    ## North Carolina 165.17494 -30.693263 -11.682811  1.304563
+    ## Maryland       129.44401  -4.132644  -2.161693  1.258237
+    ## Ohio           -49.51994  12.748248   2.104966 -2.777463
+    ## Colorado        35.78896  14.023774  12.869816  1.233391
+    ## Georgia         41.28054  -7.203986   3.987152 -7.818416
 
 #### 3.3 Group Distributions and Associated Statistics
 
