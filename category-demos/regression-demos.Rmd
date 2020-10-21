@@ -139,6 +139,7 @@ documentation. Avoiding such conversion would make no sense here.
 
 `lme4` provides exemplary handling of this case, as illustrated by the following code:
 ```{r lmer2}
+set.seed (1)
 s <- sleepstudy
 s$Reaction [ceiling (runif (1, max = nrow (s)))] <- NA # random NA value in response variable
 m <- lmer(Reaction ~ Days + (Days | Subject), data = s)
