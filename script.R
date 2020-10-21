@@ -46,26 +46,28 @@ add_section_nums <- function (x) {
     return (x)
 }
 
-write_md <- function (file, title, demo){
+write_md <- function (file, demo){
 
     file <- paste0 (tools::file_path_sans_ext (file), ".Rmd")
     rmarkdown::render (file,
                        rmarkdown::md_document(variant='gfm'))
     file <- paste0 (tools::file_path_sans_ext (file), ".md")
 
-    if (title == "standards/bayesian")
+    title <- strsplit (tools::file_path_sans_ext (file),
+                       .Platform$file.sep) [[1]] [2]
+    if (title == "bayesian")
         title <- "Bayesian Software"
-    else if (title == "standards/eda")
+    else if (title == "eda")
         title <- "Exploratory Data Analysis Software"
-    else if (title == "standards/general")
+    else if (title == "general")
         title <- "General Standards"
-    else if (title == "standards/regression")
+    else if (title == "regression")
         title <- "Regression Software"
-    else if (title == "standards/time-series")
+    else if (title == "time-series")
         title <- "Time Series Software"
-    else if (title == "standards/unsupervised")
+    else if (title == "unsupervised")
         title <- "Unsupervised Learning Software"
-    else if (title == "standards/ml")
+    else if (title == "ml")
         title <- "Machine Learning Software"
     
     if (tolower (demo) == "true")
@@ -91,4 +93,4 @@ write_md <- function (file, title, demo){
     close (con)
 }
 
-write_md (paste0 (args [1], ".Rmd"), args [1], args [2])
+write_md (args [1], args [2])
