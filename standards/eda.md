@@ -7,7 +7,8 @@ robots: noindex, nofollow
 
 <!-- Edit the .Rmd not the .md file -->
 
-## Exploratory Data Analysis
+Exploratory Data Analysis
+-------------------------
 
 Exploration is a part of all data analyses, and Exploratory Data
 Analysis (EDA) is not something that is entered into and exited from at
@@ -21,10 +22,10 @@ EDA is nevertheless somewhat different to many other categories included
 within rOpenSci’s program for peer-reviewing statistical software.
 Primary differences include:
 
-  - EDA software often has a strong focus upon visualization, which is a
+-   EDA software often has a strong focus upon visualization, which is a
     category which we have otherwise explicitly excluded from the scope
     of the project at the present stage.
-  - The assessment of EDA software requires addressing more general
+-   The assessment of EDA software requires addressing more general
     questions than software in most other categories, notably including
     the important question of intended audience(s).
 
@@ -45,22 +46,22 @@ function-level documentation.
 The *Primary Documentation* (`README` and/or vignette(s)) of EDA
 software should:
 
-  - **EA1.0** *Identify one or more target audiences for whom the
+-   **EA1.0** *Identify one or more target audiences for whom the
     software is intended*
-  - **EA1.1** *Identify the kinds of data the software is capable of
+-   **EA1.1** *Identify the kinds of data the software is capable of
     analysing (see *Kinds of Data\* below).\*
-  - **EA1.2** *Identify the kinds of questions the software is intended
+-   **EA1.2** *Identify the kinds of questions the software is intended
     to help explore; for example, are these questions:*
-      - *inferential?*
-      - *predictive?*
-      - *associative?*
-      - *causal?*
-      - *(or other modes of statistical enquiry?)*
+    -   *inferential?*
+    -   *predictive?*
+    -   *associative?*
+    -   *causal?*
+    -   *(or other modes of statistical enquiry?)*
 
 The *Secondary Documentation* (within individual functions) of EDA
 software should:
 
-  - **EA1.3** *Identify the kinds of data each function is intended to
+-   **EA1.3** *Identify the kinds of data each function is intended to
     accept as input*
 
 ### 2 Input Data
@@ -84,32 +85,32 @@ columns ensure the universal applicability of standard table join
 operations, such as those implemented via the [`dplyr`
 package](https://dplyr.tidyverse.org).
 
-  - **EA2.0** *EDA Software which accepts standard rectangular data and
+-   **EA2.0** *EDA Software which accepts standard tabular data and
     implements or relies upon extensive table filter and join operations
     should utilise an **index column** system*
-  - **EA2.1** *All values in an index column must be unique, and this
+-   **EA2.1** *All values in an index column must be unique, and this
     uniqueness should be affirmed as a pre-processing step for all input
     data.*
-  - **EA2.2** *Index columns should be explicitly identified, either:*
-      - **EA2.2a** *by using an appropriate class system, or*
-      - **EA2.2b** *through setting an `attribute` on a table, `x`, of
+-   **EA2.2** *Index columns should be explicitly identified, either:*
+    -   **EA2.2a** *by using an appropriate class system, or*
+    -   **EA2.2b** *through setting an `attribute` on a table, `x`, of
         `attr(x, "index") <- <index_col_name>`.*
 
 For EDA software which either implements custom classes or explicitly
 sets attributes specifying index columns, these attributes should be
 used as the basis of all table join operations, and in particular:
 
-  - **EA2.3** *Table join operations should not be based on any assumed
+-   **EA2.3** *Table join operations should not be based on any assumed
     variable or column names*
 
 #### 2.2 Multi-tabular input
 
 EDA software designed to accept multi-tabular input should:
 
-  - **EA2.4** *Use and demand an explicit class system for such input
+-   **EA2.4** *Use and demand an explicit class system for such input
     (for example, via the [`DM`
     package](https://github.com/krlmlr/dm)).*
-  - **EA2.5** *Ensure all individual tables follow the above standards
+-   **EA2.5** *Ensure all individual tables follow the above standards
     for Index Columns*
 
 #### 2.3 Classes and Sub-Classes
@@ -121,58 +122,54 @@ components of input objects (for example, of columns of an input
 general vector formats (see *Uni-variate Input* section of *General
 Standards*) should ensure:
 
-  - **EA2.6** *Routines appropriately process vector input of custom
+-   **EA2.6** *Routines appropriately process vector input of custom
     classes, including those which do not inherit from the `vector`
     class*
-  - **EA2.7** *Routines should appropriately process vector data
+-   **EA2.7** *Routines should appropriately process vector data
     regardless of additional attributes*
 
 The following code illustrates some ways by which “metadata” defining
 classes and additional attributes associated with a standard vector
 object may by modified.
 
-``` r
-x <- 1:10
-class (x) <- "notvector"
-attr (x, "extra_attribute") <- "another attribute"
-attr (x, "vector attribute") <- runif (5)
-attributes (x)
-#> $class
-#> [1] "notvector"
-#> 
-#> $extra_attribute
-#> [1] "another attribute"
-#> 
-#> $`vector attribute`
-#> [1] 0.03521663 0.49418081 0.60129563 0.75804346 0.16073301
-```
+    x <- 1:10
+    class (x) <- "notvector"
+    attr (x, "extra_attribute") <- "another attribute"
+    attr (x, "vector attribute") <- runif (5)
+    attributes (x)
+    #> $class
+    #> [1] "notvector"
+    #> 
+    #> $extra_attribute
+    #> [1] "another attribute"
+    #> 
+    #> $`vector attribute`
+    #> [1] 0.03521663 0.49418081 0.60129563 0.75804346 0.16073301
 
 All statistical software should appropriately deal with such input data,
 as exemplified by the `storage.mode()`, `length()`, and `sum()`
 functions of the `base` package, which return the appropriate values
 regardless of redefinition of class or additional attributes.
 
-``` r
-storage.mode (x)
-#> [1] "integer"
-length (x)
-#> [1] 10
-sum (x)
-#> [1] 55
-storage.mode (sum (x))
-#> [1] "integer"
-```
+    storage.mode (x)
+    #> [1] "integer"
+    length (x)
+    #> [1] 10
+    sum (x)
+    #> [1] 55
+    storage.mode (sum (x))
+    #> [1] "integer"
 
-Rectangular inputs in `data.frame` class may contain columns which are
+Tabular inputs in `data.frame` class may contain columns which are
 themselves defined by custom classes, and which possess additional
-attributes. EDA Software which accepts rectangular inputs should
-accordingly ensure:
+attributes. EDA Software which accepts tabular inputs should accordingly
+ensure:
 
-  - **EA2.8** *EDA routines appropriately process rectangular input of
+-   **EA2.8** *EDA routines appropriately process tabular input of
     custom classes, ideally by means of a single pre-processing routine
-    which converts rectangular input to some standard form subsequently
+    which converts tabular input to some standard form subsequently
     passed to all analytic routines.*
-  - **EA2.9** *EDA routines accept and appropriately process rectangular
+-   **EA2.9** *EDA routines accept and appropriately process tabular
     input in which individual columns may be of custom sub-classes
     including additional attributes.*
 
@@ -183,14 +180,14 @@ Software.)
 
 ### 4 Return Results / Output Data
 
-  - **EA4.0** *EDA Software should ensure all return results have types
+-   **EA4.0** *EDA Software should ensure all return results have types
     which are consistent with input types. For example, `sum`, `min`, or
     `max` values applied to `integer`-type vectors should return
     `integer` values, while `mean` or `var` will generally return
     `numeric` types.*
-  - **EA4.1** *EDA Software should implement parameters to enable
+-   **EA4.1** *EDA Software should implement parameters to enable
     explicit control of numeric precision*
-  - **EA4.2** *The primary routines of EDA Software should return
+-   **EA4.2** *The primary routines of EDA Software should return
     objects for which default `print` and `plot` methods give sensible
     results. Default `summary` methods may also be implemented.*
 
@@ -209,30 +206,30 @@ visualization, where the latter includes interactive visualization.
 Prior to these individual sub-categories, we consider a few standards
 applicable to visualization in general, whether static or dynamic.
 
-  - **EA5.0** *Graphical presentation in EDA software should be as
+-   **EA5.0** *Graphical presentation in EDA software should be as
     accessible as possible or practicable. In particular, EDA software
     should consider accessibility in terms of:*
-      - **EA5.0a** \*Typeface sizes should default to sizes which
+    -   **EA5.0a** \*Typeface sizes should default to sizes which
         explicitly enhance accessibility
-      - **EA5.0b** Default colour schemes should be carefully
+    -   **EA5.0b** Default colour schemes should be carefully
         constructed to ensure accessibility.\*
-  - **EA5.1** *Any explicit specifications of typefaces which override
+-   **EA5.1** *Any explicit specifications of typefaces which override
     default values should consider accessibility*
 
 #### 5.1 Summary and Screen-based Output
 
-  - **EA5.2** *Screen-based output should never rely on default print
+-   **EA5.2** *Screen-based output should never rely on default print
     formatting of `numeric` types, rather should also use some version
     of `round(., digits)`, `formatC`, `sprintf`, or similar functions
     for numeric formatting according the parameter described in EDA4.2.*
-  - **EA5.3** *Column-based summary statistics should always indicate
+-   **EA5.3** *Column-based summary statistics should always indicate
     the `storage.mode`, `class`, or equivalent defining attribute of
     each column (as, for example, implemented in the default
     `print.tibble` method).*
 
 #### 5.2 General Standards for Visualization (Static and Dynamic)
 
-  - **EA5.4** *All visualisations should include units on all axes, with
+-   **EA5.4** *All visualisations should include units on all axes, with
     sensibly rounded values (for example, as produced by the `pretty()`
     function).*
 
@@ -245,7 +242,7 @@ apply to the code itself, rather only to decisions present as
 user-controlled parameters exposed within the R environment. That said,
 one standard may nevertheless be applied, with an aim to minimise
 
-  - **EA5.5** *Any packages which internally bundle libraries used for
+-   **EA5.5** *Any packages which internally bundle libraries used for
     dynamic visualization and which are also bundled in other,
     pre-existing R packages, should explain the necessity and advantage
     of re-bundling that library.*

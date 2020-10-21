@@ -7,31 +7,24 @@ robots: noindex, nofollow
 
 <!-- Edit the .Rmd not the .md file -->
 
-## Bayesian and Monte Carlo Software
+Bayesian and Monte Carlo Software
+---------------------------------
 
 Bayesian and Monte Carlo Software (hereafter referred to for simplicity
 as “Bayesian Software”) is presumed to perform one or more of the
 following steps:
 
-  - 1.  Document how to specify inputs including:
-    
-    <!-- end list -->
-    
-      - 1.1 Data
-      - 1.2 Hyperparameters determining prior distributions
-      - 1.3 Parameters determining the computational processes
-
-  - 2.  Accept and validate all of forms of input
-
-  - 3.  Apply data transformation and pre-processing steps
-
-  - 4.  Apply one or more analytic algorithms, generally sampling
-        algorithms used to generate estimates of posterior distributions
-
-  - 5.  Return the result of that algorithmic application
-
-  - 6.  Offer additional functionality such as printing or summarising
-        return results
+1.  Document how to specify inputs including:
+    -   1.1 Data
+    -   1.2 Hyperparameters determining prior distributions
+    -   1.3 Parameters determining the computational processes
+2.  Accept and validate all of forms of input
+3.  Apply data transformation and pre-processing steps
+4.  Apply one or more analytic algorithms, generally sampling algorithms
+    used to generate estimates of posterior distributions
+5.  Return the result of that algorithmic application
+6.  Offer additional functionality such as printing or summarising
+    return results
 
 This document details standards for each of these steps, each prefixed
 with “BS”.
@@ -41,7 +34,7 @@ with “BS”.
 Prior to actual standards for documentation of inputs, we note one
 terminological standard for Bayesian software:
 
-  - **BS1.0** *Bayesian software should use the term “hyperparameter”
+-   **BS1.0** *Bayesian software should use the term “hyperparameter”
     exclusively to refer to parameters determining the form of prior
     distributions, and should use either the generic term “parameter” or
     some conditional variant(s) such as “computation parameters” to
@@ -50,37 +43,37 @@ terminological standard for Bayesian software:
 Bayesian Software should provide the following documentation of how to
 specify inputs:
 
-  - **BS1.1** *Description of how to enter data, both in textual form
+-   **BS1.1** *Description of how to enter data, both in textual form
     and via code examples. Both of these should consider the simplest
     cases of single objects representing independent and dependent data,
     and potentially more complicated cases of multiple independent data
     inputs.*
-  - **BS1.2** *Description of how to specify prior distributions, both
+-   **BS1.2** *Description of how to specify prior distributions, both
     in textual form describing the general principles of specifying
     prior distributions, along with more applied descriptions and
     examples, within:*
-      - **B31.2a** *The main package `README`, either as textual
+    -   **B31.2a** *The main package `README`, either as textual
         description or example code*
-      - **B31.2b** *At least one package vignette, both as general and
+    -   **B31.2b** *At least one package vignette, both as general and
         applied textual descriptions, and example code*
-      - **B31.2c** *Function-level documentation, preferably with code
+    -   **B31.2c** *Function-level documentation, preferably with code
         included in examples*
-  - **BS1.3** *Description of all parameters which control the
+-   **BS1.3** *Description of all parameters which control the
     computational process (typically those determining aspects such as
     numbers and lengths of sampling processes, seeds used to start them,
     thinning parameters determining post-hoc sampling from simulated
     values, and convergence criteria). In particular:*
-      - **BS1.3a** *Bayesian Software should document, both in text and
+    -   **BS1.3a** *Bayesian Software should document, both in text and
         examples, how to use the output of previous simulations as
         starting points of subsequent simulations.*
-      - **BS1.3b** *Where applicable, Bayesian software should document,
+    -   **BS1.3b** *Where applicable, Bayesian software should document,
         both in text and examples, how to use different sampling
         algorithms for a given model.*
-  - **BS1.4** *For Bayesian Software which implements or otherwise
+-   **BS1.4** *For Bayesian Software which implements or otherwise
     enables convergence checkers, documentation should explicitly
     describe and provide examples of use with and without convergence
     checkers.*
-  - **BS1.5** *For Bayesian Software which implements or otherwise
+-   **BS1.5** *For Bayesian Software which implements or otherwise
     enables multiple convergence checkers, differences between these
     should be explicitly tested.*
 
@@ -97,7 +90,7 @@ two-dimensional forms such as vector, matrix, or `data.frame` objects.
 The first standards concerns the range of possible generic forms for
 input *data*:
 
-  - **BS2.0** *Bayesian Software which accepts one-dimensional input
+-   **BS2.0** *Bayesian Software which accepts one-dimensional input
     should ensure values are appropriately pre-processed regardless of
     class structures. The [`units`
     package](https://github.com/r-quantities/units/) provides a good
@@ -107,27 +100,27 @@ input *data*:
     The `storage.mode` of the underlying objects may nevertheless be
     examined, and the objects transformed or processed accordingly to
     ensure such inputs do not lead to errors.*
-  - **BS2.1** *Bayesian Software which accepts two-dimension input
+-   **BS2.1** *Bayesian Software which accepts two-dimension input
     should implement pre-processing routines to ensure conversion of as
     many possible forms as possible to some standard format which is
     then passed to all analytic functions. In particular, tests should
     demonstrate that:*
-      - **BS2.1a** *`data.frame` or equivalent objects which have
+    -   **BS2.1a** *`data.frame` or equivalent objects which have
         columns which do not themselves have standard class attributes
         (typically, `vector`) are appropriately processed, and do not
         error without reason. This behaviour should be tested. Again,
         columns created by the [`units`
         package](https://github.com/r-quantities/units/) provide a good
         test case.*
-      - **BS2.1b** *`data.frame` or equivalent objects which have list
+    -   **BS2.1b** *`data.frame` or equivalent objects which have list
         columns should ensure that those columns are appropriately
         pre-processed either through being removed, converted to
         equivalent vector columns where appropriate, or some other
         appropriate treatment. This behaviour should be tested.*
-  - **BS2.2** *Bayesian Software should implement pre-processing
+-   **BS2.2** *Bayesian Software should implement pre-processing
     routines to ensure all input data is dimensionally commensurate, for
     example by ensuring commensurate lengths of vectors or numbers of
-    rows of rectangular inputs.*
+    rows of tabular inputs.*
 
 #### 2.2 Prior Distributions, Model Specifications, and Hyperparameters
 
@@ -148,17 +141,17 @@ distribution.
 
 Bayesian Software should:
 
-  - **BS2.3** *Ensure that all appropriate validation and pre-processing
+-   **BS2.3** *Ensure that all appropriate validation and pre-processing
     of hyperparameters are implemented as distinct pre-processing steps
     prior to submitting to analytic routines, and especially prior to
     submitting to multiple parallel computational chains.*
-  - **BS2.4** *Ensure that lengths of hyperparameter vectors are
+-   **BS2.4** *Ensure that lengths of hyperparameter vectors are
     checked, with no excess values silently discarded (unless such
     output is explicitly suppressed, as detailed below).*
-  - **BS2.5** *Ensure that lengths of hyperparameter vectors are
+-   **BS2.5** *Ensure that lengths of hyperparameter vectors are
     commensurate with expected model input (see example immediately
     below)*
-  - **BS2.6** *Where possible, implement pre-processing checks to
+-   **BS2.6** *Where possible, implement pre-processing checks to
     validate appropriateness of numeric values submitted for
     hyperparameters; for example, by ensuring that hyperparameters
     defining second-order moments such as distributional variance or
@@ -170,9 +163,7 @@ The following example demonstrates how standards like the above
 defines a log-likelihood estimator for a linear regression, controlled
 via a vector of three hyperparameters, `p`:
 
-``` r
-ll <- function (x, y, p) dnorm (y - (p[1] + x * p[2]), sd = p[3], log = TRUE)
-```
+    ll <- function (x, y, p) dnorm (y - (p[1] + x * p[2]), sd = p[3], log = TRUE)
 
 Pre-processing stages should be used to determine:
 
@@ -191,9 +182,7 @@ primarily through the
 function from the `utils` package. The parse data for a function can be
 extracted with the following line:
 
-``` r
-x <- getParseData (parse (text = deparse (ll)))
-```
+    x <- getParseData (parse (text = deparse (ll)))
 
 The object `x` is a `data.frame` of every R token (such as an
 expression, symbol, or operator) parsed from the function `ll`. The
@@ -201,13 +190,9 @@ following section illustrates how this data can be used to determine the
 expected lengths of vector inputs to the function, `ll()`.
 
 <details>
-
 <summary>
-
 click to see details
-
 </summary>
-
 <p>
 
 Input arguments used to define parameter vectors in any R software are
@@ -218,52 +203,47 @@ closing `]`. The following code can be used to extract elements of the
 parse data which match this pattern, and ultimately to extract the
 various values of `i` used to access members of `vec`.
 
-``` r
-vector_length <- function (x, i) {
-    xn <- x [which (x$token %in% c ("SYMBOL", "NUM_CONST", "'['", "']'")), ]
-    # split resultant data.frame at first "SYMBOL" entry
-    xn <- split (xn, cumsum (xn$token == "SYMBOL"))
-    # reduce to only those matching the above pattern
-    xn <- xn [which (vapply (xn, function (j)
-                             j$text [1] == i & nrow (j) > 3,
-                             logical (1)))]
-    ret <- NA_integer_ # default return value
-    if (length (xn) > 0) {
-        # get all values of NUM_CONST as integers
-        n <- vapply (xn, function (j)
-                         as.integer (j$text [j$token == "NUM_CONST"] [1]),
-                         integer (1), USE.NAMES = FALSE)
-        # and return max of these
-        ret <- max (n)
+    vector_length <- function (x, i) {
+        xn <- x [which (x$token %in% c ("SYMBOL", "NUM_CONST", "'['", "']'")), ]
+        # split resultant data.frame at first "SYMBOL" entry
+        xn <- split (xn, cumsum (xn$token == "SYMBOL"))
+        # reduce to only those matching the above pattern
+        xn <- xn [which (vapply (xn, function (j)
+                                 j$text [1] == i & nrow (j) > 3,
+                                 logical (1)))]
+        ret <- NA_integer_ # default return value
+        if (length (xn) > 0) {
+            # get all values of NUM_CONST as integers
+            n <- vapply (xn, function (j)
+                             as.integer (j$text [j$token == "NUM_CONST"] [1]),
+                             integer (1), USE.NAMES = FALSE)
+            # and return max of these
+            ret <- max (n)
+        }
+        return (ret)
     }
-    return (ret)
-}
-```
 
 That function can then be used to determine the length of any inputs
 which are used as hyperparameter vectors:
 
-``` r
-ll <- function (p, x, y) dnorm (y - (p[1] + x * p[2]), sd = p[3], log = TRUE)
-p <- parse (text = deparse (ll))
-x <- utils::getParseData (p)
+    ll <- function (p, x, y) dnorm (y - (p[1] + x * p[2]), sd = p[3], log = TRUE)
+    p <- parse (text = deparse (ll))
+    x <- utils::getParseData (p)
 
-# extract the names of the parameters:
-params <- unique (x$text [x$token == "SYMBOL"])
-lens <- vapply (params, function (i) vector_length (x, i), integer (1))
-lens
-#>  y  p  x 
-#> NA  3 NA
-```
+    # extract the names of the parameters:
+    params <- unique (x$text [x$token == "SYMBOL"])
+    lens <- vapply (params, function (i) vector_length (x, i), integer (1))
+    lens
+    #>  y  p  x 
+    #> NA  3 NA
 
 And the vector `p` is used as a hyperparameter vector containing three
 parameters. Any initial value vectors can then be examined to ensure
 that they have this same length.
 
------
+------------------------------------------------------------------------
 
 </p>
-
 </details>
 
 <br>
@@ -291,18 +271,18 @@ convergence criteria. All Computational Parameters should be checked for
 general “sanity” prior to calling primary computational algorithms. The
 standards for such sanity checks include that Bayesian Software should:
 
-  - **BS2.7** *Check that values for parameters are positive (except
+-   **BS2.7** *Check that values for parameters are positive (except
     where negative values may be accepted)*
-  - **BS2.8** *Check lengths and/or dimensions of inputs, and either
+-   **BS2.8** *Check lengths and/or dimensions of inputs, and either
     automatically reject or provide appropriate diagnostic messaging for
     parameters of inappropriate length or dimension; for example passing
-    a vector of length \> 1 to a parameter presumed to define a single
+    a vector of length &gt; 1 to a parameter presumed to define a single
     value (unless such output is explicitly suppressed, as detailed
     below)*
-  - **BS2.9** *Check that arguments are of expected classes or types
+-   **BS2.9** *Check that arguments are of expected classes or types
     (for example, check that `integer`-type arguments are indeed
     `integer`, with explicit conversion via `as.integer` where not)*
-  - **BS2.10** *Automatically reject parameters of inappropriate type
+-   **BS2.10** *Automatically reject parameters of inappropriate type
     (for example `character` values passed for `integer`-type parameters
     that are unable to be appropriately converted).*
 
@@ -313,20 +293,20 @@ computational parameters.
 
 Bayesian software should:
 
-  - **BS2.11** *Enable seeds to be passed as a parameter (through a
+-   **BS2.11** *Enable seeds to be passed as a parameter (through a
     direct `seed` argument or similar), or as a vector of parameters,
     one for each chain.*
-  - **BS2.12** *Enable results of previous runs to be used as starting
+-   **BS2.12** *Enable results of previous runs to be used as starting
     points for subsequent runs*
 
 Bayesian Software which implements parallel processing should:
 
-  - **BS2.13** *Ensure each chain is started with a different seed by
+-   **BS2.13** *Ensure each chain is started with a different seed by
     default*
-  - **BS2.14** *Issue diagnostic messages when identical seeds are
+-   **BS2.14** *Issue diagnostic messages when identical seeds are
     passed to distinct computational chains*
-  - **BS2.15** *Explicitly document advice *not\* to use `set.seed()`\*
-  - **BS2.16** *Provide the parameter with a *plural\* name: for
+-   **BS2.15** *Explicitly document advice *not\* to use `set.seed()`\*
+-   **BS2.16** *Provide the parameter with a *plural\* name: for
     example, “starting\_values” and not “starting\_value”\*
 
 To avoid potential confusion between separate parameters to control
@@ -341,16 +321,16 @@ control output verbosity. Bayesian computations are often
 time-consuming, and often performed as batch computations. The following
 standards should be adhered to in regard to output verbosity:
 
-  - **BS2.17** *Bayesian Software should implement at least one
+-   **BS2.17** *Bayesian Software should implement at least one
     parameter controlling the verbosity of output, defaulting to verbose
     output of all appropriate messages, warnings, errors, and progress
     indicators.*
-  - **BS2.18** *Bayesian Software should enable suppression of messages
+-   **BS2.18** *Bayesian Software should enable suppression of messages
     and progress indicators, while retaining verbosity of warnings and
     errors. This should be tested.*
-  - **BS2.19** *Bayesian Software should enable suppression of warnings
+-   **BS2.19** *Bayesian Software should enable suppression of warnings
     where appropriate. This should be tested.*
-  - **BS2.20** *Bayesian Software should explicitly enable errors to be
+-   **BS2.20** *Bayesian Software should explicitly enable errors to be
     caught, and appropriately processed either through conversion to
     warnings, or otherwise captured in return values. This should be
     tested.*
@@ -361,11 +341,11 @@ standards should be adhered to in regard to output verbosity:
 
 Bayesian Software should:
 
-  - **BS3.0** *Explicitly document assumptions made in regard to missing
+-   **BS3.0** *Explicitly document assumptions made in regard to missing
     values; for example that data is assumed to contain no missing
     (`NA`, `Inf`) values, and that such values, or entire rows including
     any such values, will be automatically removed from input data.*
-  - **BS3.1** *Implement appropriate routines to pre-process missing
+-   **BS3.1** *Implement appropriate routines to pre-process missing
     values prior to passing data through to main computational
     algorithms.*
 
@@ -373,10 +353,10 @@ Bayesian Software should:
 
 Where appropriate, Bayesian Software should:
 
-  - **BS3.2** *Implement pre-processing routines to diagnose perfect
+-   **BS3.2** *Implement pre-processing routines to diagnose perfect
     collinearity, and provide appropriate diagnostic messages or
     warnings*
-  - **BS3.3** *Provide distinct routines for processing perfectly
+-   **BS3.3** *Provide distinct routines for processing perfectly
     collinear data, potentially bypassing sampling algorithms*
 
 An appropriate test for BS3.3 would confirm that `system.time()` or
@@ -395,16 +375,16 @@ sampling algorithms, and not all Bayesian Software will internally
 implement sampling algorithms. The following standards apply to packages
 which do implement internal sampling algorithms:
 
-  - **BS4.0** *Packages should document sampling algorithms (generally
+-   **BS4.0** *Packages should document sampling algorithms (generally
     via literary citation, or reference to other software)*
-  - **BS4.1** *Packages should provide explicit comparisons with
+-   **BS4.1** *Packages should provide explicit comparisons with
     external samplers which demonstrate intended advantage of
     implementation (generally via tests, vignettes, or both).*
 
 Regardless of whether or not Bayesian Software implements internal
 sampling algorithms, it should:
 
-  - **BS4.2** *Implement at least one means to validate posterior
+-   **BS4.2** *Implement at least one means to validate posterior
     estimates (for example through the functionality of the
     [`BayesValidate`
     package](https://cran.r-project.org/package=BayesValidate), noting
@@ -416,18 +396,18 @@ sampling algorithms, it should:
 
 Where possible or applicable, Bayesian Software should:
 
-  - **BS4.3** *Implement at least one type of convergence checker, and
+-   **BS4.3** *Implement at least one type of convergence checker, and
     provide a documented reference for that implementation.*
-  - **BS4.3** *Enable computations to be stopped on convergence
+-   **BS4.3** *Enable computations to be stopped on convergence
     (although not necessarily by default).*
-  - **BS4.5** *Ensure that appropriate mechanisms are provided for
+-   **BS4.5** *Ensure that appropriate mechanisms are provided for
     models which do not converge. This is often achieved by having
     default behaviour to stop after specified numbers of iterations
     regardless of convergence.*
-  - **BS4.6** *Implement tests to confirm that results with convergence
+-   **BS4.6** *Implement tests to confirm that results with convergence
     checker are statistically equivalent to results from equivalent
     fixed number of samples without convergence checking.*
-  - **BS4.7** *Where convergence checkers are themselves parametrised,
+-   **BS4.7** *Where convergence checkers are themselves parametrised,
     the effects of such parameters should also be tested. For threshold
     parameters, for example, lower values should result in longer
     sequence lengths.*
@@ -442,58 +422,59 @@ combined into a single object through implementing a defined class
 structure, although other options are possible, including (re-)using
 extant class structures (see the CRAN Task view on [Bayesian
 Inference](https://cran.r-project.org/web/views/TimeSeries.html).
-<https://cran.r-project.org/web/views/Bayesian.html>) for reference to
-other packages and class systems). Regardless of the precise form of
-return object, and whether or not defined class structures are used or
-implemented, the objects returned from Bayesian Software should include:
+<a href="https://cran.r-project.org/web/views/Bayesian.html" class="uri">https://cran.r-project.org/web/views/Bayesian.html</a>)
+for reference to other packages and class systems). Regardless of the
+precise form of return object, and whether or not defined class
+structures are used or implemented, the objects returned from Bayesian
+Software should include:
 
-  - **BS5.0** *Seed(s) or starting value(s), including values for each
+-   **BS5.0** *Seed(s) or starting value(s), including values for each
     sequences where multiple sequences are included*
-  - **BS5.1** *Appropriate metadata on types (or classes) and dimensions
+-   **BS5.1** *Appropriate metadata on types (or classes) and dimensions
     of input data*
 
 With regard to the input function, or alternative means of specifying
 prior distributions:
 
-  - **BS5.2** *Bayesian Software should either:*
-      - **BS5.2a** *Return the input function or prior distributional
+-   **BS5.2** *Bayesian Software should either:*
+    -   **BS5.2a** *Return the input function or prior distributional
         specification in the return object; or*
-      - **BS5.2b** *Enable direct access to such via additional
+    -   **BS5.2b** *Enable direct access to such via additional
         functions which accept the return object as single argument.*
 
 Where convergence checkers are implemented or provided, Bayesian
 Software should:
 
-  - **BS5.3** *Return convergence statistics or equivalent*
-  - **BS5.4** *Where multiple checkers are enabled, return details of
+-   **BS5.3** *Return convergence statistics or equivalent*
+-   **BS5.4** *Where multiple checkers are enabled, return details of
     convergence checker used*
-  - **BS5.5** *Appropriate diagnostic statistics to indicate absence of
+-   **BS5.5** *Appropriate diagnostic statistics to indicate absence of
     convergence are either returned or immediately able to be accessed.*
 
 ### 6 Additional Functionality
 
 Bayesian Software should:
 
-  - **BS6.0** *Implement a default `print` method for return objects*
-  - **BS6.1** *Implement a default `plot` method for return objects*
-  - **BS6.2** *Provide and document straightforward abilities to plot
+-   **BS6.0** *Implement a default `print` method for return objects*
+-   **BS6.1** *Implement a default `plot` method for return objects*
+-   **BS6.2** *Provide and document straightforward abilities to plot
     sequences of posterior samples, with burn-in periods clearly
     distinguished*
-  - **BS6.3** *Provide and document straightforward abilities to plot
+-   **BS6.3** *Provide and document straightforward abilities to plot
     posterior distributional estimates*
 
 Bayesian Software may:
 
-  - **BS6.4** *Provide `summary` methods for return objects*
-  - **BS6.5** *Provide abilities to plot both sequences of posterior
+-   **BS6.4** *Provide `summary` methods for return objects*
+-   **BS6.5** *Provide abilities to plot both sequences of posterior
     samples and distributional estimates together in single graphic*
 
 ### 7 Tests
 
-  - Parameter recovery tests:
-      - Recover the prior with no data or data with no information,
+-   Parameter recovery tests:
+    -   Recover the prior with no data or data with no information,
         especially where priors are implicit.  
-      - Even in empirical Bayes, recover the estimated prior
-      - Recover posterior given expected data *and* prior
-  - Algorithmic scaling tests with data - is it linear, log, etc
-  - Test for prediction/fitted values on same scale as input values
+    -   Even in empirical Bayes, recover the estimated prior
+    -   Recover posterior given expected data *and* prior
+-   Algorithmic scaling tests with data - is it linear, log, etc
+-   Test for prediction/fitted values on same scale as input values

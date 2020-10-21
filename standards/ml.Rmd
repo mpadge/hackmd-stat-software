@@ -723,4 +723,3 @@ by iterating over the rows of that output.
     - **ML7.11a** Tests which compare metrics should do so over a range of
       inputs (generally implying differently trained models) to demonstrate
       relative advantages and disadvantages of different metrics.
-

@@ -7,14 +7,15 @@ robots: noindex, nofollow
 
 <!-- Edit the .Rmd not the .md file -->
 
-## Dimensionality Reduction, Clustering, and Unsupervised Learning
+Dimensionality Reduction, Clustering, and Unsupervised Learning
+---------------------------------------------------------------
 
 This document details standards for Dimensionality Reduction,
 Clustering, and Unsupervised Learning Software – referred to from here
 on for simplicity as “Unsupervised Learning Software”. Software in this
 category is distinguished from Regression Software though the latter
 aiming to construct or analyse one or more mappings between two defined
-data sets (for example, a set of “independent” data, \(X\), and a set of
+data sets (for example, a set of “independent” data, *X*, and a set of
 “dependent” data, “Y”), whereas Unsupervised Learning Software aims to
 construct or analyse one or more mappings between a defined set of input
 or independent data, and a second set of “output” data which are not
@@ -29,13 +30,13 @@ algorithms.
 
 ### 1 Input Data Structures and Validation
 
-  - **UL1.0** *Unsupervised Learning Software should explicitly document
+-   **UL1.0** *Unsupervised Learning Software should explicitly document
     expected format (types or classes) for input data, including
     descriptions of types or classes which are not accepted; for
     example, specification that software accepts only numeric inputs in
     `vector` or `matrix` form, or that all inputs must be in
     `data.frame` form with both column and row names.*
-  - **UL1.1** *Unsupervised Learning Software should provide distinct
+-   **UL1.1** *Unsupervised Learning Software should provide distinct
     sub-routines to assert that all input data is of the expected form,
     and issue informative error messages when incompatible data are
     submitted.*
@@ -43,11 +44,9 @@ algorithms.
 The following code demonstrates an example of a routine from the base
 `stats` package which fails to meet this standard.
 
-``` r
-d <- dist (USArrests) # example from help file for 'hclust' function
-hc <- hclust (d) # okay
-hc <- hclust (as.matrix (d))
-```
+    d <- dist (USArrests) # example from help file for 'hclust' function
+    hc <- hclust (d) # okay
+    hc <- hclust (as.matrix (d))
 
     ## Error in if (is.na(n) || n > 65536L) stop("size cannot be NA nor exceed 65536"): missing value where TRUE/FALSE needed
 
@@ -55,7 +54,7 @@ The latter fails, yet issues an uninformative error message that clearly
 indicates a failure to provide sufficient checks on the class of input
 data.
 
-  - **UL1.2** *Unsupervised learning which uses row or column names to
+-   **UL1.2** *Unsupervised learning which uses row or column names to
     label output objects should assert that input data have non-default
     row or column names, and issue an informative message when these are
     not provided. (Such messages need not necessarily be provided by
@@ -64,10 +63,8 @@ data.
 The following code provides simple examples of checks whether row and
 column names appear to have generic default values.
 
-``` r
-x <- data.frame (matrix (1:10, ncol = 2))
-x
-```
+    x <- data.frame (matrix (1:10, ncol = 2))
+    x
 
     ##   X1 X2
     ## 1  1  6
@@ -79,9 +76,7 @@ x
 Generic row names are almost always simple integer sequences, which the
 following condition confirms.
 
-``` r
-identical (rownames (x), as.character (seq (nrow (x))))
-```
+    identical (rownames (x), as.character (seq (nrow (x))))
 
     ## [1] TRUE
 
@@ -91,10 +86,8 @@ optional leading zero followed by a generic sequence of column numbers,
 appropriate for matching column names produced by generic construction
 of `data.frame` objects.
 
-``` r
-all (vapply (seq (ncol (x)), function (i)
-             grepl (paste0 ("[[:alpha:]]0?", i), colnames (x) [i]), logical (1)))
-```
+    all (vapply (seq (ncol (x)), function (i)
+                 grepl (paste0 ("[[:alpha:]]0?", i), colnames (x) [i]), logical (1)))
 
     ## [1] TRUE
 
@@ -103,29 +96,25 @@ illustrates that the `hclust` function does not implement any such
 checks or assertions, rather it silently returns an object with default
 labels.
 
-``` r
-u <- USArrests
-rownames (u) <- seq (nrow (u))
-hc <- hclust (dist (u))
-head (hc$labels)
-```
+    u <- USArrests
+    rownames (u) <- seq (nrow (u))
+    hc <- hclust (dist (u))
+    head (hc$labels)
 
     ## [1] "1" "2" "3" "4" "5" "6"
 
-  - **UL1.3** *Unsupervised Learning Software should transfer all
+-   **UL1.3** *Unsupervised Learning Software should transfer all
     relevant aspects of input data, notably including row and column
     names, and potentially information from other `attributes()`, to
     corresponding aspects of return objects.*
-      - **UL1.3a** *Where otherwise relevant information is not
+    -   **UL1.3a** *Where otherwise relevant information is not
         transferred, this should be explicitly documented.*
 
 An example of a function according with UL1.3 is
 [`stats::cutree()`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cutree.html)
 
-``` r
-hc <- hclust (dist (USArrests))
-head (cutree (hc, 10))
-```
+    hc <- hclust (dist (USArrests))
+    head (cutree (hc, 10))
 
     ##    Alabama     Alaska    Arizona   Arkansas California   Colorado 
     ##          1          2          3          4          5          4
@@ -135,11 +124,9 @@ contrast, some routines from the [`cluster`
 package](https://cran.r-project.org/package=cluster) do not comply with
 this standard:
 
-``` r
-library (cluster)
-ac <- agnes (USArrests) # agglomerative nesting
-head (cutree (ac, 10))
-```
+    library (cluster)
+    ac <- agnes (USArrests) # agglomerative nesting
+    head (cutree (ac, 10))
 
     ## [1] 1 2 3 4 3 4
 
@@ -151,29 +138,29 @@ to enable them to be transferred within
 (The labels are transferred to the object returned by `agnes`, just not
 in a way that enables `cutree` to inherit them.)
 
-  - **UL1.4** *Unsupervised Learning Software should explicitly document
+-   **UL1.4** *Unsupervised Learning Software should explicitly document
     whether input data may include missing values.*
-  - **UL1.5** *Functions in Unsupervised Learning Software which do not
+-   **UL1.5** *Functions in Unsupervised Learning Software which do not
     admit input data with missing values should provide informative
     error messages when data with missing values are submitted.*
-  - **UL1.6** *Unsupervised Learning Software should document any
+-   **UL1.6** *Unsupervised Learning Software should document any
     assumptions made with regard to input data; for example assumptions
     about distributional forms or locations (such as that data are
     centred or on approximately equivalent distributional scales).
     Implications of violations of these assumptions should be both
     documented and tested, in particular:*
-      - **UL1.6a** *Software which responds qualitatively differently to
+    -   **UL1.6a** *Software which responds qualitatively differently to
         input data which has components on markedly different scales
         should explicitly document such differences, and implications of
         submitting such data.*
-      - **UL1.6b** *Examples or other documentation should not use
+    -   **UL1.6b** *Examples or other documentation should not use
         `scale()` or equivalent transformations without explaining why
         scale is applied, and explicitly illustrating and contrasting
         the consequences of not applying such transformations.*
 
 ### 2 Pre-processing and Variable Transformation
 
-  - **UL2.0** *Routines likely to give unreliable or irreproducible
+-   **UL2.0** *Routines likely to give unreliable or irreproducible
     results in response to violations of assumptions regarding input
     data (see UL1.6) should implement pre-processing steps to diagnose
     potential violations, and issue appropriately informative messages,
@@ -181,17 +168,17 @@ in a way that enables `cutree` to inherit them.)
     applied (such as the `center` and `scale.` parameters of the
     [`stats::prcomp()`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/prcomp.html)
     function).*
-  - **UL2.1** *Unsupervised Learning Software should document any
+-   **UL2.1** *Unsupervised Learning Software should document any
     transformations applied to input data, for example conversion of
     label-values to `factor`, and should provide ways to explicitly
     avoid any default transformations (with error or warning conditions
     where appropriate).*
-  - **UL2.2** *For Unsupervised Learning Software which accepts missing
+-   **UL2.2** *For Unsupervised Learning Software which accepts missing
     values in input data, functions should implement explicit parameters
     controlling the processing of missing values, ideally distinguishing
     `NA` or `NaN` values from `Inf` values (for example, through use of
     `na.omit()` and related functions from the `stats` package).*
-  - **UL2.3** *Unsupervised Learning Software should implement
+-   **UL2.3** *Unsupervised Learning Software should implement
     pre-processing routines to identify whether aspects of input data
     are perfectly collinear.*
 
@@ -199,7 +186,7 @@ in a way that enables `cutree` to inherit them.)
 
 #### 3.1 Labelling
 
-  - **UL3.1** *Algorithms which apply sequential labels to input data
+-   **UL3.1** *Algorithms which apply sequential labels to input data
     (such as clustering or partitioning algorithms) should ensure that
     the sequence follows decreasing group sizes (so labels of “1”, “a”,
     or “A” describe the largest group, “2”, “b”, or “B” the second
@@ -209,10 +196,8 @@ Note that the [`stats::cutree()`
 function](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cutree.html)
 does not accord with this standard:
 
-``` r
-hc <- hclust (dist (USArrests))
-table (cutree (hc, k = 10))
-```
+    hc <- hclust (dist (USArrests))
+    table (cutree (hc, k = 10))
 
     ## 
     ##  1  2  3  4  5  6  7  8  9 10 
@@ -223,7 +208,7 @@ function](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cutree.html
 applies arbitrary integer labels to the groups, yet the order of labels
 is not related to the order of group sizes.
 
-  - **UL3.2** *Dimensionality reduction or equivalent algorithms which
+-   **UL3.2** *Dimensionality reduction or equivalent algorithms which
     label dimensions should ensure that that sequences of labels follows
     decreasing “importance” (for example, eigenvalues or variance
     contributions).*
@@ -232,10 +217,8 @@ The
 [`stats::prcomp`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/prcomp.html)
 function accords with this standard:
 
-``` r
-z <- prcomp (eurodist, rank = 5) # return maximum of 5 components
-summary (z)
-```
+    z <- prcomp (eurodist, rank = 5) # return maximum of 5 components
+    summary (z)
 
     ## Importance of first k=5 (out of 21) components:
     ##                              PC1       PC2       PC3       PC4       PC5
@@ -246,14 +229,14 @@ summary (z)
 The proportion of variance explained by each component decreasing with
 increasing numeric labelling of the components.
 
-  - **UL3.3** *Unsupervised Learning Software for which input data does
+-   **UL3.3** *Unsupervised Learning Software for which input data does
     not generally include labels (such as `array`-like data with no row
     names) should provide an additional parameter to enable cases to be
     labelled.*
 
 #### 3.2 Prediction
 
-  - **UL3.4** *Where applicable, Unsupervised Learning Software should
+-   **UL3.4** *Where applicable, Unsupervised Learning Software should
     implement routines to predict the properties (such as numerical
     ordinates, or cluster memberships) of additional new data without
     re-running the entire algorithm.*
@@ -267,19 +250,17 @@ can be used to predict membership of new data using the [`class:knn()`
 function](https://stat.ethz.ch/R-manual/R-devel/library/class/html/knn.html).
 (This is intended to illustrate only one of many possible approaches.)
 
-``` r
-library (class)
-hc <- hclust (dist (iris [, -5]))
-groups <- cutree (hc, k = 3)
-# function to randomly select part of a data.frame and # add some randomness
-sample_df <- function (x, n = 5) {
-    x [sample (nrow (x), size = n), ] + runif (ncol (x) * n)
-}
-iris_new <- sample_df (iris [, -5], n = 5)
-# use knn to predict membership of those new points:
-knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
-knnClust
-```
+    library (class)
+    hc <- hclust (dist (iris [, -5]))
+    groups <- cutree (hc, k = 3)
+    # function to randomly select part of a data.frame and # add some randomness
+    sample_df <- function (x, n = 5) {
+        x [sample (nrow (x), size = n), ] + runif (ncol (x) * n)
+    }
+    iris_new <- sample_df (iris [, -5], n = 5)
+    # use knn to predict membership of those new points:
+    knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
+    knnClust
 
     ## [1] 2 2 2 2 2
     ## Levels: 1 2 3
@@ -288,18 +269,16 @@ The [`stats::prcomp()`
 function](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/prcomp.html)
 implements its own `predict()` method which conforms to this standard:
 
-``` r
-res <- prcomp (USArrests)
-arrests_new <- sample_df (USArrests, n = 5)
-predict (res, newdata = arrests_new)
-```
+    res <- prcomp (USArrests)
+    arrests_new <- sample_df (USArrests, n = 5)
+    predict (res, newdata = arrests_new)
 
-    ##                 PC1       PC2        PC3        PC4
-    ## Nevada     84.23372 15.601819 16.1403270 -0.4681077
-    ## Arizona   124.20460  9.697429 -1.5872750  3.4882920
-    ## Louisiana  78.68715 -3.471980 -3.2899089 -4.5111757
-    ## Illinois   79.69376 12.913759 -5.6902886 -1.1103125
-    ## Idaho     -51.11201 -9.121897 -0.6572273  2.5509398
+    ##                      PC1        PC2        PC3        PC4
+    ## New Jersey     -10.58953  23.517236 -6.3221074 -2.1350470
+    ## Arkansas        18.99369 -15.945005  0.2065052 -0.3248443
+    ## Illinois        79.82822  13.249068 -5.4766072 -1.2075792
+    ## South Carolina 108.36539 -22.512371 -1.3364468 -1.6450465
+    ## Florida        165.46923   6.717845 -2.5958039 -2.1722202
 
 #### 3.3 Group Distributions and Associated Statistics
 
@@ -309,10 +288,8 @@ output some kind of labelling or grouping schemes. The above example of
 principal components illustrates that the return object records the
 standard deviations associated with each component:
 
-``` r
-res <- prcomp (USArrests)
-print(res)
-```
+    res <- prcomp (USArrests)
+    print(res)
 
     ## Standard deviations (1, .., p=4):
     ## [1] 83.732400 14.212402  6.489426  2.482790
@@ -324,9 +301,7 @@ print(res)
     ## UrbanPop 0.04633575  0.97685748 -0.20054629 -0.05816914
     ## Rape     0.07515550  0.20071807  0.97408059  0.07232502
 
-``` r
-summary (res)
-```
+    summary (res)
 
     ## Importance of components:
     ##                            PC1      PC2    PC3     PC4
@@ -336,7 +311,7 @@ summary (res)
 
 Such output accords with the following standard:
 
-  - **UL3.5** *Objects returned from Unsupervised Learning Software
+-   **UL3.5** *Objects returned from Unsupervised Learning Software
     which labels, categorise, or partitions data into discrete groups
     should include, or provide immediate access to, quantitative
     information on intra-group variances or equivalent, as well as on
@@ -356,10 +331,8 @@ function](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cutree.html),
 however, does yield defined numbers of clusters, yet devoid of any
 quantitative information on variances or equivalent.
 
-``` r
-res <- hclust (dist (USArrests))
-str (cutree (res, k = 5))
-```
+    res <- hclust (dist (USArrests))
+    str (cutree (res, k = 5))
 
     ##  Named int [1:50] 1 1 1 2 1 2 3 1 4 2 ...
     ##  - attr(*, "names")= chr [1:50] "Alabama" "Alaska" "Arizona" "Arkansas" ...
@@ -370,11 +343,9 @@ function](https://stat.ethz.ch/R-manual/R-devel/library/cluster/html/clara.html)
 from the [`cluster`
 package](https://cran.r-project.org/package=cluster).
 
-``` r
-library (cluster)
-cl <- clara (USArrests, k = 10) # direct clustering into specified number of clusters
-cl$clusinfo
-```
+    library (cluster)
+    cl <- clara (USArrests, k = 10) # direct clustering into specified number of clusters
+    cl$clusinfo
 
     ##       size  max_diss   av_diss isolation
     ##  [1,]    4 24.708298 14.284874 1.4837745
@@ -397,26 +368,26 @@ of the clustering scheme.
 
 ### 4 Return Results
 
-  - **UL4.0** *Unsupervised Learning Software should return some form of
+-   **UL4.0** *Unsupervised Learning Software should return some form of
     “model” object, generally through using or modifying existing class
     structures for model objects, or creating a new class of model
     objects.*
-  - **UL4.1** *Unsupervised Learning Software may enable an ability to
+-   **UL4.1** *Unsupervised Learning Software may enable an ability to
     generate a model object without actually fitting values. This may be
     useful for controlling batch processing of computationally intensive
     fitting algorithms.*
-  - **UL4.2** *The return object from Unsupervised Learning Software
+-   **UL4.2** *The return object from Unsupervised Learning Software
     should include, or otherwise enable immediate extraction of, all
     parameters used to control the algorithm used.*
 
 #### 4.1 Reporting Return Results
 
-  - **UL4.2** *Model objects returned by Unsupervised Learning Software
+-   **UL4.2** *Model objects returned by Unsupervised Learning Software
     should implement or appropriately extend a default `print` method
     which provides an on-screen summary of model (input) parameters and
     methods used to generate results. The `print` method may also
     summarise statistical aspects of the output data or results.*
-      - **UL4.2a** *The default `print` method should always ensure only
+    -   **UL4.2a** *The default `print` method should always ensure only
         a restricted number of rows of any result matrices or equivalent
         are printed to the screen.*
 
@@ -433,7 +404,7 @@ determines maximal numbers of printed objects, such as lines of
 particularly in Unsupervised Learning Software which commonly returns
 objects containing large numbers of numeric entries.
 
-  - **UL4.3** *Unsupervised Learning Software should also implement
+-   **UL4.3** *Unsupervised Learning Software should also implement
     `summary` methods for model objects which should summarise the
     primary statistics used in generating the model (such as numbers of
     observations, parameters of methods applied). The `summary` method
@@ -443,19 +414,19 @@ objects containing large numbers of numeric entries.
 
 ### 6 Visualization
 
-  - **UL6.0** *Objects returned by Unsupervised Learning Software should
+-   **UL6.0** *Objects returned by Unsupervised Learning Software should
     have default `plot` methods, either through explicit implementation,
     extension of methods for existing model objects, through ensuring
     default methods work appropriately, or through explicit reference to
     helper packages such as
     [`factoextra`](https://github.com/kassambara/factoextra) and
     associated functions.*
-  - **UL6.1** *Where the default `plot` method is **NOT** a generic
+-   **UL6.1** *Where the default `plot` method is **NOT** a generic
     `plot` method dispatched on the class of return objects (that is,
     through a `plot.<myclass>` function), that method dispatch should
     nevertheless exist in order to explicitly direct users to the
     appropriate function.*
-  - **UL6.2** *Where default plot methods include labelling components
+-   **UL6.2** *Where default plot methods include labelling components
     of return objects (such as cluster labels), routines should ensure
     that labels are automatically placed to ensure readability, and/or
     that appropriate diagnostic messages are issued where readability is

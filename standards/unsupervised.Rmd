@@ -356,4 +356,3 @@ objects containing large numbers of numeric entries.
   (for example, through attempting to place too many labels).*
 
 ### Testing
-
