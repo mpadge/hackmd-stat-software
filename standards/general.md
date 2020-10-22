@@ -13,7 +13,7 @@ General Standards for Statistical Software
 These standards refer to **Data Types** as the fundamental types defined
 by the R language itself between the following:
 
--   Continuous (`class = "numeric"`, `typeof = "double"`)
+-   Continuous (`class = "numeric"` / `typeof = "double"`)
 -   Integer
 -   String / character
 -   Date/Time
@@ -35,6 +35,36 @@ vector.
 
 ### 1 Documentation
 
+-   **G1.0** *Statistical Software should list at least one primary
+    reference from published academic literature.*
+
+We consider that statistical software submitted under our system will
+either (i) implement or extend prior methods, in which case the *primary
+reference* will be to the most relevant published version(s) of prior
+methods; or (ii) be an implementation of some new method. In the second
+case, it will be expected that the software will eventually form the
+basis of an academic publication. Until that time, the most suitable
+reference for equivalent algorithms or implementations should be
+provided.
+
+#### 1.1 Statistical Terminology
+
+-   **G1.1** *All statistical terminology should be clarified and
+    unambiguously defined.*
+
+Developers should not presume anywhere in the documentation of software
+that specific statistical terminology may be “generally understood”, and
+therefore not need explicit clarification. Even terms which many may
+consider sufficiently generic as to not require such clarification, such
+as “null hypotheses” or “confidence intervals”, will generally need
+explicit clarification. For example, both the estimation and
+interpretation of confidence intervals are dependent on distributional
+properties and associated assumptions. Any particular implementation of
+procedures to estimate or report on confidence intervals will
+accordingly reflect assumptions on distributional properties (among
+other aspects), both the nature and implications of which must be
+explicitly clarified.
+
 Standards will include requirements for form and completeness of
 documentation. As with interface, several sources already provide
 starting points for reasonable documentation. Some documentation
@@ -51,11 +81,17 @@ packages is readily extensible, as exemplified through the [`roxytest`
 package](https://github.com/mikldk/roxytest) for specifying tests
 *in-line*.
 
--   **G1.0** *Software should use
-    [`roxygen`](https://roxygen2.r-lib.org/) for all documentation.*
-    -   **G1.0a** *All internal (non-exported) functions should also be
+#### 1.2 Function-level Documentation
+
+-   **G1.2** *Software should use
+    [`roxygen`](https://roxygen2.r-lib.org/) to documentation all
+    functions.*
+    -   **G1.2a** *All internal (non-exported) functions should also be
         documented in standard [`roxygen`](https://roxygen2.r-lib.org/)
-        format.*
+        format, along with a final `@noRd` tag to suppress automatic
+        generation of `.Rd` files.*
+
+#### 1.3 Supplementary Documentation
 
 The following standards describe several forms of what might be
 considered “Supplementary Material”. While there are many places within
@@ -69,14 +105,14 @@ publication with regard to software performance (for example, claims of
 algorithmic scaling or efficiency; or claims of accuracy), the following
 standard applies:
 
--   **G1.1** *Software should include all code necessary to reproduce
+-   **G1.3** *Software should include all code necessary to reproduce
     results which form the basis of performance claims made in
     associated publications.*
 
 Where claims regarding aspects of software performance are made with
 respect to other extant R packages, the following standard applies:
 
--   **G1.2** *Software should include code necessary to compare
+-   **G1.4** *Software should include code necessary to compare
     performance claims with alternative implementations in other R
     packages.*
 
@@ -167,8 +203,8 @@ one or more of these tabular inputs are then that:
 -   **G2.6** *Software should accept as input as many of the above
     standard tabular forms as possible, including extension to
     domain-specific forms.*
--   **G2.7** *Software should provide appropriate conversion routines as
-    part of initial pre-processing to ensure that all other
+-   **G2.7** *Software should provide appropriate conversion or dispatch
+    routines as part of initial pre-processing to ensure that all other
     sub-functions of a package receive inputs of a single defined class
     or type.*
 -   **G2.8** *Software should issue diagnostic messages for type
