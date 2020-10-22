@@ -68,16 +68,12 @@ print (paste0 ("Error in x$threshold * 100 : ", x$message))
 
 ```{r na-error-fakey, eval = FALSE}
 predictors <- mtcars [, -1]
-predictors <- apply (predictors, 2, function (i) {
-                         i [sample (length (i), size = 5)] <- NA
-                         return (i) })
+predictors [1, 1] <- NA
 mod <- apd_pca (predictors)
 ```
 ```{r na-error, echo = FALSE}
 predictors <- mtcars [, -1]
-predictors <- apply (predictors, 2, function (i) {
-                         i [sample (length (i), size = 5)] <- NA
-                         return (i) })
+predictors [1, 1] <- NA
 x <- tryCatch (apd_pca (predictors),
                error = function (e) e)
 print (x)

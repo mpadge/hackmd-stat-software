@@ -78,9 +78,7 @@ That works silently, which is okay, but then:
 <!-- -->
 
     predictors <- mtcars [, -1]
-    predictors <- apply (predictors, 2, function (i) {
-                             i [sample (length (i), size = 5)] <- NA
-                             return (i) })
+    predictors [1, 1] <- NA
     mod <- apd_pca (predictors)
 
     ## <simpleError in svd(x, nu = 0, nv = k): infinite or missing values in 'x'>
