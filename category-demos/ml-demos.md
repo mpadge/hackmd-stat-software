@@ -121,23 +121,38 @@ Tests are only run with a single random seed
     produce expected behaviour such as clear warnings or errors when
     confronted with data with extreme properties including but not
     limited to:*
--   [ ] **G4.6a** *Zero-length data* is not tested
+-   [ ] **G4.6a** *Zero-length data*
+
+is not tested
+
 -   [ ] **G4.6b** *Data of unsupported types (e.g., character or complex
-    numbers in for functions designed only for numeric data)* is not
-    tested
+    numbers in for functions designed only for numeric data)*
+
+is not tested
+
 -   [ ] **G4.6c** *Data with all-`NA` fields or columns or all identical
-    fields or columns* Processing of missing data is note tested
+    fields or columns*
+
+Processing of missing data is note tested
+
 -   [ ] **G4.6d** *Data outside the scope of the algorithm (for example,
     data with more fields (columns) than observations (rows) for some
-    regression algorithms)* are not tested
+    regression algorithms)*
+
+are not tested
+
 -   [ ] **G4.7** **Noise susceptibility tests** *Packages should test
     for expected stochastic behaviour, such as through the following
     conditions:*
 -   [ ] **G4.7a** *Adding trivial noise (for example, at the scale of
     `.Machine$double.eps`) to data does not meaningfully change results*
-    is not tested
+
+is not tested
+
 -   [ ] **G4.7b** *Running under different random seeds or initial
-    conditions does not meaningfully change results* is not tested
+    conditions does not meaningfully change results*
+
+is not tested
 
 ------------------------------------------------------------------------
 
