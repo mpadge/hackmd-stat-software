@@ -246,3 +246,29 @@ one standard may nevertheless be applied, with an aim to minimise
     dynamic visualization and which are also bundled in other,
     pre-existing R packages, should explain the necessity and advantage
     of re-bundling that library.*
+
+### 6 Testing
+
+#### 6.1 Return Values
+
+-   **EA6.0** Return values from all functions should be tested,
+    including tests for the following characteristics:
+    -   **EA6.0a** Classes and types of objects
+    -   **EA6.0b** Dimensions of tabular objects
+    -   **EA6.0c** Column names (or equivalent) of tabular objects
+    -   **EA6.0d** Classes or types of all columns contained within
+        `data.frame`-type tabular objects
+    -   **EA6.0e** Values of single-valued objects; for `numeric` values
+        either using `testthat::expect_equal()` or equivalent with a
+        defined value for the `tolerance` parameter, or using
+        `round(..., digits = x)` with some defined value of `x` prior to
+        testing equality.
+
+#### 6.2 Graphical Output
+
+-   **EA6.1** The properties of graphical output from EDA software
+    should be explicitly tested, for example via the [`vdiffr`
+    package](https://github.com/r-lib/vdiffr) or equivalent.
+
+Tests for graphical output are frequently only run as part of an
+extended test suite.
