@@ -48,11 +48,13 @@ are:
   appropriately parsed, rather simply assumed to be `*.html`.
 - [x] G4.0 Tests use data sets provided by other widely-used R packages.
 - [x] G4.1 No data sets created within package, so not applicable
-- [x] G4.2--4.5 Standards for testing statistical algorithms not applicable to
+- [ ] G4.2--4.3 Tests of responses to unexpected input either not given, or do
+  not cover all cases.
+- [x] G4.4--4.7 Standards for testing statistical algorithms not applicable to
   EDA software
-- [ ] G4.6 No edge condition tests implemented
-- [ ] G4.7 No tests of noise susceptibility implemented
-- [x] G4.8--4.10 No extended tests needed, so not applicable
+- [ ] G4.8 No edge condition tests implemented
+- [ ] G4.9 No tests of noise susceptibility implemented
+- [x] G4.10--4.12 No extended tests needed, so not applicable
 
 ### EDA Standards
 
@@ -114,13 +116,15 @@ are:
 - [x] G3.0 No functions use local files, so not appicable
 - [x] G4.0 Tests use data sets provided by other widely-used R packages.
 - [x] G4.1 No data sets created within package, so not applicable
-- [x] G4.2--4.5 Standards for testing statistical algorithms not applicable to
+- [ ] G4.2 Error and warning behaviour of functions is not explicitly tested.
+- [ ] G4.3 Absence of missing or undefined values in return objects is not explicitly tested.
+- [x] G4.4--4.7 Standards for testing statistical algorithms not applicable to
   EDA software
-- [x] G4.6 Input to software is models not raw data, so edge conditions neither
+- [x] G4.8 Input to software is models not raw data, so edge conditions neither
   relevant nor applicable.
-- [x] G4.7 Input to software is models not raw data, so noise tests neither
+- [x] G4.9 Input to software is models not raw data, so noise tests neither
   relevant nor applicable.
-- [x] G4.8--4.10 Extended tests neither relevant nor applicable.
+- [x] G4.10--4.12 Extended tests neither relevant nor applicable.
 
 
 
@@ -185,11 +189,13 @@ are:
 - [x] G4.0 Tests use data sets provided by other widely-used R packages.
 - [x] G4.1 No data sets created within package, so not applicable
   exported so that users can confirm tests and run examples.
-- [x] G4.2--4.5 Standards for testing statistical algorithms not applicable to
+- [ ] G4.2 Error and warning behaviour not tested for all functions 
+- [x] G4.3 Absence of missing or undefined values is tested
+- [x] G4.4--4.8 Standards for testing statistical algorithms not applicable to
   EDA software
-- [x] G4.6 Edge conditions tested appropriately
-- [x] G4.7 Test of noise susceptibility not applicable
-- [x] G4.8--4.10 Extended tests neither relevant nor applicable.
+- [x] G4.8 Edge conditions tested appropriately
+- [x] G4.9 Test of noise susceptibility not applicable
+- [x] G4.10--4.12 Extended tests neither relevant nor applicable.
 
 ### EDA Standards
 

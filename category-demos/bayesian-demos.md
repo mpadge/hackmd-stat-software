@@ -42,13 +42,16 @@ robots: noindex, nofollow
   data simulated with fixed random seeds)
 - [x] G4.1 Data sets are created within software, but not in a way that is
   appropriate for export, so not applicable.
-- [x] G4.2 Correctness tests appropriately implemented.
-- [x] G4.3 Correctness tests are run with a fixed random seed
-- [x] G4.4 Parameter recovery tests appropriately implemented.
-- [x] G4.5 Algorithm performance tests appropriately implemented.
-- [x] G4.6 Edge condition tests appropriately implemented.
-- [ ] G4.7 No noise susceptibility tests implemented.
-- [ ] G4.8 No extended tests included, so not applicable
+- [ ] G4.2 Tests do not cover all error and warning conditions
+- [ ] G4.3 Absence of missing or undefined values in return objects not
+  explicitly tested.
+- [x] G4.4 Correctness tests appropriately implemented.
+- [x] G4.5 Correctness tests are run with a fixed random seed
+- [x] G4.6 Parameter recovery tests appropriately implemented.
+- [x] G4.7 Algorithm performance tests appropriately implemented.
+- [x] G4.8 Edge condition tests appropriately implemented.
+- [ ] G4.9 No noise susceptibility tests implemented.
+- [ ] G4.10 No extended tests included, so not applicable
 
 ### Bayesian Standards
 
@@ -203,15 +206,18 @@ robots: noindex, nofollow
 - [x] G4.0 Tests use standard data sets
 - [x] G4.1 Data sets created to test package are not exported, but are made
   generally available through direct inclusion within package sub-directory.
-- [x] G4.2 Correctness tests appropriately implemented.
-- [x] G4.3 Correctness tests are run with a fixed random seed
-- [x] G4.4 Parameter recovery tests appropriately implemented.
-- [x] G4.5 Algorithm performance tests appropriately implemented.
-- [x] G4.6 Edge condition tests appropriately implemented.
-- [ ] G4.7 No noise susceptibility tests implemented
-- [x] G4.8 Extended tests appropriately implemented (notably for underlying C++ code).
-- [x] G4.9 Extended tests require no large data sets, so not applicable
-- [ ] G4.10 Conditions necessary to run extended tests not appropriately documented
+- [ ] G4.2 Tests do not cover all error and warning conditions
+- [ ] G4.3 Absence of missing or undefined values in return objects not
+  explicitly tested.
+- [x] G4.3 Correctness tests appropriately implemented.
+- [x] G4.5 Correctness tests are run with a fixed random seed
+- [x] G4.6 Parameter recovery tests appropriately implemented.
+- [x] G4.7 Algorithm performance tests appropriately implemented.
+- [x] G4.8 Edge condition tests appropriately implemented.
+- [ ] G4.9 No noise susceptibility tests implemented
+- [x] G4.10 Extended tests appropriately implemented (notably for underlying C++ code).
+- [x] G4.11 Extended tests require no large data sets, so not applicable
+- [ ] G4.12 Conditions necessary to run extended tests not appropriately documented
 
 ### Bayesian Standards
 

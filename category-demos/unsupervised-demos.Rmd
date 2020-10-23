@@ -53,28 +53,31 @@
       files, so not applicable
 - [x] G4.0 Tests use standard data sets with known properties (notably `iris`).
 - [x] G4.1 No data sets created within, and used to test, package, so not applicable.
-- [ ] G4.2 **Correctness tests** appropriately implemented
-    - [ ] G4.2a No tests again alternative implementations, yet such tests
+- [ ] G4.2 Tests do not exist for appropriate error and warning behaviour of all functions 
+- [ ] G4.3 The absence of missing or undefined values in return objects is not
+  explicitly tested.
+- [ ] G4.4 **Correctness tests** appropriately implemented
+    - [ ] G4.4a No tests again alternative implementations, yet such tests
       could be plausibly included.
-    - [x] G4.2b Tests against previous implementations not applicable.
-    - [x] G4.2c Use of stored values from published paper outputs not applicable
-- [x] G4.3 Correctness tests are run with a fixed random seed
-- [x] G4.4 **Parameter recovery tests** appropriately impelemented.
-    - [x] G4.4a Parameter recovery tests use defined tolerance.
-    - [ ] G4.4b Parameter recovery tests are not run with multiple random seeds
-- [ ] G4.5 There are no algorithm performance tests (and I am not sure these
+    - [x] G4.4b Tests against previous implementations not applicable.
+    - [x] G4.4c Use of stored values from published paper outputs not applicable
+- [x] G4.5 Correctness tests are run with a fixed random seed
+- [x] G4.6 **Parameter recovery tests** appropriately impelemented.
+    - [x] G4.6a Parameter recovery tests use defined tolerance.
+    - [ ] G4.6b Parameter recovery tests are not run with multiple random seeds
+- [ ] G4.7 There are no algorithm performance tests (and I am not sure these
   would be relevant here?)
-- [ ] G4.6 There are no edge condition tests, and there should be
-    - [ ] G4.6a No tests for zero-length data
-    - [ ] G4.6b No tests for data of unsupported types
-    - [ ] G4.6c No tests for data with all-`NA` fields or columns or all identical fields or columns
-    - [ ] G4.6d No tests for data outside the scope of the algorithm
-- [ ] G4.7 There are no noise susceptibility tests
-    - [ ] G4.7a There are no tests that adding trivial noise does not meaningfully change
+- [ ] G4.8 There are no edge condition tests, and there should be
+    - [ ] G4.8a No tests for zero-length data
+    - [ ] G4.8b No tests for data of unsupported types
+    - [ ] G4.8c No tests for data with all-`NA` fields or columns or all identical fields or columns
+    - [ ] G4.8d No tests for data outside the scope of the algorithm
+- [ ] G4.9 There are no noise susceptibility tests
+    - [ ] G4.9a There are no tests that adding trivial noise does not meaningfully change
       results, and there should be.
-    - [ ] G4.7b There are no tests that running under different random seeds or
+    - [ ] G4.9b There are no tests that running under different random seeds or
       initial conditions does not meaningfully change results, and there should be
-- [x] G4.8--4.10 There are no extended tests, so not applicable.
+- [x] G4.10--4.12 There are no extended tests, so not applicable.
 
 ### Unsupervised Learning Standards
 

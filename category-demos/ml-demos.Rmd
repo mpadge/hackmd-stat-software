@@ -93,33 +93,36 @@ No such options provided.
 
 ### Testing 
 
- - [ ] **G4.4b** *Parameter recovery tests should be run with multiple random seeds when either data simulation or the algorithm contains a random component. (When long-running, such tests may be part of an extended, rather than regular, test suite; see G4.8-4.10, below).*
+- [ ] **G4.2** Some but not all error and warning behaviour is explicitly tested
+- [ ] **G4.3** Absence of missing or undefined data in return objects is not explicitly tested.
+
+ - [ ] **G4.6b** *Parameter recovery tests should be run with multiple random seeds when either data simulation or the algorithm contains a random component. (When long-running, such tests may be part of an extended, rather than regular, test suite; see G4.8-4.10, below).*
 
 Tests are only run with a single random seed
 
-- [ ] **G4.6** **Edge condition tests** *to test that these conditions produce expected behaviour such as clear warnings or errors when confronted with data with extreme properties including but not limited to:*
- - [ ] **G4.6a** *Zero-length data*
+- [ ] **G4.8** **Edge condition tests** *to test that these conditions produce expected behaviour such as clear warnings or errors when confronted with data with extreme properties including but not limited to:*
+ - [ ] **G4.8a** *Zero-length data*
 
 is not tested
 
- - [ ] **G4.6b** *Data of unsupported types (e.g., character or complex numbers in for functions designed only for numeric data)*
+ - [ ] **G4.8b** *Data of unsupported types (e.g., character or complex numbers in for functions designed only for numeric data)*
 
 is not tested
 
- - [ ] **G4.6c** *Data with all-`NA` fields or columns or all identical fields or columns*
+ - [ ] **G4.8c** *Data with all-`NA` fields or columns or all identical fields or columns*
 
 Processing of missing data is note tested
 
- - [ ] **G4.6d** *Data outside the scope of the algorithm (for example, data with more fields (columns) than observations (rows) for some regression algorithms)*
+ - [ ] **G4.8d** *Data outside the scope of the algorithm (for example, data with more fields (columns) than observations (rows) for some regression algorithms)*
 
 are not tested
 
-- [ ] **G4.7** **Noise susceptibility tests** *Packages should test for expected stochastic behaviour, such as through the following conditions:*
- - [ ] **G4.7a** *Adding trivial noise (for example, at the scale of `.Machine$double.eps`) to data does not meaningfully change results*
+- [ ] **G4.9** **Noise susceptibility tests** *Packages should test for expected stochastic behaviour, such as through the following conditions:*
+ - [ ] **G4.9a** *Adding trivial noise (for example, at the scale of `.Machine$double.eps`) to data does not meaningfully change results*
 
 is not tested
 
- - [ ] **G4.7b** *Running under different random seeds or initial conditions does not meaningfully change results*
+ - [ ] **G4.9b** *Running under different random seeds or initial conditions does not meaningfully change results*
 
 is not tested
 
