@@ -46,21 +46,27 @@ information that the `factor` variable is ordered.
 No options are provided for handling undefined values, rather routines
 simply error with informative messages.
 
--   **G4.4a** *Parameter recovery tests should generally be expected to
+-   **G4.2** Appropriate error and warning behaviour of all functions
+    should be explicitly demonstrated through tests.
+
+The package issues numerous error and warning messages, neither the
+triggering conditions nor values of which are explicitly tested.
+
+-   **G4.6a** *Parameter recovery tests should generally be expected to
     succeed within a defined tolerance rather than recovering exact
     values.*
 
 Many – but not all – parameter recovery tests expect exact value
 matching without specifying tolerance.
 
--   **G4.4b** *Parameter recovery tests should be run with multiple
+-   **G4.6b** *Parameter recovery tests should be run with multiple
     random seeds when either data simulation or the algorithm contains a
     random component*
 
 Parameter recovery tests are generally run once with only a single
 random seed.
 
--   **G4.5** **Algorithm performance tests** *to test that
+-   **G4.7** **Algorithm performance tests** *to test that
     implementation performs as expected as properties of data change.
     For instance, a test may show that parameters approach correct
     estimates within tolerance as data size increases, or that
@@ -68,20 +74,20 @@ random seed.
 
 There appear to be no algorithm performance tests.
 
--   **G4.7** **Noise susceptibility tests** *Packages should test for
+-   **G4.9** **Noise susceptibility tests** *Packages should test for
     expected stochastic behaviour, such as through the following
     conditions:*
-    -   **G4.7a** *Adding trivial noise (for example, at the scale of
+    -   **G4.9a** *Adding trivial noise (for example, at the scale of
         `.Machine$double.eps`) to data does not meaningfully change
         results*
-    -   **G4.7b** *Running under different random seeds or initial
+    -   **G4.9b** *Running under different random seeds or initial
         conditions does not meaningfully change results*
 
 There appear to be no noise susceptibility tests, neither tests of the
 effect of adding trivial noise, nor tests running under different random
-seeds (see G4.4b, above).
+seeds (see G4.6b, above).
 
--   **G4.8** *Extended tests should included and run under a common
+-   **G4.10** *Extended tests should included and run under a common
     framework with other tests but be switched on by flags such as as a
     `<MYPKG>_EXTENDED_TESTS=1` environment variable.*
 
