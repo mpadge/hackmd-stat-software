@@ -471,10 +471,30 @@ Bayesian Software may:
 
 ### 7 Tests
 
--   Parameter recovery tests:
-    -   Recover the prior with no data or data with no information,
-        especially where priors are implicit.  
-    -   Even in empirical Bayes, recover the estimated prior
-    -   Recover posterior given expected data *and* prior
--   Algorithmic scaling tests with data - is it linear, log, etc
--   Test for prediction/fitted values on same scale as input values
+#### 7.1 Parameter Recovery Tests
+
+Bayesian software should implement the following tests which demonstrate
+and confirm an ability to recover parameters:
+
+-   **BS7.0** Recovery of parametric estimates of a prior distribution
+-   **BS7.1** Recovery of a prior distribution in the absence of any
+    additional data or information
+-   **BS7.2** Recovery of a expected posterior distribution given a
+    specified prior and some input data
+
+#### 7.2 Algorithmic Scaling Tests
+
+-   **BS7.3** Bayesian software should include tests which demonstrate
+    and confirm the scaling of algorithmic efficiency with sizes of
+    input data; for example, that computation times increase
+    approximately logarithmically with increasing sizes of input data.
+
+#### 7.3 Scaling of Input to Output Data
+
+-   **BS7.4** Bayesian software should implement tests which confirm
+    that predicted or fitted values are on (approximately) the same
+    scale as input values.
+    -   **BS7.4a** The implications of any assumptions on scales on
+        input objects should be explicitly tested in this context; for
+        example that the scales of inputs which do not have means of
+        zero will not be able to be recovered.
