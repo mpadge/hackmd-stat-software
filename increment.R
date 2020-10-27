@@ -26,28 +26,26 @@ increment_standards <- function (s) {
     prfxs <- c ("G", "BS", "RE", "UL", "EA", "TS", "ML")
     prfx <- match.arg (prfx, prfxs)
 
-    standard <- standard_name (prfx)
+    standards <- list.files (file.path ("standards"),
+                             full.names = TRUE,
+                             pattern = "\\.Rmd$")
 
     bd_dir <- Sys.getenv ("rss_bookdown_dir")
-    i <- match (standard, tools::file_path_sans_ext (list.files (bd_dir)))
-    standard_bd <- list.files (bd_dir, full.names = TRUE) [i]
+    standards_bd <- list.files (bd_dir, full.names = TRUE, pattern = "\\.Rmd$")
 
-    standard <- file.path ("standards", standard)
-    standard <- paste0 (tools::file_path_sans_ext (standard), ".Rmd")
-
-    standards <- c (standard, standard_bd)
+    standards <- c (standards, standards_bd)
 
     for (i in standards)
         increment1 (i, s, prfx)
 }
 
 increment1 <- function (standard, s, prfx) {
-    x <- readLines (standard)
+    x0 <- readLines (standard)
 
     # get all numbers to be affected by increment
     st_start <- paste0 ("^\\-\\s+\\*\\*", prfx)
-    index1 <- grep (st_start, x)
-    numbers <- gsub ("\\*\\*.*$", "", gsub (st_start, "", x [index1]))
+    index1 <- grep (st_start, x0)
+    numbers <- gsub ("\\*\\*.*$", "", gsub (st_start, "", x0 [index1]))
     nbig <- as.integer (gsub ("\\..*$", "", numbers))
     nsmall <- as.integer (gsub ("^[0-9]+\\.", "", numbers))
 
@@ -64,11 +62,12 @@ increment1 <- function (standard, s, prfx) {
     new_standards <- rev (new_standards)
 
     for (i in seq_along (old_standards))
-        x <- gsub (old_standards [i], new_standards [i], x, fixed = TRUE)
+        x <- gsub (old_standards [i], new_standards [i], x0, fixed = TRUE)
 
-    writeLines (x, con = standard)
-
-    cli::cli_alert_success (paste0 ("Incremented ", standard))
+    if (!identical (x0, x)) {
+        writeLines (x, con = standard)
+        cli::cli_alert_success (paste0 ("Incremented ", standard))
+    }
 }
 
 standard_name <- function (prfx) {
