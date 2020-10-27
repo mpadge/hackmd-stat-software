@@ -55,8 +55,10 @@ increment1 <- function (standard, s, prfx) {
     nsmall_new <- as.integer (gsub (".*\\.", "", s))
 
     index2 <- which (nbig == nbig_new & nsmall >= nsmall_new)
-    old_standards <- paste0 ("**", prfx, nbig [index2], ".", nsmall [index2], "**")
-    new_standards <- paste0 ("**", prfx, nbig [index2], ".", nsmall [index2] + 1, "**")
+    old_standards <- paste0 ("**", prfx,
+                             nbig [index2], ".", nsmall [index2])
+    new_standards <- paste0 ("**", prfx,
+                             nbig [index2], ".", nsmall [index2] + 1)
 
     old_standards <- rev (old_standards)
     new_standards <- rev (new_standards)
