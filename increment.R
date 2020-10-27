@@ -55,16 +55,14 @@ increment1 <- function (standard, s, prfx) {
     nsmall_new <- as.integer (gsub (".*\\.", "", s))
 
     index2 <- which (nbig == nbig_new & nsmall >= nsmall_new)
-    nsmall [index2] <- nsmall [index2] + 1
-    new_standards <- paste0 ("**", prfx, nbig [index2], ".", nsmall [index2], "**")
+    old_standards <- paste0 ("**", prfx, nbig [index2], ".", nsmall [index2], "**")
+    new_standards <- paste0 ("**", prfx, nbig [index2], ".", nsmall [index2] + 1, "**")
 
-    index_to_doc <- index1 [index2]
-    for (i in seq_along (index_to_doc)) {
-        x [index_to_doc [i]] <-
-            gsub ("\\*\\*[A-Z]+[0-9]+\\.[0-9]+([a-z]?)\\*\\*",
-              new_standards [i],
-              x [index_to_doc [i]])
-    }
+    old_standards <- rev (old_standards)
+    new_standards <- rev (new_standards)
+
+    for (i in seq_along (old_standards))
+        x <- gsub (old_standards [i], new_standards [i], x, fixed = TRUE)
 
     writeLines (x, con = standard)
 
