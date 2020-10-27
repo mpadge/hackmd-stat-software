@@ -1,0 +1,79 @@
+#' Insert a new standard number, and update all old numbers throughout all other
+#' documents.
+#'
+#' @param s Single character specifying standard to be inserted. All standards
+#' following the specified number will be incremented.
+#'
+#' @note Standards are named as follows, where "X.X" denotes two one- or
+#' two-digit numbers:
+#' \itemize{
+#' \item GX.X General
+#' \item BSX.X Bayesian
+#' \item REX.X Regression
+#' \item ULX.X Unsupervised Learning
+#' \item EAX.X Exploratory Data Analysis (EDA)
+#' \item TSX.X Time Series
+#' \item MLX.X Machine Learning
+#' }
+#'
+#' @example
+#' \dontrun{
+#' increment_standards ("G4.1")
+#' }
+#' @export
+increment_standards <- function (s) {
+    prfx <- toupper (gsub ("[0-9]+\\.[0-9]+([a-z]?)", "", s))
+    prfxs <- c ("G", "BS", "RE", "UL", "EA", "TS", "ML")
+    prfx <- match.arg (prfx, prfxs)
+
+    standard <- standard_name (prfx)
+
+    bd_dir <- Sys.getenv ("rss_bookdown_dir")
+    i <- match (standard, tools::file_path_sans_ext (list.files (bd_dir)))
+    standard_bd <- list.files (bd_dir, full.names = TRUE) [i]
+
+    standard <- file.path ("standards", standard)
+    standard <- paste0 (tools::file_path_sans_ext (standard), ".Rmd")
+
+    standards <- c (standard, standard_bd)
+
+    for (i in standards)
+        increment1 (i, s, prfx)
+}
+
+increment1 <- function (standard, s, prfx) {
+    x <- readLines (standard)
+
+    # get all numbers to be affected by increment
+    st_start <- paste0 ("^\\-\\s+\\*\\*", prfx)
+    index1 <- grep (st_start, x)
+    numbers <- gsub ("\\*\\*.*$", "", gsub (st_start, "", x [index1]))
+    nbig <- as.integer (gsub ("\\..*$", "", numbers))
+    nsmall <- as.integer (gsub ("^[0-9]+\\.", "", numbers))
+
+    nbig_new <- as.integer (gsub ("^[A-Z]+|\\..*$", "", s))
+    nsmall_new <- as.integer (gsub (".*\\.", "", s))
+
+    index2 <- which (nbig == nbig_new & nsmall >= nsmall_new)
+    nsmall [index2] <- nsmall [index2] + 1
+    new_standards <- paste0 ("**", prfx, nbig [index2], ".", nsmall [index2], "**")
+
+    index_to_doc <- index1 [index2]
+    for (i in seq_along (index_to_doc)) {
+        x [index_to_doc [i]] <-
+            gsub ("\\*\\*[A-Z]+[0-9]+\\.[0-9]+([a-z]?)\\*\\*",
+              new_standards [i],
+              x [index_to_doc [i]])
+    }
+
+    writeLines (x, con = standard)
+
+    cli::cli_alert_success (paste0 ("Incremented ", standard))
+}
+
+standard_name <- function (prfx) {
+    prfxs <- c ("G", "BS", "RE", "UL", "EA", "TS", "ML")
+    standards <- c ("general", "bayesian", "regression", "unsupervised",
+                    "eda", "time-series", "ml")
+    return (standards [match (prfx, prfxs)])
+}
