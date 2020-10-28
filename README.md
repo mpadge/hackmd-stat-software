@@ -13,7 +13,7 @@ source ("increment.R")
 increment_standards ("ML4.8")
 ```
 
-That command will increment standards in the `standards/*.Rmd` documents, which will no longer have or refer to a standard named **ML4.8**, leaving you free to insert your desired new standard. Please ensure you do that in the **RMarkdown (`.Rmd`)** document, not the markdown (`.md`) document. Please make a pull request to this repo with your changes.
+That command will increment standards in the `standards/*.Rmd` documents, which will no longer have or refer to a standard named **ML4.8**, leaving you free to insert your desired new standard in any of the source documents in the [`standards` directory](https://github.com/mpadge/hackmd-stat-software/tree/master/standards). Please ensure that you do that in the **RMarkdown (`.Rmd`)** and not the markdown (`.md`) versions. Please make a pull request to this repo with your changes.
 
 ### Optional Extra: Propagate Changes and Pull Request
 
