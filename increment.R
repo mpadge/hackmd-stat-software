@@ -30,11 +30,6 @@ increment_standards <- function (s) {
                              full.names = TRUE,
                              pattern = "\\.Rmd$")
 
-    bd_dir <- Sys.getenv ("rss_bookdown_dir")
-    standards_bd <- list.files (bd_dir, full.names = TRUE, pattern = "\\.Rmd$")
-
-    standards <- c (standards, standards_bd)
-
     for (i in standards)
         increment1 (i, s, prfx)
 }
