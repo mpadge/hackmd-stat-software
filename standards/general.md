@@ -104,8 +104,7 @@ package](https://github.com/mikldk/roxytest) for specifying tests
 #### 1.2 Function-level Documentation
 
 -   **G1.2** *Software should use
-    [`roxygen`](https://roxygen2.r-lib.org/) to documentation all
-    functions.*
+    [`roxygen`](https://roxygen2.r-lib.org/) to document all functions.*
     -   **G1.2a** *All internal (non-exported) functions should also be
         documented in standard [`roxygen`](https://roxygen2.r-lib.org/)
         format, along with a final `@noRd` tag to suppress automatic
