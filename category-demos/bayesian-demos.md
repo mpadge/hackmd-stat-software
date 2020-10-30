@@ -9,161 +9,258 @@ robots: noindex, nofollow
 ## [`fmcmc`](https://github.com/USCbiostats/fmcmc)
 
 
-### General Standards
+### [General Standards](https://ropenscilabs.github.io/statistical-software-review-book/standards.html#general-standards-for-statistical-software)
 
-- [ ] G1.0 No code included to reproduce results which
-  form the basis of performance claims made in associated publications.
-- [ ] G1.1 No code included to compare performance claims with alternative
-  implementations in other R packages.
-- [x] G2.0 Explicit secondary documentation of expected lengths of inputs
-  generally provided.
-- [x] G2.1 Explicit documentation of expected *data types* of vector inputs
-  generally provided.
-- [ ] G2.2 Submission of multivariate input to parameters expected to be
+#### Documentation
+
+- [x] **G1.0** The primary reference is to a JOSS article, with sufficient secondary references documented throughout.
+
+**Statistical Terminology**
+
+- [ ] **G1.1** Statistical terminology is generally used without sufficient clarification or definition.
+
+**Function-level Documentation**
+
+- [x] **G1.2** *Software should use [`roxygen`](https://roxygen2.r-lib.org/) to documentation all functions.*
+ - [x] **G1.2a** internal functions are documented in standard [`roxygen`](https://roxygen2.r-lib.org/) format
+
+**Supplementary Documentation**
+
+- [ ] **G1.3** No code included to reproduce results which form the basis of performance claims made in associated publications.
+- [ ] **G1.4** No code included to compare performance claims with alternative implementations in other R packages.
+
+#### Input Structures
+
+**Uni-variate (Vector) Input**
+
+- [x] **G2.0** Lengths of inputs generally asserted, and explicit secondary
+  documentation of expected lengths provided.
+- [x] **G2.1** Types of inputs generally asserted, and explicit secondary
+  documentation of expected types provided.
+- [ ] **G2.2** Submission of multivariate input to parameters expected to be
   univariate is possible, and not caught in pre-processing
-- [x] G2.3 No functions have single-valued character inputs, so not applicable.
-- [ ] G2.3 Provide appropriate mechanisms to convert between different *data
+- [x**] G2.**3 No functions have single-valued character inputs, so not applicable.
+- [ ] **G2.4** Provide appropriate mechanisms to convert between different *data
   types*, potentially including:
-    - [ ] G2.3a There is no explicit conversion to `integer` via `as.integer()`
-    - [x] G2.3b explicit conversion to continuous uses `as.numeric()`
-    - [x] G2.3c explicit conversion to character uses `as.character()`
-    - [x] G2.3d--e No `factor` data used, so not applicable
-- [x] G2.5 No `factor` data used, so not applicable
-- [x] G2.6--2.9 Pre-processing of rectangular input expected to be explicitly
+    - [ ] **G2.4a** There is no explicit conversion to `integer` via `as.integer()`
+    - [x**] G2.**4b explicit conversion to continuous uses `as.numeric()`
+    - [x**] G2.**4c explicit conversion to character uses `as.character()`
+    - [x] **G2.4d**--i**G2.4e** No `factor` data used, so not applicable
+- [x] **G2.5** No `factor` data used, so not applicable
+
+**Tabular Input**
+
+- [x] **G2.6**--**G2.9** Pre-processing of rectangular input expected to be explicitly
   controlled through user specification of a log-likelihood function, so not
   applicable.
-- [ ] G2.10 There are no checks for missing data
-- [ ] G2.11 There are no options for users to specify how to handle missing
+
+**Missing or Undefined Values**
+
+- [ ] **G2.10** There are no checks for missing data
+- [ ] **G2.11** There are no options for users to specify how to handle missing
   (`NA`) data
-- [ ] G2.12 Functions assume non-missingness, without explicitly stating such
-- [ ] G2.13 There is no processing of other (non-`NA`) undefined values.
-- [ ] G3.0 Nothing is written to local files, so not applicable
-- [ ] G4.0 No standard data sets used in tests (rather, all tests use random
+- [ ] **G2.12** Functions assume non-missingness, without explicitly stating such
+- [ ] **G2.13** There is no processing of other (non-`NA`) undefined values.
+
+#### Output Structures
+
+- [x] **G3.0** Nothing is written to local files, so not applicable
+
+#### Testing 
+
+**Test Data Sets**
+
+- [x] **G4.0** No standard data sets used in tests (rather, all tests use random
   data simulated with fixed random seeds)
-- [x] G4.1 Data sets are created within software, but not in a way that is
+- [x] **G4.1** Data sets are created within software, but not in a way that is
   appropriate for export, so not applicable.
-- [ ] G4.2 Tests do not cover all error and warning conditions
-- [ ] G4.3 Absence of missing or undefined values in return objects not
+
+**Responses to Unexpected Input**
+
+- [ ] G4**.2 Tests** do not cover all error and warning conditions
+ - [x] **G4.2a** Every message produced `stop()`, `warning()`, `message()`, or equivalent is unique
+ - [ ] **G4.2b** Tests do not cover every one of those messages
+- [ ] G4**.3 Absence** of missing or undefined values in return objects not
   explicitly tested.
-- [x] G4.4 Correctness tests appropriately implemented.
-- [x] G4.5 Correctness tests are run with a fixed random seed
-- [x] G4.6 Parameter recovery tests appropriately implemented.
-- [x] G4.7 Algorithm performance tests appropriately implemented.
-- [x] G4.8 Edge condition tests appropriately implemented.
-- [ ] G4.9 No noise susceptibility tests implemented.
-- [ ] G4.10 No extended tests included, so not applicable
 
-### Bayesian Standards
+**Algorithm Tests**
 
-- [ ] BS1.0 Uses the term "parameter" to refer to "hyperparameters", although
+- [x] **G4.4** Correctness tests are appropriately implemented
+- [x] **G4.5** Correctness tests are run with a fixed random seed
+- [x] **G4.6** Parameter recovery tests appropriately implemented.
+- [x] **G4.7** Algorithm performance tests appropriately implemented.
+- [x] **G4.8** Edge condition tests appropriately implemented.
+- [ ] G4**.9 No** noise susceptibility tests implemented.
+
+**Extended tests**
+
+- [x] **G4.10**--**G4.12** No extended tests included, so not applicable
+
+---
+
+### [Bayesian Standards](https://ropenscilabs.github.io/statistical-software-review-book/standards.html#bayesian-and-monte-carlo-software)
+
+#### Documentation of Inputs
+
+- [ ] **BS1.0** Uses the term "parameter" to refer to "hyperparameters", although
   does so entirely consistently
-- [x] BS1.1 Extensive descriptions of how to enter data, primarily via
+- [x**] BS1.**1 Extensive descriptions of how to enter data, primarily via
   vignettes.
-- [ ] BS1.2 Descriptions of how to specify prior distributions provided
-    - [ ] BS1.2a Not in `README`
-    - [x] BS1.2b In vignette
-    - [ ] BS1.2c Not in Function-level documentation
-- [x] BS1.3 All parameters which control the computational process extensively
+- [ ] **BS1.2** Descriptions of how to specify prior distributions provided
+    - [ ] **BS1.2a** Not in `README`
+    - [x**] BS1.**2b In vignette
+    - [ ] **BS1.2c** Not in Function-level documentation
+- [x] **BS1.3** All parameters which control the computational process extensively
   described.
-    - [x] BS1.3a Documents how to use the output of previous simulations as
+    - [x] **BS1.3a** Documents how to use the output of previous simulations as
       starting points of subsequent simulations.
-    - [x] BS1.3b Does not document how to use different sampling algorithms
+    - [x] **BS1.3b** Does not document how to use different sampling algorithms
       because only implements one.
-- [x] BS1.4 Explicitly describes and provides examples of convergence checkers.
-- [x] BS1.5 Differences between convergence checkers are explicitly tested.
-- [x] BS2.0 Vector inputs are appropriately pre-processed regardless of class
+- [x] **BS1.4** Explicitly describes and provides examples of convergence checkers.
+- [x] **BS1.5** Differences between convergence checkers are explicitly tested.
+
+#### Input Data Structures and Validation
+
+**Input Data**
+
+- [x] **BS2.0** Vector inputs are appropriately pre-processed regardless of class
   structures.
-- [ ] BS2.1 Some pre-processing routines are implemented for alternative
+- [ ] **BS2.1** Some pre-processing routines are implemented for alternative
   columns
-    - [x] BS2.1a Re-classed columns are processed via `as.data.frame`
-    - [ ] BS2.1b List columns fail
-- [ ] BS2.2 No *pre-checks* are implemented to ensure input data are
+    - [x] **BS2.1a** Re-classed columns are processed via `as.data.frame`
+    - [ ] **BS2.1b** List columns fail
+- [ ] **BS2.2** No *pre-checks* are implemented to ensure input data are
   commensurate, rather unhelpful errors are issued instead.
-- [ ] BS2.3 Hyperparameters are neither validated nor pre-processed prior to
+
+**Prior Distributions, Model Specifications, and Hyperparameters**
+
+- [ ] **BS2.3** Hyperparameters are neither validated nor pre-processed prior to
   submitting to analytic routines, with errors passed through to multiple
   parallel computational chains (`burnin`, for example, is only used *after*
   chains have been calculated, to determine which parts of result are to be
   discarded).
-- [ ] BS2.4 Lengths of hyperparameter vectors are not explicitly checked,
+- [ ] **BS2.4** Lengths of hyperparameter vectors are not explicitly checked,
   rather passed through to attempted matrix multiplication, and then issuing
   unhelpful error message ("Error in coeffs * x. : non-conformable arrays").
-- [x] BS2.5 Passing to "coeffs * x." described above ensures that lengths of
+- [x] **BS2.5** Passing to "coeffs * x." described above ensures that lengths of
   hyperparameter vectors are commensurate with expected model input
-- [ ] BS2.6 There are no pre-processing checks to validate
+- [ ] **BS2.6** There are no pre-processing checks to validate
   appropriateness of numeric values submitted for hyperparameters; for example,
   hyperparameters defining second-order moments and given negative values are
   passed through, and lead to unhelpful errors ("Error in if (R[i] < klogratio)
   { : missing value where TRUE/FALSE needed").
-- [ ] BS2.7 There are no checks that values for parameters are positive (see
+
+**Computational Parameters**
+
+- [ ] **BS2.7** There are no checks that values for parameters are positive (see
   BS2.3 above; negative `burnin` values still lead to chains being calculated).
-- [ ] BS2.8 There are no check on lengths of inputs, for example, passing a
+- [ ] **BS2.8** There are no check on lengths of inputs, for example, passing a
   length = 2 vector to `burnin` generates warnings on various conditional
   checks expecting single values.
-- [ ] BS2.9 There are no checks that arguments are of expected classes or
+- [ ] **BS2.9** There are no checks that arguments are of expected classes or
   types, rather passing unexpected classes or types generally fails at some
   stage with uninformative error messages.
-- [ ] BS2.10 Parameters of inappropriate type are not automatically rejected,
+- [ ] **BS2.10** Parameters of inappropriate type are not automatically rejected,
   rather usually fail as described above (BS2.9).
-- [ ] BS2.11 Seeds are not able to be passed as a parameter, rather random
+
+**Seed Parameters**
+
+- [ ] **BS2.11** Seeds are not able to be passed as a parameter, rather random
   generation is determined by the system `seed` value.
-- [x] BS2.12 Results of previous runs can be used as starting points 
-- [x] BS2.13 Each chain is started with a different seed by default
-- [ ] BS2.14 Seeds can not be passed, so no diagnostic messages can be issued
+- [x] **BS2.12** Results of previous runs can be used as starting points 
+- [x] **BS2.13** Each chain is started with a different seed by default
+- [ ] **BS2.14** Seeds can not be passed, so no diagnostic messages can be issued
   when identical seeds are passed to distinct computational chains
-- [ ] BS2.15 There is no advice *not* to use `set.seed()`, rather it is the
+- [ ] **BS2.15** There is no advice *not* to use `set.seed()`, rather it is the
   suggested way to control random generation.
-- [x] BS2.16 The relevant parameter is called "initial", which require no
+- [x] **BS2.16** The relevant parameter is called "initial", which require no
   pluralization.
-- [ ] BS2.17 There is no parameter controlling the verbosity of output, rather
+
+**Output Verbosity**
+
+- [ ] **BS2.17** There is no parameter controlling the verbosity of output, rather
   just a single `progress` parameter to switch the progress bar on and off,
   while convergence checkers have no verbosity control at all.
-- [x] BS2.18 It is possible to suppress progress indicators while retaining
+- [x] **BS2.18** It is possible to suppress progress indicators while retaining
   verbosity of warnings and errors, through the `progress` parameter described
-  above (BS2.17).
-- [ ] BS2.19 It is not possible to suppress warnings, and many uninformative
+  above (**BS2.17**).
+- [ ] **BS2.19** It is not possible to suppress warnings, and many uninformative
   warnings may be triggered as described above.
-- [ ] BS2.20 There is no explicit way to catch errors
-- [ ] BS3.0 No missing values are permitted, and no checks are performed,
+- [ ] **BS2.20** There is no explicit way to catch errors
+
+#### Pre-processing and Data Transformation
+
+**Missing Values**
+
+- [ ] **BS3.0** No missing values are permitted, and no checks are performed,
   rather missing values are passed through unchecked, leading to unhelpful
   error messages.
-- [ ] BS3.1 There are no routines to pre-process missing values prior to
+- [ ] **BS3.1** There are no routines to pre-process missing values prior to
   passing data through to main computational algorithms.
-- [ ] BS3.2 There are no pre-processing routines to diagnose perfect
+
+**Perfect Collinearity**
+
+- [ ] **BS3.2** There are no pre-processing routines to diagnose perfect
   collinearity, and there are no diagnostic messages or warnings
-- [ ] BS3.3 There are no distinct routines for processing perfectly collinear
+- [ ] **BS3.3** There are no distinct routines for processing perfectly collinear
   data.
-- [x] BS4.0 Sampling algorithms are documented, including literary citation
-- [ ] BS4.1 There are no comparisons with external samplers
-- [ ] BS4.2 There are no methods to validate posterior estimates (other than
+
+#### Analytic Algorithms
+
+- [x**] BS4.**0 Sampling algorithms are documented, including literary citation
+- [ ] **BS4.1** There are no comparisons with external samplers
+- [ ] **BS4.2** There are no methods to validate posterior estimates (other than
   convergence checkers used during simulation chains).
-- [x] BS4.3 Several different kinds of convergence checkers are implemented and documented.
-- [x] BS4.4 Computations are able to be stopped on convergence
-- [x] BS4.5 Appropriate mechanisms are provided for models which do not
+- [x**] BS4.**3 Several different kinds of convergence checkers are implemented and documented.
+- [x**] BS4.**4 Computations are able to be stopped on convergence
+- [x**] BS4.**5 Appropriate mechanisms are provided for models which do not
   converge, by stopping after specified numbers of iterations regardless of
   convergence.
-- [ ] BS4.6 There are no tests to confirm that results with convergence checker
+- [ ] **BS4.6** There are no tests to confirm that results with convergence checker
   are statistically equivalent to results from equivalent fixed number of
   samples without convergence checking.
-- [ ] BS4.7 Effects of parameters of convergence checkers are not tested.
-- [ ] BS5.0 Return objects do not include information on seed(s) or starting
+- [ ] **BS4.7** Effects of parameters of convergence checkers are not tested.
+
+#### Return Values
+
+- [ ] **BS5.0** Return objects do not include information on seed(s) or starting
   value(s)
-- [ ] BS5.1 Return objects do not include metadata on types (or classes) and
+- [ ] **BS5.1** Return objects do not include metadata on types (or classes) and
   dimensions of input data
-- [ ] BS5.2 Software returns neither their input function of distributional
+- [ ] **BS5.2** Software returns neither their input function of distributional
   parameters, nor enables subsequent access to such.
-- [ ] BS5.3 Return object does not include convergence statistics 
-- [ ] BS5.4 Return object does not include details of convergence checker used 
-- [ ] BS5.5 Return object does not include diagnostic statistics to indicate
+- [ ] **BS5.3** Return object does not include convergence statistics 
+- [ ] **BS5.4** Return object does not include details of convergence checker used 
+- [ ] **BS5.5** Return object does not include diagnostic statistics to indicate
   absence of convergence
-- [ ] BS6.0 Return object does not Implement a default `print` method
-- [x] BS6.1 Return object does Implement a default `plot` method
-- [ ] BS6.2 Software provides and documents abilities to plot sequences of
+
+#### Additional Functionality
+
+- [ ] **BS6.0** Return object does not Implement a default `print` method
+- [x**] BS6.**1 Return object does Implement a default `plot` method
+- [ ] **BS6.2** Software provides and documents abilities to plot sequences of
   posterior samples, although burn-in periods are simply excluded from plots.
-- [x] BS6.3 There are straightforward abilities to plot posterior
+- [x**] BS6.**3 There are straightforward abilities to plot posterior
   distributional estimates
-- [x] BS6.4 Provide `summary` methods for return objects are provided
-- [x] BS6.5 It is possible to plot both sequences of posterior samples and
+- [x**] BS6.**4 Provide `summary` methods for return objects are provided
+- [x**] BS6.**5 It is possible to plot both sequences of posterior samples and
   distributional estimates together in single graphic
+
+#### Tests
+
+**Parameter Recovery Tests**
+
+- [x] **BS7.0** Tests for recovery of parametric estimates of a prior distribution
+- [x] **BS7.1** Tests for recovery of prior distribution in the absence of additional data
+- [x] **BS7.2** Tests for recovery of expected posterior distribution given a specified prior and input data 
+
+**Algorithmic Scaling Tests**
+
+- [ ] **BS7.3** There are no tests for scaling of algorithmic efficiency with sizes of input data
+
+**Scaling of Input to Output Data**
+
+- [x] **BS7.4** Tests confirm that predicted or fitted values are on (approximately) the same scale as input values.
 
 ---
 
