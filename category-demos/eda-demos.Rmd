@@ -168,72 +168,142 @@ reject rectangular input objects which have list-columns.
 
 - [ ] **EA6.1** properties of graphical output are not tested, merely that output is produced.
 
+
 ---
 
 ## [`insight`](https://github.com/easystats/insight)
 
-### General Standards
+### [General Standards](https://ropenscilabs.github.io/statistical-software-review-book/standards.html#general-standards-for-statistical-software)
 
-- [x] G1.0--1.1 Package makes no performance claims, so not relevant
-- [ ] G2.0 Expected lengths of inputs are generally not documented
-- [ ] G2.1 Expected *data types* of vector inputs not documented (for example,
+#### Documentation
+
+- [x] **G1.0** Primary reference is provided
+
+**Statistical Terminology**
+
+- [x] **G1.1** Statistical terminology clarified and defined. 
+
+**Function-level Documentation**
+
+- [x] **G1.2** [`roxygen`](https://roxygen2.r-lib.org/) used to document all functions.
+    - [ ] **G1.2a** Internal functions generally not sufficiently documented
+
+**Supplementary Documentation**
+
+- [x] **G1.3** No performance claims made, so not relevant
+
+#### Input Structures
+
+**Uni-variate (Vector) Input**
+
+- [ ] **G2.0 Expected lengths** of inputs are generally not documented
+- [ ] **G2.1 Expected ***data types* of vector inputs not documented (for example,
   the character vectors for `component` arguments of the `find_...()`
   functions).
-- [ ] G2.2 There are no checks or restrictions on parameters expected to be
+- [ ] **G2.2 There are** no checks or restrictions on parameters expected to be
   univariate.
-- [ ] G2.3 No checks implemented for assumed single-valued character input
-    - [ ] G2.3a `match.arg()` is not used
-    - [ ] G2.3b `tolower()` is not used to avoid sensitivity to case
-- [ ] G2.4 Provide appropriate mechanisms to convert between different *data
+- [ ] **G2.3 No checks** implemented for assumed single-valued character input
+    - [ ] **G2.3a** `match.arg()` is not used
+    - [ ] **G2.3b** `tolower()` is not used to avoid sensitivity to case
+- [ ] **G2.4** Provide appropriate mechanisms to convert between different *data
   types*, potentially including:
-    - [ ] G2.4a There is no explicit conversion to `integer` via `as.integer()`
-    - [x] G2.4b There is explicit conversion to continuous via `as.numeric()`
-    - [x] G2.4c explicit conversion to character uses `as.character()`
-    - [x] G2.4d explicit conversion to factor uses `as.factor()`
-    - [x] G2.4e explicit conversion from factor uses `as...()` functions
-- [x] G2.5 No inputs are expected to be of `factor` type, so not applicable
-- [x] G2.6--2.8 No functions accept rectangular input, so not applicable
-- [x] G2.9--2.12 No functions accept data able to contain missing values, so
-  not applicable
-- [x] G3.0 No functions use local files, so not appicable
-- [x] G4.0 Tests use data sets provided by other widely-used R packages.
-- [x] G4.1 No data sets created within package, so not applicable
-- [ ] G4.2 Error and warning behaviour of functions is not explicitly tested.
-- [ ] G4.3 Absence of missing or undefined values in return objects is not explicitly tested.
-- [x] G4.4--4.7 Standards for testing statistical algorithms not applicable to
-  EDA software
-- [x] G4.8 Input to software is models not raw data, so edge conditions neither
+    - [ ] **G2.4a** There is no explicit conversion to `integer` via `as.integer()`
+    - [x] **G2.4b** There is explicit conversion to continuous via `as.numeric()`
+    - [x] **G2.4c** explicit conversion to character uses `as.character()`
+    - [x] **G2.4d** explicit conversion to factor uses `as.factor()`
+    - [x] **G2.4e** explicit conversion from factor uses `as...()` functions
+- [x] **G2.5** No inputs are expected to be of `factor` type, so not applicable
+
+**Tabular Input**
+
+- [x] **G2.6**--**G2.9** No functions accept rectangular input, so not applicable
+
+**Missing or Undefined Values**
+
+- [x] **G2.10**--**G2.13** No functions accept data able to contain missing or
+  undefined values, so not applicable
+
+#### Output Structures
+
+- [x] **G3.0** No functions use local files, so not appicable
+
+#### Testing 
+
+**Test Data Sets**
+
+- [x] **G4.0** Tests use data sets provided by other widely-used R packages.
+- [x] **G4.1** No data sets created within package, so not applicable
+
+**Responses to Unexpected Input**
+
+- [ ] **G4.2** Error and warning behaviour of functions is not explicitly tested.
+- [ ] **G4.3** Absence of missing or undefined values in return objects is not explicitly tested.
+
+**Algorithm Tests**
+
+- [x] **G4.4**--**G4.7** Standards for testing statistical algorithms not
+  applicable to EDA software
+- [x] **G4.8** Input to software is models not raw data, so edge conditions neither
   relevant nor applicable.
-- [x] G4.9 Input to software is models not raw data, so noise tests neither
+- [x] **G4.9** Input to software is models not raw data, so noise tests neither
   relevant nor applicable.
-- [x] G4.10--4.12 Extended tests neither relevant nor applicable.
+
+**Extended tests**
+
+- [x] **G4.10**--**G4.12** Extended tests neither relevant nor applicable.
 
 
+---
 
-### EDA Standards
+### [EDA Standards](https://ropenscilabs.github.io/statistical-software-review-book/standards.html#exploratory-data-analysis)
 
-- [x] EA1.0 Target audiences clearly identified
-- [x] EA1.1 The kinds of data the software is capable of analysing clearly identified
-- [x] EA1.2 The kinds of questions the software is intended to help explore are
+#### Documentation Standards
+
+- [x] **EA1.0** Target audiences clearly identified
+- [x] **EA1.1** The kinds of data the software is capable of analysing clearly identified
+- [x] **EA1.2** The kinds of questions the software is intended to help explore are
   clearly identified
-- [x] EA1.3 The kinds of data each function is intended to accept as input are
+- [x] **EA1.3** The kinds of data each function is intended to accept as input are
   clearly identified
-- [x] EA2.0--2.9 The software does not accept general inputs, so not applicable
-- [x] EA4.0 Generally not applicable, as almost all model parameters are
+
+#### Input Data
+
+- [x] **EA2.0**--**EA2.9** The software does not accept general inputs, so not applicable
+
+#### Return Results / Output Data
+
+- [x] **EA4.0** Generally not applicable, as almost all model parameters are
   `numeric`, although `get_random()` does return `factor` for `factor` input,
   so standard met in that regard.
-- [x] EA4.1 Parameters to enable explicit control of numeric precision are not
+- [x] **EA4.1** Parameters to enable explicit control of numeric precision are not
   directly implemented, rather the package offers a suite of `format_`
   functions to specify such.
-- [x] EA4.2 Primary routines return objects for which default `print` and
+- [x] **EA4.2** Primary routines return objects for which default `print` and
   `plot` methods give sensible results, and also implement additional `print_`
   and `format_` methods.
-- [x] EA5.0--5.1 There are no `plot` or other graphical functions.
-- [ ] EA5.2 Screen-based output follows `getOption("digits")`, and so uses
+
+#### Visualization and Summary Output
+
+- [x] **EA5.0**--**EA5.1** There are no `plot` or other graphical functions.
+
+**Summary and Screen-based Output**
+
+- [ ] **EA5.2** Screen-based output follows `getOption("digits")`, and so uses
   default print formatting for `numeric` types, with no user control possible.
-- [ ] EA5.3 Column-based summary statistics do not indicate the `storage.mode`,
+- [ ] **EA5.3** Column-based summary statistics do not indicate the `storage.mode`,
   `class`, or equivalent defining attribute of each column.
-- [x] EA5.4--5.5 There are no visualisations, so not relevant
+
+**General Standards for Visualization (Static and Dynamic)**
+
+- [x] **EA5.4**--**EA5.5** There are no visualisations, so not relevant
+
+#### Testing
+
+- [x] **EA6.0** Return values from all functions are tested
+- [x] **EA6.1** No graphical output produced, so no need to test
+
+---
+
 
 ## [`naniar`](https://github.com/njtierney/naniar)
 

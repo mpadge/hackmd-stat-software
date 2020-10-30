@@ -13,7 +13,7 @@ render:
 	done
 
 demos:
-	for F in category-demos/*.Rmd ; \
+	for F in category-demos/eda-demos.Rmd ; \
 	do \
 		Rscript $(SFILE).R $$F TRUE ; \
 	done
