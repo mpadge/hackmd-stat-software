@@ -39,12 +39,12 @@ robots: noindex, nofollow
   documentation of expected types provided.
 - [ ] **G2.2** Submission of multivariate input to parameters expected to be
   univariate is possible, and not caught in pre-processing
-- [x**] G2.**3 No functions have single-valued character inputs, so not applicable.
+- [x] **G2.3** No functions have single-valued character inputs, so not applicable.
 - [ ] **G2.4** Provide appropriate mechanisms to convert between different *data
   types*, potentially including:
     - [ ] **G2.4a** There is no explicit conversion to `integer` via `as.integer()`
-    - [x**] G2.**4b explicit conversion to continuous uses `as.numeric()`
-    - [x**] G2.**4c explicit conversion to character uses `as.character()`
+    - [x] **G2.4b** explicit conversion to continuous uses `as.numeric()`
+    - [x] **G2.4c** explicit conversion to character uses `as.character()`
     - [x] **G2.4d**--i**G2.4e** No `factor` data used, so not applicable
 - [x] **G2.5** No `factor` data used, so not applicable
 
@@ -77,10 +77,10 @@ robots: noindex, nofollow
 
 **Responses to Unexpected Input**
 
-- [ ] G4**.2 Tests** do not cover all error and warning conditions
+- [ ] **G4.2** Tests do not cover all error and warning conditions
  - [x] **G4.2a** Every message produced `stop()`, `warning()`, `message()`, or equivalent is unique
  - [ ] **G4.2b** Tests do not cover every one of those messages
-- [ ] G4**.3 Absence** of missing or undefined values in return objects not
+- [ ] **G4.3** Absence of missing or undefined values in return objects not
   explicitly tested.
 
 **Algorithm Tests**
@@ -90,7 +90,7 @@ robots: noindex, nofollow
 - [x] **G4.6** Parameter recovery tests appropriately implemented.
 - [x] **G4.7** Algorithm performance tests appropriately implemented.
 - [x] **G4.8** Edge condition tests appropriately implemented.
-- [ ] G4**.9 No** noise susceptibility tests implemented.
+- [ ] **G4.9** No noise susceptibility tests implemented.
 
 **Extended tests**
 
@@ -104,11 +104,11 @@ robots: noindex, nofollow
 
 - [ ] **BS1.0** Uses the term "parameter" to refer to "hyperparameters", although
   does so entirely consistently
-- [x**] BS1.**1 Extensive descriptions of how to enter data, primarily via
+- [x] **BS1.1** Extensive descriptions of how to enter data, primarily via
   vignettes.
 - [ ] **BS1.2** Descriptions of how to specify prior distributions provided
     - [ ] **BS1.2a** Not in `README`
-    - [x**] BS1.**2b In vignette
+    - [x] **BS1.2b** In vignette
     - [ ] **BS1.2c** Not in Function-level documentation
 - [x] **BS1.3** All parameters which control the computational process extensively
   described.
@@ -237,13 +237,13 @@ robots: noindex, nofollow
 #### Additional Functionality
 
 - [ ] **BS6.0** Return object does not Implement a default `print` method
-- [x**] BS6.**1 Return object does Implement a default `plot` method
+- [x] **BS6.1** Return object does Implement a default `plot` method
 - [ ] **BS6.2** Software provides and documents abilities to plot sequences of
   posterior samples, although burn-in periods are simply excluded from plots.
-- [x**] BS6.**3 There are straightforward abilities to plot posterior
+- [x] **BS6.3** There are straightforward abilities to plot posterior
   distributional estimates
-- [x**] BS6.**4 Provide `summary` methods for return objects are provided
-- [x**] BS6.**5 It is possible to plot both sequences of posterior samples and
+- [x] **BS6.4** Provide `summary` methods for return objects are provided
+- [x] **BS6.5** It is possible to plot both sequences of posterior samples and
   distributional estimates together in single graphic
 
 #### Tests
