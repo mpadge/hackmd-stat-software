@@ -5,7 +5,7 @@
 
 <details>
 <summary>
-Click for notes on nomenclature of **Data Types**.
+Click for notes on nomenclature of Data Types.
 </summary>
 <p>
 
