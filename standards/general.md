@@ -351,17 +351,17 @@ useful for testing include [`testthat`](https://testthat.r-lib.org),
 
 #### 4.2 Responses to Unexpected Input
 
--   **G4.2** Appropriate error and warning behaviour of all functions
-    should be explicitly demonstrated through tests. In particular,
-    -   **G4.2a** Every message produced within R code by `stop()`,
-        `warning()`, `message()`, or equivalent should be unique
-    -   **G4.2b** Explicit tests should demonstrate conditions which
+-   **G4.2** *Appropriate error and warning behaviour of all functions
+    should be explicitly demonstrated through tests. In particular,*
+    -   **G4.2a** *Every message produced within R code by `stop()`,
+        `warning()`, `message()`, or equivalent should be unique*
+    -   **G4.2b** *Explicit tests should demonstrate conditions which
         trigger every one of those messages, and should compare the
-        result with expected values.
--   **G4.3** For functions which are expected to return objects
+        result with expected values.*
+-   **G4.3** *For functions which are expected to return objects
     containing no missing (`NA`) or undefined (`NaN`, `Inf`) values, the
     absence of any such values in return objects should be explicitly
-    tested.
+    tested.*
 
 #### 4.3 Algorithm Tests
 
