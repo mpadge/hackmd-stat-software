@@ -349,9 +349,31 @@ list-columns.
 [`naniar`](https://github.com/njtierney/naniar)
 -----------------------------------------------
 
-### 5 General Standards
+### 5 [General Standards](https://ropenscilabs.github.io/statistical-software-review-book/standards.html#general-standards-for-statistical-software)
 
--   [x] G1.0–1.1 Package makes no performance claims, so not relevant
+#### 5.1 Documentation
+
+-   [ ] **G1.0** Not primary reference given
+
+**Statistical Terminology**
+
+-   [x] **G1.1** Statistical terminology appropriately clarified
+
+**Function-level Documentation**
+
+-   [x] **G1.2** *Software should use
+    [`roxygen`](https://roxygen2.r-lib.org/) to document all functions.*
+    -   [ ] **G1.2a** A scarce few internal functions are not be
+        documented in [`roxygen`](https://roxygen2.r-lib.org/) format
+
+**Supplementary Documentation**
+
+-   [x] **G1.3** No performance claims make so not relevant.
+
+#### 5.2 Input Structures
+
+**Uni-variate (Vector) Input**
+
 -   [ ] G2.0 There is no documentation of expectations on lengths of
     inputs
 -   [ ] G2.1 Provide explicit secondary documentation of expectations on
@@ -374,34 +396,63 @@ list-columns.
         applicable
 -   [x] G2.5 No inputs expected to be of `factor` type, so not
     applicable.
+
+**Tabular Input**
+
 -   [ ] G2.6 `naniar` does not accept `matrix`/`array` input, even
     though it easily could.
 -   [ ] G2.7 There is no initial pre-processing to ensure that all other
     sub-functions of a package receive inputs of a single defined type.
 -   [ ] G2.8 There is no type conversion, so no diagnostic messages for
     type conversion are issued.
--   [x] G2.9 Checks for missing data are a core part of every routine
--   [x] G2.10 Most functions provide multiple, custom options for
+-   [x] G2.9 Extraction/filtering of single columns from tabular inputs
+    behaves appropriately regardless of input class.
+
+**Missing or Undefined Values**
+
+-   [x] G2.10 Checks for missing data are a core part of every routine
+-   [x] G2.11 Most functions provide multiple, custom options for
     handling missing
--   [x] G2.11 No functions assume non-missingness
--   [ ] G2.12 No functions appropriately handle undefined values other
+-   [x] G2.12 No functions assume non-missingness
+-   [ ] G2.13 No functions appropriately handle undefined values other
     than `NA`. `NaN` is treated exactly as `NA`, and `Inf` is simply
     ignored.
--   [ ] G3.0 There are no outputs written to local files, so not
+
+#### 5.3 Output Structures
+
+-   [x] G3.0 There are no outputs written to local files, so not
     applicable
+
+#### 5.4 Testing
+
+**Test Data Sets**
+
 -   [x] G4.0 Tests use data sets provided by other widely-used R
     packages.
 -   [x] G4.1 No data sets created within package, so not applicable
     exported so that users can confirm tests and run examples.
+
+**Responses to Unexpected Input**
+
 -   [ ] G4.2 Error and warning behaviour not tested for all functions
 -   [x] G4.3 Absence of missing or undefined values is tested
+
+**Algorithm Tests**
+
 -   [x] G4.4–4.8 Standards for testing statistical algorithms not
     applicable to EDA software
 -   [x] G4.8 Edge conditions tested appropriately
 -   [x] G4.9 Test of noise susceptibility not applicable
+
+**Extended tests**
+
 -   [x] G4.10–4.12 Extended tests neither relevant nor applicable.
 
-### 6 EDA Standards
+------------------------------------------------------------------------
+
+### 6 [EDA Standards](https://ropenscilabs.github.io/statistical-software-review-book/standards.html#exploratory-data-analysis)
+
+#### 6.1 Documentation Standards
 
 -   [ ] EA1.0 The software does not identify any target audiences for
     whom it is intended
@@ -413,11 +464,22 @@ list-columns.
     is intended to help explore
 -   [ ] EA1.3 The software does not identify the kinds of data each
     function is intended to accept as input (see EA1.1, above).
+
+#### 6.2 Input Data
+
+**Index Columns**
+
 -   [x] EA2.0–2.2 Software does not rely on index columns
 -   [x] EA2.3 Table join operations are not based on any assumed
     variable or column names, rather are only performed on inputs
     generated internally within the package to have standard format.
--   [x] EA2.4 Package does not use or admit multi-tabular input
+
+**Multi-tabular input**
+
+-   [x] EA2.4–EA2.5 Package does not use or admit multi-tabular input
+
+**Classes and Sub-Classes**
+
 -   [x] EA2.6 Routines appropriately process vector input of custom
     classes
 -   [x] EA2.7 Routines appropriately process vector data regardless of
@@ -427,6 +489,11 @@ list-columns.
 -   [x] EA2.9 Routines accept and appropriately process rectangular
     input with columns of custom sub-classes including additional
     attributes.
+
+#### 6.3 Analytic Algorithms
+
+#### 6.4 Return Results / Output Data
+
 -   [ ] EA4.0 Software does not ensure all return results have types
     which are consistent with input types, rather returns all results as
     `tibble` objects regardless of class of input.
@@ -434,14 +501,37 @@ list-columns.
     of numeric precision
 -   [x] EA4.2 Universal use of `tibble` classes ensures default `print`
     and `plot` methods give sensible results.
+
+#### 6.5 Visualization and Summary Output
+
 -   [x] EA5.0 Graphical presentation is as accessible as possible or
     practicable.
 -   [x] EA5.1 Typefaces appear to consider accessibility
+
+**Summary and Screen-based Output**
+
 -   [x] EA5.2 Screen-based output does not rely on default print
     formatting of `numeric` types, rather relies on `print.tibble`
     throughout.
 -   [x] EA5.3 Column-based summary statistics always indicates the
     `storage.mode` via `tibble`.
+
+**General Standards for Visualization (Static and Dynamic)**
+
 -   [ ] EA5.4 Visualisations do not include units on all axes, but do
     use `ggplot2` to produce sensibly rounded values.
+
+**Dynamic Visualization**
+
 -   [x] EA5.5 There are no routines for dynamic visualization.
+
+#### 6.6 Testing
+
+**Return Values**
+
+-   [x] **EA6.0** Return values from all functions are tested
+
+**Graphical Output**
+
+-   [x] **EA6.1** The properties of graphical output are explicitly
+    tested
