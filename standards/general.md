@@ -12,7 +12,7 @@ General Standards for Statistical Software
 
 <details>
 <summary>
-click for initial notes on nomenclature
+Click for notes on nomenclature of **Data Types**.
 </summary>
 <p>
 
