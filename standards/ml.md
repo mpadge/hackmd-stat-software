@@ -10,6 +10,10 @@ robots: noindex, nofollow
 Machine Learning Software
 -------------------------
 
+Click on the following link to view a demonstration [Application of
+Machine Learning Software
+Standards](https://hackmd.io/Ix1YwD8YTWGuzdiXsVQadA).
+
 R has an extensive and diverse ecosystem of Machine Learning (ML)
 software which is very well described in the corresponding [CRAN Task
 View](https://cran.r-project.org/web/views/MachineLearning.html). Unlike

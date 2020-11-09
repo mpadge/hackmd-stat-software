@@ -10,6 +10,10 @@ robots: noindex, nofollow
 Exploratory Data Analysis
 -------------------------
 
+Click on the following link to view a demonstration [Application of
+Exploratory Data Anslysis
+Standards](https://hackmd.io/K8F1RIhdQeuZFqMnzdqNVw).
+
 Exploration is a part of all data analyses, and Exploratory Data
 Analysis (EDA) is not something that is entered into and exited from at
 some point prior to “real” analysis. Exploratory Analyses are also not
