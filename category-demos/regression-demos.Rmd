@@ -1,6 +1,6 @@
 # Regression Demonstrations
 
-## lme4
+## [lme4](https://github.com/lme4/lme4)
 
 ```{r lib, echo = FALSE, message = FALSE}
 library (lme4)

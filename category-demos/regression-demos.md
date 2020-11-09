@@ -8,8 +8,8 @@ robots: noindex, nofollow
 Regression Demonstrations
 =========================
 
-lme4
-----
+[lme4](https://github.com/lme4/lme4)
+------------------------------------
 
 ### 1 [General Standards](https://ropenscilabs.github.io/statistical-software-review-book/standards.html#general-standards-for-statistical-software)
 
