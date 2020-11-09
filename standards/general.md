@@ -57,15 +57,16 @@ Examples of application of the following standards may be viewed as
 separate [`hackmd.io` files](https://hackmd.io) by clicking on the
 following links:
 
--   [Bayesian and Monte Carlo
+-   [Application of Bayesian and Monte Carlo
     Standards](https://hackmd.io/zVWTAl9ZQeCcj_bvMGcmMQ)
--   [Regression and Supervised Learning
+-   [Application of Regression and Supervised Learning
     Standards](https://hackmd.io/VZ-wgQtZRV2pb-wFZNDM5g)
--   [Dimensionality Reduction, Clustering, and Unsupervised Learning
+-   [Application of Dimensionality Reduction, Clustering, and
+    Unsupervised Learning
     Standards](https://hackmd.io/iOZD_oCpT86zoY5z4memaQ)
--   [Exploratory Data Anslysis
+-   [Application of Exploratory Data Anslysis
     Standards](https://hackmd.io/K8F1RIhdQeuZFqMnzdqNVw)
--   [Machine Learning Software
+-   [Application of Machine Learning Software
     Standards](https://hackmd.io/Ix1YwD8YTWGuzdiXsVQadA)
 
 Each of those files compares both general and category-specific
