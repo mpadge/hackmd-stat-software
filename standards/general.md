@@ -64,7 +64,7 @@ following links:
 -   [Application of Dimensionality Reduction, Clustering, and
     Unsupervised Learning
     Standards](https://hackmd.io/iOZD_oCpT86zoY5z4memaQ)
--   [Application of Exploratory Data Anslysis
+-   [Application of Exploratory Data Analysis
     Standards](https://hackmd.io/K8F1RIhdQeuZFqMnzdqNVw)
 -   [Application of Machine Learning Software
     Standards](https://hackmd.io/Ix1YwD8YTWGuzdiXsVQadA)

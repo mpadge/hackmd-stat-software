@@ -11,7 +11,7 @@ Exploratory Data Analysis
 -------------------------
 
 Click on the following link to view a demonstration [Application of
-Exploratory Data Anslysis
+Exploratory Data Analysis
 Standards](https://hackmd.io/K8F1RIhdQeuZFqMnzdqNVw).
 
 Exploration is a part of all data analyses, and Exploratory Data
