@@ -26,11 +26,20 @@ Machine Learning Demonstrations
 The package lists no primary reference, and only has itself has a
 citation.
 
-#### 1.1 Function-level Documentation
+#### 1.1 Statistical Terminology
 
--   [ ] **G1.2a** *All internal (non-exported) functions should also be
-    documented in standard [`roxygen`](https://roxygen2.r-lib.org/)
-    format.*
+-   [x] **G1.1** *All statistical terminology is clarified and
+    unambiguously defined.*
+
+#### 1.2 Function-level Documentation
+
+-   [x] **G1.2** *Software should use
+    [`roxygen`](https://roxygen2.r-lib.org/) to document all functions.*
+    -   [ ] **G1.2a** *All internal (non-exported) functions should also
+        be documented in standard
+        [`roxygen`](https://roxygen2.r-lib.org/) format.*
+-   [x] **G1.3**-**G1.4** Not applicable, as no performance claims are
+    made.
 
 Internal functions are not documented at all, merely given commented
 titles to separate them.
@@ -39,6 +48,13 @@ titles to separate them.
 
 #### 2.1 Uni-variate (Vector) Input
 
+-   [ ] **G2.0** *Implement assertions on lengths of inputs,
+    particularly through asserting that inputs expected to be single- or
+    multi-valued are indeed so.*
+-   [ ] **G2.0a** Provide explicit secondary documentation of any
+    expectations on lengths of inputs
+-   [x] **G2.1** *Implement assertions on types of inputs (see the
+    initial point on nomenclature above).*
 -   [ ] **G2.2** *Appropriately prohibit or restrict submission of
     multivariate input to parameters expected to be univariate.*
 
@@ -68,6 +84,12 @@ That works silently, which is okay, but then:
     print (mod)
 
     ## [1] "Error in x$threshold * 100 : non-numeric argument to binary operator"
+
+-   [x] **G2.5** No `factor` input expected, so not relevant
+-   [x] **G2.6** Standard tabular forms accepted
+-   [x] **G2.7** Standard tabular forms converted appropriately
+-   [x] **G2.8** Not applicable
+-   [x] **G2.9** List-column extraction works consistently
 
 #### 2.2 Missing or Undefined Values
 
@@ -108,14 +130,37 @@ base routines such as `svd()`.
 
 No such options provided.
 
-### 3 Testing
+### 3 Output Structures
+
+-   [x] **G3.0** No writing to local files implemented, so not
+    applicable.
+
+### 4 Testing
+
+#### 4.1 Test Data Sets
+
+-   [x] **G4.0** *Where applicable or practicable, tests should use
+    standard data sets with known properties (for example, the [NIST
+    Standard Reference Datasets](https://www.itl.nist.gov/div898/strd/),
+    or data sets provided by other widely-used R packages).*
+-   [x] **G4.1** *Data sets created within, and used to test, a package
+    should be exported (or otherwise made generally available) so that
+    users can confirm tests and run examples.*
+
+These standards are not explicitly fulfilled, but as tests can all be
+implemented with relatively small data sets, they may be considered not
+relevant.
+
+#### 4.2 Responses to Unexpected Input
 
 -   [ ] **G4.2** Some but not all error and warning behaviour is
     explicitly tested
-
 -   [ ] **G4.3** Absence of missing or undefined data in return objects
     is not explicitly tested.
 
+#### 4.3 Algorithm Tests
+
+-   [x] **G4.4**–**G4.5** Correctness tests are not applicable
 -   [ ] **G4.6b** *Parameter recovery tests should be run with multiple
     random seeds when either data simulation or the algorithm contains a
     random component. (When long-running, such tests may be part of an
@@ -123,6 +168,7 @@ No such options provided.
 
 Tests are only run with a single random seed
 
+-   [ ] **G4.8** Algorithm performance tests are not implemented.
 -   [ ] **G4.8** **Edge condition tests** *to test that these conditions
     produce expected behaviour such as clear warnings or errors when
     confronted with data with extreme properties including but not
@@ -165,7 +211,7 @@ is not tested
 [Machine Learning Standards](https://ropenscilabs.github.io/statistical-software-review-book/standards.html#machine-learning-software)
 --------------------------------------------------------------------------------------------------------------------------------------
 
-### 4 Input Data Specification
+### 5 Input Data Specification
 
 -   [ ] **ML1.0** Documentation should make a clear conceptual
     distinction between training and test data (even where such may
@@ -174,7 +220,12 @@ is not tested
 Documentation refers frequently to “training data”, yet without any
 clear interpretation of this phrase.
 
-#### 4.1 Missing Values
+-   [x] **ML1.1**–**ML1.** Design decisions distinguishing “training”
+    from “test” data clarified and justified
+-   [x] **ML1.5** Default `print` methods summarise contents of training
+    data sets.
+
+#### 5.1 Missing Values
 
 -   [ ] **ML1.6** ML software which does not admit missing values, and
     which expects no missing values, should implement explicit
@@ -195,8 +246,15 @@ No explanation is given of whether or not missing values are admitted.
 
 No such examples are provided.
 
-### 5 Pre-processing
+-   [x] **ML1.7**–**ML1.8** Missing values not admitted, so not
+    applicable.
 
+### 6 Pre-processing
+
+-   [x] **ML2.0** Pre-processing steps are appropriately defined and
+    parametrized.
+-   [x] **ML2.1** Broadcasting not used to reconcile dimensionally
+    incommensurate input data, so not applicable.
 -   [ ] **ML2.2b** Any extended documentation (such as vignettes) which
     demonstrates the use of explicit values for numeric transformations
     should explicitly describe why particular values are used.
@@ -207,8 +265,22 @@ possible,” and normalizing, “numeric data to have a mean of zero and
 standard deviation of one,” yet no explanation is given for why this is
 necessary, nor for why these values are used.
 
-### 6 Model and Algorithm Specification
+-   [ ] **ML2.3** No data on numeric transformations recorded in return
+    objects.
+-   [x] **ML2.4** There are no default values defining numeric
+    transformations, so not applicable.
+-   [x] **ML2.5** Transformations must be explicitly defined, so not
+    applicable.
+-   [x] **ML2.6** There are no distinct functions for implementing
+    transformations, so not applicable.
+-   [ ] **ML2.7** Explicit transformations are documented, but not how
+    these may be reversed, even though this could be documented.
 
+### 7 Model and Algorithm Specification
+
+-   [x] **ML3.1** Model specification is implemented as a distinct stage
+-   [x] **ML3.2** Models can not be specified without directly fitting,
+    but nor is this meaningful in the context of this pacakge.
 -   [ ] **ML3.3** Where ML software implements its own distinct classes
     of model objects, the properties and behaviours of those specific
     classes of objects should be explicitly compared with objects
@@ -221,10 +293,58 @@ necessary, nor for why these values are used.
 No comparisons are made with equivalent methods from other software,
 even though this could readily be done.
 
-### 7 Model Output and Performance
+-   [x] **ML3.4** No training rates used or implemented, so not
+    applicable.
 
-#### 7.1 Model Output
+#### 7.1 Control Parameters
 
+-   [x] **ML3.5** No control parameters implemented, so not applicable.
+-   [ ] **ML3.6** Unless explicitly justified otherwise (for example
+    because ML software under consideration is an implementation of one
+    specific algorithm), ML software should:
+-   [ ] **ML3.6a** Implement or otherwise permit usage of multiple ways
+    of exploring search space
+-   [ ] **ML3.6b** Implement or otherwise permit usage of multiple loss
+    functions.
+
+There is no ability to use alternative ways of exploring search space,
+nor of multiple loss functions (or equivalent).
+
+#### 7.2 CPU and GPU processing
+
+-   [x] **ML3.7** There is no C++ code, so not applicable.
+
+### 8 Model Training
+
+-   [ ] **ML4.0** *ML software should generally implement a unified
+    single-function interface to model training, able to receive as
+    input a model specified according to all preceding standards.*
+
+The package exports several distinct functions for model training, both
+leaving it up to the user to select an appropriate one, and suggesting a
+design decision likely to expand functions through adding new functions
+for each new mode of training.
+
+-   [x] **ML4.1**–**ML4.2** No optimizer implemented directly, so not
+    applicable.
+
+#### 8.1 Batch Processing
+
+-   [x] **ML4.3**–**ML4.6** There is no explicitly ability to implement
+    batch processing, so not applicable.
+
+#### 8.2 Re-sampling
+
+-   [x] **ML4.7**–**ML4.8** There are no explicit re-sampling routines,
+    so not applicable.
+
+### 9 Model Output and Performance
+
+#### 9.1 Model Output
+
+-   [ ] **ML5.0** No single function defined via **ML4.0**, so a variety
+    of return objects are implemented rather than a single, unified
+    object.
 -   [ ] **ML5.1** … the properties and behaviours of trained models
     produced by ML software should be explicitly compared with
     equivalent objects produced by other ML software.
@@ -247,8 +367,9 @@ No such documentation is provided.
 
 Such documentation is not provided, even though it could be.
 
-#### 7.2 Model Performance
+#### 9.2 Model Performance
 
+-   [x] **ML5.3** Model performance is assessed via distinct functions.
 -   [ ] **ML5.4** Model performance should be able to be assessed
     according to a variety of metrics.
 
@@ -261,8 +382,10 @@ usage of alternative scoring metrics.
 
 It is not possible to submit custom scoring metrics.
 
-### 8 Documentation
+### 10 Documentation
 
+-   [x] **ML6.0** Descriptions clearly distinguish training and testing
+    stages and associated data sets.
 -   [ ] **ML6.1** ML software intentionally designed to address only a
     restricted subset of the workflow described here should clearly
     document how it can be embedded within a typical *full* ML workflow
@@ -278,16 +401,19 @@ such documentation could readily be provided.
 
 Also not done.
 
-### 9 Testing
+### 11 Testing
 
-#### 9.1 Input Data
+#### 11.1 Input Data
 
+-   [x] **ML7.0** Input data need not be labelled, so not applicable.
 -   [ ] **ML7.1** Tests should demonstrate effects of different numeric
     scaling of input data (see **ML2.2**).
 
 No such tests implemented.
 
-#### 9.2 Model Classes
+-   [x] **ML7.2** Missing data are not imputed, so not applicable.
+
+#### 11.2 Model Classes
 
 -   [ ] **ML7.3a** These tests should explicitly identify restrictions
     on the functionality of model objects in comparison with those of
@@ -301,3 +427,40 @@ generated by this package.
     with those of other packages.
 
 No such tests are present.
+
+#### 11.3 Model Training
+
+-   [x] **ML7.4**–**ML7.5** Training rates not explicitly considered, so
+    not applicable.
+-   [x] **ML7.6** Training epochs not explicitly considered, so not
+    applicable.
+-   [ ] **ML7.7** ML software should explicitly test different
+    optimization algorithms, even where software is intended to
+    implement one specific algorithm.
+
+Different algorithms not tested, and they could be.
+
+-   [ ] **ML7.8** ML software should explicitly test different loss
+    functions, even where software is intended to implement one specific
+    measure of loss.
+
+Different loss functions not tested, and they could be.
+
+-   [ ] **ML7.9** Tests should explicitly compare all possible
+    combinations in categorical differences in model architecture, such
+    as different model architectures with same optimization algorithms,
+    same model architectures with different optimization algorithms, and
+    differences in both.
+
+Not implemented
+
+-   [x] **ML7.10** There is no information on paths taken by optimizers,
+    so this can not be tested and is not applicable.
+
+#### 11.4 Model Performance
+
+-   [ ] **ML7.11** All performance metrics available for a given class
+    of trained model should be thoroughly tested and compared.
+
+Performance metrics are neither tested nor compared, and they could
+readily be.
