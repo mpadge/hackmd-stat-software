@@ -1,3 +1,11 @@
+---
+output:
+    md_document:
+        pandoc_args: [
+            "--atx-headers"
+        ]
+---
+
 # Bayesian and Monte Carlo Software - Demonstration Application of Standards
 
 ## [`fmcmc`](https://github.com/USCbiostats/fmcmc)
