@@ -5,8 +5,21 @@ robots: noindex, nofollow
 ---
 
 
-Exploratory Data Analysis - Demonstration Application of Standards
-==================================================================
+Exploratory Data Analysis (EDA) - Demonstration Application of Standards
+========================================================================
+
+This file demonstrates the application of
+[rOpenSci](https://ropensci.org) ’s [standards for statistical
+software](https://ropenscilabs.github.io/statistical-software-review-book/standards.html)
+to three [EDA
+software](https://ropenscilabs.github.io/statistical-software-review-book/standards.html#exploratory-data-analysis)
+packages. These applications are not intended to represent or reflect
+evaluations or assessment of the packages, and particularly not of the
+extent to which they fail to meet standards. Rather, the demonstrations
+are intended to highlight aspects of the software which could be
+productively improved by adhering to the standards, and thereby more
+generally to demonstrate the general usefulness of these standards in
+advancing and improving software quality.
 
 Prior to considering these demonstrations, it is recommended to peruse a
 recent article which appeared in the R Journal entitled, [*The Landscape

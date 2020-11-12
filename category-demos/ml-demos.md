@@ -8,6 +8,19 @@ robots: noindex, nofollow
 Machine Learning Demonstrations
 ===============================
 
+This file demonstrates the application of
+[rOpenSci](https://ropensci.org) ’s [standards for statistical
+software](https://ropenscilabs.github.io/statistical-software-review-book/standards.html)
+to one [Machine Learning
+software](https://ropenscilabs.github.io/statistical-software-review-book/standards.html#machine-learning-softwaree)
+package. These applications are not intended to represent or reflect
+evaluations or assessment of the packages, and particularly not of the
+extent to which they fail to meet standards. Rather, the demonstrations
+are intended to highlight aspects of the software which could be
+productively improved by adhering to the standards, and thereby more
+generally to demonstrate the general usefulness of these standards in
+advancing and improving software quality.
+
 [`applicable`](https://applicable.tidymodels.org/)
 --------------------------------------------------
 
