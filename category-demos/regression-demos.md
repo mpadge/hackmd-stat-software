@@ -161,10 +161,12 @@ Documentation of the primary function (`lmer`) states that the main
 named in `formula`*”. This function fails with equivalent `matrix` input
 with the uninformative error,
 
-    s <- sleepstudy
-    s$Subject <- as.integer (s$Subject)
-    s <- as.matrix (s)
-    m <- lmer(Reaction ~ Days + (Days | Subject), data = s)
+``` r
+s <- sleepstudy
+s$Subject <- as.integer (s$Subject)
+s <- as.matrix (s)
+m <- lmer(Reaction ~ Days + (Days | Subject), data = s)
+```
 
     ## Error in list2env(data) : first argument must be a named list
 
@@ -197,19 +199,25 @@ no sense here.
 `lme4` provides exemplary handling of this case, as illustrated by the
 following code:
 
-    set.seed (1)
-    s <- sleepstudy
-    s$Reaction [ceiling (runif (1, max = nrow (s)))] <- NA # random NA value in response variable
-    m <- lmer(Reaction ~ Days + (Days | Subject), data = s)
-    nobs (m)
+``` r
+set.seed (1)
+s <- sleepstudy
+s$Reaction [ceiling (runif (1, max = nrow (s)))] <- NA # random NA value in response variable
+m <- lmer(Reaction ~ Days + (Days | Subject), data = s)
+nobs (m)
+```
 
     ## [1] 179
 
-    length (predict (m))
+``` r
+length (predict (m))
+```
 
     ## [1] 179
 
-    length (predict (m, s))
+``` r
+length (predict (m, s))
+```
 
     ## [1] 180
 
@@ -228,9 +236,11 @@ issuing an appropriate message (“dropping 1 column / coefficient”), yet
 failing to subsequently fit an appropriate model. The following code
 demonstrates:
 
-    s1 <- s2 <- sleepstudy
-    s1$Reaction <- s1$Days
-    lmer(Reaction ~ Days + (Days | Subject), data = s1)
+``` r
+s1 <- s2 <- sleepstudy
+s1$Reaction <- s1$Days
+lmer(Reaction ~ Days + (Days | Subject), data = s1)
+```
 
     ## Linear mixed model fit by REML ['lmerMod']
     ## Formula: Reaction ~ Days + (Days | Subject)
@@ -247,8 +257,10 @@ demonstrates:
     ##           0            1  
     ## optimizer (nloptwrap) convergence code: 0 (OK) ; 0 optimizer warnings; 1 lme4 warnings
 
-    s2$Days2 <- 2 * s2$Days
-    m <- lmer(Reaction ~ Days + Days2 + (Days | Subject) + (Days2 | Subject), data = s2)
+``` r
+s2$Days2 <- 2 * s2$Days
+m <- lmer(Reaction ~ Days + Days2 + (Days | Subject) + (Days2 | Subject), data = s2)
+```
 
     ## fixed-effect model matrix is rank deficient so dropping 1 column / coefficient
 
@@ -285,10 +297,12 @@ generate forecast values beyond the ranges of input data. There are
 nevertheless no explicit methods to use a model to generate confidence
 intervals on forecasts in the ways offered by the `stats` package:
 
-    x <- data.frame (x = 1:10,
-                     y = runif (10))
-    m0 <- lm (y ~ x, data = x)
-    predict (m0, newdata = data.frame (x = 11:16), se.fit = TRUE)
+``` r
+x <- data.frame (x = 1:10,
+                 y = runif (10))
+m0 <- lm (y ~ x, data = x)
+predict (m0, newdata = data.frame (x = 11:16), se.fit = TRUE)
+```
 
     ## $fit
     ##         1         2         3         4         5         6 
@@ -304,7 +318,9 @@ intervals on forecasts in the ways offered by the `stats` package:
     ## $residual.scale
     ## [1] 0.3272751
 
-    predict (m0, newdata = data.frame (x = 11:16), interval = "confidence")
+``` r
+predict (m0, newdata = data.frame (x = 11:16), interval = "confidence")
+```
 
     ##         fit        lwr       upr
     ## 1 0.3774055 -0.1381512 0.8929622
@@ -314,7 +330,9 @@ intervals on forecasts in the ways offered by the `stats` package:
     ## 5 0.2551110 -0.5695287 1.0797506
     ## 6 0.2245373 -0.6799558 1.1290305
 
-    predict (m0, newdata = data.frame (x = 11:16), interval = "prediction")
+``` r
+predict (m0, newdata = data.frame (x = 11:16), interval = "prediction")
+```
 
     ##         fit        lwr      upr
     ## 1 0.3774055 -0.5365789 1.291390
@@ -329,15 +347,19 @@ model to generate estimates of uncertainty involved in using that model
 to make forecasts. No such equivalent methods exist for objects of class
 `lmerMod`:
 
-    m <- lmer(Reaction ~ Days + (Days | Subject), data = sleepstudy)
-    predict (m, data.frame (Days = 0:12, Subject = 308))
+``` r
+m <- lmer(Reaction ~ Days + (Days | Subject), data = sleepstudy)
+predict (m, data.frame (Days = 0:12, Subject = 308))
+```
 
     ##        1        2        3        4        5        6        7        8 
     ## 253.6637 273.3299 292.9962 312.6624 332.3287 351.9950 371.6612 391.3275 
     ##        9       10       11       12       13 
     ## 410.9937 430.6600 450.3263 469.9925 489.6588
 
-    predict (m, data.frame (Days = 0:12, Subject = 308), se.fit = TRUE)
+``` r
+predict (m, data.frame (Days = 0:12, Subject = 308), se.fit = TRUE)
+```
 
     ## Warning in predict.merMod(m, data.frame(Days = 0:12, Subject = 308), se.fit =
     ## TRUE): unused arguments ignored
@@ -347,7 +369,9 @@ to make forecasts. No such equivalent methods exist for objects of class
     ##        9       10       11       12       13 
     ## 410.9937 430.6600 450.3263 469.9925 489.6588
 
-    predict (m, data.frame (Days = 0:12, Subject = 308), interval = "confidence")
+``` r
+predict (m, data.frame (Days = 0:12, Subject = 308), interval = "confidence")
+```
 
     ## Warning in predict.merMod(m, data.frame(Days = 0:12, Subject = 308), interval =
     ## "confidence"): unused arguments ignored
@@ -357,7 +381,9 @@ to make forecasts. No such equivalent methods exist for objects of class
     ##        9       10       11       12       13 
     ## 410.9937 430.6600 450.3263 469.9925 489.6588
 
-    predict (m, data.frame (Days = 0:12, Subject = 308), interval = "prediction")
+``` r
+predict (m, data.frame (Days = 0:12, Subject = 308), interval = "prediction")
+```
 
     ## Warning in predict.merMod(m, data.frame(Days = 0:12, Subject = 308), interval =
     ## "prediction"): unused arguments ignored
@@ -370,25 +396,33 @@ to make forecasts. No such equivalent methods exist for objects of class
 Similar comments apply to objects of class `glmerMod` returned by the
 `glmer` function:
 
-    gm <- glmer(cbind(incidence, size - incidence) ~ period + (1 |herd),
-                data = cbpp,
-                family = binomial)
-    p <- predict (gm, type = "response", se.fit = TRUE)
+``` r
+gm <- glmer(cbind(incidence, size - incidence) ~ period + (1 |herd),
+            data = cbpp,
+            family = binomial)
+p <- predict (gm, type = "response", se.fit = TRUE)
+```
 
     ## Warning in predict.merMod(gm, type = "response", se.fit = TRUE): unused
     ## arguments ignored
 
-    p <- predict (gm, type = "response", interval = "confidence")
+``` r
+p <- predict (gm, type = "response", interval = "confidence")
+```
 
     ## Warning in predict.merMod(gm, type = "response", interval = "confidence"):
     ## unused arguments ignored
 
-    p <- predict (gm, type = "response", interval = "prediction")
+``` r
+p <- predict (gm, type = "response", interval = "prediction")
+```
 
     ## Warning in predict.merMod(gm, type = "response", interval = "prediction"):
     ## unused arguments ignored
 
-    p # numeric values only
+``` r
+p # numeric values only
+```
 
     ##          1          2          3          4          5          6          7 
     ## 0.30816472 0.14177337 0.12598556 0.08405701 0.15480041 0.06360406 0.05595361 

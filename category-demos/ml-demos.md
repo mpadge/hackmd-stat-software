@@ -24,7 +24,9 @@ advancing and improving software quality.
 [`applicable`](https://applicable.tidymodels.org/)
 --------------------------------------------------
 
-    library (applicable)
+``` r
+library (applicable)
+```
 
 ------------------------------------------------------------------------
 
@@ -89,12 +91,16 @@ acceptable value anyway.
 
 Explicit conversion is not implemented. The following is possible:
 
-    predictors <- mtcars [, -1]
-    mod <- apd_pca (predictors, threshold = "0.5")
+``` r
+predictors <- mtcars [, -1]
+mod <- apd_pca (predictors, threshold = "0.5")
+```
 
 That works silently, which is okay, but then:
 
-    print (mod)
+``` r
+print (mod)
+```
 
     ## [1] "Error in x$threshold * 100 : non-numeric argument to binary operator"
 
@@ -110,11 +116,11 @@ That works silently, which is okay, but then:
     checks for missing data as part of initial pre-processing prior to
     passing data to analytic algorithms.*
 
-<!-- -->
-
-    predictors <- mtcars [, -1]
-    predictors [1, 1] <- NA
-    mod <- apd_pca (predictors)
+``` r
+predictors <- mtcars [, -1]
+predictors [1, 1] <- NA
+mod <- apd_pca (predictors)
+```
 
     ## <simpleError in svd(x, nu = 0, nv = k): infinite or missing values in 'x'>
 
