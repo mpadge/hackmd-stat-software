@@ -120,7 +120,7 @@ statistical quantities produced by the software, e.g., the definition of
 null hypotheses or confidence intervals. Data included in software –
 that used in examples or tests – will also have documentation
 requirements. It is worth noting that the
-[`roxygen`](https://roxygen2.r-lib.org/) system for documenting R
+[`roxygen2`](https://roxygen2.r-lib.org/) system for documenting R
 packages is readily extensible, as exemplified through the [`roxytest`
 package](https://github.com/mikldk/roxytest) for specifying tests
 *in-line*.
@@ -128,9 +128,10 @@ package](https://github.com/mikldk/roxytest) for specifying tests
 #### 1.2 Function-level Documentation
 
 -   **G1.2** *Software should use
-    [`roxygen`](https://roxygen2.r-lib.org/) to document all functions.*
+    [`roxygen2`](https://roxygen2.r-lib.org/) to document all
+    functions.*
     -   **G1.2a** *All internal (non-exported) functions should also be
-        documented in standard [`roxygen`](https://roxygen2.r-lib.org/)
+        documented in standard [`roxygen2`](https://roxygen2.r-lib.org/)
         format, along with a final `@noRd` tag to suppress automatic
         generation of `.Rd` files.*
 
