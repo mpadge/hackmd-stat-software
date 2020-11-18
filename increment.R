@@ -56,8 +56,9 @@ increment1 <- function (standard, s, prfx) {
     old_standards <- rev (old_standards)
     new_standards <- rev (new_standards)
 
+    x <- x0
     for (i in seq_along (old_standards))
-        x <- gsub (old_standards [i], new_standards [i], x0, fixed = TRUE)
+        x <- gsub (old_standards [i], new_standards [i], x, fixed = TRUE)
 
     if (!identical (x0, x)) {
         writeLines (x, con = standard)
