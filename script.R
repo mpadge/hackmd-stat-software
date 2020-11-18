@@ -1,14 +1,14 @@
 #!/usr/bin/env Rscript
-args = commandArgs(trailingOnly=TRUE)
+args <- commandArgs(trailingOnly = TRUE)
 
-if (length (args) != 2) 
-      stop("Two arguments must be supplied", call.=FALSE)
+if (length (args) != 2)
+      stop("Two arguments must be supplied", call. = FALSE)
 
 add_section_nums <- function (x) {
-    index1 <- grep ("^\\#\\s", x)
+    #index1 <- grep ("^\\#\\s", x)
     #if (length (index1) > 0)
     #    stop ("These documents should not have primary sections")
-    index2 <- grep ("^\\#\\#\\s", x)
+    #index2 <- grep ("^\\#\\#\\s", x)
     #if (length (index2) > 1)
     #    stop ("These documents should only have one single secondary section")
 
@@ -46,11 +46,19 @@ add_section_nums <- function (x) {
     return (x)
 }
 
-write_md <- function (file, demo){
+write_md <- function (file, demo) {
 
     file <- paste0 (tools::file_path_sans_ext (file), ".Rmd")
+    # This should produce ATX-style headers, but doesn't:
+    #pa <- rmarkdown::pandoc_options (
+    #                                 to = "gfm",
+    #                                 args = "--atx-headers")
+    #of <- rmarkdown::output_format (knitr = rmarkdown::knitr_options (),
+    #                                pandoc = pa)
+    #rmarkdown::render (file,
+    #                   output_format = of)
     rmarkdown::render (file,
-                       rmarkdown::md_document(variant='gfm'))
+                       rmarkdown::md_document(variant = "gfm"))
     file <- paste0 (tools::file_path_sans_ext (file), ".md")
 
     title <- strsplit (tools::file_path_sans_ext (file),
@@ -71,7 +79,7 @@ write_md <- function (file, demo){
         title <- "Machine Learning Software"
     else if (title == "eda-demos")
         title <- "EDA demos"
-    
+
     if (tolower (demo) == "true")
         tags <- "tags: statistical-software-demos, statistical-software"
     else
