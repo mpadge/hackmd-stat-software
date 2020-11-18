@@ -42,21 +42,37 @@ for representing time series data, new time series package should accept
 as many different classes of input as possible by according with the
 following standards:
 
--   **TS1.0** *Time Series Software should explicitly document the types
+-   **TS1.0** *Time Series Software should use and rely on explicit
+    class systems developed for representing time series data, and
+    should not permit generic, non-time-series input*
+
+The core algorithms of time-series software are often ultimately applied
+to simple vector objects, and some time series software accepts simple
+vector inputs, assuming these to represent temporally sequential data.
+Permitting such generic inputs nevertheless prevents any such
+assumptions from being asserted or tested. Missing values pose
+particular problems in this regard. A simple `na.omit()` call or similar
+will shorten the length of the vector by removing any `NA` values, and
+will change the explicit temporal relationship between elements. The use
+of explicit classes for time series generally ensures an ability to
+explicitly assert properties such as strict temporal regularity, and to
+control for any deviation from expected properties.
+
+-   **TS1.1** *Time Series Software should explicitly document the types
     and classes of input data able to be passed to each function.*
--   **TS1.1** *Time Series Software should accept input data in as many
+-   **TS1.2** *Time Series Software should accept input data in as many
     time series specific classes as possible.*
--   **TS1.2** *Time Series Software should implement validation routines
+-   **TS1.3** *Time Series Software should implement validation routines
     to confirm that inputs are of acceptable classes (or represented in
     otherwise appropriate ways for software which does not use class
     systems).*
--   **TS1.3** *Time Series Software should implement a single
+-   **TS1.4** *Time Series Software should implement a single
     pre-processing routine to validate input data, and to appropriately
     transform it to a single uniform type to be passed to all subsequent
     data-processing functions (the [`tsbox`
     package](https://www.tsbox.help/) provides one convenient approach
     for this).*
--   **TS1.4** *The pre-processing function described above should
+-   **TS1.5** *The pre-processing function described above should
     maintain all time- or date-based components or attributes of input
     data.*
 
@@ -64,9 +80,9 @@ For Time Series Software which relies on or implements custom classes or
 types for representing time-series data, the following standards should
 be adhered to:
 
--   **TS1.5** *The software should ensure strict ordering of the time,
+-   **TS1.6** *The software should ensure strict ordering of the time,
     frequency, or equivalent ordering index variable.*
--   **TS1.6** *Any violations of ordering should be caught in the
+-   **TS1.7** *Any violations of ordering should be caught in the
     pre-processing stages of all functions.*
 
 #### 1.1 Time Intervals and Relative Time
@@ -82,10 +98,10 @@ analogous data in relative form, and thus many packages should accept
 time series inputs both in absolute and relative forms. Software which
 can or should accept times series inputs in relative form should:
 
--   **TS1.7** *Accept inputs defined via the [`units`
+-   **TS1.8** *Accept inputs defined via the [`units`
     package](https://github.com/r-quantities/units/) for attributing SI
     units to R vectors.*
--   **TS1.8** *Where time intervals or periods may be days or months, be
+-   **TS1.9** *Where time intervals or periods may be days or months, be
     explicit about the system used to represent such, particularly
     regarding whether a calendar system is used, or whether a year is
     presumed to have 365 days, 365.2422 days, or some other value.*
