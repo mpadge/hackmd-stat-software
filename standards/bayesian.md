@@ -167,7 +167,9 @@ The following example demonstrates how standards like the above
 defines a log-likelihood estimator for a linear regression, controlled
 via a vector of three hyperparameters, `p`:
 
-    ll <- function (x, y, p) dnorm (y - (p[1] + x * p[2]), sd = p[3], log = TRUE)
+``` r
+ll <- function (x, y, p) dnorm (y - (p[1] + x * p[2]), sd = p[3], log = TRUE)
+```
 
 Pre-processing stages should be used to determine:
 
@@ -186,7 +188,9 @@ primarily through the
 function from the `utils` package. The parse data for a function can be
 extracted with the following line:
 
-    x <- getParseData (parse (text = deparse (ll)))
+``` r
+x <- getParseData (parse (text = deparse (ll)))
+```
 
 The object `x` is a `data.frame` of every R token (such as an
 expression, symbol, or operator) parsed from the function `ll`. The
@@ -207,39 +211,43 @@ closing `]`. The following code can be used to extract elements of the
 parse data which match this pattern, and ultimately to extract the
 various values of `i` used to access members of `vec`.
 
-    vector_length <- function (x, i) {
-        xn <- x [which (x$token %in% c ("SYMBOL", "NUM_CONST", "'['", "']'")), ]
-        # split resultant data.frame at first "SYMBOL" entry
-        xn <- split (xn, cumsum (xn$token == "SYMBOL"))
-        # reduce to only those matching the above pattern
-        xn <- xn [which (vapply (xn, function (j)
-                                 j$text [1] == i & nrow (j) > 3,
-                                 logical (1)))]
-        ret <- NA_integer_ # default return value
-        if (length (xn) > 0) {
-            # get all values of NUM_CONST as integers
-            n <- vapply (xn, function (j)
-                             as.integer (j$text [j$token == "NUM_CONST"] [1]),
-                             integer (1), USE.NAMES = FALSE)
-            # and return max of these
-            ret <- max (n)
-        }
-        return (ret)
+``` r
+vector_length <- function (x, i) {
+    xn <- x [which (x$token %in% c ("SYMBOL", "NUM_CONST", "'['", "']'")), ]
+    # split resultant data.frame at first "SYMBOL" entry
+    xn <- split (xn, cumsum (xn$token == "SYMBOL"))
+    # reduce to only those matching the above pattern
+    xn <- xn [which (vapply (xn, function (j)
+                             j$text [1] == i & nrow (j) > 3,
+                             logical (1)))]
+    ret <- NA_integer_ # default return value
+    if (length (xn) > 0) {
+        # get all values of NUM_CONST as integers
+        n <- vapply (xn, function (j)
+                         as.integer (j$text [j$token == "NUM_CONST"] [1]),
+                         integer (1), USE.NAMES = FALSE)
+        # and return max of these
+        ret <- max (n)
     }
+    return (ret)
+}
+```
 
 That function can then be used to determine the length of any inputs
 which are used as hyperparameter vectors:
 
-    ll <- function (p, x, y) dnorm (y - (p[1] + x * p[2]), sd = p[3], log = TRUE)
-    p <- parse (text = deparse (ll))
-    x <- utils::getParseData (p)
+``` r
+ll <- function (p, x, y) dnorm (y - (p[1] + x * p[2]), sd = p[3], log = TRUE)
+p <- parse (text = deparse (ll))
+x <- utils::getParseData (p)
 
-    # extract the names of the parameters:
-    params <- unique (x$text [x$token == "SYMBOL"])
-    lens <- vapply (params, function (i) vector_length (x, i), integer (1))
-    lens
-    #>  y  p  x 
-    #> NA  3 NA
+# extract the names of the parameters:
+params <- unique (x$text [x$token == "SYMBOL"])
+lens <- vapply (params, function (i) vector_length (x, i), integer (1))
+lens
+#>  y  p  x 
+#> NA  3 NA
+```
 
 And the vector `p` is used as a hyperparameter vector containing three
 parameters. Any initial value vectors can then be examined to ensure
@@ -426,11 +434,10 @@ combined into a single object through implementing a defined class
 structure, although other options are possible, including (re-)using
 extant class structures (see the CRAN Task view on [Bayesian
 Inference](https://cran.r-project.org/web/views/TimeSeries.html).
-<a href="https://cran.r-project.org/web/views/Bayesian.html" class="uri">https://cran.r-project.org/web/views/Bayesian.html</a>)
-for reference to other packages and class systems). Regardless of the
-precise form of return object, and whether or not defined class
-structures are used or implemented, the objects returned from Bayesian
-Software should include:
+<https://cran.r-project.org/web/views/Bayesian.html>) for reference to
+other packages and class systems). Regardless of the precise form of
+return object, and whether or not defined class structures are used or
+implemented, the objects returned from Bayesian Software should include:
 
 -   **BS5.0** *Seed(s) or starting value(s), including values for each
     sequences where multiple sequences are included*

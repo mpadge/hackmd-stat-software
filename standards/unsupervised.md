@@ -48,9 +48,11 @@ algorithms.
 The following code demonstrates an example of a routine from the base
 `stats` package which fails to meet this standard.
 
-    d <- dist (USArrests) # example from help file for 'hclust' function
-    hc <- hclust (d) # okay
-    hc <- hclust (as.matrix (d))
+``` r
+d <- dist (USArrests) # example from help file for 'hclust' function
+hc <- hclust (d) # okay
+hc <- hclust (as.matrix (d))
+```
 
     ## Error in if (is.na(n) || n > 65536L) stop("size cannot be NA nor exceed 65536"): missing value where TRUE/FALSE needed
 
@@ -67,8 +69,10 @@ data.
 The following code provides simple examples of checks whether row and
 column names appear to have generic default values.
 
-    x <- data.frame (matrix (1:10, ncol = 2))
-    x
+``` r
+x <- data.frame (matrix (1:10, ncol = 2))
+x
+```
 
     ##   X1 X2
     ## 1  1  6
@@ -80,7 +84,9 @@ column names appear to have generic default values.
 Generic row names are almost always simple integer sequences, which the
 following condition confirms.
 
-    identical (rownames (x), as.character (seq (nrow (x))))
+``` r
+identical (rownames (x), as.character (seq (nrow (x))))
+```
 
     ## [1] TRUE
 
@@ -90,8 +96,10 @@ optional leading zero followed by a generic sequence of column numbers,
 appropriate for matching column names produced by generic construction
 of `data.frame` objects.
 
-    all (vapply (seq (ncol (x)), function (i)
-                 grepl (paste0 ("[[:alpha:]]0?", i), colnames (x) [i]), logical (1)))
+``` r
+all (vapply (seq (ncol (x)), function (i)
+             grepl (paste0 ("[[:alpha:]]0?", i), colnames (x) [i]), logical (1)))
+```
 
     ## [1] TRUE
 
@@ -100,10 +108,12 @@ illustrates that the `hclust` function does not implement any such
 checks or assertions, rather it silently returns an object with default
 labels.
 
-    u <- USArrests
-    rownames (u) <- seq (nrow (u))
-    hc <- hclust (dist (u))
-    head (hc$labels)
+``` r
+u <- USArrests
+rownames (u) <- seq (nrow (u))
+hc <- hclust (dist (u))
+head (hc$labels)
+```
 
     ## [1] "1" "2" "3" "4" "5" "6"
 
@@ -117,8 +127,10 @@ labels.
 An example of a function according with UL1.3 is
 [`stats::cutree()`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cutree.html)
 
-    hc <- hclust (dist (USArrests))
-    head (cutree (hc, 10))
+``` r
+hc <- hclust (dist (USArrests))
+head (cutree (hc, 10))
+```
 
     ##    Alabama     Alaska    Arizona   Arkansas California   Colorado 
     ##          1          2          3          4          5          4
@@ -128,9 +140,11 @@ contrast, some routines from the [`cluster`
 package](https://cran.r-project.org/package=cluster) do not comply with
 this standard:
 
-    library (cluster)
-    ac <- agnes (USArrests) # agglomerative nesting
-    head (cutree (ac, 10))
+``` r
+library (cluster)
+ac <- agnes (USArrests) # agglomerative nesting
+head (cutree (ac, 10))
+```
 
     ## [1] 1 2 3 4 3 4
 
@@ -200,8 +214,10 @@ Note that the [`stats::cutree()`
 function](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cutree.html)
 does not accord with this standard:
 
-    hc <- hclust (dist (USArrests))
-    table (cutree (hc, k = 10))
+``` r
+hc <- hclust (dist (USArrests))
+table (cutree (hc, k = 10))
+```
 
     ## 
     ##  1  2  3  4  5  6  7  8  9 10 
@@ -221,8 +237,10 @@ The
 [`stats::prcomp`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/prcomp.html)
 function accords with this standard:
 
-    z <- prcomp (eurodist, rank = 5) # return maximum of 5 components
-    summary (z)
+``` r
+z <- prcomp (eurodist, rank = 5) # return maximum of 5 components
+summary (z)
+```
 
     ## Importance of first k=5 (out of 21) components:
     ##                              PC1       PC2       PC3       PC4       PC5
@@ -254,18 +272,20 @@ can be used to predict membership of new data using the [`class:knn()`
 function](https://stat.ethz.ch/R-manual/R-devel/library/class/html/knn.html).
 (This is intended to illustrate only one of many possible approaches.)
 
-    library (class)
-    set.seed (1)
-    hc <- hclust (dist (iris [, -5]))
-    groups <- cutree (hc, k = 3)
-    # function to randomly select part of a data.frame and # add some randomness
-    sample_df <- function (x, n = 5) {
-        x [sample (nrow (x), size = n), ] + runif (ncol (x) * n)
-    }
-    iris_new <- sample_df (iris [, -5], n = 5)
-    # use knn to predict membership of those new points:
-    knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
-    knnClust
+``` r
+library (class)
+set.seed (1)
+hc <- hclust (dist (iris [, -5]))
+groups <- cutree (hc, k = 3)
+# function to randomly select part of a data.frame and # add some randomness
+sample_df <- function (x, n = 5) {
+    x [sample (nrow (x), size = n), ] + runif (ncol (x) * n)
+}
+iris_new <- sample_df (iris [, -5], n = 5)
+# use knn to predict membership of those new points:
+knnClust <- knn (train = iris [, -5], test = iris_new , k = 1, cl = groups)
+knnClust
+```
 
     ## [1] 2 2 1 1 2
     ## Levels: 1 2 3
@@ -274,9 +294,11 @@ The [`stats::prcomp()`
 function](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/prcomp.html)
 implements its own `predict()` method which conforms to this standard:
 
-    res <- prcomp (USArrests)
-    arrests_new <- sample_df (USArrests, n = 5)
-    predict (res, newdata = arrests_new)
+``` r
+res <- prcomp (USArrests)
+arrests_new <- sample_df (USArrests, n = 5)
+predict (res, newdata = arrests_new)
+```
 
     ##                      PC1        PC2        PC3       PC4
     ## North Carolina 165.17494 -30.693263 -11.682811  1.304563
@@ -293,8 +315,10 @@ output some kind of labelling or grouping schemes. The above example of
 principal components illustrates that the return object records the
 standard deviations associated with each component:
 
-    res <- prcomp (USArrests)
-    print(res)
+``` r
+res <- prcomp (USArrests)
+print(res)
+```
 
     ## Standard deviations (1, .., p=4):
     ## [1] 83.732400 14.212402  6.489426  2.482790
@@ -306,7 +330,9 @@ standard deviations associated with each component:
     ## UrbanPop 0.04633575  0.97685748 -0.20054629 -0.05816914
     ## Rape     0.07515550  0.20071807  0.97408059  0.07232502
 
-    summary (res)
+``` r
+summary (res)
+```
 
     ## Importance of components:
     ##                            PC1      PC2    PC3     PC4
@@ -336,8 +362,10 @@ function](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cutree.html),
 however, does yield defined numbers of clusters, yet devoid of any
 quantitative information on variances or equivalent.
 
-    res <- hclust (dist (USArrests))
-    str (cutree (res, k = 5))
+``` r
+res <- hclust (dist (USArrests))
+str (cutree (res, k = 5))
+```
 
     ##  Named int [1:50] 1 1 1 2 1 2 3 1 4 2 ...
     ##  - attr(*, "names")= chr [1:50] "Alabama" "Alaska" "Arizona" "Arkansas" ...
@@ -348,9 +376,11 @@ function](https://stat.ethz.ch/R-manual/R-devel/library/cluster/html/clara.html)
 from the [`cluster`
 package](https://cran.r-project.org/package=cluster).
 
-    library (cluster)
-    cl <- clara (USArrests, k = 10) # direct clustering into specified number of clusters
-    cl$clusinfo
+``` r
+library (cluster)
+cl <- clara (USArrests, k = 10) # direct clustering into specified number of clusters
+cl$clusinfo
+```
 
     ##       size  max_diss   av_diss isolation
     ##  [1,]    4 24.708298 14.284874 1.4837745

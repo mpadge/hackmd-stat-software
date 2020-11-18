@@ -136,33 +136,37 @@ The following code illustrates some ways by which “metadata” defining
 classes and additional attributes associated with a standard vector
 object may by modified.
 
-    x <- 1:10
-    class (x) <- "notvector"
-    attr (x, "extra_attribute") <- "another attribute"
-    attr (x, "vector attribute") <- runif (5)
-    attributes (x)
-    #> $class
-    #> [1] "notvector"
-    #> 
-    #> $extra_attribute
-    #> [1] "another attribute"
-    #> 
-    #> $`vector attribute`
-    #> [1] 0.03521663 0.49418081 0.60129563 0.75804346 0.16073301
+``` r
+x <- 1:10
+class (x) <- "notvector"
+attr (x, "extra_attribute") <- "another attribute"
+attr (x, "vector attribute") <- runif (5)
+attributes (x)
+#> $class
+#> [1] "notvector"
+#> 
+#> $extra_attribute
+#> [1] "another attribute"
+#> 
+#> $`vector attribute`
+#> [1] 0.03521663 0.49418081 0.60129563 0.75804346 0.16073301
+```
 
 All statistical software should appropriately deal with such input data,
 as exemplified by the `storage.mode()`, `length()`, and `sum()`
 functions of the `base` package, which return the appropriate values
 regardless of redefinition of class or additional attributes.
 
-    storage.mode (x)
-    #> [1] "integer"
-    length (x)
-    #> [1] 10
-    sum (x)
-    #> [1] 55
-    storage.mode (sum (x))
-    #> [1] "integer"
+``` r
+storage.mode (x)
+#> [1] "integer"
+length (x)
+#> [1] 10
+sum (x)
+#> [1] 55
+storage.mode (sum (x))
+#> [1] "integer"
+```
 
 Tabular inputs in `data.frame` class may contain columns which are
 themselves defined by custom classes, and which possess additional

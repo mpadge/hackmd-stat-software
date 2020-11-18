@@ -160,19 +160,21 @@ The following demonstration is taken directly from the [`rray`
 package](https://github.com/r-lib/rray) (which is not currently on
 CRAN).
 
-    library (rray)
-    a <- array(c(1, 2), dim = c(2, 1))
-    b <- array(c(3, 4), dim = c(1, 2))
-    # rbind (a, b) # error!
-    rray_bind (a, b, .axis = 1)
-    #>      [,1] [,2]
-    #> [1,]    1    1
-    #> [2,]    2    2
-    #> [3,]    3    4
-    rray_bind (a, b, .axis = 2)
-    #>      [,1] [,2] [,3]
-    #> [1,]    1    3    4
-    #> [2,]    2    3    4
+``` r
+library (rray)
+a <- array(c(1, 2), dim = c(2, 1))
+b <- array(c(3, 4), dim = c(1, 2))
+# rbind (a, b) # error!
+rray_bind (a, b, .axis = 1)
+#>      [,1] [,2]
+#> [1,]    1    1
+#> [2,]    2    2
+#> [3,]    3    4
+rray_bind (a, b, .axis = 2)
+#>      [,1] [,2] [,3]
+#> [1,]    1    3    4
+#> [2,]    2    3    4
+```
 
 Broadcasting is commonly employed in ML software because it enables ML
 operations to be implemented on objects with incommensurate dimensions.
@@ -761,10 +763,12 @@ standards **ML3** and **ML4**.
 
 The following example illustrates:
 
-    architechture <- c ("archA", "archB")
-    optimizers <- c ("optA", "optB", "optC")
-    cost_fns <- c ("costA", "costB", "costC")
-    expand.grid (architechture, optimizers, cost_fns)
+``` r
+architechture <- c ("archA", "archB")
+optimizers <- c ("optA", "optB", "optC")
+cost_fns <- c ("costA", "costB", "costC")
+expand.grid (architechture, optimizers, cost_fns)
+```
 
     ##     Var1 Var2  Var3
     ## 1  archA optA costA

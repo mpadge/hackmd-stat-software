@@ -276,30 +276,32 @@ one or more of these `data.frame`-type tabular inputs are then that:
 The next standard concerns the following inconsistencies between three
 common tabular classes in regard the column extraction operator, `[`.
 
-    class (x) # x is any kind of `data.frame` object
-    #> [1] "data.frame"
-    class (x [, 1])
-    #> [1] "integer"
-    class (x [, 1, drop = TRUE]) # default
-    #> [1] "integer"
-    class (x [, 1, drop = FALSE])
-    #> [1] "data.frame"
+``` r
+class (x) # x is any kind of `data.frame` object
+#> [1] "data.frame"
+class (x [, 1])
+#> [1] "integer"
+class (x [, 1, drop = TRUE]) # default
+#> [1] "integer"
+class (x [, 1, drop = FALSE])
+#> [1] "data.frame"
 
-    x <- tibble::tibble (x)
-    class (x [, 1])
-    #> [1] "tbl_df"     "tbl"        "data.frame"
-    class (x [, 1, drop = TRUE])
-    #> [1] "integer"
-    class (x [, 1, drop = FALSE]) # default
-    #> [1] "tbl_df"     "tbl"        "data.frame"
+x <- tibble::tibble (x)
+class (x [, 1])
+#> [1] "tbl_df"     "tbl"        "data.frame"
+class (x [, 1, drop = TRUE])
+#> [1] "integer"
+class (x [, 1, drop = FALSE]) # default
+#> [1] "tbl_df"     "tbl"        "data.frame"
 
-    x <- data.table::data.table (x)
-    class (x [, 1])
-    #> [1] "data.table" "data.frame"
-    class (x [, 1, drop = TRUE]) # no effect
-    #> [1] "data.table" "data.frame"
-    class (x [, 1, drop = FALSE]) # default
-    #> [1] "data.table" "data.frame"
+x <- data.table::data.table (x)
+class (x [, 1])
+#> [1] "data.table" "data.frame"
+class (x [, 1, drop = TRUE]) # no effect
+#> [1] "data.table" "data.frame"
+class (x [, 1, drop = FALSE]) # default
+#> [1] "data.table" "data.frame"
+```
 
 -   Extracting a single column from a `data.frame` returns a `vector` by
     default, and a `data.frame` if `drop = FALSE`.
