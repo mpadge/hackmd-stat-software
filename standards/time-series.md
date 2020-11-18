@@ -38,9 +38,9 @@ input through affirming appropriate class(es). Software which does not
 use or rely on class systems will generally need specific routines to
 validate input data structures. In particular, because of the long
 history of time series software in R, and the variety of class systems
-for representing time series data, new time series package should accept
-as many different classes of input as possible by according with the
-following standards:
+for representing time series data, new time series packages should
+accept as many different classes of input as possible by according with
+the following standards:
 
 -   **TS1.0** *Time Series Software should use and rely on explicit
     class systems developed for representing time series data, and
