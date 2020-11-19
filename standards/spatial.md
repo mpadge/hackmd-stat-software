@@ -1,5 +1,5 @@
 ---
-title: spatial
+title: Spatial Software Standards
 tags: statistical-software
 robots: noindex, nofollow
 ---
