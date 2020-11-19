@@ -21,7 +21,7 @@ one or more of the following steps:
 4.  Offer additional functionality such as printing or summarising
     return results
 
-Each standard for spatial software is prefixed with “SP”.
+Each standard for spatial software is prefixed with “**SP**”.
 
 ### 1 Spatial Domains
 
@@ -67,14 +67,16 @@ These considerations motivate the first standard for spatial software:
 
 -   **SP1.0** *Spatial software should explicitly indicate its domain of
     applicability, and in particular distinguish whether the software
-    may be applied in geometric domains, geographic domains, or both.*
+    may be applied in rectilinear/geometric domains,
+    curvilinear/geographic domains, or both.*
 
 We encourage the use of clear and unambiguous phrases such as “planar”,
 “spherical”, “rectilinear” or “curvilinear”, along with clear
 indications of dimensionality such as “two-” or “three-dimensional.”
 Concepts of dimensionality should be interpreted to refer explicitly to
-the dimensionality of independent spatial coordinates. Attributes
-measured at spatial locations do not represent additional dimensions.
+the dimensionality of independent spatial coordinates. Elevation is a
+third spatial dimension, while other attributes measured at spatial
+locations do not represent additional dimensions.
 
 -   **SP1.1** *Spatial software should explicitly indicate its
     dimensional domain of applicability, in particular through
@@ -178,8 +180,8 @@ coordinates. Several other libraries have been built on top or or
 alongside that, notably including the [`GDAL` (“Geospatial Data
 Abstraction Library”)](https://gdal.org) and [`geos` (“Geometry Engine,
 Open Source”)](https://trac.osgeo.org/geos/) libraries. These libraries
-are used by, and integrated within, most spatial software commonly used
-today, and are likely to continue to be used.
+are used by, and integrated within, most geographical spatial software
+commonly used today, and are likely to continue to be used.
 
 While not a standard in itself, it is expected that spatial software
 should not, absent very convincing and explicit justification, attempt
@@ -197,7 +199,7 @@ Notable class systems and associated packages in R include
 [`sf`](https://cran.r-project.org/package=sf), and
 [`raster`](https://rspatial.org/raster/), and more recent extensions
 such as [`stars`](https://cran.r-project.org/package=stars),
-[`terra`](https://rspatial.org/terra), or
+[`terra`](https://rspatial.org/terra), and
 [`s2`](https://r-spatial.github.io/s2/). With regard to these packages,
 the following single standard applies:
 
@@ -330,7 +332,7 @@ should:
     coordinates, and maintained in the return object according to*
     **SP3.1***, are printed by default on the axes.*
 
-Time Series Software which returns objects with geographical coordinates
+Spatial Software which returns objects with geographical coordinates
 should:
 
 -   **SP4.3** *Offer an ability to generate interactive (generally
