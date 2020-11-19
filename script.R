@@ -63,22 +63,21 @@ write_md <- function (file, demo) {
 
     title <- strsplit (tools::file_path_sans_ext (file),
                        .Platform$file.sep) [[1]] [2]
-    if (title == "bayesian")
-        title <- "Bayesian Software"
-    else if (title == "eda")
+    if (title == "eda")
         title <- "Exploratory Data Analysis Software"
-    else if (title == "general")
-        title <- "General Standards"
-    else if (title == "regression")
-        title <- "Regression Software"
-    else if (title == "time-series")
-        title <- "Time Series Software"
-    else if (title == "unsupervised")
-        title <- "Unsupervised Learning Software"
-    else if (title == "ml")
-        title <- "Machine Learning Software"
     else if (title == "eda-demos")
         title <- "EDA demos"
+    else if (title == "unsupervised")
+        title <- "Unsupervised Learning Software Standards"
+    else if (title == "ml")
+        title <- "Machine Learning Software Standards"
+    else if (tolower (demo) == "false") {
+        words <- strsplit (title, "-") [[1]]
+        words <- vapply (words, function (i)
+                         paste0 (toupper (substr (i, 1, 1)), substring (i, 2)),
+                         character (1), USE.NAMES = FALSE)
+        title <- paste0 (paste0 (words, collapse = " "), " Software Standards")
+    }
 
     if (tolower (demo) == "true")
         tags <- "tags: statistical-software-demos, statistical-software"
