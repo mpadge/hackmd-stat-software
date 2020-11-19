@@ -305,7 +305,7 @@ Time Series Software which returns objects in a custom class structure should:
 - **SP4.1** *Default to placing the "longitude" or "x" (or equivalent) variable
   on the horizontal axis.*
 - **SP4.2** *Ensure that any spatial units associated with input coordinates,
-  and maintained in the return object according to* **SP3.1***, are  printed by
+  and maintained in the return object according to* **SP3.1**, *are  printed by
   default on the axes.*
 
 Spatial Software which returns objects with geographical coordinates should:

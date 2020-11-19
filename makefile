@@ -7,7 +7,7 @@ DEMO = FALSE
 all: render copy
 
 render:
-	for F in standards/*.Rmd ; \
+	for F in standards/spatial.Rmd ; \
 	do \
 		Rscript $(SFILE).R $$F FALSE ; \
 	done

@@ -330,7 +330,7 @@ should:
     variable on the horizontal axis.*
 -   **SP4.2** *Ensure that any spatial units associated with input
     coordinates, and maintained in the return object according to*
-    **SP3.1***, are printed by default on the axes.*
+    **SP3.1**, *are printed by default on the axes.*
 
 Spatial Software which returns objects with geographical coordinates
 should:
