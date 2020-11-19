@@ -1,5 +1,5 @@
 ---
-title: Bayesian Software
+title: Bayesian Software Standards
 tags: statistical-software
 robots: noindex, nofollow
 ---

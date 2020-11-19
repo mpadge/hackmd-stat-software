@@ -1,5 +1,5 @@
 ---
-title: General Standards
+title: General Software Standards
 tags: statistical-software
 robots: noindex, nofollow
 ---

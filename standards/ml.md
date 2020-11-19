@@ -1,5 +1,5 @@
 ---
-title: Machine Learning Software
+title: Machine Learning Software Standards
 tags: statistical-software
 robots: noindex, nofollow
 ---

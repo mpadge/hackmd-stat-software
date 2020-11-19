@@ -1,5 +1,5 @@
 ---
-title: Regression Software
+title: Regression Software Standards
 tags: statistical-software
 robots: noindex, nofollow
 ---

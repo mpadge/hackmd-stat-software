@@ -1,5 +1,5 @@
 ---
-title: Time Series Software
+title: Time Series Software Standards
 tags: statistical-software
 robots: noindex, nofollow
 ---
