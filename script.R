@@ -64,7 +64,7 @@ write_md <- function (file, demo) {
     title <- strsplit (tools::file_path_sans_ext (file),
                        .Platform$file.sep) [[1]] [2]
     if (title == "eda")
-        title <- "Exploratory Data Analysis Software"
+        title <- "Exploratory Data Analysis Software Standards"
     else if (title == "eda-demos")
         title <- "EDA demos"
     else if (title == "unsupervised")

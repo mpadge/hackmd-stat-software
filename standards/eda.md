@@ -1,5 +1,5 @@
 ---
-title: Exploratory Data Analysis Software
+title: Exploratory Data Analysis Software Standards
 tags: statistical-software
 robots: noindex, nofollow
 ---
