@@ -303,7 +303,7 @@ standard should nevertheless be adhered to:
 
 ### 3 Return Results
 
-For (functions within) Spatial Software which return time series data:
+For (functions within) Spatial Software which return spatial data:
 
 -   **SP3.0** *Return values should either:*
     -   **SP3.0a** *Be in same class as input data, or*
@@ -317,11 +317,11 @@ For (functions within) Spatial Software which return data other than
 direct series:
 
 -   **SP3.3** *Return values should explicitly include all appropriate
-    units and/or time scales*
+    units*
 
 ### 4 Visualization
 
-Time Series Software which returns objects in a custom class structure
+Spatial Software which returns objects in a custom class structure
 should:
 
 -   **SP4.0** *Implement default `plot` methods for any implemented
