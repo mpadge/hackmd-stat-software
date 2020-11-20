@@ -6,6 +6,16 @@ robots: noindex, nofollow
 
 
 <!-- Edit the .Rmd not the .md file -->
+<!-- TODO
+- revisit regression standards and use a a guide for how to write/adapt actual
+  algorithmic standards for spatial software.
+- permutation-type statistics which need random seeds
+- clustering
+- spatial as a context for representating data which is then passed through to
+  algorithms which themselves might be subject to additional standards.
+- Kernel density estimates: What are default values for parameters? How are
+  they justified? How can they be controlled?
+-->
 
 Spatial Software
 ----------------
@@ -301,44 +311,84 @@ standard should nevertheless be adhered to:
 -   **SP2.10** *Spatial software should accept inputs defined via the*
     [`units` package](https://github.com/r-quantities/units/).
 
-### 3 Return Results
+### 3 Algorithms
+
+Algorithms for spatial software are often related to other categories of
+statistical software, and it is anticipated that spatial software will
+commonly also be subject to standards from these other categories.
+Nevertheless, because spatial analyses frequently face unique
+challenges, some of these category-specific standards also have
+extension standards in when applied to spatial software. The following
+standards will be applicable for any spatial software which also fits
+any of the listed sub-categories.
+
+**Regression Software**
+
+-   **SP3.0** *Spatial regression software should explicitly quantify
+    and distinguish autocovariant or autoregressive processes from those
+    covariant or regressive processes not directly related to spatial
+    structure alone.*
+
+**Unsupervised Learning Software**
+
+The following standard applies to any spatial unsupervised learning
+software which uses clustering algorithms.
+
+-   **SP3.1** *Spatial clustering should not use standard non-spatial
+    clustering algorithms in which spatial proximity is merely
+    represented by an additional weighting factor. Rather, clustering
+    schemes should be derived from explicitly spatial algorithms.*
+
+**Machine Learning Software**
+
+One common application in which machine learning algorithms are applied
+to spatial software is in analyses of raster images. Because the
+individual cells or pixels of these raster images represent fixed
+spatial coordinates, the following standard applies (and also renders
+**ML2.1** inapplicable).
+
+-   **SP3.2** *Spatial machine learning software should ensure that
+    broadcasting procedures for reconciling inputs of different
+    dimensions are **not** applied*.
+
+### 4 Return Results
 
 For (functions within) Spatial Software which return spatial data:
 
--   **SP3.0** *Return values should either:*
-    -   **SP3.0a** *Be in same class as input data, or*
-    -   **SP3.0b** *Be in a unique, preferably class-defined, format.*
--   **SP3.1** *Any units included as attributes of input data should
+-   **SP4.0** *Return values should either:*
+    -   **SP4.0a** *Be in same class as input data, or*
+    -   **SP4.0b** *Be in a unique, preferably class-defined, format.*
+-   **SP4.1** *Any units included as attributes of input data should
     also be included within return values.*
--   **SP3.2** *The type and class of all return values should be
+-   **SP4.2** *The type and class of all return values should be
     explicitly documented.*
 
 For (functions within) Spatial Software which return data other than
 direct series:
 
--   **SP3.3** *Return values should explicitly include all appropriate
+-   **SP4.3** *Return values should explicitly include all appropriate
     units*
 
-### 4 Visualization
+### 5 Visualization
 
 Spatial Software which returns objects in a custom class structure
 should:
 
--   **SP4.0** *Implement default `plot` methods for any implemented
+-   **SP5.0** *Implement default `plot` methods for any implemented
     class system.*
--   **SP4.1** *Default to placing the “longitude” or “x” (or equivalent)
+-   **SP5.1** *Default to placing the “longitude” or “x” (or equivalent)
     variable on the horizontal axis.*
--   **SP4.2** *Ensure that any spatial units associated with input
+-   **SP5.2** *Ensure that any spatial units associated with input
     coordinates, and maintained in the return object according to*
-    **SP3.1**, *are printed by default on the axes.*
+    **SP4.1**, *are printed by default on the axes.*
 
 Spatial Software which returns objects with geographical coordinates
 should:
 
--   **SP4.3** *Offer an ability to generate interactive (generally
+-   **SP5.3** *Offer an ability to generate interactive (generally
     `html`-based) visualisations of results.*
 
-### 5 Testing
+### 6 Testing
 
 The following standards apply to all Spatial Software which is intended
 or able to be applied to data represented in curvilinear systems,
@@ -350,17 +400,17 @@ data according to **SP2.0b**.
 
 **Round-Trip Tests**
 
--   **SP5.0** *Software which implements routines for transforming
+-   **SP6.0** *Software which implements routines for transforming
     coordinates of input data should include tests which demonstrate
     ability to recover the original coordinates.*
--   **SP5.1** *All functions which can be applied to both rectilinear
+-   **SP6.1** *All functions which can be applied to both rectilinear
     and curvilinear data should be tested through application to both.*
-    -   **SP5.1a** *Functions which may yield inaccurate results when
+    -   **SP6.1a** *Functions which may yield inaccurate results when
         applied to data in one or the other forms (such as the preceding
         examples of centroids and buffers from ellipsoidal data) should
         test that results from inappropriate application of those
         functions are indeed less accurate.*
-    -   **SP5.1b** *Functions which yield accurate results regardless of
+    -   **SP6.1b** *Functions which yield accurate results regardless of
         whether input data are rectilinear or curvilinear should
         demonstrate equivalent accuracy in both cases, and should also
         demonstrate how equivalent results may be obtained through first
@@ -368,7 +418,7 @@ data according to **SP2.0b**.
 
 **Extreme Geographical Coordinates**
 
--   **SP5.2** *Geographical Software should include tests with extreme
+-   **SP6.2** *Geographical Software should include tests with extreme
     geographical coordinates, minimally including extension to polar
     extremes of +/-90 degrees.*
 
