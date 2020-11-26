@@ -1,0 +1,168 @@
+---
+title: On Developing Standards for Open-Source Software
+tags: manuscripts
+robots: noindex, nofollow
+bibliography: [statistical-software.bib]
+output:
+        html_document:
+                number_sections: true
+        md_document:
+                number_sections: true
+---
+
+
+# Introduction
+
+Many aspects of human endeavour, notably including academic activities, have
+become increasingly "open" through the use of openly published data and openly
+available tools. Such open activity has been largely enabled by computational
+technology, in particular increases in bandwidth available to share and access
+online open resources. One notable example have been activities conducted in
+accordance with the so-called "FAIR" principles for scientific data of
+Findability, Accessibility, Interoperability, and Reusablility
+[@wilkinson_fair_2016]. The first two of those four components (Findability and
+Accessibility) directly require some degree of openness to achieve, while the
+latter two (Interoperability and Reusablility) are greatly facilitated or
+enhanced by openness. This set of principles may accordingly be viewed as an
+elucidation of the importance of openness within the context of scientific
+data.
+
+These principles extend beyond the domain of scientific data, for example
+through to the tools used to develop and guide scientific process, and in
+particular to software [@hasselbring_fair_2020]. Openness of software,
+especially manifest through open-source software, is particularly important in
+encouraging and enabling activities conducted in accordance with all four of
+the FAIR principles. Using open-source software in scientific research
+naturally leads to *sharing* software, which in turn leads to software being
+inherently designed for Interoperability and Reusablility. The result is
+software being designed to be (more) *modular*
+[@zirkelbach_modularization_2019]. While such modularity is a very effective
+way to enhance Interoperability and Reusablility, it also means that any given
+piece of software will have a wider range of dependencies on other pieces of
+software not directly under the control of any particular group of researchers.
+
+Adherence to FAIR principles both of scientific data and process development
+thus increases the need to ensure that interoperated and reused components are
+of sufficient quality or standard. Extending the FAIR principles to scientific
+process thus unavoidably requires the development of open standards. While
+individual researchers and research organizations can themselves engage with
+these principles largely independent of other researchers or organizations, the
+ongoing effectiveness of these principles in transforming research to become
+more *FAIR* ultimately requires the development, dissemination, and adoption of
+open standards. And that can only be a collective enterprise which can not
+effectively be approached from an individual level.
+
+## Open Standards
+
+We consider open standards to be those which are and continue to be guided by
+public discussions, and to which anybody may contribute [referred to as open
+"concerted" standards by @cerri_open_2007]. The development of adoption of open
+standards is in itself an enacting of FAIR principles, because such standards
+must reflect, among other aspects, an intention to enhance Interoperability and
+Reusablility. Nevertheless, within software contexts, open standards have been
+most widely considered in regard to formats for representing and/or exchanging
+data (such as standards for "pdf" or "svg" file formats, respectively defined
+and maintained by a closed private corporation, and the open Worldwide Web
+Consortium). The development of such standards can often greatly facilitate the
+development of standard tools (or the standardisation of existing tools), which
+can in turn reduce costs, either or initial entry into, or ongoing maintenance
+of, processes [@dedrick_why_2003].
+
+
+The importance of open standards have been considered in numerous specialised
+domains, such as health care [@reynolds_open_2011], libraries
+[@corrado_importance_2005], and governance [@simon_value_2005].
+
+## Restrictions of our Project
+
+- Much of the empirical research was drawn from material ultimately arising
+  from academic activities which are inherently open, and so provide sufficient
+  material to define scope and usage of software.
+- Adaptation to other areas with comparably less "raw data" available in open
+  form may not be so straightforward.
+- That said, the empirical research ultimately aimed only to construct
+  a "network graph" of inter-relationships between concepts within our chosen
+  domain. Any information that could be used to define concepts and their
+  inter-relationships could be used to approach this task. For example, an
+  analogous network graph could be derived by analysing dependency graphs of
+  open-source software.
+
+## Motivation
+
+We aim here to document a process by which we developed a suite of open
+standards for open-source software, and in doing so to provide a template able
+to be adopted and adapted for Reusablility in other domains. More generally, we
+aim to demonstrate an effective way to approach and hopefully overcome the
+problem elucidated at the outset that individually-adopted FAIR principles
+unavoidably require the development of collectively-consensual open standards.
+This demonstration is intended to serve as a template for how FAIR principles
+in other domains can be extended towards the development of sets of collective,
+open standards, which further enables and enhances the ongoing development of
+FAIR research.
+
+## Context
+
+Our area of application was statistical software written in the computer
+language R, a language explicitly designed for "statistical computing". The
+present work describes a project to expand an existing system for peer review
+of open source software developed by an organization named *rOpenSci* to
+accommodate explicitly statistical software. The current review system
+encompasses several categories of software developed in the R language, yet
+excludes statistical software, because the organization felt they had no
+members with sufficient expertise in that domain. One of the most important
+components of project to expand the scope to include statistical software was
+the development of a set of standards for statistical software. All empirical
+descriptions of the present work thus pertain to the specific domain of
+statistical software, yet we attempt throughout to extract general or
+generalizable principles behind this specific application, and to explore how
+our domain-specific processes might be adapted for development in other
+domains.
+
+## Additional Stuff
+
+- "Working in Public" by Nadia Eghbal
+- Examples of FDA + EU standards for pharma workflows including software; R Validation Hub
+- Discuss relationship between standards and assessment
+
+# Methods
+
+The following methods 
+
+## Defining Scope
+
+- Collect "raw data" by:
+    - Identifying online (or other) resources providing textual descriptions of
+      software development and usage within our area of application.
+    - Manually filter to only those texts specifically relating to software
+- Analyse raw data by:
+    - Initial text analyses to extract key words and concepts
+    - Manually refine these to a working set of key words and concepts
+    - Manually ascribe key words/concepts to each text in the data set
+    - Convert texts to frequencies of association between all pairs of key words/concepts
+- Extraction of key words/concepts:
+    - Produce a visual representation of network of key words/concepts, with
+      connections visually weighted by relative frequencies of association.
+    - Use those relative frequencies of association to statistically identify
+      clusters of similar key words/concepts.
+    - Provide each distinct cluster within the visualization with its own colour
+    - Use that visualization to identify distinct clusters of key words/concepts
+- Mapping key words/concepts onto sub-categories:
+    - For each key word/concept, extract from the text corpus all strongly
+      associated words, divided into different parts of speech (primarily
+      adjectives, nouns, or verbs).
+    - Use the resultant lists of associated words to formulate an initial
+      description of that key word/concept as a potential sub-category for
+      which to develop standards.
+
+## Formulating Standards
+
+- Process used / devised to derive actual standards for the empirically derived
+  set of candidate categories. 
+
+-----
+
+
+# References
+
+
+
