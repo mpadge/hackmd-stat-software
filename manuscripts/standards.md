@@ -5,6 +5,12 @@ robots: noindex, nofollow
 ---
 
 
+<style type="text/css">
+body{ /* Normal  */
+    font-size: 16px;
+    }
+</style>
+
 # 1 Introduction
 
 Many aspects of human endeavour, notably including academic activities,
@@ -163,22 +169,17 @@ development in other domains.
 # 2 Developing Open Standards
 
 Standards are most effectively developed within a concrete and
-definitive structure. While it may be possible to develop standards to
-apply to some generic domain without any notion of how that domain may
-be internally structured, the task will likely be both easier and more
-effective when the internal structure of an overall domain of
-applicability is first defined. Arguably the easiest way to define such
-internal structure is to divide a domain among a number of
-domain-specific categories.
-
-We ultimately consider a hierarchical sub-division of an entire domain
-at a first level into categories, and at a second, subsidiary level,
-into sub-categories within those categories, such that the standards for
-each category are intelligibly separated among specified sub-categories.
-The primary task of definition nevertheless remains that of defining
-categories, as considered in the following sub-section. Following that
-we consider the process of defining standards for each category, which
-involves the clarification of sub-categories. The subsequent two
+definitive structure. For any given domain, arguably the most
+straightforward way to derive such a structure will be to divide a
+domain among a number of domain-specific categories. We ultimately
+consider a hierarchical sub-division of an entire domain at a first
+level into categories, and at a second, subsidiary level, into
+sub-categories within those categories, such that the standards for each
+category are intelligibly separated among specified sub-categories. The
+primary task of definition nevertheless remains that of defining
+categories, and is the focus of the following sub-section. Following
+that we consider the process of defining standards for each category,
+which involves the clarification of sub-categories. The subsequent two
 sub-sections then consider processes of revision, iteration, and ongoing
 development of resultant standards.
 
@@ -194,58 +195,21 @@ software.
 
 Defining specific categories within a domain of application for
 standards enables sub-sets of standards to be devised for more
-restricted application to those categories only. This will likely
-generally be an easier task than devising standards which aim for
-universal applicability across an entire domain. Therefore defining
-scope is one of the most important steps in developing any set of
-standards, with this section exploring general processes by which scope
-may be defined in terms of categorical distinctions with a given domain.
-As described at the outset, we largely eschew processes which may be
-effectively used to define the scope of closed standards such as expert
-consultation, and focus here on more open and ultimately more
-reproducible and transferable processes.
+restricted application to those categories only. Defining standards for
+a restricted sub-category of an entire field with generally be both
+easier and more effective than the more abstract task of defining
+standards for an entire field. Accordingly, defining scope is one of the
+most important steps in developing any set of standards, with this
+section exploring general processes by which scope may be defined in
+terms of categorical distinctions with a given domain. As described at
+the outset, we largely eschew processes which may be effectively used to
+define the scope of closed standards such as expert consultation, and
+focus here on more open and ultimately more reproducible and
+transferable processes.
 
 ### Empirical Derivation of Categories
 
-We now describe general processes by which categories can be defined
-using empirical input data of (i) a series of potential categorical
-labels, and (ii) some measure of inter-relationship between those
-labels, such as frequencies or counts of co-occurrence. This sub-section
-describes how those kinds of data can be submitted to clustering
-algorithms in order to empirically distinguish unique sub-domains with
-the data.
-
-These input data must be derived from some kind of corpus containing a
-series of objects. These objects can be solely textual, as in our case
-below which used conference abstracts, or they might be non-text objects
-such as software repositories. Either way, each object must be assigned
-one or more categorical labels. In our case, we performed an initial,
-superficial perusal of our corpus to intuit what kinds of labels may be
-useful in describing the abstracts. We then proceeded to label
-individual abstracts, keeping a record of all unique labels developed as
-we proceeded through the corpus. These labels were, and will likely
-generally be, partly subjective, with a primary initial effect being
-that items in the list of labels were modified and revised as we
-proceeded through the corpus.
-
-We thus performed the labelling exercise twice: A first time in order to
-derive a representative and stable list of potential labels, and a
-second time to apply items from the final list of labels to each entity
-in our corpus. Our primary input data was then simply a list of items,
-one for each abstract, each entry of which contained one or more labels
-of sub-categories within our overall field of statistical software.
-
-We then converted these lists into a network representation, with
-weights between each pairs of unique labels formed by the aggregate
-number of times those two labels co-occurred within any single corpus
-entity. While it may be possible to submit such a network representation
-to an empirical routine in order to discern clusters of related labels,
-the results in our case did not appear particularly useful. We therefore
-converted our network into an interactive `html` format which enables us
-to examine the resultant network and apply subjective insights into
-resultant patterns.
-
-#### Sourcing and Collating Input Data
+#### Sourcing and Collating an Input Corpus
 
 As primary input data we needed a corpus of texts representative of our
 primary domain of statistical software. We initially tried using
@@ -256,6 +220,65 @@ that identifying words were unable to serve as categorical labels
 because they were either overly unique (being used in only or or two
 manuscripts), or overly generic and used ubiquitously throughout our
 entire domain.
+
+#### Next Bit
+
+We now describe general processes by which categories can be defined
+using empirical input data derived by applying labels to some input
+corpus. A corpus can be derived almost any way imaginable, but is
+considered here to be comprised of objects which can be described by one
+or more (hopefully simple) text labels. Our application below used
+conference abstracts, but a corpus could just as easily be a collection
+of software, or any other objects able to be labelled.
+
+The actual labelling is likely to have to be done manually, as in our
+case, although certain domains and corpora may enable more automated
+processes. We describe here likely the most laborious version of
+manually encoding and assigning labels, with those two verbs
+representing two distinct processes defined in more detail by:
+
+-   *Encoding* of labels, performed by initially perusing a corpus to
+    discern what kinds of labels might be sufficiently general yet
+    precise enough to categorically distinguish each item; and
+-   *Assigning* of labels, performed by actually defining each corpus
+    item by one or more of the labels derived in the first step.
+
+The procedure we adopted to encode labels was to progressively read
+through the corpus, while constructing and modifying a list of candidate
+labels. These candidates were commonly revised and edited as more corpus
+items (abstracts) were read, with the procedure eventually leading to a
+convergent set of labels. Having derived that set, we then read through
+the corpus a second time, assigning labels from our set to each item.
+
+We thus performed the labelling exercise twice: A first time in order to
+derive a representative and stable list of candidate labels, and a
+second time to apply items from the final list of labels to each entity
+in our corpus. Our primary input data was then simply a list of items,
+one for each abstract, each entry of which contained one or more labels
+of sub-categories within our overall field of statistical software.
+
+These lists then converted into a network representation, by aggregating
+connections between all co-occurring labels by one for each
+co-occurrence. For example, if an item had labels *A*, *B*, and *C*,
+then we increment network connections by one for connections *A*–*B*,
+*A*–*C*, and *B*–*C*. (The network is undirected, so *A*–*B* is the same
+as *B*–*A*.) This kind of representation is also effectively a proximity
+matrix, with stronger connections represented increased proximity. As
+such, it can be represented in matrix form and submitted to empirical
+clustering or partitioning routines. These kinds of analyses may yield
+useful insights into internal categorical structures. In our case,
+however, they did not, an we found it more useful to convert our network
+into an interactive `html` format which enabled us to examine the
+resultant network and apply more subjective insights into resultant
+patterns.
+
+In particular, the interactive visualization enabled ready
+identification of nodes (labels) which were both peripheral and weakly
+connected, quickly reducing a large number of numerous inter-connected
+nodes down to a considerably smaller core. Rather than attempting to
+“cluster” or “partition” this core into a smaller number of groups, each
+of the remaining primary nodes in our case seemed like sensible
+candidates themselves for categorical labels.
 
 ## 2.2 Defining Category-Specific Standards
 
