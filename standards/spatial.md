@@ -213,10 +213,19 @@ such as [`stars`](https://cran.r-project.org/package=stars),
 [`s2`](https://r-spatial.github.io/s2/). With regard to these packages,
 the following single standard applies:
 
--   **SP2.1** *Spatial Software which uses pre-existing class systems
-    for representing geographical data should use*
-    [`sf`](https://cran.r-project.org/package=sf) *rather than*
-    [`sp`](https://cran.r-project.org/package=sp).
+-   **SP2.1** *Spatial Software which uses either the
+    [`sf`](https://cran.r-project.org/package=sf) of
+    [`sp`](https://cran.r-project.org/package=sp) class systems for
+    representing geographical data should either*
+    -   **SP2.1a** *Use [`sf`](https://cran.r-project.org/package=sf)
+        rather than [`sp`](https://cran.r-project.org/package=sp),* or
+    -   **SP2.1b** *Explicitly justify why
+        [`sp`](https://cran.r-project.org/package=sp) is used.*
+
+An example of a valid explicit reason to use
+[`sp`](https://cran.r-project.org/package=sp) would be to ensure
+compatibility with some other dependent package which exclusively relies
+on input data in that format.
 
 More generally,
 
@@ -313,6 +322,22 @@ standard should nevertheless be adhered to:
 
 ### 3 Algorithms
 
+-   **SP3.0** *Spatial software which considers spatial neighbours
+    should enable user control over neighbourhood forms and sizes. In
+    particular:*
+    -   **SP3.0a** *Neighbours (able to be expressed) on regular grids
+        should be able to be considered in both rectangular only, or
+        rectangular and diagonal (respectively “rook” and “queen” by
+        analogy to chess.*
+    -   **SP3.0b** *Neighbourhoods in irregular spaces should be
+        minimally able to be controlled via an integer number of
+        neighbours, an area in which to include neighbours, or otherwise
+        equivalent user-controlled value.*
+-   **SP3.1** *Spatial software which considers spatial neighbours
+    should enable neighbour contributions to be weighted by distance (or
+    other weighting variable), and not rely on a uniform-weight
+    rectangular cut-off.*
+
 Algorithms for spatial software are often related to other categories of
 statistical software, and it is anticipated that spatial software will
 commonly also be subject to standards from these other categories.
@@ -350,6 +375,13 @@ spatial coordinates, the following standard applies (and also renders
 -   **SP3.2** *Spatial machine learning software should ensure that
     broadcasting procedures for reconciling inputs of different
     dimensions are **not** applied*.
+-   **SP3.3** *Spatial machine learning software should ensure that test
+    and training data are spatially distinct, and not simply sampled
+    uniform from a common region.*
+
+The latter standard, **SP1.3**, is commonly met by applying some form of
+spatial partitioning to data, and using spatially distinct partitions to
+define test and training data.
 
 ### 4 Return Results
 
