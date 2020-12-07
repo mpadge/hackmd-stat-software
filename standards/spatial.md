@@ -331,8 +331,9 @@ standard should nevertheless be adhered to:
         analogy to chess.*
     -   **SP3.0b** *Neighbourhoods in irregular spaces should be
         minimally able to be controlled via an integer number of
-        neighbours, an area in which to include neighbours, or otherwise
-        equivalent user-controlled value.*
+        neighbours, an area (or equivalent distance defining an area) in
+        which to include neighbours, or otherwise equivalent
+        user-controlled value.*
 -   **SP3.1** *Spatial software which considers spatial neighbours
     should enable neighbour contributions to be weighted by distance (or
     other weighting variable), and not rely on a uniform-weight
