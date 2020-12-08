@@ -324,8 +324,8 @@ standard should nevertheless be adhered to:
 ### 3 Algorithms
 
 The following standards will be conditionally applicable to some but not
-all spatial software. Procedures for standards deemed not applicable are
-described in the [R package of this
+all spatial software. Procedures for standards deemed not applicable to
+a particular piece of software are described in the [R package of this
 project](https://github.com/ropenscilabs/statistical-software-review).
 
 -   **SP3.0** *Spatial software which considers spatial neighbours
