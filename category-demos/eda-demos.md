@@ -67,59 +67,62 @@ list-columns.
 
 **Uni-variate (Vector) Input**
 
--   [ ] G2.0 No documentation on expected lengths of any input variables
--   [x] G2.1 Types of most inputs clearly documented
--   [ ] G2.2 (Not yet implemented in `autotest`, but will be confirmed
-    there.)
--   [ ] G2.3 `match.arg()` not used for single-valued character inputs,
-    nor is `tolower()` or equivalent used to avoid sensitivity to case.
--   [x] G2.4 Not applicable
--   [ ] G2.5 No mention of how factors are handled
+-   [ ] **G2.0** No documentation on expected lengths of any input
+    variables
+-   [x] **G2.1** Types of most inputs clearly documented
+-   [ ] **G2.2** (Not yet implemented in `autotest`, but will be
+    confirmed there.)
+-   [ ] **G2.3** `match.arg()` not used for single-valued character
+    inputs, nor is `tolower()` or equivalent used to avoid sensitivity
+    to case.
+-   [x] **G2.4** Not applicable
+-   [ ] **G2.5** No mention of how factors are handled
 
 **Tabular Input**
 
--   [x] G2.6 All standard input forms accepted
--   [ ] G2.7 (Not yet checked)
--   [x] G2.8 Not applicable
--   [x] G2.9 Different classes of tabular input yield consistent results
+-   [x] **G2.6** All standard input forms accepted
+-   [ ] **G2.7** (Not yet checked)
+-   [x] **G2.8** Not applicable
+-   [x] **G2.9** Different classes of tabular input yield consistent
+    results
 
 **Missing or Undefined Values**
 
--   [x] G2.10 Missing data appropriately handled
--   [x] G2.11 No user control over missing data needed here
--   [x] G2.12 All missing data appropriately pre-processed
--   [x] G2.13 Undefined values appropriately handled, although no
+-   [x] **G2.10** Missing data appropriately handled
+-   [x] **G2.11** No user control over missing data needed here
+-   [x] **G2.12** All missing data appropriately pre-processed
+-   [x] **G2.13** Undefined values appropriately handled, although no
     options provided to remove them, even though such options could be
     useful here.
 
 #### 1.3 Output Structures
 
--   [ ] G3.0 File name specifications (in `ExpReport()` function)
+-   [ ] **G4.0** File name specifications (in `ExpReport()` function)
     **not** appropriately parsed, rather simply assumed to be `*.html`.
 
 #### 1.4 Testing
 
 **Test Data Sets**
 
--   [x] G4.0 Tests use data sets provided by other widely-used R
+-   [x] **G5.0** Tests use data sets provided by other widely-used R
     packages.
--   [x] G4.1 No data sets created within package, so not applicable
+-   [x] **G5.1** No data sets created within package, so not applicable
 
 **Responses to Unexpected Input**
 
--   [ ] G4.2–4.3 Tests of responses to unexpected input either not
-    given, or do not cover all cases.
+-   [ ] **G5.2**–**G5.3** Tests of responses to unexpected input either
+    not given, or do not cover all cases.
 
 **Algorithm Tests**
 
--   [x] G4.4–4.7 Standards for testing statistical algorithms not
-    applicable to EDA software
--   [ ] G4.8 No edge condition tests implemented
--   [ ] G4.9 No tests of noise susceptibility implemented
+-   [x] **G5.4**–**G5.7** Standards for testing statistical algorithms
+    not applicable to EDA software
+-   [ ] **G5.8** No edge condition tests implemented
+-   [ ] **G5.9** No tests of noise susceptibility implemented
 
 **Extended tests**
 
--   [x] G4.10–4.12 No extended tests needed, so not applicable
+-   [x] **G5.10**–**5.12** No extended tests needed, so not applicable
 
 ------------------------------------------------------------------------
 
@@ -387,79 +390,86 @@ list-columns.
 
 **Uni-variate (Vector) Input**
 
--   [ ] G2.0 There is no documentation of expectations on lengths of
+-   [ ] **G2.0** There is no documentation of expectations on lengths of
     inputs
--   [ ] G2.1 Provide explicit secondary documentation of expectations on
-    *data types* of all vector inputs (see the above list).
--   [ ] G2.2 Lengths of parameters expected to be univariate are not
+-   [ ] **G2.1** Provide explicit secondary documentation of
+    expectations on *data types* of all vector inputs (see the above
+    list).
+-   [ ] **G2.2** Lengths of parameters expected to be univariate are not
     checked, and lead to uninformative errors (for example, `missing`
     parameter of [`add_any_miss()`
     function](http://naniar.njtierney.com/reference/add_any_miss.html)).
--   [x] G2.3 No single-valued character parameters used, so not
+-   [x] **G2.3** No single-valued character parameters used, so not
     applicable.
--   [x] G2.4 Provide appropriate mechanisms to convert between different
-    *data types*, potentially including:
-    -   [x] G2.4a explicit conversion to `integer` uses `as.integer()`
-    -   [x] G2.4b explicit conversion to continuous uses `as.numeric()`
-    -   [x] G2.4c There is no explicit conversion to character, so not
-        applicable `paste` or `paste0`)
-    -   [x] G2.4d There is no explicit conversion to factor, so not
+-   [x] **G2.4** Provide appropriate mechanisms to convert between
+    different *data types*, potentially including:
+    -   [x] **G2.4a** explicit conversion to `integer` uses
+        `as.integer()`
+    -   [x] **G2.4b** explicit conversion to continuous uses
+        `as.numeric()`
+    -   [x] **G2.4c** There is no explicit conversion to character, so
+        not applicable `paste` or `paste0`)
+    -   [x] **G2.4d** There is no explicit conversion to factor, so not
         applicable
-    -   [x] G2.4e There is no explicit conversion from factor, so not
-        applicable
--   [x] G2.5 No inputs expected to be of `factor` type, so not
+    -   [x] **G2.4e** There is no explicit conversion from factor, so
+        not applicable
+-   [x] **G2.5** No inputs expected to be of `factor` type, so not
     applicable.
 
 **Tabular Input**
 
--   [ ] G2.6 `naniar` does not accept `matrix`/`array` input, even
+-   [ ] **G2.6** `naniar` does not accept `matrix`/`array` input, even
     though it easily could.
--   [ ] G2.7 There is no initial pre-processing to ensure that all other
-    sub-functions of a package receive inputs of a single defined type.
--   [ ] G2.8 There is no type conversion, so no diagnostic messages for
-    type conversion are issued.
--   [x] G2.9 Extraction/filtering of single columns from tabular inputs
-    behaves appropriately regardless of input class.
+-   [ ] **G2.7** There is no initial pre-processing to ensure that all
+    other sub-functions of a package receive inputs of a single defined
+    type.
+-   [ ] **G2.8** There is no type conversion, so no diagnostic messages
+    for type conversion are issued.
+-   [x] **G2.9** Extraction/filtering of single columns from tabular
+    inputs behaves appropriately regardless of input class.
 
 **Missing or Undefined Values**
 
--   [x] G2.10 Checks for missing data are a core part of every routine
--   [x] G2.11 Most functions provide multiple, custom options for
+-   [x] **G2.10** Checks for missing data are a core part of every
+    routine
+-   [x] **G2.11** Most functions provide multiple, custom options for
     handling missing
--   [x] G2.12 No functions assume non-missingness
--   [ ] G2.13 No functions appropriately handle undefined values other
-    than `NA`. `NaN` is treated exactly as `NA`, and `Inf` is simply
-    ignored.
+-   [x] **G2.12** No functions assume non-missingness
+-   [ ] **G2.13** No functions appropriately handle undefined values
+    other than `NA`. `NaN` is treated exactly as `NA`, and `Inf` is
+    simply ignored.
 
 #### 5.3 Output Structures
 
--   [x] G3.0 There are no outputs written to local files, so not
+-   [x] **G4.0** There are no outputs written to local files, so not
     applicable
 
 #### 5.4 Testing
 
 **Test Data Sets**
 
--   [x] G4.0 Tests use data sets provided by other widely-used R
+-   [x] **G5.0** Tests use data sets provided by other widely-used R
     packages.
--   [x] G4.1 No data sets created within package, so not applicable
+-   [x] **G5.1** No data sets created within package, so not applicable
     exported so that users can confirm tests and run examples.
 
 **Responses to Unexpected Input**
 
--   [ ] G4.2 Error and warning behaviour not tested for all functions
--   [x] G4.3 Absence of missing or undefined values is tested
+-   [ ] **G5.2** Error and warning behaviour not tested for all
+    functions
+-   [x] **G5.3** Absence of missing or undefined values is tested
 
 **Algorithm Tests**
 
--   [x] G4.4–4.8 Standards for testing statistical algorithms not
-    applicable to EDA software
--   [x] G4.8 Edge conditions tested appropriately
--   [x] G4.9 Test of noise susceptibility not applicable
+-   [x] **G5.4**–**G5.8** Standards for testing statistical algorithms
+    not applicable to EDA software
+-   [x] **G5.8** Edge conditions tested appropriately
+-   [x] **G5.9** Test of noise susceptibility not applicable
 
 **Extended tests**
 
--   [x] G4.10–4.12 Extended tests neither relevant nor applicable.
+-   [x] **G5.10**–**G5.12** Extended tests neither relevant nor
+    applicable.
 
 ------------------------------------------------------------------------
 
