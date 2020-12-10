@@ -81,41 +81,41 @@ effectively removing the information that the `factor` variable is ordered.
 
 #### Output Structures
 
-- [x] **G3.0** No local files produced, so not relvant
+- [x] **G4.0** No local files produced, so not relvant
 
 #### Testing 
 
 **Test Data Sets**
 
-- [x] **G4.0** Tests use standard data sets with known properties 
-- [x] **G4.1** Data sets created within package are exported 
+- [x] **G5.0** Tests use standard data sets with known properties 
+- [x] **G5.1** Data sets created within package are exported 
 
 **Responses to Unexpected Input**
 
-- [ ] **G4.2** The package issues numerous error and warning messages, neither
+- [ ] **G5.2** The package issues numerous error and warning messages, neither
   the triggering conditions nor values of which are explicitly tested.
-    - [x] **G4.2a** Messages produced by `stop()`, `warning()`, `message()`are unique.
-    - [ ] **G4.2b** Tests do not trigger every one of those messages
-- [x] **G4.3** Absence of missing values form return results is explicitly tested.
+    - [x] **G5.2a** Messages produced by `stop()`, `warning()`, `message()`are unique.
+    - [ ] **G5.2b** Tests do not trigger every one of those messages
+- [x] **G5.3** Absence of missing values form return results is explicitly tested.
 
 **Algorithm Tests**
 
-- [x] **G4.4** Correctness tests are implemented.
-- [x] **G4.5** Correctness tests are run with a fixed random seed
-- [x] **G4.6** Parameter recovery tests impelemented
-    - [ ] **G4.6a** Many, but not all, parameter recovery tests are expected to
+- [x] **G5.4** Correctness tests are implemented.
+- [x] **G5.5** Correctness tests are run with a fixed random seed
+- [x] **G5.6** Parameter recovery tests impelemented
+    - [ ] **G5.6a** Many, but not all, parameter recovery tests are expected to
       succeed within a defined tolerance 
-    - [ ] **G4.6b** Parameter recovery are generally only run with one single
+    - [ ] **G5.6b** Parameter recovery are generally only run with one single
       random seeds when algorithm contains a random component.
-- [ ] **G4.7** There appear to be no algorithm performance tests
-- [x] **G4.8** Edge condition appropriately tested
-- [ ] **G4.9** There appear to be no noise susceptibility tests, neither tests
+- [ ] **G5.7** There appear to be no algorithm performance tests
+- [x] **G5.8** Edge condition appropriately tested
+- [ ] **G5.9** There appear to be no noise susceptibility tests, neither tests
   of the effect of adding trivial noise, nor tests running under different
   random seeds.
 
 **Extended tests**
 
-- [x] **G4.10**--**G4.12** The `lme4` package provides exemplary use of exactly
+- [x] **G5.10**--**G5.12** The `lme4` package provides exemplary use of exactly
   such an environmental variable, carefully documented in a `tests/README.md`
   file.
 

@@ -272,35 +272,35 @@ list-columns.
 
 #### 3.3 Output Structures
 
--   [x] **G3.0** No functions use local files, so not appicable
+-   [x] **G4.0** No functions use local files, so not appicable
 
 #### 3.4 Testing
 
 **Test Data Sets**
 
--   [x] **G4.0** Tests use data sets provided by other widely-used R
+-   [x] **G5.0** Tests use data sets provided by other widely-used R
     packages.
--   [x] **G4.1** No data sets created within package, so not applicable
+-   [x] **G5.1** No data sets created within package, so not applicable
 
 **Responses to Unexpected Input**
 
--   [ ] **G4.2** Error and warning behaviour of functions is not
+-   [ ] **G5.2** Error and warning behaviour of functions is not
     explicitly tested.
--   [ ] **G4.3** Absence of missing or undefined values in return
+-   [ ] **G5.3** Absence of missing or undefined values in return
     objects is not explicitly tested.
 
 **Algorithm Tests**
 
--   [x] **G4.4**–**G4.7** Standards for testing statistical algorithms
+-   [x] **G5.4**–**G5.7** Standards for testing statistical algorithms
     not applicable to EDA software
--   [x] **G4.8** Input to software is models not raw data, so edge
+-   [x] **G5.8** Input to software is models not raw data, so edge
     conditions neither relevant nor applicable.
--   [x] **G4.9** Input to software is models not raw data, so noise
+-   [x] **G5.9** Input to software is models not raw data, so noise
     tests neither relevant nor applicable.
 
 **Extended tests**
 
--   [x] **G4.10**–**G4.12** Extended tests neither relevant nor
+-   [x] **G5.10**–**G5.12** Extended tests neither relevant nor
     applicable.
 
 ------------------------------------------------------------------------

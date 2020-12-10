@@ -93,38 +93,38 @@ advancing and improving software quality.
 
 #### 1.3 Output Structures
 
--   [x] **G3.0** Nothing is written to local files, so not applicable
+-   [x] **G4.0** Nothing is written to local files, so not applicable
 
 #### 1.4 Testing
 
 **Test Data Sets**
 
--   [x] **G4.0** No standard data sets used in tests (rather, all tests
+-   [x] **G5.0** No standard data sets used in tests (rather, all tests
     use random data simulated with fixed random seeds)
--   [x] **G4.1** Data sets are created within software, but not in a way
+-   [x] **G5.1** Data sets are created within software, but not in a way
     that is appropriate for export, so not applicable.
 
 **Responses to Unexpected Input**
 
--   [ ] **G4.2** Tests do not cover all error and warning conditions
--   [x] **G4.2a** Every message produced `stop()`, `warning()`,
+-   [ ] **G5.2** Tests do not cover all error and warning conditions
+-   [x] **G5.2a** Every message produced `stop()`, `warning()`,
     `message()`, or equivalent is unique
--   [ ] **G4.2b** Tests do not cover every one of those messages
--   [ ] **G4.3** Absence of missing or undefined values in return
+-   [ ] **G5.2b** Tests do not cover every one of those messages
+-   [ ] **G5.3** Absence of missing or undefined values in return
     objects not explicitly tested.
 
 **Algorithm Tests**
 
--   [x] **G4.4** Correctness tests are appropriately implemented
--   [x] **G4.5** Correctness tests are run with a fixed random seed
--   [x] **G4.6** Parameter recovery tests appropriately implemented.
--   [x] **G4.7** Algorithm performance tests appropriately implemented.
--   [x] **G4.8** Edge condition tests appropriately implemented.
--   [ ] **G4.9** No noise susceptibility tests implemented.
+-   [x] **G5.4** Correctness tests are appropriately implemented
+-   [x] **G5.5** Correctness tests are run with a fixed random seed
+-   [x] **G5.6** Parameter recovery tests appropriately implemented.
+-   [x] **G5.7** Algorithm performance tests appropriately implemented.
+-   [x] **G5.8** Edge condition tests appropriately implemented.
+-   [ ] **G5.9** No noise susceptibility tests implemented.
 
 **Extended tests**
 
--   [x] **G4.10**–**G4.12** No extended tests included, so not
+-   [x] **G5.10**–**G5.12** No extended tests included, so not
     applicable
 
 ------------------------------------------------------------------------
@@ -396,15 +396,15 @@ advancing and improving software quality.
 
 #### 3.3 Output Structures
 
--   [ ] **G3.0** Processing of names of local files explicitly
+-   [ ] **G4.0** Processing of names of local files explicitly
     documented
 
 #### 3.4 Testing
 
 **Test Data Sets**
 
--   [x] **G4.0** Tests use standard data sets
--   [x] **G4.1** Data sets created to test package are not exported, but
+-   [x] **G5.0** Tests use standard data sets
+-   [x] **G5.1** Data sets created to test package are not exported, but
     are made generally available through direct inclusion within package
     sub-directory.
 
@@ -416,12 +416,12 @@ advancing and improving software quality.
 
 **Algorithm Tests**
 
--   [x] **G4.3** Correctness tests appropriately implemented.
--   [x] **G4.5** Correctness tests are run with a fixed random seed
--   [x] **G4.6** Parameter recovery tests appropriately implemented.
--   [x] **G4.7** Algorithm performance tests appropriately implemented.
--   [x] **G4.8** Edge condition tests appropriately implemented.
--   [ ] **G4.9** No noise susceptibility tests implemented
+-   [x] **G5.3** Correctness tests appropriately implemented.
+-   [x] **G5.5** Correctness tests are run with a fixed random seed
+-   [x] **G5.6** Parameter recovery tests appropriately implemented.
+-   [x] **G5.7** Algorithm performance tests appropriately implemented.
+-   [x] **G5.8** Edge condition tests appropriately implemented.
+-   [ ] **G5.9** No noise susceptibility tests implemented
 
 **Extended tests**
 

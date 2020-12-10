@@ -151,18 +151,18 @@ No such options provided.
 
 ### 3 Output Structures
 
--   [x] **G3.0** No writing to local files implemented, so not
+-   [x] **G4.0** No writing to local files implemented, so not
     applicable.
 
 ### 4 Testing
 
 #### 4.1 Test Data Sets
 
--   [x] **G4.0** *Where applicable or practicable, tests should use
+-   [x] **G5.0** *Where applicable or practicable, tests should use
     standard data sets with known properties (for example, the [NIST
     Standard Reference Datasets](https://www.itl.nist.gov/div898/strd/),
     or data sets provided by other widely-used R packages).*
--   [x] **G4.1** *Data sets created within, and used to test, a package
+-   [x] **G5.1** *Data sets created within, and used to test, a package
     should be exported (or otherwise made generally available) so that
     users can confirm tests and run examples.*
 
@@ -172,55 +172,55 @@ relevant.
 
 #### 4.2 Responses to Unexpected Input
 
--   [ ] **G4.2** Some but not all error and warning behaviour is
+-   [ ] **G5.2** Some but not all error and warning behaviour is
     explicitly tested
--   [ ] **G4.3** Absence of missing or undefined data in return objects
+-   [ ] **G5.3** Absence of missing or undefined data in return objects
     is not explicitly tested.
 
 #### 4.3 Algorithm Tests
 
--   [x] **G4.4**–**G4.5** Correctness tests are not applicable
--   [ ] **G4.6b** *Parameter recovery tests should be run with multiple
+-   [x] **G5.4**–**G5.5** Correctness tests are not applicable
+-   [ ] **G5.6b** *Parameter recovery tests should be run with multiple
     random seeds when either data simulation or the algorithm contains a
     random component. (When long-running, such tests may be part of an
     extended, rather than regular, test suite; see G4.8-4.10, below).*
 
 Tests are only run with a single random seed
 
--   [ ] **G4.8** Algorithm performance tests are not implemented.
--   [ ] **G4.8** **Edge condition tests** *to test that these conditions
+-   [ ] **G5.8** Algorithm performance tests are not implemented.
+-   [ ] **G5.8** **Edge condition tests** *to test that these conditions
     produce expected behaviour such as clear warnings or errors when
     confronted with data with extreme properties including but not
     limited to:*
--   [ ] **G4.8a** *Zero-length data*
+-   [ ] **G5.8a** *Zero-length data*
 
 is not tested
 
--   [ ] **G4.8b** *Data of unsupported types (e.g., character or complex
+-   [ ] **G5.8b** *Data of unsupported types (e.g., character or complex
     numbers in for functions designed only for numeric data)*
 
 is not tested
 
--   [ ] **G4.8c** *Data with all-`NA` fields or columns or all identical
+-   [ ] **G5.8c** *Data with all-`NA` fields or columns or all identical
     fields or columns*
 
 Processing of missing data is note tested
 
--   [ ] **G4.8d** *Data outside the scope of the algorithm (for example,
+-   [ ] **G5.8d** *Data outside the scope of the algorithm (for example,
     data with more fields (columns) than observations (rows) for some
     regression algorithms)*
 
 are not tested
 
--   [ ] **G4.9** **Noise susceptibility tests** *Packages should test
+-   [ ] **G5.9** **Noise susceptibility tests** *Packages should test
     for expected stochastic behaviour, such as through the following
     conditions:*
--   [ ] **G4.9a** *Adding trivial noise (for example, at the scale of
+-   [ ] **G5.9a** *Adding trivial noise (for example, at the scale of
     `.Machine$double.eps`) to data does not meaningfully change results*
 
 is not tested
 
--   [ ] **G4.9b** *Running under different random seeds or initial
+-   [ ] **G5.9b** *Running under different random seeds or initial
     conditions does not meaningfully change results*
 
 is not tested

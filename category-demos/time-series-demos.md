@@ -71,41 +71,41 @@ Time Series Demonstrations
 
 #### 1.3 Output Structures
 
--   [x] **G3.0** Software does not enable outputs to local files, so not
+-   [x] **G4.0** Software does not enable outputs to local files, so not
     applicable.
 
 #### 1.4 Testing
 
 **Test Data Sets**
 
--   [ ] **G4.0** Tests do not use standard data sets with known
+-   [ ] **G5.0** Tests do not use standard data sets with known
     properties, although in this case arguably should.
--   [x] **G4.1** Data sets created within tests are not exported, but
+-   [x] **G5.1** Data sets created within tests are not exported, but
     are sufficiently simple that this standard is not applicable.
 
 **Responses to Unexpected Input**
 
--   [ ] **G4.2** There are no tests of error or warning behaviour
--   [ ] **G4.3** Absence of missing (`NA`) or undefined (`NaN`, `Inf`)
+-   [ ] **G5.2** There are no tests of error or warning behaviour
+-   [ ] **G5.3** Absence of missing (`NA`) or undefined (`NaN`, `Inf`)
     values in return objects is not tested.
 
 **Algorithm Tests**
 
--   [ ] **G4.4** There are no correctness tests, although there could
+-   [ ] **G5.4** There are no correctness tests, although there could
     and should be.
--   [ ] **G4.4a**–**G4.4b** There are no tests against alternative or
+-   [ ] **G5.4a**–**G5.4b** There are no tests against alternative or
     prior implementations, although there could and should be.
--   [x] **G4.4c** Use of stored values from published paper outputs not
+-   [x] **G5.4c** Use of stored values from published paper outputs not
     applicable here.
--   [x] **G4.5** Tests are be run with a fixed random seed
--   [ ] **G4.6** Parameter recovery tests are not implemented.
--   [ ] **G4.7** Algorithm performance tests are not implemented.
--   [ ] **G4.8** Edge condition tests are not implemented.
--   [ ] **G4.9** Noise susceptibility tests are not implemented.
+-   [x] **G5.5** Tests are be run with a fixed random seed
+-   [ ] **G5.6** Parameter recovery tests are not implemented.
+-   [ ] **G5.7** Algorithm performance tests are not implemented.
+-   [ ] **G5.8** Edge condition tests are not implemented.
+-   [ ] **G5.9** Noise susceptibility tests are not implemented.
 
 **Extended tests**
 
--   [x] **G4.10**–**G4.12** There are no extended tests, so not
+-   [x] **G5.10**–**G5.12** There are no extended tests, so not
     applicable.
 
 ------------------------------------------------------------------------
