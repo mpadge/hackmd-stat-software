@@ -53,8 +53,8 @@ increment1 <- function (standard, s, prfx) {
     new_standards <- paste0 ("**", prfx,
                              nbig [index2], ".", nsmall [index2] + 1)
 
-    old_standards <- rev (old_standards)
-    new_standards <- rev (new_standards)
+    old_standards <- unique (rev (old_standards))
+    new_standards <- unique (rev (new_standards))
 
     x <- x0
     for (i in seq_along (old_standards))
