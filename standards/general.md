@@ -7,8 +7,7 @@ robots: noindex, nofollow
 
 <!-- Edit the .Rmd not the .md file -->
 
-General Standards for Statistical Software
-------------------------------------------
+## General Standards for Statistical Software
 
 <details>
 <summary>
@@ -53,30 +52,6 @@ vector.
 
 <br>
 
-Examples of application of the following standards may be viewed as
-separate [`hackmd.io` files](https://hackmd.io) by clicking on the
-following links:
-
--   [Application of Bayesian and Monte Carlo
-    Standards](https://hackmd.io/zVWTAl9ZQeCcj_bvMGcmMQ)
--   [Application of Regression and Supervised Learning
-    Standards](https://hackmd.io/VZ-wgQtZRV2pb-wFZNDM5g)
--   [Application of Dimensionality Reduction, Clustering, and
-    Unsupervised Learning
-    Standards](https://hackmd.io/iOZD_oCpT86zoY5z4memaQ)
--   [Application of Exploratory Data Analysis
-    Standards](https://hackmd.io/K8F1RIhdQeuZFqMnzdqNVw)
--   [Application of Machine Learning Software
-    Standards](https://hackmd.io/Ix1YwD8YTWGuzdiXsVQadA)
-
-Each of those files compares both general and category-specific
-standards against selected R packages within those categories. These
-comparisons are intended for illustrative purposes only, and are in no
-way intended to represent evaluations of the software. They are
-presented in the hope of demonstrating how the standards presented here
-may be applied to software, and what the results of such application may
-look like.
-
 ### 1 Documentation
 
 -   **G1.0** *Statistical Software should list at least one primary
@@ -91,9 +66,22 @@ basis of an academic publication. Until that time, the most suitable
 reference for equivalent algorithms or implementations should be
 provided.
 
+-   **G1.1** *Statistical Software should document whether the
+    algorithm(s) it implements are:*
+    -   *The first implementation of a novel algorithm*; or
+    -   *The first implementation within **R** of an algorithm which has
+        previously been implemented in other languages or contexts*; or
+    -   *An improvement on other implementations of similar algorithms
+        in **R***.
+
+The second and third options additionally require references to
+comparable algorithms or implementations to be documented somewhere
+within the software, including references to all known implementations
+in other computer languages.
+
 #### 1.1 Statistical Terminology
 
--   **G1.1** *All statistical terminology should be clarified and
+-   **G1.2** *All statistical terminology should be clarified and
     unambiguously defined.*
 
 Developers should not presume anywhere in the documentation of software
@@ -127,7 +115,7 @@ package](https://github.com/mikldk/roxytest) for specifying tests
 
 #### 1.2 Function-level Documentation
 
--   **G1.2** *Software should use
+-   **G1.3** *Software should use
     [`roxygen2`](https://roxygen2.r-lib.org/) to document all
     functions.*
     -   **G1.2a** *All internal (non-exported) functions should also be
@@ -149,14 +137,14 @@ publication with regard to software performance (for example, claims of
 algorithmic scaling or efficiency; or claims of accuracy), the following
 standard applies:
 
--   **G1.3** *Software should include all code necessary to reproduce
+-   **G1.4** *Software should include all code necessary to reproduce
     results which form the basis of performance claims made in
     associated publications.*
 
 Where claims regarding aspects of software performance are made with
 respect to other extant R packages, the following standard applies:
 
--   **G1.4** *Software should include code necessary to compare
+-   **G1.5** *Software should include code necessary to compare
     performance claims with alternative implementations in other R
     packages.*
 
@@ -373,6 +361,26 @@ and
 rely on equality comparisons, and this standard extends to require that
 software should not apply any functions which themselves rely on
 equality comparisons to floating point numbers.
+
+-   G3.1 Statistical software which relies on covariance calculations
+    should enable users to choose between different algorithms for
+    calculating covariances, and should not rely solely on covariances
+    from the `stats::cov` function.
+    -   G3.1a While it may be sufficient to offer a single default
+        method, the ability to use arbitrarily specified methods should
+        nevertheless be documented (typically in examples or vignettes).
+
+Estimates of covariance can be very sensitive to outliers, and a variety
+of methods have been developed for “robust” estimates of covariance,
+implemented in such packages as
+[`rms`](https://cran.r-project.org/package=rms),
+[`robust`](https://cran.r-project.org/package=robust), and
+[`sandwich`](https://cran.r-project.org/package=sandwich). Adhering to
+this standard merely requires an ability for a user to specify a
+particular covariance function, such as through an additional parameter.
+The `stats::cov` function can be used as a default, and additional
+packages such as the three listed here need not necessarily be listed as
+`Imports` to a package.
 
 ### 4 Output Structures
 
