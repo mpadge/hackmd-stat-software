@@ -7,8 +7,7 @@ robots: noindex, nofollow
 
 <!-- Edit the .Rmd not the .md file -->
 
-Machine Learning Software
--------------------------
+## Machine Learning Software
 
 Click on the following link to view a demonstration [Application of
 Machine Learning Software
