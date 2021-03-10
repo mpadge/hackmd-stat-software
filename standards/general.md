@@ -9,6 +9,17 @@ robots: noindex, nofollow
 
 ## General Standards for Statistical Software
 
+Note that these and all category-specific standards that follow are
+intended to serve as *recommendations* for best practices. Note in
+particular that many standards are written using the word “*should*” in
+explicit acknowledgement that adhering to such standards may not always
+be possible. All standards phrased in these terms are intended to be
+interpreted as applicable under such conditions as “*Where possible*”,
+or “*Where applicable*”. Developers are requested to note any standards
+which they deem not applicable to their software via the [`srr`
+package](https://ropenscilabs.github.io/srr/), as described in [Chapter
+3](#pkgdev).
+
 <details>
 <summary>
 Click for notes on nomenclature of Data Types.
