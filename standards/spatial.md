@@ -17,8 +17,7 @@ robots: noindex, nofollow
   they justified? How can they be controlled?
 -->
 
-Spatial Software
-----------------
+## Spatial Software
 
 Standards for spatial software begin with a consideration and
 standardisation of domains of applicability. Following that we proceed
@@ -185,11 +184,11 @@ particular, coordinate reference systems used to precisely relate pairs
 of coordinates to precise locations in a curvilinear space, and in
 particular to the Earth’s ellipsoid, need to be able to be compared and
 transformed regardless of the specificities of individual software. This
-ubiquitous need has fostered the development of the [`proj`
+ubiquitous need has fostered the development of the [`PROJ`
 library](https://proj.org/) for representing and transforming spatial
 coordinates. Several other libraries have been built on top or or
 alongside that, notably including the [`GDAL` (“Geospatial Data
-Abstraction Library”)](https://gdal.org) and [`geos` (“Geometry Engine,
+Abstraction Library”)](https://gdal.org) and [`GEOS` (“Geometry Engine,
 Open Source”)](https://trac.osgeo.org/geos/) libraries. These libraries
 are used by, and integrated within, most geographical spatial software
 commonly used today, and will likely continue to be used.
@@ -249,8 +248,8 @@ concerning documentation and testing.
 As described above, one of the primary reasons for the development of
 classes in Spatial Software is to represent the coordinate reference
 systems in which data are represented, and to ensure compatibility with
-the [`proj` system](https://proj.org/) and other generic spatial
-libraries. The [`proj`](https://proj.org/) standards and associated
+the [`PROJ` system](https://proj.org/) and other generic spatial
+libraries. The [`PROJ`](https://proj.org/) standards and associated
 software library have been recently (2020) updated (to version number 7)
 with “breaking changes” that are not backwards-compatible with previous
 versions, and in particular with the long-standing version 4. The
@@ -271,7 +270,7 @@ relies on geographic data which uses or relies upon coordinate reference
 systems.
 
 -   **SP2.3** *Geographical Spatial Software should be compliant with
-    version 6 (and, ideally 7) of* [`proj`](https://proj.org/), *and
+    version 6 (and, ideally 7) of* [`PROJ`](https://proj.org/), *and
     with* `wkt2` *representations. The primary implications, described
     in detail in the articles linked to above, are that:*
     -   **SP2.3a** *Software should not accept so-called “PROJ4-strings”
@@ -334,7 +333,7 @@ project](https://github.com/ropenscilabs/statistical-software-review).
     -   **SP3.0a** *Neighbours (able to be expressed) on regular grids
         should be able to be considered in both rectangular only, or
         rectangular and diagonal (respectively “rook” and “queen” by
-        analogy to chess.*
+        analogy to chess).*
     -   **SP3.0b** *Neighbourhoods in irregular spaces should be
         minimally able to be controlled via an integer number of
         neighbours, an area (or equivalent distance defining an area) in
