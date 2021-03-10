@@ -245,7 +245,7 @@ more of these `data.frame`-type tabular inputs are then that:
 The next standard concerns the following inconsistencies between three common
 tabular classes in regard the column extraction operator, `[`.
 
-```{r}
+```{r drop, eval = FALSE}
 class (x) # x is any kind of `data.frame` object
 #> [1] "data.frame"
 class (x [, 1])
