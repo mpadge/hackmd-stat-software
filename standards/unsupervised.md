@@ -7,14 +7,9 @@ robots: noindex, nofollow
 
 <!-- Edit the .Rmd not the .md file -->
 
-Dimensionality Reduction, Clustering, and Unsupervised Learning
----------------------------------------------------------------
+## Dimensionality Reduction, Clustering, and Unsupervised Learning
 
-Click on the following link to view a demonstration [Application of
-Dimensionality Reduction, Clustering, and Unsupervised Learning
-Standards](https://hackmd.io/iOZD_oCpT86zoY5z4memaQ).
-
-This document details standards for Dimensionality Reduction,
+This sub-section details standards for Dimensionality Reduction,
 Clustering, and Unsupervised Learning Software – referred to from here
 on for simplicity as “Unsupervised Learning Software”. Software in this
 category is distinguished from Regression Software though the latter
@@ -31,6 +26,36 @@ the input data. Examples of the former type include dimensionality
 reduction and ordination software and algorithms, and examples of the
 latter include clustering and discrete partitioning software and
 algorithms.
+
+Some examples of *Dimensionality Reduction, Clustering, and Unsupervised
+Learning* software include:
+
+1.  [`ivis`](https://joss.theoj.org/papers/10.21105/joss.01596)
+    implements a dimensionality reduction technique using a "Siamese
+    Neural Network architecture.
+2.  [`tsfeaturex`](https://joss.theoj.org/papers/10.21105/joss.01279) is
+    a package to automate “time series feature extraction,” which also
+    provides an example of a package for which both input and output
+    data are generally incomparable with most other packages in this
+    category.
+3.  [`iRF`](https://joss.theoj.org/papers/10.21105/joss.01077) is
+    another example of a generally incomparable package within this
+    category, here one for which the features extracted are the most
+    distinct predictive features extracted from repeated iterations of
+    random forest algorithms.
+4.  [`compboost`](https://joss.theoj.org/papers/10.21105/joss.00967) is
+    a package for component-wise gradient boosting which may be
+    sufficient general to potentially allow general application to
+    problems addressed by several packages in this category.
+5.  The [`iml`](https://joss.theoj.org/papers/10.21105/joss.00786)
+    package may offer usable functionality for devising general
+    assessments of software within this category, through offering a
+    “toolbox for making machine learning models interpretable” in a
+    “model agnostic” way.
+
+Click on the following link to view a demonstration [Application of
+Dimensionality Reduction, Clustering, and Unsupervised Learning
+Standards](https://hackmd.io/iOZD_oCpT86zoY5z4memaQ).
 
 ### 1 Input Data Structures and Validation
 
