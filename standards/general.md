@@ -203,7 +203,20 @@ other languages, whereby the type of a variable must be explicitly
 specified prior to assignment. Use of such approaches is encouraged,
 including but not restricted to approaches documented in packages such
 as [`vctrs`](https://vctrs.r-lib.org), or the experimental package
-[`typed`](https://github.com/moodymudskipper/typed).
+[`typed`](https://github.com/moodymudskipper/typed). One additional
+standard for vector input is:
+
+-   **G2.6** *Software which accepts one-dimensional input should ensure
+    values are appropriately pre-processed regardless of class
+    structures.*
+
+The [`units` package](https://github.com/r-quantities/units/) provides a
+good example, in creating objects that may be treated as vectors, yet
+which have a class structure that does not inherit from the `vector`
+class. Using these objects as input often causes software to fail. The
+`storage.mode` of the underlying objects may nevertheless be examined,
+and the objects transformed or processed accordingly to ensure such
+inputs do not lead to errors.
 
 #### 2.2 Tabular Input
 
@@ -247,14 +260,22 @@ classes listed in the final of the above points.
 General Standards applicable to software which is intended to accept any
 one or more of these `data.frame`-type tabular inputs are then that:
 
--   **G2.6** *Software should accept as input as many of the above
+-   **G2.7** *Software should accept as input as many of the above
     standard tabular forms as possible, including extension to
     domain-specific forms.*
--   **G2.7** *Software should provide appropriate conversion or dispatch
+
+Software need not necessarily test abilities to accept different types
+of inputs, because that may require adding packages to the `Suggests`
+field of a package for that purpose alone. Nevertheless, software which
+somehow uses (through `Depends` or `Suggests`) any packages for
+representing tabular data should confirm in tests the ability to accept
+these types of input.
+
+-   **G2.8** *Software should provide appropriate conversion or dispatch
     routines as part of initial pre-processing to ensure that all other
     sub-functions of a package receive inputs of a single defined class
     or type.*
--   **G2.8** *Software should issue diagnostic messages for type
+-   **G2.9** *Software should issue diagnostic messages for type
     conversion in which information is lost (such as conversion of
     variables from factor to character; standardisation of variable
     names; or removal of meta-data such as those associated with
@@ -323,37 +344,57 @@ class (x [, 1, drop = FALSE]) # default
 
 Given such inconsistencies,
 
--   **G2.9** *Software should ensure that extraction or filtering of
+-   **G2.10** *Software should ensure that extraction or filtering of
     single columns from tabular inputs should not presume any particular
     default behaviour, and should ensure all column-extraction
     operations behave consistently regardless of the class of tabular
     data used as input.*
 
-Adherence to the above standard **G2.7** will ensure that any implicitly
+Adherence to the above standard **G2.8** will ensure that any implicitly
 or explicitly assumed default behaviour will yield consistent results
 regardless of input classes.
 
+**Columns of tabular inputs**
+
+The follow standards apply to `data.frame`-like tabular objects
+(including all derived and otherwise compatible classes), and so do not
+apply to `matrix` or `array` objects.
+
+-   **G2.11** *Software should ensure that `data.frame`-like tabular
+    objects which have columns which do not themselves have standard
+    class attributes (typically, `vector`) are appropriately processed,
+    and do not error without reason. This behaviour should be tested.
+    Again, columns created by the [`units`
+    package](https://github.com/r-quantities/units/) provide a good test
+    case.*
+-   **G2.12** *Software should ensure that `data.frame`-like tabular
+    objects which have list columns should ensure that those columns are
+    appropriately pre-processed either through being removed, converted
+    to equivalent vector columns where appropriate, or some other
+    appropriate treatment such as an informative error. This behaviour
+    should be tested.*
+
 #### 2.3 Missing or Undefined Values
 
--   **G2.10** *Statistical Software should implement appropriate checks
+-   **G2.13** *Statistical Software should implement appropriate checks
     for missing data as part of initial pre-processing prior to passing
     data to analytic algorithms.*
--   **G2.11** *Where possible, all functions should provide options for
+-   **G2.14** *Where possible, all functions should provide options for
     users to specify how to handle missing (`NA`) data, with options
     minimally including:*
-    -   **G2.11a** *error on missing data*
-    -   **G2.11b** *ignore missing data with default warnings or
+    -   **G2.14a** *error on missing data*
+    -   **G2.14b** *ignore missing data with default warnings or
         messages issued*
-    -   **G2.11c** *replace missing data with appropriately imputed
+    -   **G2.14c** *replace missing data with appropriately imputed
         values*
--   **G2.12** *Functions should never assume non-missingness, and should
+-   **G2.15** *Functions should never assume non-missingness, and should
     never pass data with potential missing values to any base routines
     with default `na.rm =   FALSE`-type parameters (such as
     [`mean()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html),
     [`sd()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/sd.html)
     or
     [`cor()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html)).*
--   **G2.13** *All functions should also provide options to handle
+-   **G2.16** *All functions should also provide options to handle
     undefined values (e.g., `NaN`, `Inf` and `-Inf`), including
     potentially ignoring or removing such values.*
 
