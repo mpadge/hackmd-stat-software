@@ -22,8 +22,9 @@ in [Chapter 3](#pkgdev).
 
 <details>
 <summary>
-These standards refer to **Data Types** as the fundamental types defined
-by the <a href="https://cran.r-project.org/doc/manuals/R-lang.html">R
+These standards refer to <b>Data Types</b> as the fundamental types
+defined by the
+<a href="https://cran.r-project.org/doc/manuals/R-lang.html">R
 language</a> itself. Information on these types can be seen by clicking
 here.
 </summary>
