@@ -97,15 +97,12 @@ software should:
 -   **EA1.1** *Identify the kinds of data the software is capable of
     analysing (see *Kinds of Data\* below).\*
 -   **EA1.2** *Identify the kinds of questions the software is intended
-    to help explore; for example, are these questions:*
-    -   *inferential?*
-    -   *predictive?*
-    -   *associative?*
-    -   *causal?*
-    -   *(or other modes of statistical enquiry?)*
+    to help explore.*
 
-The *Secondary Documentation* (within individual functions) of EDA
-software should:
+Important distinctions between kinds of questions include whether they
+are inferential, predictive, associative, causal, or representative of
+other modes of statistical enquiry. The *Secondary Documentation*
+(within individual functions) of EDA software should:
 
 -   **EA1.3** *Identify the kinds of data each function is intended to
     accept as input*
@@ -119,7 +116,7 @@ accepts data of more general and varied types. EDA software should aim
 to accept and appropriately transform as many diverse kinds of input
 data as possible, through addressing the following standards, considered
 in terms of the two cases of input data in uni- and multi-variate form.
-All of the general standards for kinds of input (G2.0 - G2.7) apply to
+All of the general standards for kinds of input (G2.0 - G2.12) apply to
 input data for EDA Software.
 
 #### 2.1 Index Columns
@@ -165,13 +162,12 @@ EDA software designed to accept multi-tabular input should:
 objects, while *Sub-Classes* refer to the class definitions of
 components of input objects (for example, of columns of an input
 `data.frame`). EDA software which is intended to receive input in
-general vector formats (see *Uni-variate Input* section of *General
-Standards*) should ensure:
+general vector formats (see *Uni-variate Input* section of [*General
+Standards*](#general-standards)) should ensure that it complies with
+**G2.**, so that vector input is appropriately processed regardless of
+input class. An additional standard for EDA software is that,
 
--   **EA2.6** *Routines appropriately process vector input of custom
-    classes, including those which do not inherit from the `vector`
-    class*
--   **EA2.7** *Routines should appropriately process vector data
+-   **EA2.6** *Routines should appropriately process vector data
     regardless of additional attributes*
 
 The following code illustrates some ways by which “metadata” defining
@@ -212,33 +208,25 @@ storage.mode (sum (x))
 
 Tabular inputs in `data.frame` class may contain columns which are
 themselves defined by custom classes, and which possess additional
-attributes. EDA Software which accepts tabular inputs should accordingly
-ensure:
-
--   **EA2.8** *EDA routines appropriately process tabular input of
-    custom classes, ideally by means of a single pre-processing routine
-    which converts tabular input to some standard form subsequently
-    passed to all analytic routines.*
--   **EA2.9** *EDA routines accept and appropriately process tabular
-    input in which individual columns may be of custom sub-classes
-    including additional attributes.*
+attributes. The ability of software to accept such inputs is covered by
+the *Tabular Input* section of the [*General
+Standards*](#general-standards).
 
 ### 3 Analytic Algorithms
 
 EDA software will generally not directly implement what might be
-considered as statistical algorithms in their own right. The following
-standards may nevertheless apply to some of the main analytic routines
-of EDA software.
+considered as statistical algorithms in their own right. Where
+algorithms are implemented, the following standards apply.
 
--   **EA3.0** The algorithmic components of EDA Software should enable
+-   **EA3.0** *The algorithmic components of EDA Software should enable
     automated extraction and/or reporting of statistics as some
     sufficiently “meta” level (such as variable or model selection), for
     which previous or reference implementations require manual
-    intervention.
--   **EA3.1** EDA software should enable standardised comparison of
+    intervention.*
+-   **EA3.1** *EDA software should enable standardised comparison of
     inputs, processes, models, or outputs which previous or reference
     implementations otherwise only enable in some comparably
-    unstandardised form.
+    unstandardised form.*
 
 Both of these standards also relate to the following standards for
 output values, visualisation, and summary output.
@@ -246,10 +234,11 @@ output values, visualisation, and summary output.
 ### 4 Return Results / Output Data
 
 -   **EA4.0** *EDA Software should ensure all return results have types
-    which are consistent with input types. For example, `sum`, `min`, or
-    `max` values applied to `integer`-type vectors should return
-    `integer` values, while `mean` or `var` will generally return
-    `numeric` types.*
+    which are consistent with input types.*
+
+Examples of such compliance include ensuring that `sum`, `min`, or `max`
+values applied to `integer`-type vectors return `integer` values.
+
 -   **EA4.1** *EDA Software should implement parameters to enable
     explicit control of numeric precision*
 -   **EA4.2** *The primary routines of EDA Software should return
@@ -274,29 +263,35 @@ applicable to visualization in general, whether static or dynamic.
 -   **EA5.0** *Graphical presentation in EDA software should be as
     accessible as possible or practicable. In particular, EDA software
     should consider accessibility in terms of:*
-    -   **EA5.0a** \*Typeface sizes should default to sizes which
-        explicitly enhance accessibility
-    -   **EA5.0b** Default colour schemes should be carefully
-        constructed to ensure accessibility.\*
+    -   **EA5.0a** *Typeface sizes, which should default to sizes which
+        explicitly enhance accessibility*
+    -   **EA5.0b** *Default colour schemes, which should be carefully
+        constructed to ensure accessibility.*
 -   **EA5.1** *Any explicit specifications of typefaces which override
-    default values should consider accessibility*
+    default values provided through other packages (including the
+    `graphics` package) should consider accessibility*
 
 #### 5.1 Summary and Screen-based Output
 
 -   **EA5.2** *Screen-based output should never rely on default print
     formatting of `numeric` types, rather should also use some version
     of `round(., digits)`, `formatC`, `sprintf`, or similar functions
-    for numeric formatting according the parameter described in EDA4.2.*
+    for numeric formatting according the parameter described in*
+    **EA4.1**.
 -   **EA5.3** *Column-based summary statistics should always indicate
     the `storage.mode`, `class`, or equivalent defining attribute of
-    each column (as, for example, implemented in the default
-    `print.tibble` method).*
+    each column.*
+
+An example of compliance with the latter standard is the `print.tibble`
+method of the [`tibble` package](https://tibble.tidyverse.org).
 
 #### 5.2 General Standards for Visualization (Static and Dynamic)
 
--   **EA5.4** *All visualisations should include units on all axes, with
-    sensibly rounded values (for example, as produced by the `pretty()`
-    function).*
+-   **EA5.4** *All visualisations should ensure values are rounded
+    sensibly (for example, via `pretty()` function).*
+-   **EA5.5** *All visualisations should include units on all axes where
+    such are specified or otherwise obtainable from input data or other
+    routines.*
 
 #### 5.3 Dynamic Visualization
 
@@ -305,9 +300,10 @@ Dynamic visualization routines are commonly implemented as interfaces to
 an internal part of an R package, standards shall not be considered to
 apply to the code itself, rather only to decisions present as
 user-controlled parameters exposed within the R environment. That said,
-one standard may nevertheless be applied, with an aim to minimise
+one standard may nevertheless be applied, which aims to maximise
+inter-operability between packages.
 
--   **EA5.5** *Any packages which internally bundle libraries used for
+-   **EA5.6** *Any packages which internally bundle libraries used for
     dynamic visualization and which are also bundled in other,
     pre-existing R packages, should explain the necessity and advantage
     of re-bundling that library.*
