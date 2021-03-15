@@ -183,32 +183,27 @@ NA
 The value for 08:46 is *implicitly missing*, while the value for 08:44
 is *explicitly missing*. These two forms of missingness may connote
 different things, and may require different forms of pre-processing.
-With this in mind, the following standards apply:
+With this in mind, and beyond the [*General
+Standards*](#general-standards) for missing data (**G2.13**–**G2.16**),
+the following standards apply:
 
--   **TS2.0** *Appropriate checks for missing data, and associated
-    transformation routines, should be performed as part of initial
-    pre-processing prior to passing data to analytic algorithms.*
--   **TS2.1** *Time Series Software which presumes or requires regular
-    data should only allow *explicit\* missing values, and should issue
+-   **TS2.0** *Time Series Software which presumes or requires regular
+    data should only allow **explicit** missing values, and should issue
     appropriate diagnostic messages, potentially including errors, in
-    response to any *implicit* missing values.\*
--   **TS2.2** *Where possible, all functions should provide options for
+    response to any **implicit** missing values.*
+-   **TS2.1** *Where possible, all functions should provide options for
     users to specify how to handle missing data, with options minimally
     including:*
-    -   **TS2.2a** *error on missing data.*
-    -   **TS2.2b** *warn or ignore missing data, and proceed to analyse
+    -   **TS2.1a** \*error on missing data; or.
+    -   **TS2.1b** *warn or ignore missing data, and proceed to analyse
         irregular data, ensuring that results from function calls with
         regular yet missing data return identical values to submitting
-        equivalent irregular data with no missing values.*
-    -   **TS2.2c** *replace missing data with appropriately imputed
+        equivalent irregular data with no missing values; or*
+    -   **TS2.1c** *replace missing data with appropriately imputed
         values.*
--   **TS2.3** *Functions should never assume non-missingness, and should
-    never pass data with potential missing values to any base routines
-    with default `na.rm =   FALSE`-type parameters (such as
-    [`mean()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/mean.html),
-    [`sd()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/sd.html)
-    or
-    [`var()`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/cor.html)).*
+
+This latter standard is a modified version of *General Standard*
+**G2.14**, with additional requirements via **TS2.1b**.
 
 #### 2.2 Stationarity
 
@@ -217,18 +212,18 @@ requirements made with respect to the stationarity or otherwise of all
 input data. In particular, any (sub-)functions which assume or rely on
 stationarity should:
 
--   **TS2.4** *Consider stationarity of all relevant moments - typically
+-   **TS2.2** *Consider stationarity of all relevant moments - typically
     first (mean) and second (variance) order, or otherwise document why
     such consideration may be restricted to lower orders only.*
--   **TS2.5** *Explicitly document all assumptions and/or requirements
+-   **TS2.3** *Explicitly document all assumptions and/or requirements
     of stationarity*
--   **TS2.6** *Implement appropriate checks for all relevant forms of
+-   **TS2.4** *Implement appropriate checks for all relevant forms of
     stationarity, and either:*
-    -   **TS2.6a** *issue diagnostic messages or warnings; or*
-    -   **TS2.6b** *enable or advise on appropriate transformations to
+    -   **TS2.4a** *issue diagnostic messages or warnings; or*
+    -   **TS2.4b** *enable or advise on appropriate transformations to
         ensure stationarity.*
 
-The two options in the last point (TS2.6b) respectively translate to
+The two options in the last point (TS2.4b) respectively translate to
 *enabling* transformations to ensure stationarity by providing
 appropriate routines, generally triggered by some function parameter, or
 *advising* on appropriate transformations, for example by directing
@@ -240,12 +235,15 @@ transformations.
 Where covariance matrices are constructed or otherwise used within or as
 input to functions, they should:
 
--   **TS2.7** *Incorporate a system to ensure that both row and column
+-   **TS2.5** *Incorporate a system to ensure that both row and column
     orders follow the same ordering as the underlying time series data.
     This may, for example, be done by including the `index` attribute of
     the time series data as an attribute of the covariance matrix.*
--   **TS2.8** *Where applicable, covariance matrices should also include
+-   **TS2.6** *Where applicable, covariance matrices should also include
     specification of appropriate units.*
+
+*General Standard* **G3.1** also applies to all Time Series Software
+which constructs or uses covariance matrices.
 
 ### 3 Analytic Algorithms
 
@@ -322,8 +320,8 @@ that the second, and only the third as a last resort.
 -   **TS4.6** *Time Series Software which implements or otherwise
     enables forecasting should return either:*
     -   **TS4.6a** *A distribution object, for example via one of the
-        many packages described in the CRAN Task View on [*Probability
-        Distributions*](https://cran.r-project.org/web/views/Distributions.html)
+        many packages described in the CRAN Task View on [Probability
+        Distributions](https://cran.r-project.org/web/views/Distributions.html)
         (or the new [`distributional`
         package](https://pkg.mitchelloharawild.com/distributional/) as
         used in the [`fable` package](https://fable.tidyverts.org) for
@@ -331,8 +329,8 @@ that the second, and only the third as a last resort.
     -   **TS4.6b** *For each variable to be forecast, predicted values
         equivalent to first- and second-order moments (for example, mean
         and standard error values).*
-    -   **TS4.6c** *Some more general indication of error involved with
-        forecast estimates.*
+    -   **TS4.6c** *Some more general indication of error associated
+        with forecast estimates.*
 
 Beyond these particular standards for return objects, Time Series
 Software which implements or otherwise enables forecasting should:
@@ -361,7 +359,7 @@ Time Series Software should:
 -   **TS5.3** *Ensure that units of the time, frequency, or index
     variable are printed by default on the axis.*
 -   **TS5.4** *For frequency visualization, abscissa spanning
-    \[ − *π*, *π*\] should be avoided in favour positive units of
+    \[ − *π*, *π*\] should be avoided in favour of positive units of
     \[0, 2*π*\] or \[0, 0.5\], in all cases with appropriate additional
     explanation of units.*
 -   **TS5.5** *Provide options to determine whether plots of data with
