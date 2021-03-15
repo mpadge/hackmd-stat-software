@@ -9,6 +9,27 @@ robots: noindex, nofollow
 
 ## Regression and Supervised Learning
 
+This sub-section details standards for Regression and Supervised
+Learning Software – referred to from here on for simplicity as
+“Regression Software”. Regression Software implements algorithms which
+aim to construct or analyse one or more mappings between two defined
+data sets (for example, a set of “independent” data, *X*, and a set of
+“dependent” data, *Y*). In contrast, the analogous category of
+Unsupervised Learning Software aims to construct or analyse one or more
+mappings between a defined set of input or independent data, and a
+second set of “output” data which are not necessarily known or given
+prior to the analysis.
+
+Common purposes of Regression Software are to fit models to estimate
+relationships or to make predictions between specified inputs and
+outputs. Regression Software includes tools with inferential or
+predictive foci, Bayesian, frequentist, or probability-free Machine
+Learning (ML) approaches, parametric or or non-parametric approaches,
+discrete outputs (such as in classification tasks) or continuous
+outputs, and models and algorithms specific to applications or data such
+as time series or spatial data. In many cases other standards specific
+to these subcategories may apply.
+
 Examples of the diversity of Regression and Unsupervised Learning
 software include the following.
 
@@ -59,27 +80,6 @@ Click on the following link to view a demonstration [Application of
 Regression and Supervised Learning
 Standards](https://hackmd.io/VZ-wgQtZRV2pb-wFZNDM5g).
 
-This sub-section details standards for Regression and Supervised
-Learning Software – referred to from here on for simplicity as
-“Regression Software”. Regression Software implements algorithms which
-aim to construct or analyse one or more mappings between two defined
-data sets (for example, a set of “independent” data, *X*, and a set of
-“dependent” data, *Y*). In contrast, the analogous category of
-Unsupervised Learning Software aims to construct or analyse one or more
-mappings between a defined set of input or independent data, and a
-second set of “output” data which are not necessarily known or given
-prior to the analysis.
-
-Common purposes of Regression Software are to fit models to estimate
-relationships or to make predictions between specified inputs and
-outputs. Regression Software includes tools with inferential or
-predictive foci, Bayesian, frequentist, or probability-free Machine
-Learning (ML) approaches, parametric or or non-parametric approaches,
-discrete outputs (such as in classification tasks) or continuous
-outputs, and models and algorithms specific to applications or data such
-as time series or spatial data. In many cases other standards specific
-to these subcategories may apply.
-
 The following standards are divided among several sub-categories, with
 each standard prefixed with “RE”.
 
@@ -89,22 +89,36 @@ each standard prefixed with “RE”.
     via a formula interface, unless reasons for not doing so are
     explicitly documented.*
 -   **RE1.1** *Regression Software should document how formula
-    interfaces are converted to matrix representations of input data.
-    See Max Kuhn’s [RStudio blog
-    post](https://rviews.rstudio.com/2017/02/01/the-r-formula-method-the-good-parts/)
-    for examples.*
+    interfaces are converted to matrix representations of input data.*
+
+See Max Kuhn’s [RStudio blog
+post](https://rviews.rstudio.com/2017/02/01/the-r-formula-method-the-good-parts/)
+for examples of how to implement and describe such conversions.
+
 -   **RE1.2** *Regression Software should document expected format
     (types or classes) for inputting predictor variables, including
-    descriptions of types or classes which are not accepted; for
-    example, specification that software accepts only numeric inputs in
-    `vector` or `matrix` form, or that all inputs must be in
-    `data.frame` form with both column and row names.*
--   **RE1.3** *Regression Software should transfer all relevant aspects
-    of input data, notably including row and column names, and
-    potentially information from other `attributes()`, to corresponding
-    aspects of return objects (see RE4, below).*
+    descriptions of types or classes which are not accepted.*
+
+Examples documentation addressing this standard include clarifying that
+software accepts only numeric inputs in `vector` or `matrix` form, or
+that all inputs must be in `data.frame` form with both column and row
+names.
+
+-   **RE1.3** *Regression Software which passes or otherwise transforms
+    aspects of input data onto output structures should ensure that
+    those output structures retain all relevant aspects of input data,
+    notably including row and column names, and potentially information
+    from other `attributes()`.*
     -   **RE1.3a** *Where otherwise relevant information is not
         transferred, this should be explicitly documented.*
+
+This standard reflects the common process in regression software of
+transforming a rectangular input structure into a modified version which
+includes additional columns of model fits or predictions. Software which
+constructs such modified versions anew often copies numeric values from
+input columns, and may implicitly drop additional information such as
+attributes. This standard requires all such information to be retained.
+
 -   **RE1.4** *Regression Software should document any assumptions made
     with regard to input data; for example distributional assumptions,
     or assumptions that predictor data have mean values of zero.
@@ -122,6 +136,10 @@ each standard prefixed with “RE”.
     controlling the processing of missing values, ideally distinguishing
     `NA` or `NaN` values from `Inf` values (for example, through use of
     `na.omit()` and related functions from the `stats` package).*
+
+Note that fulfilling this standard ensures compliance with all *General
+Standard* for missing values (**G2.13**–**G2.16**).
+
 -   **RE2.2** *Regression Software should provide different options for
     processing missing values in predictor and response data. For
     example, it should be possible to fit a model with no missing
@@ -145,7 +163,7 @@ These pre-processing routines should also be tested as described below.
 ### 3 Algorithms
 
 The following standards apply to the model fitting algorithms of
-Regression Software which implements or relies on iterative algorithms
+Regression Software which implement or rely on iterative algorithms
 which are expected to converge to generate model statistics. Regression
 Software which implements or relies on iterative convergence algorithms
 should:
@@ -196,8 +214,10 @@ should include access provisions to all those that are applicable.
     (via `vcov()`)*
 -   **RE4.7** *Where appropriate, convergence statistics*
 
-Regression Software *should* provide simple and direct methods to return
-or otherwise access the following form of data and metadata, where the
+Note that compliance with **RE4.6** should also heed *General Standard*
+**G3.1** in offering user control over covariance algorithms. Regression
+Software should further provide simple and direct methods to return or
+otherwise access the following form of data and metadata, where the
 latter includes information on any transformations which may have been
 applied to the data prior to submission to modelling routines.
 
@@ -212,8 +232,8 @@ applied to the data prior to submission to modelling routines.
 -   **RE4.12** *Where appropriate, functions used to transform input
     data, and associated inverse transform functions.*
 
-Regression software *may* provide simple and direct methods to return or
-otherwise access the following:
+Regression software may additionally opt to provide simple and direct
+methods to return or otherwise access the following:
 
 -   **RE4.13** *Predictor variables, and associated “metadata” where
     applicable.*
@@ -258,9 +278,10 @@ provides abilities to process, categorical grouping variables:
 
 ### 5 Documentation
 
-Beyond the general standards for documentation, Regression Software
-should explicitly describe the following aspects, and ideally provide
-extended documentation including summary graphical reports of:
+Beyond the [*General Standards*](#general-standards) for documentation,
+Regression Software should explicitly describe the following aspects,
+and ideally provide extended documentation including summary graphical
+reports of:
 
 -   **RE5.0** *Scaling relationships between sizes of input data
     (numbers of observations, with potential extension to numbers of
@@ -268,15 +289,15 @@ extended documentation including summary graphical reports of:
 
 ### 6 Visualization
 
--   **RE6.0** *Model objects returned by Regression Software (see RE3.0)
-    should have default `plot` methods, either through explicit
-    implementation, extension of methods for existing model objects, or
-    through ensuring default methods work appropriately.*
+-   **RE6.0** *Model objects returned by Regression Software (see*
+    **RE4***) should have default `plot` methods, either through
+    explicit implementation, extension of methods for existing model
+    objects, or through ensuring default methods work appropriately.*
 -   **RE6.1** *Where the default `plot` method is **NOT** a generic
     `plot` method dispatched on the class of return objects (that is,
-    through a `plot.<myclass>` function), that method dispatch should
-    nevertheless exist in order to explicitly direct users to the
-    appropriate function.*
+    through an S3-type `plot.<myclass>` function or equivalent), that
+    method dispatch (or equivalent) should nevertheless exist in order
+    to explicitly direct users to the appropriate function.*
 -   **RE6.2** *The default `plot` method should produce a plot of the
     `fitted` values of the model, with optional visualisation of
     confidence intervals or equivalent.*
@@ -306,22 +327,16 @@ and cases:
         fitting is at least as fast or (preferably) faster than testing
         with equivalent noisy data (see RE2.4b).*
 
-#### 7.2 Diagnostic Messages
-
--   **RE7.2** All error and warning messages should be explicitly
-    triggered in tests, including explicit testing for the content of
-    those diagnostic messages.
-
-#### 7.3 Return Results
+#### 7.2 Return Results
 
 Tests for Regression Software should
 
--   **RE7.3** Demonstrate that output objects retain aspects of input
+-   **RE7.2** Demonstrate that output objects retain aspects of input
     data such as row or case names (see **RE1.3**).
--   **RE7.4** Demonstrate and test expected behaviour when objects
+-   **RE7.3** Demonstrate and test expected behaviour when objects
     returned from regression software are submitted to the accessor
     methods of **RE4.2**–**RE4.7**.
--   **RE7.5** Extending directly from **RE4.15**, where appropriate,
+-   **RE7.4** Extending directly from **RE4.15**, where appropriate,
     tests should demonstrate and confirm that forecast errors,
     confidence intervals, or equivalent values increase with forecast
     horizons.
