@@ -9,10 +9,6 @@ robots: noindex, nofollow
 
 ## Machine Learning Software
 
-Click on the following link to view a demonstration [Application of
-Machine Learning Software
-Standards](https://hackmd.io/Ix1YwD8YTWGuzdiXsVQadA).
-
 R has an extensive and diverse ecosystem of Machine Learning (ML)
 software which is very well described in the corresponding [CRAN Task
 View](https://cran.r-project.org/web/views/MachineLearning.html). Unlike
@@ -34,8 +30,12 @@ approach data analysis via the two primary steps of:
 A single ML task generally yields two distinct outputs:
 
 1.  The model derived in the first of the previous steps; and
-2.  Associated statistics of model performance (as evaluated within the
-    context of the test data used to assess that performance).
+2.  Associated statistics of model performance, as evaluated within the
+    context of the test data used to assess that performance.
+
+Click on the following link to view a demonstration [Application of
+Machine Learning Software
+Standards](https://hackmd.io/Ix1YwD8YTWGuzdiXsVQadA).
 
 **A Machine Learning Workflow**
 
@@ -125,16 +125,14 @@ admit a potential lack of clarity in any notional categorical
 distinction between training and test data, and between model
 specification and training.
 
-The preceding workflow mentioned a couple of concepts the definitions of
-which may be seen by clicking on the corresponding items below.
-Following that, we proceed to standards for ML software, enumerated and
-developed with reference to the preceding workflow steps. As described
-above, these steps may not be applicable to all ML software, and so all
-of the following standards should be considered to be conditioned on
-“where applicable.” In order that the following standards initially
-adhere to the enumeration of workflow steps given above, more general
-standards pertaining to aspects such as documentation and testing are
-given following the initial five “workflow” standards.
+The preceding workflow mentioned a couple of concepts the
+interpretations of which in the context of these standards may be seen
+by clicking on the corresponding items below. Following that, we proceed
+to standards for ML software, enumerated and developed with reference to
+the preceding workflow steps. In order that the following standards
+initially adhere to the enumeration of workflow steps given above, more
+general standards pertaining to aspects such as documentation and
+testing are given following the initial five “workflow” standards.
 
 <details>
 <summary>
@@ -202,6 +200,8 @@ post](https://sgugger.github.io/how-do-you-find-a-good-learning-rate.html).
 
 </p>
 </details>
+
+<br>
 
 Partly because of widespread and current relevance, the category of
 Machine Learning software is one for which there have been other notable
@@ -295,9 +295,11 @@ applicability or otherwise of the preceding three standards.
 
 Missing data are handled differently by different ML routines, and it is
 also difficult to suggest generally applicable standards for
-pre-processing missing values in ML software. The following standards
-attempt to cover a practical range of typical approaches and
-applications.
+pre-processing missing values in ML software. The [*General
+Standards*](#general-standards) for missing values (**G2.13**–**G2.16**)
+do not apply to Machine Learning software, in the place of which the
+following standards attempt to cover a practical range of typical
+approaches and applications.
 
 -   **ML1.6** *ML software which does not admit missing values, and
     which expects no missing values, should implement explicit
