@@ -88,11 +88,20 @@ data.
 -   **UL1.2** *Unsupervised learning which uses row or column names to
     label output objects should assert that input data have non-default
     row or column names, and issue an informative message when these are
-    not provided. (Such messages need not necessarily be provided by
-    default, but should at least be optionally available.)*
+    not provided.*
 
-The following code provides simple examples of checks whether row and
-column names appear to have generic default values.
+Such messages need not necessarily be provided by default, but should at
+least be optionally available.
+
+<details>
+<summary>
+Click here for examples of checks for whether row and column names have
+generic default values.
+</summary>
+<p>
+
+The `data.frame` function inserts default row and column names where
+these are not explicitly specified.
 
 ``` r
 x <- data.frame (matrix (1:10, ncol = 2))
@@ -128,10 +137,16 @@ all (vapply (seq (ncol (x)), function (i)
 
     ## [1] TRUE
 
-Messages should be issued in both of these cases. The following code
-illustrates that the `hclust` function does not implement any such
-checks or assertions, rather it silently returns an object with default
-labels.
+Messages should be issued in both of these cases.
+
+</p>
+</details>
+
+<br>
+
+The following code illustrates that the `hclust` function does not
+implement any such checks or assertions, rather it silently returns an
+object with default labels.
 
 ``` r
 u <- USArrests
@@ -181,22 +196,17 @@ to enable them to be transferred within
 (The labels are transferred to the object returned by `agnes`, just not
 in a way that enables `cutree` to inherit them.)
 
--   **UL1.4** *Unsupervised Learning Software should explicitly document
-    whether input data may include missing values.*
--   **UL1.5** *Functions in Unsupervised Learning Software which do not
-    admit input data with missing values should provide informative
-    error messages when data with missing values are submitted.*
--   **UL1.6** *Unsupervised Learning Software should document any
+-   **UL1.4** *Unsupervised Learning Software should document any
     assumptions made with regard to input data; for example assumptions
     about distributional forms or locations (such as that data are
     centred or on approximately equivalent distributional scales).
     Implications of violations of these assumptions should be both
     documented and tested, in particular:*
-    -   **UL1.6a** *Software which responds qualitatively differently to
+    -   **UL1.4a** *Software which responds qualitatively differently to
         input data which has components on markedly different scales
         should explicitly document such differences, and implications of
         submitting such data.*
-    -   **UL1.6b** *Examples or other documentation should not use
+    -   **UL1.4b** *Examples or other documentation should not use
         `scale()` or equivalent transformations without explaining why
         scale is applied, and explicitly illustrating and contrasting
         the consequences of not applying such transformations.*
@@ -208,19 +218,26 @@ in a way that enables `cutree` to inherit them.)
     data (see UL1.6) should implement pre-processing steps to diagnose
     potential violations, and issue appropriately informative messages,
     and/or include parameters to enable suitable transformations to be
-    applied (such as the `center` and `scale.` parameters of the
-    [`stats::prcomp()`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/prcomp.html)
-    function).*
+    applied.*
+
+Example of compliance with this standard are the documentation entries
+for the `center` and `scale.` parameters of the
+[`stats::prcomp()`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/prcomp.html)
+function.
+
 -   **UL2.1** *Unsupervised Learning Software should document any
     transformations applied to input data, for example conversion of
     label-values to `factor`, and should provide ways to explicitly
     avoid any default transformations (with error or warning conditions
     where appropriate).*
--   **UL2.2** *For Unsupervised Learning Software which accepts missing
-    values in input data, functions should implement explicit parameters
+-   **UL2.2** *Unsupervised Learning Software which accepts missing
+    values in input data should implement explicit parameters
     controlling the processing of missing values, ideally distinguishing
-    `NA` or `NaN` values from `Inf` values (for example, through use of
-    `na.omit()` and related functions from the `stats` package).*
+    `NA` or `NaN` values from `Inf` values.*
+
+This standard applies beyond *General Standards* **G2.13**–**G2.16**,
+through the additional requirement of implementing explicit parameters.
+
 -   **UL2.3** *Unsupervised Learning Software should implement
     pre-processing routines to identify whether aspects of input data
     are perfectly collinear.*
@@ -483,9 +500,9 @@ objects containing large numbers of numeric entries.
     associated functions.*
 -   **UL6.1** *Where the default `plot` method is **NOT** a generic
     `plot` method dispatched on the class of return objects (that is,
-    through a `plot.<myclass>` function), that method dispatch should
-    nevertheless exist in order to explicitly direct users to the
-    appropriate function.*
+    through an S3-type `plot.<myclass>` function or equivalent), that
+    method dispatch (or equivalent) should nevertheless exist in order
+    to explicitly direct users to the appropriate function.*
 -   **UL6.2** *Where default plot methods include labelling components
     of return objects (such as cluster labels), routines should ensure
     that labels are automatically placed to ensure readability, and/or
