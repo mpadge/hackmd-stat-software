@@ -225,8 +225,8 @@ systems.
     `WKT2` *representations. The primary implication, described in
     detail in the articles linked to above, is that:*
     -   **SP2.4a** *Software should not permit coordinate reference
-        systems to be defined on the basis of so-called “PROJ4-strings”
-        alone.*
+        systems to be represented merely by so-called “PROJ4-strings”,
+        but should use at least WKT2.*
 
 **General Input Structures**
 
