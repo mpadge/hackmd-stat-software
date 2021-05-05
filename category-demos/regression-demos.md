@@ -120,7 +120,7 @@ information that the `factor` variable is ordered.
 
 -   [x] **G5.4** Correctness tests are implemented.
 -   [x] **G5.5** Correctness tests are run with a fixed random seed
--   [x] **G5.6** Parameter recovery tests impelemented
+-   [x] **G5.6** Parameter recovery tests implemented
     -   [ ] **G5.6a** Many, but not all, parameter recovery tests are
         expected to succeed within a defined tolerance
     -   [ ] **G5.6b** Parameter recovery are generally only run with one
